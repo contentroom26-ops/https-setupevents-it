@@ -1,8 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const AnimatedHeroBackground = () => {
-  const [glitchActive, setGlitchActive] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -31,40 +30,8 @@ const AnimatedHeroBackground = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Random glitch effect
-  useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      setGlitchActive(true);
-      setTimeout(() => setGlitchActive(false), 150);
-    }, 3000 + Math.random() * 2000);
-
-    return () => clearInterval(glitchInterval);
-  }, []);
-
   return (
     <div className="absolute inset-0 bg-black overflow-hidden">
-      {/* Glitch overlay */}
-      {glitchActive && (
-        <div className="absolute inset-0 z-50 pointer-events-none">
-          <div className="absolute inset-0 bg-white/5 animate-pulse" />
-          <div 
-            className="absolute inset-0" 
-            style={{ 
-              background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
-              animation: 'glitchLines 0.1s infinite'
-            }} 
-          />
-        </div>
-      )}
-
-      {/* Scanlines */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-30 z-40"
-        style={{
-          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
-        }}
-      />
-
       {/* Grid pattern - Layer 3 (subtle parallax) */}
       <motion.div style={{ x: layer3X, y: layer3Y }} className="absolute inset-0">
         <svg className="absolute inset-0 w-full h-full opacity-15">
@@ -331,25 +298,13 @@ const AnimatedHeroBackground = () => {
         ))}
       </motion.svg>
 
-      {/* Layer 3 - Dots and particles with glitch offset */}
+      {/* Layer 3 - Dots and particles */}
       <motion.svg 
         className="absolute inset-0 w-full h-full" 
         viewBox="0 0 1920 1080" 
         preserveAspectRatio="xMidYMid slice"
-        style={{ 
-          x: layer3X, 
-          y: layer3Y,
-          filter: glitchActive ? 'url(#glitch)' : 'none'
-        }}
+        style={{ x: layer3X, y: layer3Y }}
       >
-        <defs>
-          <filter id="glitch">
-            <feOffset in="SourceGraphic" dx="3" dy="0" result="r" />
-            <feOffset in="SourceGraphic" dx="-3" dy="0" result="b" />
-            <feBlend in="r" in2="b" mode="screen" />
-          </filter>
-        </defs>
-
         {/* Floating dots grid */}
         {[...Array(40)].map((_, i) => (
           <motion.circle
@@ -373,83 +328,43 @@ const AnimatedHeroBackground = () => {
           />
         ))}
 
-        {/* Orbiting dots around center */}
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <motion.circle
-            key={`orbit-${i}`}
-            cx="975"
-            cy="475"
-            r="4"
-            fill="white"
-            initial={{ rotate: i * 60 }}
-            animate={{ rotate: i * 60 + 360 }}
-            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            style={{ 
-              transformOrigin: "975px 475px",
-              offsetPath: `path("M 975 275 A 200 200 0 1 1 975 675 A 200 200 0 1 1 975 275")`,
-              offsetDistance: `${i * 16.66}%`
-            }}
-          />
-        ))}
-
-        {/* Corner brackets with glitch */}
-        <motion.g
-          animate={{ 
-            x: glitchActive ? [0, 5, -3, 0] : 0,
-            opacity: glitchActive ? [1, 0.5, 1] : 1
-          }}
-          transition={{ duration: 0.1 }}
-        >
-          <motion.path
-            d="M 0 120 L 0 0 L 120 0"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M 1800 0 L 1920 0 L 1920 120"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 1, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M 0 960 L 0 1080 L 120 1080"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 2, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M 1920 960 L 1920 1080 L 1800 1080"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 3, ease: "easeInOut" }}
-          />
-        </motion.g>
-
-        {/* Random glitch rectangles */}
-        {glitchActive && [...Array(8)].map((_, i) => (
-          <rect
-            key={`glitch-rect-${i}`}
-            x={Math.random() * 1920}
-            y={Math.random() * 1080}
-            width={50 + Math.random() * 200}
-            height={2 + Math.random() * 10}
-            fill="white"
-            opacity={0.3 + Math.random() * 0.4}
-          />
-        ))}
+        {/* Corner brackets */}
+        <motion.path
+          d="M 0 120 L 0 0 L 120 0"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 1800 0 L 1920 0 L 1920 120"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 1, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 0 960 L 0 1080 L 120 1080"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 2, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 1920 960 L 1920 1080 L 1800 1080"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: [0, 1, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, delay: 3, ease: "easeInOut" }}
+        />
       </motion.svg>
 
       {/* Gradient overlay for depth */}
@@ -462,15 +377,6 @@ const AnimatedHeroBackground = () => {
           background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.4) 100%)'
         }}
       />
-
-      {/* CSS for glitch animation */}
-      <style>{`
-        @keyframes glitchLines {
-          0% { transform: translateY(0); }
-          50% { transform: translateY(-2px); }
-          100% { transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 };
