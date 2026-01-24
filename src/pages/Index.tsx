@@ -5,6 +5,7 @@ import ServicesSection from "@/components/ServicesSection";
 import HostessSlideshow from "@/components/HostessSlideshow";
 import WorldMapSection from "@/components/WorldMapSection";
 import MethodSection from "@/components/MethodSection";
+import DieselGallery from "@/components/DieselGallery";
 import PortfolioSection from "@/components/PortfolioSection";
 import WhyUsSection from "@/components/WhyUsSection";
 import FinalCTASection from "@/components/FinalCTASection";
@@ -22,6 +23,7 @@ const Index = () => {
       <HostessSlideshow />
       <WorldMapSection />
       <MethodSection />
+      <DieselGallery />
       <PortfolioSection />
       <WhyUsSection />
       <FinalCTASection />
