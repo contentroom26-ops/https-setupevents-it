@@ -16,7 +16,7 @@ const WhatsAppButton = () => {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2, duration: 0.3 }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Contattaci su WhatsApp"
     >

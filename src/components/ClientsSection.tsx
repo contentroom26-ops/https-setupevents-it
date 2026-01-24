@@ -3,12 +3,12 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const clients = [
-  { name: "Diesel", logo: "DIESEL" },
-  { name: "Mediolanum", logo: "MEDIOLANUM" },
-  { name: "Prada", logo: "PRADA" },
-  { name: "Armani", logo: "ARMANI" },
-  { name: "Bulgari", logo: "BULGARI" },
-  { name: "Ferragamo", logo: "FERRAGAMO" },
+  "DIESEL",
+  "MEDIOLANUM",
+  "PRADA",
+  "ARMANI",
+  "BULGARI",
+  "FERRAGAMO",
 ];
 
 const ClientsSection = () => {
@@ -16,30 +16,29 @@ const ClientsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-16 md:py-20 bg-secondary/50" ref={ref}>
+    <section className="py-16 md:py-20 bg-background border-y border-border" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="flex items-center justify-between mb-10"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-muted-foreground font-medium tracking-wide uppercase text-sm">
-            20+ eventi di successo realizzati
-          </p>
+          <span className="number-label">[02] — Clienti</span>
+          <span className="text-muted-foreground text-sm">20+ eventi realizzati</span>
         </motion.div>
 
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-20">
           {clients.map((client, index) => (
-            <motion.div
-              key={client.name}
-              className="text-2xl md:text-3xl font-serif font-medium text-muted-foreground/60 hover:text-primary transition-colors duration-300 tracking-widest"
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+            <motion.span
+              key={client}
+              className="text-xl md:text-2xl font-display font-bold text-muted-foreground/40 hover:text-foreground transition-colors duration-300 tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
             >
-              {client.logo}
-            </motion.div>
+              {client}
+            </motion.span>
           ))}
         </div>
       </div>

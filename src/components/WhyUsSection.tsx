@@ -1,29 +1,22 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { Target, Gem, Clock } from "lucide-react";
 
-const reasons = [
+const stats = [
   {
-    icon: Target,
     number: 100,
     suffix: "%",
-    title: "Regia completa",
-    description: "Gestiamo ogni aspetto del tuo evento, dalla strategia all'esecuzione, per un risultato senza compromessi.",
+    label: "Clienti soddisfatti",
   },
   {
-    icon: Gem,
     number: 20,
     suffix: "+",
-    title: "Estetica e precisione",
-    description: "Ogni dettaglio è curato con ossessione. Il tuo evento sarà impeccabile in ogni suo elemento.",
+    label: "Eventi realizzati",
   },
   {
-    icon: Clock,
     number: 24,
     suffix: "h",
-    title: "Timing perfetto",
-    description: "Gestione impeccabile del tempo e degli imprevisti. Il tuo evento scorre fluido, senza intoppi.",
+    label: "Tempo di risposta",
   },
 ];
 
@@ -40,7 +33,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   }, [isInView, count, value]);
 
   return (
-    <span ref={ref} className="text-5xl md:text-6xl font-serif font-medium text-gradient-gold">
+    <span ref={ref} className="text-6xl md:text-8xl font-display font-bold tracking-tighter">
       <motion.span>{rounded}</motion.span>
       {suffix}
     </span>
@@ -52,44 +45,55 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-background" ref={ref}>
+    <section className="section-padding bg-background border-t border-border" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="text-center mb-16"
+          className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-medium tracking-widest uppercase text-sm mb-4 block">
-            Perché scegliere noi
-          </span>
-          <h2 className="heading-section mb-6">
-            Cosa ci rende <span className="italic">diversi</span>
+          <span className="number-label block mb-4">[06] — Risultati</span>
+          <h2 className="heading-section">
+            PERCHÉ<br />
+            <span className="italic font-normal">SCEGLIERCI</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          {reasons.map((reason, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+          {stats.map((stat, index) => (
             <motion.div
-              key={reason.title}
-              className="text-center p-8"
+              key={stat.label}
+              className="text-center md:text-left"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
             >
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <reason.icon className="w-8 h-8 text-primary" />
-              </div>
-              <Counter value={reason.number} suffix={reason.suffix} />
-              <h3 className="text-xl font-serif font-medium mt-4 mb-3 text-foreground">
-                {reason.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {reason.description}
-              </p>
+              <Counter value={stat.number} suffix={stat.suffix} />
+              <p className="text-muted-foreground mt-4 text-lg">{stat.label}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          className="mt-20 pt-20 border-t border-border grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <div>
+            <h3 className="font-display font-bold text-xl mb-3">Regia completa</h3>
+            <p className="text-muted-foreground">Gestiamo ogni aspetto del tuo evento per un risultato senza compromessi.</p>
+          </div>
+          <div>
+            <h3 className="font-display font-bold text-xl mb-3">Estetica e precisione</h3>
+            <p className="text-muted-foreground">Ogni dettaglio è curato con ossessione. Impeccabile in ogni elemento.</p>
+          </div>
+          <div>
+            <h3 className="font-display font-bold text-xl mb-3">Timing perfetto</h3>
+            <p className="text-muted-foreground">Gestione impeccabile del tempo e degli imprevisti.</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
