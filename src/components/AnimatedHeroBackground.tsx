@@ -1,98 +1,240 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const AnimatedHeroBackground = () => {
+  const [glitchActive, setGlitchActive] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth spring for parallax
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Different parallax layers
+  const layer1X = useTransform(smoothX, [0, 1], [-30, 30]);
+  const layer1Y = useTransform(smoothY, [0, 1], [-30, 30]);
+  const layer2X = useTransform(smoothX, [0, 1], [-60, 60]);
+  const layer2Y = useTransform(smoothY, [0, 1], [-60, 60]);
+  const layer3X = useTransform(smoothX, [0, 1], [-15, 15]);
+  const layer3Y = useTransform(smoothY, [0, 1], [-15, 15]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Random glitch effect
+  useEffect(() => {
+    const glitchInterval = setInterval(() => {
+      setGlitchActive(true);
+      setTimeout(() => setGlitchActive(false), 150);
+    }, 3000 + Math.random() * 2000);
+
+    return () => clearInterval(glitchInterval);
+  }, []);
+
   return (
     <div className="absolute inset-0 bg-black overflow-hidden">
-      {/* Grid pattern */}
-      <svg className="absolute inset-0 w-full h-full opacity-20">
-        <defs>
-          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
+      {/* Glitch overlay */}
+      {glitchActive && (
+        <div className="absolute inset-0 z-50 pointer-events-none">
+          <div className="absolute inset-0 bg-white/5 animate-pulse" />
+          <div 
+            className="absolute inset-0" 
+            style={{ 
+              background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
+              animation: 'glitchLines 0.1s infinite'
+            }} 
+          />
+        </div>
+      )}
 
-      {/* Animated geometric shapes */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-        {/* Large rotating square */}
+      {/* Scanlines */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30 z-40"
+        style={{
+          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+        }}
+      />
+
+      {/* Grid pattern - Layer 3 (subtle parallax) */}
+      <motion.div style={{ x: layer3X, y: layer3Y }} className="absolute inset-0">
+        <svg className="absolute inset-0 w-full h-full opacity-15">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.3" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </motion.div>
+
+      {/* Layer 1 - Main geometric shapes */}
+      <motion.svg 
+        className="absolute inset-0 w-full h-full" 
+        viewBox="0 0 1920 1080" 
+        preserveAspectRatio="xMidYMid slice"
+        style={{ x: layer1X, y: layer1Y }}
+      >
+        {/* Large rotating squares - faster */}
+        <motion.rect
+          x="750"
+          y="250"
+          width="450"
+          height="450"
+          fill="none"
+          stroke="white"
+          strokeWidth="1"
+          initial={{ rotate: 0, opacity: 0.4 }}
+          animate={{ rotate: 360, opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "975px 475px" }}
+        />
         <motion.rect
           x="800"
           y="300"
-          width="400"
-          height="400"
-          fill="none"
-          stroke="white"
-          strokeWidth="1"
-          initial={{ rotate: 0, opacity: 0.3 }}
-          animate={{ rotate: 360, opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: "1000px 500px" }}
-        />
-
-        {/* Smaller counter-rotating square */}
-        <motion.rect
-          x="850"
-          y="350"
-          width="300"
-          height="300"
+          width="350"
+          height="350"
           fill="none"
           stroke="white"
           strokeWidth="0.5"
-          initial={{ rotate: 45, opacity: 0.2 }}
-          animate={{ rotate: -315, opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: "1000px 500px" }}
+          initial={{ rotate: 45, opacity: 0.3 }}
+          animate={{ rotate: -315, opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "975px 475px" }}
+        />
+        <motion.rect
+          x="875"
+          y="375"
+          width="200"
+          height="200"
+          fill="none"
+          stroke="white"
+          strokeWidth="1.5"
+          initial={{ rotate: 0, opacity: 0.5 }}
+          animate={{ rotate: -360, opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "975px 475px" }}
         />
 
-        {/* Pulsing circle */}
+        {/* Pulsing circles - faster */}
         <motion.circle
-          cx="1000"
-          cy="500"
-          r="150"
+          cx="975"
+          cy="475"
+          r="180"
           fill="none"
           stroke="white"
           strokeWidth="1"
-          initial={{ scale: 1, opacity: 0.4 }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.1, 0.4] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ scale: 1, opacity: 0.5 }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Expanding circles */}
-        {[0, 1, 2].map((i) => (
+        {/* Expanding circles - more of them, faster */}
+        {[0, 1, 2, 3, 4].map((i) => (
           <motion.circle
             key={i}
-            cx="1000"
-            cy="500"
-            r="100"
+            cx="975"
+            cy="475"
+            r="80"
             fill="none"
             stroke="white"
             strokeWidth="0.5"
             initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: [0.5, 3], opacity: [0.5, 0] }}
+            animate={{ scale: [0.5, 4], opacity: [0.6, 0] }}
             transition={{
-              duration: 6,
+              duration: 3,
               repeat: Infinity,
-              delay: i * 2,
+              delay: i * 0.6,
               ease: "easeOut"
             }}
           />
         ))}
 
-        {/* Horizontal moving lines */}
-        {[0, 1, 2, 3, 4].map((i) => (
+        {/* Central hexagon */}
+        <motion.polygon
+          points="975,380 1050,427 1050,522 975,570 900,522 900,427"
+          fill="none"
+          stroke="white"
+          strokeWidth="1"
+          initial={{ rotate: 0, opacity: 0.4 }}
+          animate={{ rotate: 360, opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "975px 475px" }}
+        />
+      </motion.svg>
+
+      {/* Layer 2 - Fast moving elements */}
+      <motion.svg 
+        className="absolute inset-0 w-full h-full" 
+        viewBox="0 0 1920 1080" 
+        preserveAspectRatio="xMidYMid slice"
+        style={{ x: layer2X, y: layer2Y }}
+      >
+        {/* Fast horizontal lines */}
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
           <motion.line
             key={`h-${i}`}
-            x1="-100"
-            y1={200 + i * 180}
-            x2="300"
-            y2={200 + i * 180}
+            x1="-200"
+            y1={100 + i * 130}
+            x2="0"
+            y2={100 + i * 130}
             stroke="white"
-            strokeWidth="0.5"
-            initial={{ x: -400 }}
+            strokeWidth={i % 2 === 0 ? "1" : "0.5"}
+            initial={{ x: -200 }}
             animate={{ x: 2200 }}
             transition={{
-              duration: 12 + i * 2,
+              duration: 4 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "linear"
+            }}
+          />
+        ))}
+
+        {/* Fast vertical lines */}
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <motion.line
+            key={`v-${i}`}
+            x1={200 + i * 320}
+            y1="-100"
+            x2={200 + i * 320}
+            y2="100"
+            stroke="white"
+            strokeWidth="0.5"
+            initial={{ y: -200 }}
+            animate={{ y: 1300 }}
+            transition={{
+              duration: 5 + i,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "linear"
+            }}
+          />
+        ))}
+
+        {/* Diagonal streaks */}
+        {[0, 1, 2, 3].map((i) => (
+          <motion.line
+            key={`d-${i}`}
+            x1={-100 + i * 600}
+            y1="-100"
+            x2={100 + i * 600}
+            y2="100"
+            stroke="white"
+            strokeWidth="0.3"
+            initial={{ x: -300, y: -300 }}
+            animate={{ x: 2200, y: 1400 }}
+            transition={{
+              duration: 6,
               repeat: Infinity,
               delay: i * 1.5,
               ease: "linear"
@@ -100,165 +242,235 @@ const AnimatedHeroBackground = () => {
           />
         ))}
 
-        {/* Vertical moving lines */}
-        {[0, 1, 2, 3].map((i) => (
-          <motion.line
-            key={`v-${i}`}
-            x1={300 + i * 450}
-            y1="-100"
-            x2={300 + i * 450}
-            y2="200"
-            stroke="white"
-            strokeWidth="0.5"
-            initial={{ y: -300 }}
-            animate={{ y: 1200 }}
-            transition={{
-              duration: 15 + i * 3,
-              repeat: Infinity,
-              delay: i * 2,
-              ease: "linear"
-            }}
-          />
-        ))}
-
-        {/* Diagonal lines */}
-        <motion.line
-          x1="0"
-          y1="0"
-          x2="600"
-          y2="600"
-          stroke="white"
-          strokeWidth="0.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: [0, 0.5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.line
-          x1="1920"
-          y1="0"
-          x2="1320"
-          y2="600"
-          stroke="white"
-          strokeWidth="0.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: [0, 0.5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 4, ease: "easeInOut" }}
-        />
-
-        {/* Floating triangles */}
+        {/* Floating triangles - more dynamic */}
         <motion.polygon
-          points="150,100 250,250 50,250"
+          points="120,80 220,230 20,230"
+          fill="none"
+          stroke="white"
+          strokeWidth="0.8"
+          initial={{ y: 0, rotate: 0, opacity: 0.4 }}
+          animate={{ y: [0, -50, 0], rotate: [0, 20, 0], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.polygon
+          points="1750,750 1850,900 1650,900"
+          fill="none"
+          stroke="white"
+          strokeWidth="0.8"
+          initial={{ y: 0, rotate: 0, opacity: 0.4 }}
+          animate={{ y: [0, 40, 0], rotate: [0, -25, 0], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.polygon
+          points="200,700 300,850 100,850"
           fill="none"
           stroke="white"
           strokeWidth="0.5"
           initial={{ y: 0, rotate: 0, opacity: 0.3 }}
-          animate={{ y: [0, -30, 0], rotate: [0, 10, 0], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, -30, 0], rotate: [0, 15, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
         <motion.polygon
-          points="1700,800 1800,950 1600,950"
+          points="1650,150 1750,300 1550,300"
           fill="none"
           stroke="white"
           strokeWidth="0.5"
           initial={{ y: 0, rotate: 0, opacity: 0.3 }}
-          animate={{ y: [0, 20, 0], rotate: [0, -15, 0], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          animate={{ y: [0, 25, 0], rotate: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         />
 
         {/* Abstract architectural shapes */}
         <motion.path
-          d="M 100 600 L 100 400 L 250 400 L 250 500 L 200 500 L 200 600 Z"
+          d="M 80 550 L 80 350 L 230 350 L 230 450 L 180 450 L 180 550 Z"
           fill="none"
           stroke="white"
-          strokeWidth="0.5"
-          initial={{ opacity: 0.2 }}
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          strokeWidth="0.8"
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: [0.3, 0.6, 0.3], pathLength: [0.8, 1, 0.8] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.path
-          d="M 1650 200 L 1650 400 L 1800 400 L 1800 300 L 1750 300 L 1750 200 Z"
+          d="M 1680 180 L 1680 380 L 1830 380 L 1830 280 L 1780 280 L 1780 180 Z"
           fill="none"
           stroke="white"
-          strokeWidth="0.5"
-          initial={{ opacity: 0.2 }}
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 3, ease: "easeInOut" }}
+          strokeWidth="0.8"
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: [0.3, 0.6, 0.3], pathLength: [0.8, 1, 0.8] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 1.5, ease: "easeInOut" }}
         />
 
-        {/* Floating dots */}
-        {[...Array(20)].map((_, i) => (
+        {/* Plus signs */}
+        {[
+          { x: 400, y: 200 },
+          { x: 1500, y: 300 },
+          { x: 300, y: 800 },
+          { x: 1600, y: 700 },
+          { x: 500, y: 500 },
+          { x: 1400, y: 600 },
+        ].map((pos, i) => (
+          <motion.g
+            key={`plus-${i}`}
+            initial={{ opacity: 0.2, scale: 1 }}
+            animate={{ 
+              opacity: [0.2, 0.6, 0.2], 
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0]
+            }}
+            transition={{ 
+              duration: 3 + i * 0.5, 
+              repeat: Infinity, 
+              delay: i * 0.4,
+              ease: "easeInOut" 
+            }}
+            style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
+          >
+            <line x1={pos.x - 15} y1={pos.y} x2={pos.x + 15} y2={pos.y} stroke="white" strokeWidth="1" />
+            <line x1={pos.x} y1={pos.y - 15} x2={pos.x} y2={pos.y + 15} stroke="white" strokeWidth="1" />
+          </motion.g>
+        ))}
+      </motion.svg>
+
+      {/* Layer 3 - Dots and particles with glitch offset */}
+      <motion.svg 
+        className="absolute inset-0 w-full h-full" 
+        viewBox="0 0 1920 1080" 
+        preserveAspectRatio="xMidYMid slice"
+        style={{ 
+          x: layer3X, 
+          y: layer3Y,
+          filter: glitchActive ? 'url(#glitch)' : 'none'
+        }}
+      >
+        <defs>
+          <filter id="glitch">
+            <feOffset in="SourceGraphic" dx="3" dy="0" result="r" />
+            <feOffset in="SourceGraphic" dx="-3" dy="0" result="b" />
+            <feBlend in="r" in2="b" mode="screen" />
+          </filter>
+        </defs>
+
+        {/* Floating dots grid */}
+        {[...Array(40)].map((_, i) => (
           <motion.circle
             key={`dot-${i}`}
-            cx={100 + (i % 5) * 450}
-            cy={150 + Math.floor(i / 5) * 250}
-            r="2"
+            cx={80 + (i % 8) * 240}
+            cy={100 + Math.floor(i / 8) * 200}
+            r={i % 3 === 0 ? 3 : 2}
             fill="white"
             initial={{ opacity: 0.2, scale: 1 }}
             animate={{ 
-              opacity: [0.2, 0.8, 0.2], 
-              scale: [1, 1.5, 1],
-              y: [0, -10, 0]
+              opacity: [0.2, 0.9, 0.2], 
+              scale: [1, 1.8, 1],
+              y: [0, -15, 0]
             }}
             transition={{
-              duration: 3 + (i % 3),
+              duration: 2 + (i % 4) * 0.5,
               repeat: Infinity,
-              delay: i * 0.3,
+              delay: i * 0.1,
               ease: "easeInOut"
             }}
           />
         ))}
 
-        {/* Central cross */}
+        {/* Orbiting dots around center */}
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <motion.circle
+            key={`orbit-${i}`}
+            cx="975"
+            cy="475"
+            r="4"
+            fill="white"
+            initial={{ rotate: i * 60 }}
+            animate={{ rotate: i * 60 + 360 }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            style={{ 
+              transformOrigin: "975px 475px",
+              offsetPath: `path("M 975 275 A 200 200 0 1 1 975 675 A 200 200 0 1 1 975 275")`,
+              offsetDistance: `${i * 16.66}%`
+            }}
+          />
+        ))}
+
+        {/* Corner brackets with glitch */}
         <motion.g
-          initial={{ opacity: 0.3 }}
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ 
+            x: glitchActive ? [0, 5, -3, 0] : 0,
+            opacity: glitchActive ? [1, 0.5, 1] : 1
+          }}
+          transition={{ duration: 0.1 }}
         >
-          <line x1="950" y1="500" x2="1050" y2="500" stroke="white" strokeWidth="1" />
-          <line x1="1000" y1="450" x2="1000" y2="550" stroke="white" strokeWidth="1" />
+          <motion.path
+            d="M 0 120 L 0 0 L 120 0"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M 1800 0 L 1920 0 L 1920 120"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 1, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M 0 960 L 0 1080 L 120 1080"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 2, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M 1920 960 L 1920 1080 L 1800 1080"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 3, ease: "easeInOut" }}
+          />
         </motion.g>
 
-        {/* Corner accents */}
-        <motion.path
-          d="M 0 100 L 0 0 L 100 0"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.path
-          d="M 1820 0 L 1920 0 L 1920 100"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 2, ease: "easeInOut" }}
-        />
-        <motion.path
-          d="M 0 980 L 0 1080 L 100 1080"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 4, ease: "easeInOut" }}
-        />
-        <motion.path
-          d="M 1920 980 L 1920 1080 L 1820 1080"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 6, ease: "easeInOut" }}
-        />
-      </svg>
+        {/* Random glitch rectangles */}
+        {glitchActive && [...Array(8)].map((_, i) => (
+          <rect
+            key={`glitch-rect-${i}`}
+            x={Math.random() * 1920}
+            y={Math.random() * 1080}
+            width={50 + Math.random() * 200}
+            height={2 + Math.random() * 10}
+            fill="white"
+            opacity={0.3 + Math.random() * 0.4}
+          />
+        ))}
+      </motion.svg>
 
       {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+
+      {/* Vignette effect */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.4) 100%)'
+        }}
+      />
+
+      {/* CSS for glitch animation */}
+      <style>{`
+        @keyframes glitchLines {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-2px); }
+          100% { transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };
