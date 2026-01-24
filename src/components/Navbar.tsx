@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
   { name: "Servizi", href: "#services" },
@@ -31,7 +31,7 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? "bg-background/95 backdrop-blur-md shadow-sm py-4" 
+            ? "bg-background/95 backdrop-blur-md border-b border-border py-4" 
             : "bg-transparent py-6"
         }`}
         initial={{ y: -100 }}
@@ -42,22 +42,22 @@ const Navbar = () => {
           {/* Logo */}
           <a 
             href="#" 
-            className={`font-serif text-xl md:text-2xl font-medium transition-colors ${
+            className={`font-display text-xl font-bold tracking-tight transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             }`}
           >
-            Gabrielleshi <span className="text-primary">Events</span>
+            GABRIELLESHI
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`font-medium transition-colors underline-gold ${
+                className={`text-sm font-medium tracking-wide uppercase transition-colors underline-hover ${
                   isScrolled 
-                    ? "text-foreground hover:text-primary" 
+                    ? "text-foreground" 
                     : "text-white/90 hover:text-white"
                 }`}
               >
@@ -66,9 +66,14 @@ const Navbar = () => {
             ))}
             <button
               onClick={() => scrollToSection("#contact")}
-              className="btn-hero rounded-full text-sm px-6 py-2.5"
+              className={`text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-200 flex items-center gap-2 ${
+                isScrolled 
+                  ? "bg-foreground text-background hover:bg-foreground/90" 
+                  : "bg-white text-foreground hover:bg-white/90"
+              }`}
             >
-              Richiedi preventivo
+              Preventivo
+              <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
 
@@ -91,20 +96,20 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-charcoal md:hidden"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-foreground md:hidden flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="flex-1 flex flex-col items-start justify-center container-custom gap-8">
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-white text-2xl font-serif"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  className="text-background text-4xl font-display font-bold tracking-tight"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
                   {link.name}
@@ -112,9 +117,9 @@ const Navbar = () => {
               ))}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="btn-hero rounded-full mt-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                className="mt-8 bg-background text-foreground px-8 py-4 font-semibold tracking-tight uppercase text-sm"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 Richiedi preventivo

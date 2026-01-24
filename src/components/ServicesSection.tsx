@@ -1,51 +1,38 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { 
-  Building2, 
-  Sparkles, 
-  Clapperboard, 
-  MapPin, 
-  Users, 
-  Star, 
-  Palette 
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const services = [
   {
-    icon: Building2,
+    number: "01",
     title: "Corporate Events",
-    description: "Meeting, convention, cene aziendali e team building progettati per rafforzare il tuo brand e coinvolgere i tuoi stakeholder.",
+    description: "Meeting, convention, cene aziendali e team building progettati per rafforzare il tuo brand.",
   },
   {
-    icon: Sparkles,
+    number: "02",
     title: "Brand Activations",
-    description: "Esperienze immersive che trasformano i consumatori in ambasciatori del brand, creando connessioni autentiche e memorabili.",
+    description: "Esperienze immersive che trasformano i consumatori in ambasciatori del brand.",
   },
   {
-    icon: Clapperboard,
+    number: "03",
     title: "Event Production",
-    description: "Produzione completa di eventi con tecnologie all'avanguardia, regia professionale e storytelling coinvolgente.",
+    description: "Produzione completa con tecnologie all'avanguardia, regia professionale e storytelling.",
   },
   {
-    icon: MapPin,
+    number: "04",
     title: "Location & Allestimenti",
-    description: "Scouting delle migliori location italiane e internazionali, con allestimenti scenografici su misura per ogni concept.",
+    description: "Scouting delle migliori location italiane con allestimenti scenografici su misura.",
   },
   {
-    icon: Users,
+    number: "05",
     title: "Staff & Regia",
-    description: "Team di professionisti esperti, dalla regia alla logistica, per garantire un'esecuzione impeccabile di ogni dettaglio.",
+    description: "Team di professionisti esperti per garantire un'esecuzione impeccabile.",
   },
   {
-    icon: Star,
-    title: "Hostess & Ragazze Immagine",
-    description: "Personale selezionato per locali, eventi e promozioni. Professionalità, stile e presenza impeccabile per rappresentare al meglio il tuo brand.",
-  },
-  {
-    icon: Palette,
-    title: "Experience Design",
-    description: "Concept creativi unici che trasformano ogni evento in un'esperienza sensoriale coinvolgente e indimenticabile.",
+    number: "06",
+    title: "Hostess & Immagine",
+    description: "Personale selezionato per eventi e promozioni. Professionalità e stile impeccabile.",
   },
 ];
 
@@ -57,36 +44,38 @@ const ServicesSection = () => {
     <section id="services" className="section-padding bg-background" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="text-center mb-16"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-medium tracking-widest uppercase text-sm mb-4 block">
-            Cosa facciamo
-          </span>
-          <h2 className="heading-section mb-6">
-            Servizi pensati per il <span className="italic">tuo successo</span>
-          </h2>
-          <p className="text-body max-w-2xl mx-auto">
+          <div>
+            <span className="number-label block mb-4">[03] — Servizi</span>
+            <h2 className="heading-section">
+              COSA<br />
+              <span className="italic font-normal">FACCIAMO</span>
+            </h2>
+          </div>
+          <p className="text-body max-w-md">
             Ogni servizio è progettato per creare eventi che lasciano il segno. 
-            Dalla strategia all'esecuzione, siamo al tuo fianco.
+            Dalla strategia all'esecuzione.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="card-service rounded-lg group"
+              className="bg-background p-8 md:p-10 group cursor-pointer hover:bg-secondary transition-colors duration-300"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <service.icon className="w-6 h-6 text-primary" />
+              <div className="flex items-start justify-between mb-6">
+                <span className="number-label">[{service.number}]</span>
+                <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
-              <h3 className="text-xl font-serif font-medium mb-3 text-foreground">
+              <h3 className="text-2xl font-display font-bold mb-4 tracking-tight">
                 {service.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed">

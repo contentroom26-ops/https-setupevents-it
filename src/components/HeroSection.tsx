@@ -14,7 +14,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax Effect */}
+      {/* Background Image */}
       <motion.div
         className="absolute inset-0 z-0"
         initial={{ scale: 1.1 }}
@@ -25,80 +25,78 @@ const HeroSection = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
+        <div className="absolute inset-0 bg-black/60" />
       </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-6"
+        <motion.span
+          className="number-label block mb-8 text-white/60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <span className="inline-block px-4 py-2 text-sm font-medium tracking-widest uppercase text-primary border border-primary/30 rounded-full">
-            Gabrielleshi Events
-          </span>
-        </motion.div>
+          [01] — Event Agency
+        </motion.span>
 
         <motion.h1
-          className="heading-display text-white mb-6 max-w-5xl mx-auto"
+          className="heading-display text-white mb-8"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Eventi su misura che fanno{" "}
-          <span className="text-gradient-gold italic">parlare del tuo brand</span>
+          EVENTI SU
+          <br />
+          <span className="italic font-normal">MISURA</span>
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-lg md:text-xl text-white/70 mb-12 max-w-xl mx-auto font-light"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Creiamo esperienze memorabili per il tuo brand. Corporate events, brand activations, 
-          produzioni spettacolari — dalla visione all'applauso finale.
+          Corporate events, brand activations, produzioni spettacolari. 
+          Dalla visione all'applauso finale.
         </motion.p>
 
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
           <button
             onClick={scrollToContact}
-            className="btn-hero rounded-full flex items-center gap-2 group"
+            className="bg-white text-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
           >
-            Richiedi un preventivo
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            Richiedi preventivo
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={openWhatsApp}
-            className="btn-outline-hero rounded-full flex items-center gap-2"
+            className="btn-outline-hero flex items-center gap-2"
           >
-            <MessageCircle className="w-5 h-5" />
-            Parla con noi ora
+            <MessageCircle className="w-4 h-4" />
+            Parla con noi
           </button>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          <motion.div
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-          </motion.div>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+      >
+        <span className="text-white/40 text-xs uppercase tracking-widest">Scroll</span>
+        <motion.div
+          className="w-px h-12 bg-white/30"
+          animate={{ scaleY: [1, 0.5, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        />
+      </motion.div>
     </section>
   );
 };
