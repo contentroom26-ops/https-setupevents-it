@@ -57,14 +57,14 @@ const HeroSection = () => {
         >
           <button
             onClick={scrollToContact}
-            className="bg-white text-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
+            className="bg-white text-foreground px-8 py-4 rounded-full font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
           >
             Richiedi preventivo
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={openWhatsApp}
-            className="btn-outline-hero flex items-center gap-2"
+            className="btn-outline-hero rounded-full flex items-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
             Parla con noi
