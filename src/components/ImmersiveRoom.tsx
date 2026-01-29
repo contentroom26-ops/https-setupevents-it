@@ -117,14 +117,14 @@ const Room = ({ scrollProgress, selectedFrame, onFrameSelect }: RoomProps) => {
         <meshStandardMaterial color="#ffffff" />
       </mesh>
 
-      {/* Walls - white/light gray */}
+      {/* Walls - pure white */}
       <mesh position={[-roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#f5f5f5" roughness={0.6} />
+        <meshStandardMaterial color="#ffffff" roughness={0.5} />
       </mesh>
       <mesh position={[roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#f5f5f5" roughness={0.6} />
+        <meshStandardMaterial color="#ffffff" roughness={0.5} />
       </mesh>
 
       {/* Archways - dark for contrast */}
