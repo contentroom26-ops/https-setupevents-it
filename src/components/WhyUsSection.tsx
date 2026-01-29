@@ -45,7 +45,7 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-black/70 backdrop-blur-sm border-t border-white/10" ref={ref}>
+    <section className="section-padding bg-black/35 backdrop-blur-sm border-t border-white/10" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-20"
