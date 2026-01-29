@@ -3,6 +3,46 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "framer-motion";
 import * as THREE from "three";
 
+// Animated Door component
+const AnimatedDoor = ({ 
+  position, 
+  scrollProgress,
+  isLeft 
+}: { 
+  position: [number, number, number]; 
+  scrollProgress: React.MutableRefObject<number>;
+  isLeft: boolean;
+}) => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const doorWidth = 2.8;
+  const doorHeight = 6;
+
+  useFrame(() => {
+    if (meshRef.current) {
+      // Door starts opening at 85% scroll progress
+      const doorProgress = Math.max(0, (scrollProgress.current - 0.85) / 0.15);
+      const maxRotation = Math.PI / 2.2;
+      const targetRotation = isLeft ? doorProgress * maxRotation : -doorProgress * maxRotation;
+      
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(
+        meshRef.current.rotation.y,
+        targetRotation,
+        0.1
+      );
+    }
+  });
+
+  return (
+    <mesh 
+      ref={meshRef} 
+      position={position}
+    >
+      <boxGeometry args={[doorWidth, doorHeight, 0.15]} />
+      <meshStandardMaterial color="#0a0a0a" roughness={0.3} metalness={0.7} />
+    </mesh>
+  );
+};
+
 const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) => {
   const { camera } = useThree();
   const targetZ = useRef(8);
@@ -10,6 +50,7 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
   const corridorLength = 180;
   const roomWidth = 12;
   const roomHeight = 7;
+  const doorZ = -corridorLength + 8;
 
   const archways = useMemo(() => 
     Array.from({ length: 10 }, (_, i) => ({ z: -15 - i * 16 })), 
@@ -129,14 +170,62 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
         </group>
       ))}
 
-      {/* End wall - white */}
-      <mesh position={[0, roomHeight / 2, -corridorLength + 5]}>
-        <planeGeometry args={[roomWidth, roomHeight]} />
-        <meshStandardMaterial color="#fafafa" />
-      </mesh>
+      {/* Door Frame at end */}
+      <group position={[0, 0, doorZ]}>
+        {/* Door frame - grand entrance style */}
+        <mesh position={[-3.2, roomHeight / 2, 0]}>
+          <boxGeometry args={[0.4, roomHeight, 0.3]} />
+          <meshStandardMaterial color="#0a0a0a" roughness={0.3} metalness={0.5} />
+        </mesh>
+        <mesh position={[3.2, roomHeight / 2, 0]}>
+          <boxGeometry args={[0.4, roomHeight, 0.3]} />
+          <meshStandardMaterial color="#0a0a0a" roughness={0.3} metalness={0.5} />
+        </mesh>
+        <mesh position={[0, roomHeight - 0.2, 0]}>
+          <boxGeometry args={[6.8, 0.4, 0.3]} />
+          <meshStandardMaterial color="#0a0a0a" roughness={0.3} metalness={0.5} />
+        </mesh>
+        
+        {/* Decorative arch above door */}
+        <mesh position={[0, roomHeight + 0.3, 0]}>
+          <boxGeometry args={[7.5, 0.6, 0.2]} />
+          <meshStandardMaterial color="#1a1a1a" roughness={0.4} />
+        </mesh>
+      </group>
+
+      {/* Animated Double Doors */}
+      <group position={[0, 0, doorZ]}>
+        {/* Left door - pivot from left edge */}
+        <group position={[-1.4, 0, 0]}>
+          <AnimatedDoor 
+            position={[-1.4, 3, 0]} 
+            scrollProgress={scrollProgress}
+            isLeft={true}
+          />
+        </group>
+        {/* Right door - pivot from right edge */}
+        <group position={[1.4, 0, 0]}>
+          <AnimatedDoor 
+            position={[1.4, 3, 0]} 
+            scrollProgress={scrollProgress}
+            isLeft={false}
+          />
+        </group>
+      </group>
+
+      {/* Glowing light behind door - visible when open */}
+      <pointLight 
+        position={[0, roomHeight / 2, doorZ - 5]} 
+        intensity={2} 
+        color="#ffffff" 
+        distance={40} 
+      />
       
-      {/* End focal light */}
-      <pointLight position={[0, roomHeight / 2, -corridorLength + 15]} intensity={0.5} color="#ffffff" distance={30} />
+      {/* Bright room behind door */}
+      <mesh position={[0, roomHeight / 2, doorZ - 10]}>
+        <planeGeometry args={[20, roomHeight + 4]} />
+        <meshBasicMaterial color="#ffffff" />
+      </mesh>
     </group>
   );
 };
