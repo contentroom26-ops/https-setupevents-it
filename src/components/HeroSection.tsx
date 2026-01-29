@@ -14,19 +14,14 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      >
+      {/* Background Image - Static, no animation */}
+      <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
-        <div className="absolute inset-0 bg-black/60" />
-      </motion.div>
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center">
