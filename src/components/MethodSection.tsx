@@ -38,7 +38,7 @@ const MethodSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="number-label block mb-4 text-background/50">[05] — Metodo</span>
+          <span className="number-label block mb-4 text-background/50">[06] — Metodo</span>
           <h2 className="heading-section">
             IL NOSTRO<br />
             <span className="italic font-normal">PROCESSO</span>

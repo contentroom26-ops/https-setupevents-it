@@ -53,7 +53,7 @@ const WhyUsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="number-label block mb-4">[07] — Risultati</span>
+          <span className="number-label block mb-4">[08] — Risultati</span>
           <h2 className="heading-section">
             PERCHÉ<br />
             <span className="italic font-normal">SCEGLIERCI</span>
