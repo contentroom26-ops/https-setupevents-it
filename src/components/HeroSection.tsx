@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const scrollToContact = () => {
@@ -14,16 +13,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image - Static, no animation */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-
-      {/* Content */}
+      {/* Content - no background, 3D is behind */}
       <div className="relative z-10 container-custom text-center">
         <motion.span
           className="number-label block mb-8 text-white/60"

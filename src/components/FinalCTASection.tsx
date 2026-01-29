@@ -13,7 +13,7 @@ const FinalCTASection = () => {
   };
 
   return (
-    <section className="py-32 md:py-40 bg-foreground text-background" ref={ref}>
+    <section className="py-32 md:py-40 bg-black/85 backdrop-blur-sm text-white" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="text-center max-w-4xl mx-auto"
