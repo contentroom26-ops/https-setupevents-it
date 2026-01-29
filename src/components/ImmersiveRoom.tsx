@@ -77,55 +77,93 @@ const Room = ({ scrollProgress, selectedFrame, onFrameSelect }: RoomProps) => {
   return (
     <group>
       {/* Brighter ambient light */}
-      <ambientLight intensity={0.6} color="#ffffff" />
+      <ambientLight intensity={0.8} color="#ffffff" />
       
-      {/* Soft point lights along corridor */}
-      <pointLight position={[0, roomHeight - 1, -20]} intensity={1} distance={80} color="#f0f0f0" />
-      <pointLight position={[0, roomHeight - 1, -60]} intensity={1} distance={80} color="#f0f0f0" />
-      <pointLight position={[0, roomHeight - 1, -100]} intensity={0.8} distance={80} color="#f0f0f0" />
-      <pointLight position={[0, roomHeight - 1, -140]} intensity={0.6} distance={80} color="#f0f0f0" />
+      {/* Multiple point lights along corridor for dramatic lighting */}
+      <pointLight position={[0, roomHeight - 1, -10]} intensity={1.5} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -30]} intensity={1.5} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -50]} intensity={1.5} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -70]} intensity={1.2} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -90]} intensity={1.2} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -110]} intensity={1} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -130]} intensity={1} distance={60} color="#ffffff" />
+      <pointLight position={[0, roomHeight - 1, -150]} intensity={0.8} distance={60} color="#ffffff" />
+      
+      {/* Side wall accent lights */}
+      <pointLight position={[-4, 3, -25]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[4, 3, -25]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[-4, 3, -55]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[4, 3, -55]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[-4, 3, -85]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[4, 3, -85]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[-4, 3, -115]} intensity={0.8} distance={30} color="#ffffff" />
+      <pointLight position={[4, 3, -115]} intensity={0.8} distance={30} color="#ffffff" />
       
       {/* Spotlight from front */}
       <spotLight
         position={[0, roomHeight, 10]}
         angle={0.8}
         penumbra={0.5}
-        intensity={1.5}
+        intensity={2}
         color="#ffffff"
-        distance={150}
+        distance={200}
       />
 
-      <fog attach="fog" args={["#f8f8f8", 40, 200]} />
+      <fog attach="fog" args={["#ffffff", 80, 250]} />
 
-      {/* Floor - white marble style */}
-      <mesh position={[0, 0, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial color="#f0f0f0" roughness={0.4} metalness={0.1} />
+      {/* Floor - white marble with black grid */}
+      <mesh position={[0, -0.1, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[roomWidth + 2, corridorLength + 20]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Floor grid lines - subtle */}
-      {Array.from({ length: 20 }, (_, i) => (
-        <mesh key={`grid-${i}`} position={[0, 0.02, -10 - i * 9]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[roomWidth, 0.05]} />
-          <meshBasicMaterial color="#d0d0d0" />
+      {/* Floor grid lines - black for contrast */}
+      {Array.from({ length: 25 }, (_, i) => (
+        <mesh key={`grid-${i}`} position={[0, 0.01, -5 - i * 7]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[roomWidth, 0.08]} />
+          <meshBasicMaterial color="#0a0a0a" />
+        </mesh>
+      ))}
+      
+      {/* Vertical floor lines */}
+      {[-4, -2, 0, 2, 4].map((x, i) => (
+        <mesh key={`vgrid-${i}`} position={[x, 0.01, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[0.04, corridorLength]} />
+          <meshBasicMaterial color="#0a0a0a" />
         </mesh>
       ))}
 
-      {/* Ceiling - white */}
+      {/* Ceiling - pure white */}
       <mesh position={[0, roomHeight, -corridorLength / 2]} rotation={[Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial color="#ffffff" />
+        <planeGeometry args={[roomWidth + 2, corridorLength + 20]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.2} />
       </mesh>
 
-      {/* Walls - pure white */}
-      <mesh position={[-roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, Math.PI / 2, 0]}>
-        <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#ffffff" roughness={0.5} />
+      {/* Walls - SOLID white boxes (visible from both sides) */}
+      <mesh position={[-roomWidth / 2 - 0.1, roomHeight / 2, -corridorLength / 2]}>
+        <boxGeometry args={[0.2, roomHeight, corridorLength + 20]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.3} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, -Math.PI / 2, 0]}>
-        <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#ffffff" roughness={0.5} />
+      <mesh position={[roomWidth / 2 + 0.1, roomHeight / 2, -corridorLength / 2]}>
+        <boxGeometry args={[0.2, roomHeight, corridorLength + 20]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.3} side={THREE.DoubleSide} />
       </mesh>
+      
+      {/* Wall panels - white with black trim */}
+      {Array.from({ length: 12 }, (_, i) => (
+        <group key={`panel-${i}`}>
+          {/* Left wall panel */}
+          <mesh position={[-roomWidth / 2 + 0.02, roomHeight / 2, -15 - i * 14]}>
+            <boxGeometry args={[0.05, roomHeight - 1, 10]} />
+            <meshStandardMaterial color="#fafafa" roughness={0.4} />
+          </mesh>
+          {/* Right wall panel */}
+          <mesh position={[roomWidth / 2 - 0.02, roomHeight / 2, -15 - i * 14]}>
+            <boxGeometry args={[0.05, roomHeight - 1, 10]} />
+            <meshStandardMaterial color="#fafafa" roughness={0.4} />
+          </mesh>
+        </group>
+      ))}
 
       {/* Archways - dark for contrast */}
       {archways.map((arch, i) => (
