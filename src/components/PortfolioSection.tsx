@@ -2,49 +2,63 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-import event1 from "@/assets/event-1.jpg";
-import event2 from "@/assets/event-2.jpg";
-import event3 from "@/assets/event-3.jpg";
-import event4 from "@/assets/event-4.jpg";
-import event5 from "@/assets/event-5.jpg";
-import event6 from "@/assets/event-6.jpg";
+import diesel1 from "@/assets/diesel-1.jpg";
+import diesel2 from "@/assets/diesel-2.jpg";
+import diesel3 from "@/assets/diesel-3.jpg";
+import diesel4 from "@/assets/diesel-4.jpg";
+import diesel5 from "@/assets/diesel-5.jpg";
+import diesel6 from "@/assets/diesel-6.jpg";
+import diesel7 from "@/assets/diesel-7.jpg";
+import diesel8 from "@/assets/diesel-8.jpg";
 
 const portfolio = [
   {
-    image: event1,
-    title: "Fashion Show",
+    image: diesel1,
+    title: "Diesel Event",
     client: "Diesel",
     category: "Brand Activation",
   },
   {
-    image: event2,
-    title: "Product Launch",
-    client: "Tech Brand",
-    category: "Corporate Event",
+    image: diesel2,
+    title: "VIP Experience",
+    client: "Diesel",
+    category: "Fashion Event",
   },
   {
-    image: event3,
-    title: "Gala Dinner",
-    client: "Mediolanum",
-    category: "Corporate Event",
+    image: diesel3,
+    title: "Store Opening",
+    client: "Diesel",
+    category: "Brand Activation",
   },
   {
-    image: event4,
-    title: "Annual Conference",
-    client: "Private",
-    category: "Event Production",
+    image: diesel4,
+    title: "Flagship Launch",
+    client: "Diesel",
+    category: "Store Event",
   },
   {
-    image: event5,
-    title: "Luxury Event",
-    client: "Private",
+    image: diesel5,
+    title: "Collection Preview",
+    client: "Diesel",
+    category: "Fashion Event",
+  },
+  {
+    image: diesel6,
+    title: "Party Night",
+    client: "Diesel",
+    category: "Brand Activation",
+  },
+  {
+    image: diesel7,
+    title: "Fashion Night",
+    client: "Diesel",
     category: "Experience Design",
   },
   {
-    image: event6,
-    title: "Trade Show",
-    client: "Various",
-    category: "Hostess & Staff",
+    image: diesel8,
+    title: "Shopping Experience",
+    client: "Diesel",
+    category: "Retail Event",
   },
 ];
 
