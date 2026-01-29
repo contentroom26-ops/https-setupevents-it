@@ -122,9 +122,9 @@
 }
 
 @layer components {
-  /* Button Variants - Framer Rounded Style */
+  /* Button Variants - Brutalist Style */
   .btn-hero {
-    @apply bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm rounded-full;
+    @apply bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm;
   }
 
   .btn-hero:hover {
@@ -133,7 +133,7 @@
   }
 
   .btn-outline-hero {
-    @apply bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm rounded-full;
+    @apply bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm;
   }
 
   .btn-outline-hero:hover {
@@ -199,7 +199,7 @@
 
   /* WhatsApp Button */
   .whatsapp-btn {
-    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200;
+    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-none flex items-center justify-center transition-all duration-200;
     background: #25D366;
   }
 
