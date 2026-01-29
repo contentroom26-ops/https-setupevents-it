@@ -72,7 +72,7 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
       />
 
       {/* Fog for depth */}
-      <fog attach="fog" args={["#0a0a0a", 15, 120]} />
+      <fog attach="fog" args={["#0a0a0a", 15, 220]} />
 
       {/* === FLOOR === */}
       <mesh position={[0, 0, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
