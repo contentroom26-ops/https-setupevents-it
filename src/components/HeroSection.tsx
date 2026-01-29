@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import AnimatedHeroBackground from "./AnimatedHeroBackground";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const scrollToContact = () => {
@@ -14,8 +14,19 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Vector Background */}
-      <AnimatedHeroBackground />
+      {/* Background Image */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center">
@@ -57,14 +68,14 @@ const HeroSection = () => {
         >
           <button
             onClick={scrollToContact}
-            className="bg-white text-foreground px-8 py-4 rounded-full font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
+            className="bg-white text-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
           >
             Richiedi preventivo
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={openWhatsApp}
-            className="btn-outline-hero rounded-full flex items-center gap-2"
+            className="btn-outline-hero flex items-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
             Parla con noi
