@@ -65,7 +65,7 @@ const HostessSlideshow = () => {
   }, [isAutoPlaying, nextSlide]);
 
   return (
-    <section className="section-padding bg-black/90 backdrop-blur-sm text-white overflow-hidden" ref={ref}>
+    <section className="section-padding bg-black/40 backdrop-blur-sm text-white overflow-hidden" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"

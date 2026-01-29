@@ -53,7 +53,7 @@ const PortfolioSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="portfolio" className="section-padding bg-black/75 backdrop-blur-sm" ref={ref}>
+    <section id="portfolio" className="section-padding bg-black/30 backdrop-blur-sm" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
