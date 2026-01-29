@@ -72,10 +72,10 @@ const ContactSection = () => {
     }));
   };
 
-  const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-white/20 focus:outline-none focus:border-white transition-colors placeholder:text-white/40 text-white";
+  const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-foreground/20 focus:outline-none focus:border-foreground transition-colors placeholder:text-foreground/40 text-foreground";
 
   return (
-    <section id="contact" className="section-padding bg-black/5" ref={ref}>
+    <section id="contact" className="section-padding bg-background/50" ref={ref}>
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left Content */}
@@ -84,17 +84,17 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="number-label text-white/60 block mb-4">[09] — Form</span>
-            <h2 className="heading-section text-white mb-8">
+            <span className="number-label text-foreground/60 block mb-4">[09] — Form</span>
+            <h2 className="heading-section text-foreground mb-8">
               RACCONTACI<br />
               <span className="italic font-normal">IL PROGETTO</span>
             </h2>
-            <p className="text-body text-white/70 mb-10">
+            <p className="text-body text-foreground/70 mb-10">
               Compila il modulo con i dettagli del tuo progetto. 
               Ti contatteremo per una consulenza gratuita.
             </p>
             
-            <div className="space-y-4 text-white">
+            <div className="space-y-4 text-foreground">
               <div className="flex items-center gap-3">
                 <ArrowUpRight className="w-4 h-4" />
                 <span>Ti rispondiamo entro 24 ore</span>
@@ -217,10 +217,10 @@ const ContactSection = () => {
                   name="privacy"
                   checked={formData.privacy}
                   onChange={handleChange}
-                  className="mt-1 w-4 h-4 border-white/20 accent-white"
+                  className="mt-1 w-4 h-4 border-foreground/20 accent-foreground"
                 />
-                <span className="text-sm text-white/60">
-                  Accetto la <a href="#" className="underline-hover text-white">Privacy Policy</a> *
+                <span className="text-sm text-foreground/60">
+                  Accetto la <a href="#" className="underline-hover text-foreground">Privacy Policy</a> *
                 </span>
               </label>
             </div>

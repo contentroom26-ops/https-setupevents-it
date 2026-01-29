@@ -30,7 +30,7 @@ const MethodSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-black/5 text-white" ref={ref}>
+    <section className="section-padding bg-background/50 text-foreground" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-20"
@@ -38,7 +38,7 @@ const MethodSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="number-label block mb-4 text-background/50">[05] — Metodo</span>
+          <span className="number-label block mb-4 text-foreground/50">[05] — Metodo</span>
           <h2 className="heading-section">
             IL NOSTRO<br />
             <span className="italic font-normal">PROCESSO</span>
@@ -55,14 +55,14 @@ const MethodSection = () => {
               transition={{ duration: 0.6, delay: index * 0.15 }}
             >
               <div className="flex items-baseline gap-4 mb-4">
-                <span className="text-6xl md:text-7xl font-display font-bold text-background/10">
+                <span className="text-6xl md:text-7xl font-display font-bold text-foreground/10">
                   {step.number}
                 </span>
               </div>
               <h3 className="text-2xl font-display font-bold mb-3 tracking-tight">
                 {step.title}
               </h3>
-              <p className="text-background/60 leading-relaxed">
+              <p className="text-foreground/60 leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

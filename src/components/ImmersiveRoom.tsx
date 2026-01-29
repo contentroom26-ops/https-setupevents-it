@@ -29,119 +29,114 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
   return (
     <group>
       {/* Brighter ambient light */}
-      <ambientLight intensity={0.4} color="#ffffff" />
+      <ambientLight intensity={0.6} color="#ffffff" />
       
-      {/* Strong white point lights along corridor */}
-      <pointLight position={[0, roomHeight - 1, -20]} intensity={1.5} distance={80} color="#ffffff" />
-      <pointLight position={[0, roomHeight - 1, -60]} intensity={1.5} distance={80} color="#ffffff" />
-      <pointLight position={[0, roomHeight - 1, -100]} intensity={1.2} distance={80} color="#ffffff" />
-      <pointLight position={[0, roomHeight - 1, -140]} intensity={1} distance={80} color="#ffffff" />
+      {/* Soft point lights along corridor */}
+      <pointLight position={[0, roomHeight - 1, -20]} intensity={1} distance={80} color="#f0f0f0" />
+      <pointLight position={[0, roomHeight - 1, -60]} intensity={1} distance={80} color="#f0f0f0" />
+      <pointLight position={[0, roomHeight - 1, -100]} intensity={0.8} distance={80} color="#f0f0f0" />
+      <pointLight position={[0, roomHeight - 1, -140]} intensity={0.6} distance={80} color="#f0f0f0" />
       
       {/* Spotlight from front */}
       <spotLight
         position={[0, roomHeight, 10]}
         angle={0.8}
         penumbra={0.5}
-        intensity={2}
+        intensity={1.5}
         color="#ffffff"
         distance={150}
       />
 
-      <fog attach="fog" args={["#0f0f0f", 30, 200]} />
+      <fog attach="fog" args={["#f8f8f8", 40, 200]} />
 
-      {/* Floor - lighter */}
+      {/* Floor - white marble style */}
       <mesh position={[0, 0, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial color="#1a1a1a" roughness={0.6} metalness={0.3} />
+        <meshStandardMaterial color="#f0f0f0" roughness={0.4} metalness={0.1} />
       </mesh>
 
-      {/* Floor grid lines - more visible */}
+      {/* Floor grid lines - subtle */}
       {Array.from({ length: 20 }, (_, i) => (
         <mesh key={`grid-${i}`} position={[0, 0.02, -10 - i * 9]} rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[roomWidth, 0.05]} />
-          <meshBasicMaterial color="#3a3a3a" />
+          <meshBasicMaterial color="#d0d0d0" />
         </mesh>
       ))}
 
-      {/* Ceiling */}
+      {/* Ceiling - white */}
       <mesh position={[0, roomHeight, -corridorLength / 2]} rotation={[Math.PI / 2, 0, 0]}>
         <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial color="#0d0d0d" />
+        <meshStandardMaterial color="#ffffff" />
       </mesh>
 
-      {/* Walls - slightly lighter */}
+      {/* Walls - white/light gray */}
       <mesh position={[-roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#181818" roughness={0.8} />
+        <meshStandardMaterial color="#f5f5f5" roughness={0.6} />
       </mesh>
       <mesh position={[roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial color="#181818" roughness={0.8} />
+        <meshStandardMaterial color="#f5f5f5" roughness={0.6} />
       </mesh>
 
-      {/* Archways with more contrast */}
+      {/* Archways - dark for contrast */}
       {archways.map((arch, i) => (
         <group key={i} position={[0, 0, arch.z]}>
           {/* Left pillar */}
           <mesh position={[-roomWidth / 2 + 0.3, roomHeight / 2, 0]}>
             <boxGeometry args={[0.6, roomHeight, 0.5]} />
-            <meshStandardMaterial color="#222222" roughness={0.5} />
+            <meshStandardMaterial color="#1a1a1a" roughness={0.5} />
           </mesh>
           {/* Right pillar */}
           <mesh position={[roomWidth / 2 - 0.3, roomHeight / 2, 0]}>
             <boxGeometry args={[0.6, roomHeight, 0.5]} />
-            <meshStandardMaterial color="#222222" roughness={0.5} />
+            <meshStandardMaterial color="#1a1a1a" roughness={0.5} />
           </mesh>
           {/* Top beam */}
           <mesh position={[0, roomHeight - 0.2, 0]}>
             <boxGeometry args={[roomWidth, 0.4, 0.5]} />
-            <meshStandardMaterial color="#222222" roughness={0.5} />
+            <meshStandardMaterial color="#1a1a1a" roughness={0.5} />
           </mesh>
           {/* Floor accent line */}
           <mesh position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[roomWidth, 0.15]} />
-            <meshBasicMaterial color="#444444" />
+            <meshBasicMaterial color="#c0c0c0" />
           </mesh>
         </group>
       ))}
 
-      {/* Bright ceiling light strips */}
+      {/* Ceiling light strips - subtle */}
       {Array.from({ length: 12 }, (_, i) => (
         <group key={`light-${i}`} position={[0, roomHeight - 0.05, -15 - i * 14]}>
           <mesh>
             <boxGeometry args={[3, 0.08, 0.4]} />
-            <meshBasicMaterial color="#ffffff" />
-          </mesh>
-          {/* Glow effect */}
-          <mesh position={[0, -0.1, 0]}>
-            <planeGeometry args={[3.5, 0.6]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.15} />
+            <meshBasicMaterial color="#1a1a1a" />
           </mesh>
         </group>
       ))}
 
-      {/* Wall accent lights */}
+      {/* Wall accent lights - dark lines */}
       {Array.from({ length: 8 }, (_, i) => (
         <group key={`wall-light-${i}`}>
           <mesh position={[-roomWidth / 2 + 0.1, roomHeight / 2, -25 - i * 20]}>
             <planeGeometry args={[0.05, 3]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
+            <meshBasicMaterial color="#1a1a1a" transparent opacity={0.6} />
           </mesh>
           <mesh position={[roomWidth / 2 - 0.1, roomHeight / 2, -25 - i * 20]}>
             <planeGeometry args={[0.05, 3]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
+            <meshBasicMaterial color="#1a1a1a" transparent opacity={0.6} />
           </mesh>
         </group>
       ))}
 
-      {/* End wall */}
+      {/* End wall - white */}
       <mesh position={[0, roomHeight / 2, -corridorLength + 5]}>
         <planeGeometry args={[roomWidth, roomHeight]} />
-        <meshStandardMaterial color="#0a0a0a" />
+        <meshStandardMaterial color="#fafafa" />
       </mesh>
       
       {/* End focal light */}
-      <pointLight position={[0, roomHeight / 2, -corridorLength + 15]} intensity={0.8} color="#ffffff" distance={30} />
+      <pointLight position={[0, roomHeight / 2, -corridorLength + 15]} intensity={0.5} color="#ffffff" distance={30} />
     </group>
   );
 };
@@ -155,7 +150,7 @@ const ImmersiveRoom = () => {
   });
 
   return (
-    <div className="fixed inset-0 z-0 bg-[#0a0a0a]">
+    <div className="fixed inset-0 z-0 bg-[#f8f8f8]">
       <Canvas
         camera={{ position: [0, 2, 8], fov: 65 }}
         gl={{ antialias: false, powerPreference: "high-performance" }}
