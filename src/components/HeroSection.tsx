@@ -16,7 +16,7 @@ const HeroSection = () => {
       {/* Content - no background, 3D is behind */}
       <div className="relative z-10 container-custom text-center">
         <motion.span
-          className="number-label block mb-8 text-white/60"
+          className="number-label block mb-8 text-foreground/60"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -25,7 +25,7 @@ const HeroSection = () => {
         </motion.span>
 
         <motion.h1
-          className="heading-display text-white mb-8"
+          className="heading-display text-foreground mb-8"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -36,7 +36,7 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-white/70 mb-12 max-w-xl mx-auto font-light"
+          className="text-lg md:text-xl text-foreground/70 mb-12 max-w-xl mx-auto font-light"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -53,14 +53,14 @@ const HeroSection = () => {
         >
           <button
             onClick={scrollToContact}
-            className="bg-white text-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
+            className="bg-foreground text-background px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-foreground/90 flex items-center gap-2 group"
           >
             Richiedi preventivo
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={openWhatsApp}
-            className="btn-outline-hero flex items-center gap-2"
+            className="bg-transparent border-2 border-foreground text-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm hover:bg-foreground hover:text-background flex items-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
             Parla con noi
@@ -75,9 +75,9 @@ const HeroSection = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <span className="text-white/40 text-xs uppercase tracking-widest">Scroll</span>
+        <span className="text-foreground/40 text-xs uppercase tracking-widest">Scroll</span>
         <motion.div
-          className="w-px h-12 bg-white/30"
+          className="w-px h-12 bg-foreground/30"
           animate={{ scaleY: [1, 0.5, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />

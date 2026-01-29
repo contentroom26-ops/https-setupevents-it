@@ -33,9 +33,9 @@ const HostessCarousel = () => {
   };
 
   return (
-    <section className="py-24 overflow-hidden relative bg-black/5" ref={ref}>
+    <section className="py-24 overflow-hidden relative bg-background/50" ref={ref}>
       {/* Gradient background with color accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-950/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-100/30 to-transparent pointer-events-none" />
       
       <div className="container-custom mb-16">
         <motion.div
@@ -43,10 +43,10 @@ const HostessCarousel = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <span className="number-label block mb-4 text-rose-400/60">[04] — Staff</span>
-          <h2 className="heading-section text-white">
+          <span className="number-label block mb-4 text-rose-500/80">[04] — Staff</span>
+          <h2 className="heading-section text-foreground">
             HOSTESS &<br />
-            <span className="italic font-normal text-rose-200/80">IMMAGINE</span>
+            <span className="italic font-normal text-rose-600/80">IMMAGINE</span>
           </h2>
         </motion.div>
       </div>
@@ -59,8 +59,8 @@ const HostessCarousel = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {/* Side gradients */}
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black/90 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black/90 to-transparent z-20 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background/90 to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background/90 to-transparent z-20 pointer-events-none" />
 
         {/* Hostess display */}
         <div className="flex items-end justify-center h-full relative">
@@ -113,8 +113,8 @@ const HostessCarousel = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <p className="text-white font-display font-bold text-lg">{hostess.name}</p>
-                      <p className="text-rose-300/80 text-sm">{hostess.role}</p>
+                      <p className="text-foreground font-display font-bold text-lg">{hostess.name}</p>
+                      <p className="text-rose-600/80 text-sm">{hostess.role}</p>
                     </motion.div>
                   )}
                 </div>
@@ -126,14 +126,14 @@ const HostessCarousel = () => {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-rose-500/30 bg-black/50 flex items-center justify-center text-white hover:bg-rose-500/20 hover:border-rose-500/50 transition-all"
+          className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-rose-500/30 bg-background/80 flex items-center justify-center text-foreground hover:bg-rose-100 hover:border-rose-500/50 transition-all"
           aria-label="Previous"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-rose-500/30 bg-black/50 flex items-center justify-center text-white hover:bg-rose-500/20 hover:border-rose-500/50 transition-all"
+          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-rose-500/30 bg-background/80 flex items-center justify-center text-foreground hover:bg-rose-100 hover:border-rose-500/50 transition-all"
           aria-label="Next"
         >
           <ChevronRight className="w-6 h-6" />
@@ -159,7 +159,7 @@ const HostessCarousel = () => {
       {/* Description */}
       <div className="container-custom mt-16">
         <motion.p
-          className="text-white/60 max-w-xl text-lg"
+          className="text-foreground/60 max-w-xl text-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}

@@ -41,7 +41,7 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="services" className="section-padding bg-black/5" ref={ref}>
+    <section id="services" className="section-padding bg-background/50" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -50,35 +50,35 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
         >
           <div>
-            <span className="number-label text-white/60 block mb-4">[03] — Servizi</span>
-            <h2 className="heading-section text-white">
+            <span className="number-label text-foreground/60 block mb-4">[03] — Servizi</span>
+            <h2 className="heading-section text-foreground">
               COSA<br />
               <span className="italic font-normal">FACCIAMO</span>
             </h2>
           </div>
-          <p className="text-body text-white/70 max-w-md">
+          <p className="text-body text-foreground/70 max-w-md">
             Ogni servizio è progettato per creare eventi che lasciano il segno. 
             Dalla strategia all'esecuzione.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="bg-black/5 p-8 md:p-10 group cursor-pointer hover:bg-black/15 transition-colors duration-300"
+              className="bg-background/80 p-8 md:p-10 group cursor-pointer hover:bg-secondary transition-colors duration-300"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="flex items-start justify-between mb-6">
-                <span className="number-label text-white/50">[{service.number}]</span>
-                <ArrowUpRight className="w-5 h-5 text-white/50 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <span className="number-label text-foreground/50">[{service.number}]</span>
+                <ArrowUpRight className="w-5 h-5 text-foreground/50 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
-              <h3 className="text-2xl font-display font-bold mb-4 tracking-tight text-white">
+              <h3 className="text-2xl font-display font-bold mb-4 tracking-tight text-foreground">
                 {service.title}
               </h3>
-              <p className="text-white/60 leading-relaxed">
+              <p className="text-foreground/60 leading-relaxed">
                 {service.description}
               </p>
             </motion.div>
