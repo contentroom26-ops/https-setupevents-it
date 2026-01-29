@@ -6,7 +6,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-foreground text-background py-20">
+    <footer className="bg-black/95 backdrop-blur-sm text-white py-20">
       <div className="container-custom">
         {/* Top Section */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 mb-16 pb-16 border-b border-background/10">

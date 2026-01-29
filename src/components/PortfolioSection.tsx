@@ -53,7 +53,7 @@ const PortfolioSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="portfolio" className="section-padding bg-secondary" ref={ref}>
+    <section id="portfolio" className="section-padding bg-black/75 backdrop-blur-sm" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -62,8 +62,8 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
         >
           <div>
-            <span className="number-label block mb-4">[06] — Portfolio</span>
-            <h2 className="heading-section">
+            <span className="number-label text-white/60 block mb-4">[06] — Portfolio</span>
+            <h2 className="heading-section text-white">
               EVENTI<br />
               <span className="italic font-normal">RECENTI</span>
             </h2>

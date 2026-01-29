@@ -31,7 +31,7 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? "bg-background/95 backdrop-blur-md border-b border-border py-4" 
+            ? "bg-black/80 backdrop-blur-md border-b border-white/10 py-4" 
             : "bg-transparent py-6"
         }`}
         initial={{ y: -100 }}
@@ -42,9 +42,7 @@ const Navbar = () => {
           {/* Logo */}
           <a 
             href="#" 
-            className={`font-display text-xl font-bold tracking-tight transition-colors ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}
+            className="font-display text-xl font-bold tracking-tight transition-colors text-white"
           >
             GABRIELLESHI
           </a>
@@ -55,22 +53,14 @@ const Navbar = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium tracking-wide uppercase transition-colors underline-hover ${
-                  isScrolled 
-                    ? "text-foreground" 
-                    : "text-white/90 hover:text-white"
-                }`}
+                className="text-sm font-medium tracking-wide uppercase transition-colors underline-hover text-white/90 hover:text-white"
               >
                 {link.name}
               </button>
             ))}
             <button
               onClick={() => scrollToSection("#contact")}
-              className={`text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-200 flex items-center gap-2 ${
-                isScrolled 
-                  ? "bg-foreground text-background hover:bg-foreground/90" 
-                  : "bg-white text-foreground hover:bg-white/90"
-              }`}
+              className="text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-200 flex items-center gap-2 bg-white text-black hover:bg-white/90"
             >
               Preventivo
               <ArrowUpRight className="w-4 h-4" />
@@ -84,9 +74,9 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <X className="w-6 h-6 text-white" />
             ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <Menu className="w-6 h-6 text-white" />
             )}
           </button>
         </div>
@@ -96,7 +86,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-foreground md:hidden flex flex-col"
+            className="fixed inset-0 z-40 bg-black md:hidden flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -107,7 +97,7 @@ const Navbar = () => {
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-background text-4xl font-display font-bold tracking-tight"
+                  className="text-white text-4xl font-display font-bold tracking-tight"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -117,7 +107,7 @@ const Navbar = () => {
               ))}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-8 bg-background text-foreground px-8 py-4 font-semibold tracking-tight uppercase text-sm"
+                className="mt-8 bg-white text-black px-8 py-4 font-semibold tracking-tight uppercase text-sm"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
