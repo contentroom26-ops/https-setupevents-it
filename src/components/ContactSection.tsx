@@ -75,7 +75,7 @@ const ContactSection = () => {
   const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-white/20 focus:outline-none focus:border-white transition-colors placeholder:text-white/40 text-white";
 
   return (
-    <section id="contact" className="section-padding bg-black/35 backdrop-blur-sm" ref={ref}>
+    <section id="contact" className="section-padding bg-black/15" ref={ref}>
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left Content */}
