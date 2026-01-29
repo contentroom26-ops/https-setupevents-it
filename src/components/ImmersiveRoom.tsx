@@ -3,267 +3,115 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "framer-motion";
 import * as THREE from "three";
 
-// Architectural room/corridor component
+// Optimized minimal corridor
 const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) => {
-  const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
+  const targetZ = useRef(8);
+  const targetY = useRef(1.6);
 
-  // Room dimensions
-  const roomWidth = 12;
-  const roomHeight = 8;
-  const corridorLength = 200;
+  const corridorLength = 180;
+  const roomWidth = 10;
+  const roomHeight = 6;
 
-  // Create architectural elements
-  const archways = useMemo(() => {
-    const arches = [];
-    for (let i = 0; i < 15; i++) {
-      arches.push({
-        z: -15 - i * 12,
-        width: roomWidth - 1,
-        height: roomHeight - 0.5,
-      });
-    }
-    return arches;
-  }, []);
+  // Reduced archways - only 8
+  const archways = useMemo(() => 
+    Array.from({ length: 8 }, (_, i) => ({ z: -20 - i * 20 })), 
+  []);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     const progress = scrollProgress.current;
     
-    // Camera moves through the corridor
-    const startZ = 8;
-    const endZ = -corridorLength + 20;
-    camera.position.z = startZ + (endZ - startZ) * progress;
+    // Smooth lerp for camera movement
+    const endZ = -corridorLength + 30;
+    targetZ.current = THREE.MathUtils.lerp(targetZ.current, 8 + (endZ - 8) * progress, delta * 3);
+    targetY.current = THREE.MathUtils.lerp(targetY.current, 1.6, delta * 5);
     
-    // Subtle breathing movement
-    camera.position.y = 1.6 + Math.sin(progress * Math.PI * 4) * 0.15;
-    camera.position.x = Math.sin(progress * Math.PI * 2) * 0.3;
-    
-    // Look straight ahead
-    camera.lookAt(
-      camera.position.x * 0.5, 
-      1.6, 
-      camera.position.z - 15
-    );
-
-    // Very subtle room sway
-    if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(progress * Math.PI) * 0.01;
-    }
+    camera.position.z = targetZ.current;
+    camera.position.y = targetY.current;
+    camera.position.x = 0;
+    camera.lookAt(0, 1.6, camera.position.z - 20);
   });
 
   return (
-    <group ref={groupRef}>
-      {/* Ambient lighting */}
-      <ambientLight intensity={0.15} />
+    <group>
+      <ambientLight intensity={0.2} />
+      <pointLight position={[0, roomHeight - 1, -80]} intensity={0.6} distance={120} />
       
-      {/* Main light from above */}
-      <pointLight position={[0, roomHeight - 1, -50]} intensity={0.8} color="#ffffff" distance={100} />
-      <pointLight position={[0, roomHeight - 1, -100]} intensity={0.6} color="#ffffff" distance={100} />
-      <pointLight position={[0, roomHeight - 1, -150]} intensity={0.4} color="#ffffff" distance={100} />
-      
-      {/* Spotlight effect */}
-      <spotLight
-        position={[0, roomHeight, 5]}
-        angle={0.6}
-        penumbra={0.8}
-        intensity={1}
-        color="#ffffff"
-        target-position={[0, 0, -20]}
-      />
+      <fog attach="fog" args={["#0a0a0a", 20, 180]} />
 
-      {/* Fog for depth */}
-      <fog attach="fog" args={["#0a0a0a", 15, 220]} />
-
-      {/* === FLOOR === */}
+      {/* Floor */}
       <mesh position={[0, 0, -corridorLength / 2]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial 
-          color="#1a1a1a" 
-          roughness={0.8}
-          metalness={0.2}
-        />
+        <meshBasicMaterial color="#141414" />
       </mesh>
 
-      {/* Floor grid lines */}
-      {[...Array(30)].map((_, i) => (
-        <mesh key={`floor-line-${i}`} position={[0, 0.01, -5 - i * 7]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[roomWidth, 0.02]} />
-          <meshBasicMaterial color="#2a2a2a" />
-        </mesh>
-      ))}
-
-      {/* === CEILING === */}
+      {/* Ceiling */}
       <mesh position={[0, roomHeight, -corridorLength / 2]} rotation={[Math.PI / 2, 0, 0]}>
         <planeGeometry args={[roomWidth, corridorLength]} />
-        <meshStandardMaterial 
-          color="#0d0d0d" 
-          roughness={0.9}
-        />
+        <meshBasicMaterial color="#0a0a0a" />
       </mesh>
 
-      {/* === LEFT WALL === */}
+      {/* Walls */}
       <mesh position={[-roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial 
-          color="#151515" 
-          roughness={0.85}
-          metalness={0.1}
-        />
+        <meshBasicMaterial color="#121212" />
       </mesh>
-
-      {/* === RIGHT WALL === */}
       <mesh position={[roomWidth / 2, roomHeight / 2, -corridorLength / 2]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[corridorLength, roomHeight]} />
-        <meshStandardMaterial 
-          color="#151515" 
-          roughness={0.85}
-          metalness={0.1}
-        />
+        <meshBasicMaterial color="#121212" />
       </mesh>
 
-      {/* === ARCHWAYS / FRAMES === */}
-      {archways.map((arch, index) => (
-        <group key={`arch-${index}`} position={[0, 0, arch.z]}>
-          {/* Left pillar */}
-          <mesh position={[-roomWidth / 2 + 0.3, roomHeight / 2, 0]}>
-            <boxGeometry args={[0.6, roomHeight, 0.4]} />
-            <meshStandardMaterial color="#1a1a1a" roughness={0.7} />
+      {/* Simplified archways */}
+      {archways.map((arch, i) => (
+        <group key={i} position={[0, 0, arch.z]}>
+          <mesh position={[-roomWidth / 2 + 0.2, roomHeight / 2, 0]}>
+            <boxGeometry args={[0.4, roomHeight, 0.3]} />
+            <meshBasicMaterial color="#1a1a1a" />
           </mesh>
-          
-          {/* Right pillar */}
-          <mesh position={[roomWidth / 2 - 0.3, roomHeight / 2, 0]}>
-            <boxGeometry args={[0.6, roomHeight, 0.4]} />
-            <meshStandardMaterial color="#1a1a1a" roughness={0.7} />
+          <mesh position={[roomWidth / 2 - 0.2, roomHeight / 2, 0]}>
+            <boxGeometry args={[0.4, roomHeight, 0.3]} />
+            <meshBasicMaterial color="#1a1a1a" />
           </mesh>
-          
-          {/* Top beam */}
-          <mesh position={[0, roomHeight - 0.2, 0]}>
-            <boxGeometry args={[roomWidth, 0.4, 0.4]} />
-            <meshStandardMaterial color="#1a1a1a" roughness={0.7} />
-          </mesh>
-
-          {/* Floor edge accent */}
-          <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[roomWidth, 0.1]} />
-            <meshBasicMaterial color="#333333" />
+          <mesh position={[0, roomHeight - 0.15, 0]}>
+            <boxGeometry args={[roomWidth, 0.3, 0.3]} />
+            <meshBasicMaterial color="#1a1a1a" />
           </mesh>
         </group>
       ))}
 
-      {/* === WALL PANELS === */}
-      {[...Array(12)].map((_, i) => (
-        <group key={`panel-${i}`}>
-          {/* Left wall panels */}
-          <mesh position={[-roomWidth / 2 + 0.02, roomHeight / 2, -20 - i * 15]}>
-            <boxGeometry args={[0.05, roomHeight - 2, 8]} />
-            <meshStandardMaterial color="#1f1f1f" roughness={0.6} />
-          </mesh>
-          
-          {/* Right wall panels */}
-          <mesh position={[roomWidth / 2 - 0.02, roomHeight / 2, -20 - i * 15]}>
-            <boxGeometry args={[0.05, roomHeight - 2, 8]} />
-            <meshStandardMaterial color="#1f1f1f" roughness={0.6} />
-          </mesh>
-        </group>
-      ))}
-
-      {/* === CEILING LIGHTS === */}
-      {[...Array(20)].map((_, i) => (
-        <group key={`light-${i}`} position={[0, roomHeight - 0.1, -10 - i * 10]}>
-          {/* Light fixture */}
-          <mesh>
-            <boxGeometry args={[2, 0.1, 0.5]} />
-            <meshBasicMaterial color="#333333" />
-          </mesh>
-          {/* Light glow */}
-          <mesh position={[0, -0.1, 0]}>
-            <planeGeometry args={[1.8, 0.3]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
-          </mesh>
-          {/* Point light for actual illumination */}
-          <pointLight 
-            position={[0, -0.5, 0]} 
-            intensity={0.2} 
-            color="#ffffff" 
-            distance={15}
-          />
-        </group>
-      ))}
-
-      {/* === DECORATIVE ELEMENTS === */}
-      {/* Vertical accent lines on walls */}
-      {[...Array(25)].map((_, i) => (
-        <group key={`accent-${i}`}>
-          <mesh position={[-roomWidth / 2 + 0.01, roomHeight / 2, -8 - i * 8]}>
-            <boxGeometry args={[0.02, roomHeight, 0.02]} />
-            <meshBasicMaterial color="#2a2a2a" />
-          </mesh>
-          <mesh position={[roomWidth / 2 - 0.01, roomHeight / 2, -8 - i * 8]}>
-            <boxGeometry args={[0.02, roomHeight, 0.02]} />
-            <meshBasicMaterial color="#2a2a2a" />
-          </mesh>
-        </group>
-      ))}
-
-      {/* === END OF CORRIDOR - Focal point === */}
-      <group position={[0, 0, -corridorLength + 10]}>
-        {/* Back wall */}
-        <mesh position={[0, roomHeight / 2, 0]}>
-          <planeGeometry args={[roomWidth, roomHeight]} />
-          <meshStandardMaterial color="#0d0d0d" roughness={0.9} />
-        </mesh>
-        
-        {/* Decorative frame on back wall */}
-        <mesh position={[0, roomHeight / 2, 0.1]}>
-          <boxGeometry args={[6, 5, 0.1]} />
-          <meshStandardMaterial color="#1a1a1a" roughness={0.7} />
-        </mesh>
-        
-        {/* Subtle glow at the end */}
-        <pointLight position={[0, roomHeight / 2, 2]} intensity={0.5} color="#ffffff" distance={20} />
-      </group>
-
-      {/* === AMBIENT DUST PARTICLES (static) === */}
-      {[...Array(50)].map((_, i) => (
-        <mesh
-          key={`dust-${i}`}
-          position={[
-            (Math.random() - 0.5) * roomWidth * 0.8,
-            Math.random() * roomHeight * 0.8 + 1,
-            -Math.random() * 150
-          ]}
-        >
-          <sphereGeometry args={[0.02, 4, 4]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.15} />
+      {/* Minimal ceiling lights - only 6 */}
+      {Array.from({ length: 6 }, (_, i) => (
+        <mesh key={i} position={[0, roomHeight - 0.05, -30 - i * 25]}>
+          <planeGeometry args={[1.5, 0.2]} />
+          <meshBasicMaterial color="#333333" transparent opacity={0.5} />
         </mesh>
       ))}
+
+      {/* End wall */}
+      <mesh position={[0, roomHeight / 2, -corridorLength + 5]}>
+        <planeGeometry args={[roomWidth, roomHeight]} />
+        <meshBasicMaterial color="#0a0a0a" />
+      </mesh>
     </group>
   );
 };
 
 const ImmersiveRoom = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const scrollProgressRef = useRef(0);
-  
   const { scrollYProgress } = useScroll();
   
-  // Update scroll progress ref
   scrollYProgress.on("change", (value) => {
     scrollProgressRef.current = value;
   });
 
   return (
-    <div 
-      ref={containerRef}
-      className="fixed inset-0 z-0"
-      style={{ background: "#0a0a0a" }}
-    >
+    <div className="fixed inset-0 z-0 bg-[#0a0a0a]">
       <Canvas
-        camera={{ position: [0, 1.6, 8], fov: 70 }}
-        gl={{ antialias: true, alpha: false }}
-        dpr={[1, 2]}
+        camera={{ position: [0, 1.6, 8], fov: 65 }}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
+        dpr={1}
+        frameloop="always"
       >
-        <color attach="background" args={["#0a0a0a"]} />
         <Room scrollProgress={scrollProgressRef} />
       </Canvas>
     </div>
