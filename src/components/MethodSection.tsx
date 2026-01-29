@@ -30,7 +30,7 @@ const MethodSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-black/15 text-white" ref={ref}>
+    <section className="section-padding bg-black/5 text-white" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-20"

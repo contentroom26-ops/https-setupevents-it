@@ -41,7 +41,7 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="services" className="section-padding bg-black/15" ref={ref}>
+    <section id="services" className="section-padding bg-black/5" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -66,7 +66,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="bg-black/10 p-8 md:p-10 group cursor-pointer hover:bg-black/25 transition-colors duration-300"
+              className="bg-black/5 p-8 md:p-10 group cursor-pointer hover:bg-black/15 transition-colors duration-300"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}

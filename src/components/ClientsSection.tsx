@@ -16,7 +16,7 @@ const ClientsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-16 md:py-20 bg-black/20 border-y border-white/10" ref={ref}>
+    <section className="py-16 md:py-20 bg-black/10 border-y border-white/5" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex items-center justify-between mb-10"

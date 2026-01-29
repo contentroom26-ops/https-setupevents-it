@@ -33,9 +33,9 @@ const HostessCarousel = () => {
   };
 
   return (
-    <section className="py-24 overflow-hidden relative" ref={ref}>
+    <section className="py-24 overflow-hidden relative bg-black/5" ref={ref}>
       {/* Gradient background with color accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-950/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-950/5 to-transparent pointer-events-none" />
       
       <div className="container-custom mb-16">
         <motion.div
