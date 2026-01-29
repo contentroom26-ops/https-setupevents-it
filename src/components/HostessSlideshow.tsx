@@ -1,202 +1,203 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
-import hostess1 from "@/assets/hostess-white-1.jpg";
-import hostess2 from "@/assets/hostess-white-2.jpg";
-import hostess3 from "@/assets/hostess-white-3.jpg";
-import hostess4 from "@/assets/hostess-white-4.jpg";
-import hostess5 from "@/assets/hostess-white-5.jpg";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import hostess1 from "@/assets/hostess-1.jpg";
+import hostess2 from "@/assets/hostess-2.jpg";
+import hostess3 from "@/assets/hostess-3.jpg";
+import hostess4 from "@/assets/hostess-4.jpg";
+import hostess5 from "@/assets/hostess-5.jpg";
 
-const hostesses = [
+const slides = [
   {
-    id: 1,
     image: hostess1,
-    name: "Corporate Events",
-    role: "Hostess Professionali",
-    description: "Staff selezionato per accoglienza e gestione eventi aziendali",
+    title: "Hostess Professionali",
+    description: "Staff selezionato per eventi corporate",
   },
   {
-    id: 2,
     image: hostess2,
-    name: "Fashion & Luxury",
-    role: "Modelle Immagine",
-    description: "Presenza elegante per eventi fashion e luxury brand",
+    title: "Brand Activation",
+    description: "Team coordinato per fiere ed esposizioni",
   },
   {
-    id: 3,
     image: hostess3,
-    name: "Brand Activation",
-    role: "Brand Ambassador",
-    description: "Rappresentanza professionale per attivazioni e promozioni",
+    title: "Auto Show",
+    description: "Ragazze immagine per eventi automotive",
   },
   {
-    id: 4,
     image: hostess4,
-    name: "Gala & VIP Events",
-    role: "Event Hostess",
-    description: "Accoglienza esclusiva per eventi di gala e cerimonie",
+    title: "Gala & Eventi VIP",
+    description: "Accoglienza esclusiva per eventi luxury",
   },
   {
-    id: 5,
     image: hostess5,
-    name: "Fiere & Congressi",
-    role: "Exhibition Staff",
-    description: "Staff professionale per fiere internazionali e congressi",
+    title: "Product Launch",
+    description: "Ambassador per lanci prodotto",
   },
 ];
 
 const HostessSlideshow = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const displayIndex = hoveredIndex !== null ? hoveredIndex : activeIndex;
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  // Auto-play
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(nextSlide, 4000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextSlide]);
 
   return (
-    <section className="section-padding bg-background overflow-hidden" ref={ref}>
+    <section className="section-padding bg-foreground text-background overflow-hidden" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
           <div>
-            <span className="number-label block mb-4">[04] — Staff</span>
+            <span className="number-label block mb-4 text-background/50">[04] — Staff</span>
             <h2 className="heading-section">
               HOSTESS &<br />
               <span className="italic font-normal">IMMAGINE</span>
             </h2>
           </div>
-          <p className="text-body max-w-md">
+          <p className="text-background/60 max-w-md">
             Personale selezionato e formato per rappresentare il tuo brand 
             con professionalità, eleganza e stile impeccabile.
           </p>
         </motion.div>
+      </div>
 
-        {/* Interactive Slideshow */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Image Display */}
-          <div className="relative aspect-[3/4] bg-secondary overflow-hidden order-2 lg:order-1">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={displayIndex}
-                src={hostesses[displayIndex].image}
-                alt={hostesses[displayIndex].name}
-                className="w-full h-full object-cover object-top"
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              />
-            </AnimatePresence>
-            
-            {/* Floating Info Card */}
+      {/* Slideshow Container */}
+      <motion.div
+        className="relative"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        {/* Main Slider */}
+        <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+          <AnimatePresence mode="wait">
             <motion.div
-              className="absolute bottom-6 left-6 right-6 bg-background p-6 border border-border"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              key={currentSlide}
+              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={displayIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="text-muted-foreground text-xs uppercase tracking-widest">
-                    {hostesses[displayIndex].role}
-                  </span>
-                  <h3 className="font-display font-bold text-xl mt-1">
-                    {hostesses[displayIndex].name}
-                  </h3>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
-
-            {/* Counter */}
-            <div className="absolute top-6 right-6 font-display font-bold text-6xl text-foreground/10">
-              {String(displayIndex + 1).padStart(2, "0")}
-            </div>
-          </div>
-
-          {/* Interactive List */}
-          <div className="space-y-0 order-1 lg:order-2">
-            {hostesses.map((hostess, index) => (
-              <motion.div
-                key={hostess.id}
-                className={`group cursor-pointer border-b border-border py-6 transition-all duration-300 ${
-                  displayIndex === index ? "bg-secondary -mx-6 px-6" : ""
-                }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => setActiveIndex(index)}
-                initial={{ opacity: 0, x: 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-6">
-                    <span className={`font-display font-bold text-3xl transition-colors duration-300 ${
-                      displayIndex === index ? "text-foreground" : "text-muted-foreground/30"
-                    }`}>
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className={`font-display font-bold text-lg md:text-xl transition-colors duration-300 ${
-                        displayIndex === index ? "text-foreground" : "text-muted-foreground"
-                      }`}>
-                        {hostess.name}
-                      </h3>
-                      <p className={`text-sm transition-all duration-300 overflow-hidden ${
-                        displayIndex === index 
-                          ? "text-muted-foreground max-h-20 opacity-100 mt-1" 
-                          : "max-h-0 opacity-0"
-                      }`}>
-                        {hostess.description}
-                      </p>
-                    </div>
-                  </div>
+              <img
+                src={slides[currentSlide].image}
+                alt={slides[currentSlide].title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              
+              {/* Slide Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
+                <div className="container-custom">
                   <motion.div
-                    className={`transition-all duration-300 ${
-                      displayIndex === index ? "opacity-100" : "opacity-0"
-                    }`}
-                    animate={{ x: displayIndex === index ? 0 : -10 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
                   >
-                    <ArrowRight className="w-5 h-5" />
+                    <span className="text-background/60 text-sm uppercase tracking-widest block mb-2">
+                      {String(currentSlide + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl font-display font-bold tracking-tight mb-2">
+                      {slides[currentSlide].title}
+                    </h3>
+                    <p className="text-background/80 text-lg">
+                      {slides[currentSlide].description}
+                    </p>
                   </motion.div>
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 border border-background/30 flex items-center justify-center text-background hover:bg-background hover:text-foreground transition-all duration-200 z-10"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 border border-background/30 flex items-center justify-center text-background hover:bg-background hover:text-foreground transition-all duration-200 z-10"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Thumbnail Navigation */}
+        <div className="container-custom mt-8">
+          <div className="flex gap-2 md:gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {slides.map((slide, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`relative flex-shrink-0 w-20 h-28 md:w-28 md:h-40 overflow-hidden transition-all duration-300 ${
+                  index === currentSlide 
+                    ? "ring-2 ring-background opacity-100" 
+                    : "opacity-40 hover:opacity-70"
+                }`}
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+                {index === currentSlide && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-background"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 4, ease: "linear" }}
+                    style={{ transformOrigin: "left" }}
+                  />
+                )}
+              </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Progress Indicator */}
-        <div className="flex gap-2 mt-12 justify-center lg:justify-start">
-          {hostesses.map((_, index) => (
+        {/* Progress Dots (Mobile) */}
+        <div className="flex md:hidden justify-center gap-2 mt-6 container-custom">
+          {slides.map((_, index) => (
             <button
               key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`h-1 transition-all duration-500 ${
-                activeIndex === index 
-                  ? "w-12 bg-foreground" 
-                  : "w-6 bg-foreground/20 hover:bg-foreground/40"
+              onClick={() => goToSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentSlide ? "bg-background w-8" : "bg-background/30"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

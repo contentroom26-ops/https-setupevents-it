@@ -62,7 +62,7 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
         >
           <div>
-            <span className="number-label block mb-4">[07] — Portfolio</span>
+            <span className="number-label block mb-4">[06] — Portfolio</span>
             <h2 className="heading-section">
               EVENTI<br />
               <span className="italic font-normal">RECENTI</span>
