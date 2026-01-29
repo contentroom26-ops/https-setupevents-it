@@ -84,7 +84,7 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="number-label block mb-4">[10] — Form</span>
+            <span className="number-label block mb-4">[08] — Form</span>
             <h2 className="heading-section mb-8">
               RACCONTACI<br />
               <span className="italic font-normal">IL PROGETTO</span>
