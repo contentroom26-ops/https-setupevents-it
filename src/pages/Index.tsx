@@ -6,7 +6,6 @@ import HostessCarousel from "@/components/HostessCarousel";
 import MethodSection from "@/components/MethodSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import WhyUsSection from "@/components/WhyUsSection";
-import FinalCTASection from "@/components/FinalCTASection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -28,7 +27,7 @@ const Index = () => {
         <MethodSection />
         <PortfolioSection />
         <WhyUsSection />
-        <FinalCTASection />
+        {/* Contact section now includes the door reveal effect and CTA */}
         <ContactSection />
         <Footer />
       </div>
