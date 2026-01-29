@@ -21,7 +21,7 @@ const FinalCTASection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <span className="number-label block mb-6 text-background/50">[07] — Contattaci</span>
+          <span className="number-label block mb-6 text-background/50">[09] — Contattaci</span>
           
           <h2 className="heading-display mb-8">
             PRONTO A<br />
