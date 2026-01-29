@@ -1,7 +1,8 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "framer-motion";
 import * as THREE from "three";
+import Gallery3D from "./Gallery3D";
 
 // Animated Door component
 const AnimatedDoor = ({ 
@@ -43,7 +44,13 @@ const AnimatedDoor = ({
   );
 };
 
-const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) => {
+interface RoomProps {
+  scrollProgress: React.MutableRefObject<number>;
+  selectedFrame: number | null;
+  onFrameSelect: (index: number | null) => void;
+}
+
+const Room = ({ scrollProgress, selectedFrame, onFrameSelect }: RoomProps) => {
   const { camera } = useThree();
   const targetZ = useRef(8);
 
@@ -226,6 +233,12 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
         <planeGeometry args={[20, roomHeight + 4]} />
         <meshBasicMaterial color="#ffffff" />
       </mesh>
+      
+      {/* 3D Gallery - Interactive art pieces on walls */}
+      <Gallery3D 
+        selectedFrame={selectedFrame} 
+        onFrameSelect={onFrameSelect} 
+      />
     </group>
   );
 };
@@ -233,21 +246,53 @@ const Room = ({ scrollProgress }: { scrollProgress: React.MutableRefObject<numbe
 const ImmersiveRoom = () => {
   const scrollProgressRef = useRef(0);
   const { scrollYProgress } = useScroll();
+  const [selectedFrame, setSelectedFrame] = useState<number | null>(null);
   
   scrollYProgress.on("change", (value) => {
     scrollProgressRef.current = value;
   });
 
+  // Close selected frame when clicking outside
+  const handleCanvasClick = () => {
+    if (selectedFrame !== null) {
+      setSelectedFrame(null);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-0 bg-[#f8f8f8]">
       <Canvas
         camera={{ position: [0, 2, 8], fov: 65 }}
-        gl={{ antialias: false, powerPreference: "high-performance" }}
-        dpr={1}
+        gl={{ antialias: true, powerPreference: "high-performance" }}
+        dpr={Math.min(window.devicePixelRatio, 2)}
         frameloop="always"
+        onPointerMissed={handleCanvasClick}
       >
-        <Room scrollProgress={scrollProgressRef} />
+        <Room 
+          scrollProgress={scrollProgressRef} 
+          selectedFrame={selectedFrame}
+          onFrameSelect={setSelectedFrame}
+        />
       </Canvas>
+      
+      {/* Instruction hint */}
+      {selectedFrame === null && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
+          <p className="text-foreground/40 text-sm font-display tracking-widest uppercase animate-pulse">
+            Passa sulle opere per esplorarle • Clicca per ingrandire
+          </p>
+        </div>
+      )}
+      
+      {/* Close button when frame is selected */}
+      {selectedFrame !== null && (
+        <button
+          onClick={() => setSelectedFrame(null)}
+          className="absolute top-8 right-8 z-50 w-12 h-12 rounded-full bg-background/80 border border-border flex items-center justify-center text-foreground hover:bg-background transition-colors"
+        >
+          <span className="text-2xl font-light">×</span>
+        </button>
+      )}
     </div>
   );
 };
