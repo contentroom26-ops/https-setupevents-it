@@ -25,25 +25,23 @@ interface GalleryItem {
   side: "left" | "right";
 }
 
-// Gallery items positioned along the corridor walls
+// Gallery items positioned floating above the runway sides
 const galleryItems: GalleryItem[] = [
-  // Left wall pieces
-  { imageUrl: diesel1, title: "Diesel Event", category: "Brand Activation", position: [-5.7, 3, -25], side: "left" },
-  { imageUrl: event1, title: "Fashion Night", category: "Luxury Event", position: [-5.7, 3, -45], side: "left" },
-  { imageUrl: diesel3, title: "Store Opening", category: "Brand Activation", position: [-5.7, 3, -65], side: "left" },
-  { imageUrl: event3, title: "VIP Gala", category: "Corporate Event", position: [-5.7, 3, -85], side: "left" },
-  { imageUrl: diesel5, title: "Collection Preview", category: "Fashion Event", position: [-5.7, 3, -105], side: "left" },
-  { imageUrl: event5, title: "Product Launch", category: "Press Event", position: [-5.7, 3, -125], side: "left" },
-  { imageUrl: diesel7, title: "Fashion Night", category: "Experience Design", position: [-5.7, 3, -145], side: "left" },
+  // Left side floating frames - above the audience
+  { imageUrl: diesel1, title: "Diesel Event", category: "Brand Activation", position: [-6.5, 4, -25], side: "left" },
+  { imageUrl: event1, title: "Fashion Night", category: "Luxury Event", position: [-6.5, 4, -50], side: "left" },
+  { imageUrl: diesel3, title: "Store Opening", category: "Brand Activation", position: [-6.5, 4, -75], side: "left" },
+  { imageUrl: event3, title: "VIP Gala", category: "Corporate Event", position: [-6.5, 4, -100], side: "left" },
+  { imageUrl: diesel5, title: "Collection Preview", category: "Fashion Event", position: [-6.5, 4, -125], side: "left" },
+  { imageUrl: event5, title: "Product Launch", category: "Press Event", position: [-6.5, 4, -150], side: "left" },
   
-  // Right wall pieces
-  { imageUrl: diesel2, title: "VIP Experience", category: "Fashion Event", position: [5.7, 3, -35], side: "right" },
-  { imageUrl: event2, title: "Art Exhibition", category: "Cultural Event", position: [5.7, 3, -55], side: "right" },
-  { imageUrl: diesel4, title: "Flagship Launch", category: "Store Event", position: [5.7, 3, -75], side: "right" },
-  { imageUrl: event4, title: "Cocktail Party", category: "Private Event", position: [5.7, 3, -95], side: "right" },
-  { imageUrl: diesel6, title: "Party Night", category: "Brand Activation", position: [5.7, 3, -115], side: "right" },
-  { imageUrl: event6, title: "Gala Dinner", category: "Corporate Event", position: [5.7, 3, -135], side: "right" },
-  { imageUrl: diesel8, title: "Shopping Experience", category: "Retail Event", position: [5.7, 3, -155], side: "right" },
+  // Right side floating frames
+  { imageUrl: diesel2, title: "VIP Experience", category: "Fashion Event", position: [6.5, 4, -37], side: "right" },
+  { imageUrl: event2, title: "Art Exhibition", category: "Cultural Event", position: [6.5, 4, -62], side: "right" },
+  { imageUrl: diesel4, title: "Flagship Launch", category: "Store Event", position: [6.5, 4, -87], side: "right" },
+  { imageUrl: event4, title: "Cocktail Party", category: "Private Event", position: [6.5, 4, -112], side: "right" },
+  { imageUrl: diesel6, title: "Party Night", category: "Brand Activation", position: [6.5, 4, -137], side: "right" },
+  { imageUrl: event6, title: "Gala Dinner", category: "Corporate Event", position: [6.5, 4, -162], side: "right" },
 ];
 
 interface Gallery3DProps {
