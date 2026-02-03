@@ -34,9 +34,9 @@ const FinalCTASection = () => {
           
           <motion.button
             onClick={scrollToContact}
-            className="bg-foreground text-background px-10 py-5 font-semibold tracking-tight transition-all duration-200 uppercase text-sm inline-flex items-center gap-3 group"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            className="bg-foreground text-background px-10 py-5 font-semibold tracking-tight transition-all duration-200 uppercase text-sm inline-flex items-center gap-3 group rounded-full"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             Inizia il progetto
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
