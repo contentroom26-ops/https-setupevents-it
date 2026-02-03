@@ -4,10 +4,8 @@ import { useRef, useState } from "react";
 
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
-import diesel3 from "@/assets/diesel-3.jpg";
 import dieselEvent1 from "@/assets/diesel-event-1.jpg";
 import dieselEvent2 from "@/assets/diesel-event-2.jpg";
-import dieselEvent3 from "@/assets/diesel-event-3.jpg";
 import dieselEvent4 from "@/assets/diesel-event-4.jpg";
 import dieselEvent5 from "@/assets/diesel-event-5.jpg";
 
@@ -15,10 +13,8 @@ const projects = [
   { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation" },
   { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event" },
   { image: dieselEvent2, title: "Diesel Collection", category: "Product Launch" },
-  { image: diesel2, title: "VIP Experience", category: "Exclusive Event" },
-  { image: dieselEvent3, title: "Diesel Party", category: "Brand Experience" },
   { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event" },
-  { image: diesel3, title: "Diesel Firenze", category: "Store Event" },
+  { image: diesel2, title: "VIP Experience", category: "Exclusive Event" },
   { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation" },
 ];
 
