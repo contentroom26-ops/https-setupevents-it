@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 const WhatsAppButton = () => {
   const openWhatsApp = () => {
     window.open(
-      "https://wa.me/393XXXXXXXXX?text=Ciao! Vorrei informazioni sui vostri servizi per eventi.",
+      "https://wa.me/393284163053?text=Salve, vorrei organizzare un evento, vorrei avere più informazioni.",
       "_blank"
     );
   };
