@@ -73,25 +73,26 @@ const StorySection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p className="text-lg">
-                Sono <strong className="text-foreground">Gabriel Leshi</strong>, fondatore di Setup Events. 
-                Per oltre un decennio ho vissuto il mondo dell'intrattenimento notturno fiorentino 
-                dall'interno, costruendo relazioni, comprendendo dinamiche e perfezionando ogni dettaglio 
-                che trasforma una serata in un'esperienza memorabile.
+                <strong className="text-foreground">Setup Events</strong> è un progetto fondato da 
+                <strong className="text-foreground"> Gabriel Lleshi</strong>, nato da oltre dieci anni 
+                di esperienza diretta nel mondo dell'organizzazione di eventi e dell'intrattenimento su 
+                Firenze. Dopo aver collaborato con una delle discoteche più importanti della città e aver 
+                curato eventi per brand nazionali e internazionali, Setup Events prende forma come realtà 
+                specializzata nella creazione di esperienze su misura.
               </p>
               
               <p>
-                Centinaia di eventi organizzati per brand nazionali e internazionali. 
-                Decine di migliaia di persone accolte. Un tasso di riempimento che sfiora 
-                il <strong className="text-foreground">100%</strong> — non per caso, ma per metodo. 
-                Ogni location, ogni pubblico, ogni momento della serata: conosco Firenze 
-                e il suo ecosistema come pochi altri.
+                Centinaia di eventi realizzati e una profonda conoscenza del territorio fiorentino hanno 
+                permesso di sviluppare un metodo di lavoro basato su <strong className="text-foreground">strategia, 
+                relazioni e attenzione al dettaglio</strong>. Ogni progetto viene costruito partendo dall'identità 
+                del cliente, dal pubblico di riferimento e dalla location, con l'obiettivo di trasformare 
+                ogni evento in un'esperienza memorabile.
               </p>
 
               <p>
-                Da tre anni ho canalizzato questa expertise nell'organizzazione di 
-                <strong className="text-foreground"> eventi personalizzati su misura</strong>: 
-                corporate, lanci prodotto, esperienze esclusive. Non organizziamo eventi. 
-                Creiamo momenti che le persone ricordano.
+                Setup Events opera nell'organizzazione di <strong className="text-foreground">eventi corporate, 
+                lanci prodotto ed esperienze esclusive</strong>, unendo dinamicità, professionalità e creatività. 
+                Non realizziamo semplici eventi: creiamo momenti che le persone ricordano.
               </p>
             </motion.div>
 
