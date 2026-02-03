@@ -94,20 +94,21 @@
 @layer components {
   /* Button Variants - Brutalist Style */
   .btn-hero {
-    @apply bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm;
+    @apply bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm rounded-full;
   }
 
   .btn-hero:hover {
     @apply bg-foreground/90;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
   }
 
   .btn-outline-hero {
-    @apply bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-200 uppercase text-sm;
+    @apply bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm rounded-full;
   }
 
   .btn-outline-hero:hover {
     @apply bg-white text-foreground;
+    transform: translateY(-2px) scale(1.05);
   }
 
   /* Card Styles - Clean & Modern */

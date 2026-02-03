@@ -62,20 +62,24 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <button
+          <motion.button
             onClick={scrollToContact}
-            className="bg-white text-black px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group"
+            className="bg-white text-black px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm hover:bg-white/90 flex items-center gap-2 group rounded-full"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             Richiedi preventivo
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={openWhatsApp}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm hover:bg-white hover:text-black flex items-center gap-2"
+            className="bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm hover:bg-white hover:text-black flex items-center gap-2 rounded-full"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             <MessageCircle className="w-4 h-4" />
             Parla con noi
-          </button>
+          </motion.button>
         </motion.div>
       </div>
 
