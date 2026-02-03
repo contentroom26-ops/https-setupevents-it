@@ -19,16 +19,15 @@ const projects = [
 ];
 
 const imageVariants = {
-  hidden: { opacity: 0, y: 80, scale: 0.9 },
+  hidden: { opacity: 0, y: 60 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 60,
+      stiffness: 70,
       damping: 15,
-      delay: i * 0.12,
+      delay: i * 0.15,
     },
   }),
 };
@@ -77,22 +76,22 @@ const PortfolioSection = () => {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="group cursor-pointer"
+              className="group cursor-pointer relative"
               custom={index}
               variants={imageVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.3 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <motion.div 
                 className="relative overflow-hidden aspect-[4/5] mb-4"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 <motion.img
                   src={project.image}
@@ -133,20 +132,28 @@ const PortfolioSection = () => {
               
               <motion.span 
                 className="text-sm text-muted-foreground uppercase tracking-wider block"
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.5 + index * 0.1 }}
+                transition={{ delay: 0.4 + index * 0.15 }}
               >
                 {project.category}
               </motion.span>
               <motion.h3 
-                className="text-xl font-bold mt-1"
-                initial={{ opacity: 0, x: -10 }}
+                className="text-xl font-bold mt-1 tracking-tight"
+                initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.55 + index * 0.1 }}
+                transition={{ delay: 0.5 + index * 0.15 }}
               >
                 {project.title}
               </motion.h3>
+              
+              {/* Hover underline - same as MethodSection */}
+              <motion.div
+                className="h-0.5 bg-foreground/30 mt-4"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.4 }}
+              />
             </motion.div>
           ))}
         </div>
