@@ -140,8 +140,8 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               >
                 <Phone className="w-4 h-4" />
-                <a href="tel:+393XXXXXXXXX" className="hover:text-background transition-colors">
-                  +39 3XX XXX XXXX
+                <a href="tel:+393284163053" className="hover:text-background transition-colors">
+                  +39 328 416 3053
                 </a>
               </motion.li>
               <motion.li 

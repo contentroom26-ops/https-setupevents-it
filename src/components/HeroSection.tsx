@@ -9,7 +9,7 @@ const HeroSection = () => {
   };
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/393XXXXXXXXX?text=Ciao! Vorrei informazioni sui vostri servizi", "_blank");
+    window.open("https://wa.me/393284163053?text=Salve, vorrei organizzare un evento, vorrei avere più informazioni.", "_blank");
   };
 
   return (
