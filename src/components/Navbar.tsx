@@ -58,13 +58,15 @@ const Navbar = () => {
                 {link.name}
               </button>
             ))}
-            <button
+            <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-200 flex items-center gap-2 bg-foreground text-background hover:bg-foreground/90"
+              className="text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-300 flex items-center gap-2 bg-foreground text-background hover:bg-foreground/90 rounded-full"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               Preventivo
               <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -107,10 +109,12 @@ const Navbar = () => {
               ))}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-8 bg-foreground text-background px-8 py-4 font-semibold tracking-tight uppercase text-sm"
+                className="mt-8 bg-foreground text-background px-8 py-4 font-semibold tracking-tight uppercase text-sm rounded-full"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Richiedi preventivo
               </motion.button>
