@@ -5,17 +5,21 @@ import { useRef, useState } from "react";
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
 import diesel3 from "@/assets/diesel-3.jpg";
-import event1 from "@/assets/event-1.jpg";
-import event2 from "@/assets/event-2.jpg";
-import event3 from "@/assets/event-3.jpg";
+import dieselEvent1 from "@/assets/diesel-event-1.jpg";
+import dieselEvent2 from "@/assets/diesel-event-2.jpg";
+import dieselEvent3 from "@/assets/diesel-event-3.jpg";
+import dieselEvent4 from "@/assets/diesel-event-4.jpg";
+import dieselEvent5 from "@/assets/diesel-event-5.jpg";
 
 const projects = [
-  { image: diesel1, title: "Diesel Event", category: "Brand Activation" },
-  { image: event1, title: "Fashion Night", category: "Luxury Event" },
-  { image: diesel2, title: "VIP Experience", category: "Fashion Event" },
-  { image: event2, title: "Art Exhibition", category: "Cultural Event" },
-  { image: diesel3, title: "Store Opening", category: "Brand Activation" },
-  { image: event3, title: "VIP Gala", category: "Corporate Event" },
+  { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation" },
+  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event" },
+  { image: dieselEvent2, title: "Diesel Collection", category: "Product Launch" },
+  { image: diesel2, title: "VIP Experience", category: "Exclusive Event" },
+  { image: dieselEvent3, title: "Diesel Party", category: "Brand Experience" },
+  { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event" },
+  { image: diesel3, title: "Diesel Firenze", category: "Store Event" },
+  { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation" },
 ];
 
 const imageVariants = {
