@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, ArrowRight } from "lucide-react";
+import { Send, ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const eventTypes = [
   "Corporate Event",
@@ -33,6 +34,7 @@ const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
     nome: "",
@@ -47,7 +49,7 @@ const ContactSection = () => {
     privacy: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.privacy) {
@@ -59,23 +61,52 @@ const ContactSection = () => {
       return;
     }
 
-    toast({
-      title: "Richiesta inviata!",
-      description: "Ti risponderemo entro 24 ore. Grazie!",
-    });
+    setIsSubmitting(true);
 
-    setFormData({
-      nome: "",
-      cognome: "",
-      azienda: "",
-      email: "",
-      telefono: "",
-      tipoEvento: "",
-      dataEvento: "",
-      budget: "",
-      messaggio: "",
-      privacy: false,
-    });
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          nome: formData.nome,
+          cognome: formData.cognome,
+          azienda: formData.azienda,
+          email: formData.email,
+          telefono: formData.telefono,
+          tipoEvento: formData.tipoEvento,
+          dataEvento: formData.dataEvento,
+          budget: formData.budget,
+          messaggio: formData.messaggio,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Richiesta inviata!",
+        description: "Ti risponderemo entro 24 ore. Grazie!",
+      });
+
+      setFormData({
+        nome: "",
+        cognome: "",
+        azienda: "",
+        email: "",
+        telefono: "",
+        tipoEvento: "",
+        dataEvento: "",
+        budget: "",
+        messaggio: "",
+        privacy: false,
+      });
+    } catch (error) {
+      console.error("Error sending contact form:", error);
+      toast({
+        title: "Errore",
+        description: "Si è verificato un errore. Riprova più tardi.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -312,12 +343,22 @@ const ContactSection = () => {
               >
                 <motion.button
                   type="submit"
-                  className="w-full bg-foreground text-background px-8 py-5 font-bold tracking-tight transition-all duration-300 uppercase text-sm flex items-center justify-center gap-4 group rounded-full"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  disabled={isSubmitting}
+                  className="w-full bg-foreground text-background px-8 py-5 font-bold tracking-tight transition-all duration-300 uppercase text-sm flex items-center justify-center gap-4 group rounded-full disabled:opacity-70"
+                  whileHover={{ scale: isSubmitting ? 1 : 1.05, y: isSubmitting ? 0 : -2 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                 >
-                  Invia richiesta
-                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                  {isSubmitting ? (
+                    <>
+                      Invio in corso...
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      Invia richiesta
+                      <Send className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                    </>
+                  )}
                 </motion.button>
               </motion.div>
             </form>
