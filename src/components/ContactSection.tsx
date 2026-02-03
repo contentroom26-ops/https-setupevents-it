@@ -312,9 +312,9 @@ const ContactSection = () => {
               >
                 <motion.button
                   type="submit"
-                  className="w-full bg-foreground text-background px-8 py-5 font-bold tracking-tight transition-all duration-200 uppercase text-sm flex items-center justify-center gap-4 group"
-                  whileHover={{ scale: 1.01, y: -2 }}
-                  whileTap={{ scale: 0.99 }}
+                  className="w-full bg-foreground text-background px-8 py-5 font-bold tracking-tight transition-all duration-300 uppercase text-sm flex items-center justify-center gap-4 group rounded-full"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Invia richiesta
                   <Send className="w-4 h-4 transition-transform group-hover:translate-x-2" />
