@@ -130,8 +130,8 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               >
                 <Mail className="w-4 h-4" />
-                <a href="mailto:info@gabrielleshievents.it" className="hover:text-background transition-colors">
-                  info@gabrielleshievents.it
+                <a href="mailto:info@setupevents.it" className="hover:text-background transition-colors">
+                  info@setupevents.it
                 </a>
               </motion.li>
               <motion.li 
@@ -150,7 +150,7 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               >
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>Milano, Italia</span>
+                <span>Firenze, Italia</span>
               </motion.li>
             </ul>
           </motion.div>
@@ -164,12 +164,14 @@ const Footer = () => {
             <h4 className="font-display font-bold text-sm uppercase tracking-widest mb-6">Social</h4>
             <div className="flex gap-4">
               {[
-                { icon: Instagram, label: "Instagram" },
-                { icon: Linkedin, label: "LinkedIn" },
-              ].map((social, i) => (
+                { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gabrielleshi_events/" },
+                { icon: Linkedin, label: "LinkedIn", href: "#" },
+               ].map((social, i) => (
                 <motion.a 
                   key={social.label}
-                  href="#" 
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 border border-background/20 flex items-center justify-center hover:bg-background hover:text-foreground transition-all"
                   aria-label={social.label}
                   whileHover={{ scale: 1.1, y: -2 }}
@@ -193,7 +195,7 @@ const Footer = () => {
           transition={{ delay: 0.7 }}
         >
           <p>© {new Date().getFullYear()} Gabrielleshi Events</p>
-          <p>P.IVA: XXXXXXXXXXX</p>
+          <p>P.IVA: 07386270487</p>
         </motion.div>
       </div>
     </footer>
