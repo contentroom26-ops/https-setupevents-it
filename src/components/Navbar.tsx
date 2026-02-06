@@ -42,7 +42,9 @@ const Navbar = () => {
           {/* Logo */}
           <a 
             href="#" 
-            className="font-display text-xl font-bold tracking-tight transition-colors text-foreground"
+            className={`font-display text-xl font-bold tracking-tight transition-colors ${
+              isScrolled ? "text-foreground" : "text-white"
+            }`}
           >
             GABRIELLESHI
           </a>
@@ -53,14 +55,18 @@ const Navbar = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium tracking-wide uppercase transition-colors underline-hover text-foreground/80 hover:text-foreground"
+                className={`text-sm font-medium tracking-wide uppercase transition-colors underline-hover ${
+                  isScrolled ? "text-foreground/80 hover:text-foreground" : "text-white/80 hover:text-white"
+                }`}
               >
                 {link.name}
               </button>
             ))}
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-300 flex items-center gap-2 bg-foreground text-background hover:bg-foreground/90 rounded-full"
+              className={`text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-300 flex items-center gap-2 rounded-full ${
+                isScrolled ? "bg-foreground text-background hover:bg-foreground/90" : "bg-white text-black hover:bg-white/90"
+              }`}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -76,9 +82,9 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
+              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             ) : (
-              <Menu className="w-6 h-6 text-foreground" />
+              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             )}
           </button>
         </div>
