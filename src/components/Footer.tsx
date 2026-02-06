@@ -71,7 +71,7 @@ const Footer = () => {
           >
             <h4 className="font-display font-bold text-sm uppercase tracking-widest mb-6">Servizi</h4>
             <ul className="space-y-3 text-background/60">
-              {["Corporate Events", "Brand Activations", "Event Production", "Hostess & Staff"].map((item, i) => (
+              {["Corporate Events", "Brand Activations", "Event Production", "Hostess & Staff", "Public Relations"].map((item, i) => (
                 <motion.li 
                   key={item}
                   custom={i}
