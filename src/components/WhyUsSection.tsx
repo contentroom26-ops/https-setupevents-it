@@ -144,38 +144,6 @@ const WhyUsSection = () => {
           ))}
         </div>
 
-        <motion.div 
-          className="pt-16 border-t border-border"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.4 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="group cursor-default"
-                custom={index}
-                variants={featureVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.div
-                  className="h-1 w-12 bg-foreground mb-6"
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: 48 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                />
-                <h3 className="text-xl font-bold mb-3 group-hover:text-foreground/80 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
