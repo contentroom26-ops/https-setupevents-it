@@ -73,26 +73,7 @@ const StorySection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p className="text-lg">
-                <strong className="text-foreground">Setup Events</strong> è un progetto fondato da 
-                <strong className="text-foreground"> Gabriel Lleshi</strong>, nato da oltre dieci anni 
-                di esperienza diretta nel mondo dell'organizzazione di eventi e dell'intrattenimento su 
-                Firenze. Dopo aver collaborato con una delle discoteche più importanti della città e aver 
-                curato eventi per brand nazionali e internazionali, Setup Events prende forma come realtà 
-                specializzata nella creazione di esperienze su misura.
-              </p>
-              
-              <p>
-                Centinaia di eventi realizzati e una profonda conoscenza del territorio fiorentino hanno 
-                permesso di sviluppare un metodo di lavoro basato su <strong className="text-foreground">strategia, 
-                relazioni e attenzione al dettaglio</strong>. Ogni progetto viene costruito partendo dall'identità 
-                del cliente, dal pubblico di riferimento e dalla location, con l'obiettivo di trasformare 
-                ogni evento in un'esperienza memorabile.
-              </p>
-
-              <p>
-                Setup Events opera nell'organizzazione di <strong className="text-foreground">eventi corporate, 
-                lanci prodotto ed esperienze esclusive</strong>, unendo dinamicità, professionalità e creatività. 
-                Non realizziamo semplici eventi: creiamo momenti che le persone ricordano.
+                Setup Events è una realtà specializzata nella progettazione e organizzazione di eventi su misura a Firenze. Grazie a una solida esperienza nel mondo dell'intrattenimento e a una profonda conoscenza del territorio, creiamo esperienze pensate per valorizzare brand, location e pubblico di riferimento. Operiamo nel settore corporate, nei lanci prodotto e negli eventi esclusivi, curando ogni dettaglio con un approccio strategico, creativo e professionale. Non realizziamo semplici eventi, ma esperienze che lasciano il segno.
               </p>
             </motion.div>
 
@@ -104,7 +85,7 @@ const StorySection = () => {
             >
               <div className="w-16 h-px bg-foreground" />
               <span className="text-sm uppercase tracking-widest text-muted-foreground">
-                Gabriel Leshi, Founder
+                Gabriel Lleshi, Founder
               </span>
             </motion.div>
           </motion.div>

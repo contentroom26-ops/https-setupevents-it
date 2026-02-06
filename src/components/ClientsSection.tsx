@@ -55,7 +55,7 @@ const ClientsSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            I nostri clienti
+            Brand
           </motion.span>
           <motion.span 
             className="text-sm text-muted-foreground"
