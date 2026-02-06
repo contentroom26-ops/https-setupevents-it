@@ -21,7 +21,7 @@ const services = [
   {
     number: "04",
     title: "Public Relations",
-    description: "Gestione delle relazioni pubbliche per amplificare la comunicazione e la reputazione del brand.",
+    description: "Gestione dei contatti e degli ospiti accuratamente selezionata in base alle richieste del cliente, selezione del target giusto per ogni occasione.",
   },
   {
     number: "05",
@@ -30,7 +30,7 @@ const services = [
   },
   {
     number: "06",
-    title: "AV Services",
+    title: "A/V Services",
     description: "Servizi audio-video professionali con tecnologie all'avanguardia per produzioni impeccabili.",
   },
 ];
