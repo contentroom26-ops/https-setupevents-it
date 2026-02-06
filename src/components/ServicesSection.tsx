@@ -30,7 +30,7 @@ const services = [
   },
   {
     number: "06",
-    title: "A/V Services",
+    title: "A / V Services",
     description: "Servizi audio-video professionali con tecnologie all'avanguardia per produzioni impeccabili.",
   },
 ];
