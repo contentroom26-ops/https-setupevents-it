@@ -15,7 +15,7 @@ const services = [
   },
   {
     number: "03",
-    title: "Hostess e Stuart",
+    title: "Hostess e Steward",
     description: "Personale selezionato e formato per accoglienza, promozione e immagine durante gli eventi.",
   },
   {
