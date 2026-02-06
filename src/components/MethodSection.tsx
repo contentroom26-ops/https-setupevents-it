@@ -97,15 +97,6 @@ const MethodSection = () => {
               whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Connection line */}
-              {index < steps.length - 1 && (
-                <motion.div 
-                  className="hidden lg:block absolute top-10 left-full w-full h-px bg-background/20"
-                  initial={{ scaleX: 0, originX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}
-                />
-              )}
               
               <motion.span 
                 className="text-7xl md:text-8xl font-bold text-background/10 leading-none block"
