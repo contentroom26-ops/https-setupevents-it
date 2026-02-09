@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { useRef } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import AnimatedBackground from "./AnimatedBackground";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -9,8 +9,8 @@ const HeroSection = () => {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -25,21 +25,11 @@ const HeroSection = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <img
-          src={heroBg}
-          alt="Evento esclusivo Firenze"
-          className="w-full h-[120%] object-cover"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-accent" />
-      </motion.div>
+      <AnimatedBackground />
 
-      {/* Content */}
-      <motion.div className="relative z-10 container-custom text-center" style={{ opacity }}>
+      <motion.div className="relative z-10 container-custom text-center" style={{ opacity, scale }}>
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-10"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -51,7 +41,7 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.h1
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-extrabold text-white leading-[0.9] tracking-tighter mb-8"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-white leading-[0.95] tracking-tighter mb-6"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -60,11 +50,11 @@ const HeroSection = () => {
           <br />
           <span className="text-primary">che lasciano</span>
           <br />
-          <span className="italic font-normal">il segno</span>
+          <span className="italic font-normal text-white/70">il segno</span>
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-white/60 mb-12 max-w-xl mx-auto text-balance leading-relaxed"
+          className="text-base md:text-lg text-white/50 mb-10 max-w-lg mx-auto text-balance leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
