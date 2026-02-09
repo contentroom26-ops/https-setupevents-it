@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
+// Scroll percentages that position the camera at each section
+// Camera: z = 5 - progress * 75, so progress = (5 - z_target) / 75
+const sectionScrollMap: Record<string, number> = {
+  "#services": 0.52,   // z = -34
+  "#portfolio": 0.68,  // z = -46
+  "#contact": 0.93,    // z = -65
+};
+
 const navLinks = [
   { name: "Servizi", href: "#services" },
   { name: "Portfolio", href: "#portfolio" },
@@ -21,8 +29,13 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    const progress = sectionScrollMap[href];
+    if (progress !== undefined) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: progress * maxScroll, behavior: "smooth" });
+    } else if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -30,8 +43,8 @@ const Navbar = () => {
     <>
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? "bg-black/60 backdrop-blur-md border-b border-white/10 py-4" 
+          isScrolled
+            ? "bg-black/60 backdrop-blur-md border-b border-white/10 py-4"
             : "bg-transparent py-6"
         }`}
         initial={{ y: -100 }}
@@ -39,21 +52,20 @@ const Navbar = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="container-custom flex items-center justify-between">
-          {/* Logo */}
-          <a 
-            href="#" 
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
             className="font-display text-xl font-bold tracking-tight text-white"
           >
             GABRIELLESHI
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium tracking-wide uppercase transition-colors underline-hover text-white/80 hover:text-white"
+                className="text-sm font-medium tracking-wide uppercase transition-colors text-white/80 hover:text-white"
               >
                 {link.name}
               </button>
@@ -69,7 +81,6 @@ const Navbar = () => {
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -84,7 +95,6 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -113,8 +123,6 @@ const Navbar = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 Richiedi preventivo
               </motion.button>
