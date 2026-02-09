@@ -2,15 +2,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
-// Scroll percentages that position the camera at each section
-// Camera: z = 5 - progress * 75, so progress = (5 - z_target) / 75
-const sectionScrollMap: Record<string, number> = {
-  "#services": 0.52,   // z = -34
-  "#portfolio": 0.68,  // z = -46
-  "#contact": 0.93,    // z = -65
-};
-
 const navLinks = [
+  { name: "Chi siamo", href: "#storia" },
   { name: "Servizi", href: "#services" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Contatti", href: "#contact" },
@@ -21,20 +14,16 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
-    const progress = sectionScrollMap[href];
-    if (progress !== undefined) {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({ top: progress * maxScroll, behavior: "smooth" });
-    } else if (href === "#") {
+    if (href === "#") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
     }
     setIsMobileMenuOpen(false);
   };
@@ -42,54 +31,59 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-black/60 backdrop-blur-md border-b border-white/10 py-4"
-            : "bg-transparent py-6"
+            ? "bg-background/80 backdrop-blur-xl border-b border-border py-3"
+            : "bg-transparent py-5"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="container-custom flex items-center justify-between">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="font-display text-xl font-bold tracking-tight text-white"
+            className={`font-display text-xl font-extrabold tracking-tight transition-colors duration-300 ${
+              isScrolled ? "text-foreground" : "text-white"
+            }`}
           >
-            GABRIELLESHI
+            SETUP<span className="text-primary">EVENTS</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium tracking-wide uppercase transition-colors text-white/80 hover:text-white"
+                className={`text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  isScrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-white/70 hover:text-white"
+                }`}
               >
                 {link.name}
               </button>
             ))}
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-sm font-semibold tracking-wide uppercase px-6 py-3 transition-all duration-300 flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="text-sm font-bold px-6 py-2.5 rounded-full bg-primary text-primary-foreground flex items-center gap-2 hover:brightness-110 transition-all"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Preventivo
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </motion.button>
           </div>
 
           <button
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-white" />
+              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             ) : (
-              <Menu className="w-6 h-6 text-white" />
+              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             )}
           </button>
         </div>
@@ -98,31 +92,31 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md md:hidden flex flex-col"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-accent flex flex-col md:hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex-1 flex flex-col items-start justify-center container-custom gap-8">
-              {navLinks.map((link, index) => (
+            <div className="flex-1 flex flex-col items-start justify-center container-custom gap-6">
+              {navLinks.map((link, i) => (
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-white text-4xl font-display font-bold tracking-tight"
-                  initial={{ opacity: 0, x: -20 }}
+                  className="text-accent-foreground text-4xl font-display font-extrabold tracking-tight"
+                  initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {link.name}
                 </motion.button>
               ))}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-8 bg-white text-black px-8 py-4 font-semibold tracking-tight uppercase text-sm rounded-full"
-                initial={{ opacity: 0, x: -20 }}
+                className="mt-6 bg-primary text-primary-foreground px-8 py-4 font-bold text-sm rounded-full"
+                initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.35 }}
               >
                 Richiedi preventivo
               </motion.button>

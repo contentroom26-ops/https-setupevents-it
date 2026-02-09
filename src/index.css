@@ -2,63 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Gabrielleshi Events Design System
-   Modern Brutalist aesthetic - Bold, clean, high contrast
-   Colors: Pure White, Deep Black, Neutral Grays
-*/
+/* SetupEvents — Bold Contrast Design System */
 
 @layer base {
   :root {
-    /* Core Colors - White Theme with Black Typography */
     --background: 0 0% 98%;
-    --foreground: 0 0% 8%;
+    --foreground: 0 0% 4%;
 
-    /* Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card-foreground: 0 0% 4%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover-foreground: 0 0% 4%;
 
-    /* Brand Color - Pure Black */
-    --primary: 0 0% 8%;
+    /* Vivid Orange Accent */
+    --primary: 18 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Light Gray */
-    --secondary: 0 0% 94%;
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
 
-    /* Muted - Soft Gray */
-    --muted: 0 0% 92%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Accent - Dark */
-    --accent: 0 0% 12%;
+    /* Dark sections */
+    --accent: 0 0% 4%;
     --accent-foreground: 0 0% 98%;
 
-    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders & Inputs */
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 0 0% 8%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 18 100% 50%;
 
-    --radius: 0rem;
+    --radius: 0.75rem;
 
-    /* Custom Variables */
-    --charcoal: 0 0% 8%;
-    --gray-light: 0 0% 94%;
-    --gray-medium: 0 0% 50%;
-
-    /* Shadows */
-    --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 20px 40px -10px hsl(0 0% 0% / 0.15);
-
-    /* Sidebar */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 15%;
     --sidebar-primary: 0 0% 10%;
@@ -85,102 +65,48 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 }
 
 @layer components {
-  /* Button Variants - Brutalist Style */
-  .btn-hero {
-    @apply bg-primary text-primary-foreground px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm rounded-full;
-  }
-
-  .btn-hero:hover {
-    @apply bg-foreground/90;
-    transform: translateY(-2px) scale(1.05);
-  }
-
-  .btn-outline-hero {
-    @apply bg-transparent border-2 border-white text-white px-8 py-4 font-semibold tracking-tight transition-all duration-300 uppercase text-sm rounded-full;
-  }
-
-  .btn-outline-hero:hover {
-    @apply bg-white text-foreground;
-    transform: translateY(-2px) scale(1.05);
-  }
-
-  /* Card Styles - Clean & Modern */
-  .card-service {
-    @apply bg-card p-8 transition-all duration-300 border border-border;
-  }
-
-  .card-service:hover {
-    @apply bg-secondary;
-    transform: translateY(-4px);
-  }
-
-  /* Section Styles */
-  .section-padding {
-    @apply py-24 md:py-32 lg:py-40;
-  }
-
   .container-custom {
     @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
   }
 
-  /* Typography - Bold & Modern */
-  .heading-display {
-    @apply text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.9] tracking-tighter;
-    font-family: 'Space Grotesk', sans-serif;
+  .section-light {
+    @apply bg-background text-foreground;
   }
 
-  .heading-section {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-tight;
-    font-family: 'Space Grotesk', sans-serif;
+  .section-dark {
+    @apply bg-accent text-accent-foreground;
   }
 
-  .text-body {
-    @apply text-base md:text-lg text-muted-foreground leading-relaxed;
+  /* Marquee animation */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
-  /* Number Labels */
-  .number-label {
-    @apply text-xs font-mono tracking-widest text-muted-foreground uppercase;
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
   }
 
-  /* Hover underline effect */
-  .underline-hover {
-    @apply relative inline-block;
-  }
-
-  .underline-hover::after {
+  /* Grain texture overlay */
+  .grain::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-[2px] bg-foreground;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-  }
-
-  .underline-hover:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  /* WhatsApp Button */
-  .whatsapp-btn {
-    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-none flex items-center justify-center transition-all duration-200;
-    background: #25D366;
-  }
-
-  .whatsapp-btn:hover {
-    transform: translateY(-2px);
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground;
+  .text-balance {
+    text-wrap: balance;
   }
 }

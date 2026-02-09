@@ -1,18 +1,28 @@
 import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import Marquee from "@/components/Marquee";
+import StorySection from "@/components/StorySection";
+import MethodSection from "@/components/MethodSection";
+import ServicesSection from "@/components/ServicesSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import WhyUsSection from "@/components/WhyUsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import Corridor3D from "@/components/Corridor3D";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      {/* Full-screen 3D corridor with all content inside */}
-      <Corridor3D />
-
-      {/* Scroll spacer - creates page height for camera movement */}
-      <div className="h-[700vh] pointer-events-none" />
-
-      {/* Fixed overlays */}
+    <div className="min-h-screen bg-background">
       <Navbar />
+      <HeroSection />
+      <Marquee />
+      <StorySection />
+      <MethodSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <WhyUsSection />
+      <ContactSection />
+      <Footer />
       <WhatsAppButton />
     </div>
   );

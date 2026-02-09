@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
@@ -8,6 +7,8 @@ import dieselEvent1 from "@/assets/diesel-event-1.jpg";
 import dieselEvent2 from "@/assets/diesel-event-2.jpg";
 import dieselEvent4 from "@/assets/diesel-event-4.jpg";
 import dieselEvent5 from "@/assets/diesel-event-5.jpg";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const projects = [
   { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation" },
@@ -18,138 +19,87 @@ const projects = [
   { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation" },
 ];
 
-const imageVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 70,
-      damping: 15,
-      delay: i * 0.15,
-    },
-  }),
-};
-
 const PortfolioSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
+    <section id="portfolio" className="section-dark py-28 md:py-40 relative grain overflow-hidden">
       <div className="container-custom">
-        <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <div>
-            <motion.span 
-              className="text-sm text-white/50 uppercase tracking-widest block mb-4"
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Portfolio
-            </motion.span>
-            <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              I nostri<br />
-              <span className="italic font-normal">eventi</span>
-            </motion.h2>
-          </div>
-          <motion.p 
-            className="text-white/60 max-w-md"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease }}
           >
-            Una selezione dei nostri progetti più recenti. 
+            <span className="text-sm font-bold text-primary uppercase tracking-[0.2em] block mb-6">
+              Portfolio
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter leading-[0.95] text-accent-foreground">
+              I nostri
+              <br />
+              <span className="italic font-normal text-accent-foreground/50">eventi</span>
+            </h2>
+          </motion.div>
+          <motion.p
+            className="text-accent-foreground/50 max-w-md text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
+          >
+            Una selezione dei nostri progetti più recenti.
             Ogni evento racconta una storia unica.
           </motion.p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              className="group cursor-pointer relative"
-              custom={index}
-              variants={imageVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              onMouseEnter={() => setHoveredIndex(index)}
+              className={`group cursor-pointer relative overflow-hidden rounded-2xl ${
+                i === 0 || i === 3 ? "md:col-span-2 lg:col-span-1" : ""
+              }`}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
+              onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <motion.div className="relative overflow-hidden aspect-[4/5] mb-4">
+              <div className="aspect-[4/5] relative overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
-                  animate={{
-                    scale: hoveredIndex === index ? 1.1 : 1,
-                  }}
+                  animate={{ scale: hoveredIndex === i ? 1.08 : 1 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
+                  loading="lazy"
                 />
-                <motion.div 
-                  className="absolute inset-0 bg-black"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredIndex === index ? 0.3 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-                
+                {/* Overlay */}
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+                  animate={{ opacity: hoveredIndex === i ? 1 : 0.4 }}
                   transition={{ duration: 0.3 }}
-                >
+                />
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
                   <motion.span
-                    className="text-white text-sm uppercase tracking-widest font-medium px-6 py-3 border border-white"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ 
-                      y: hoveredIndex === index ? 0 : 20, 
-                      opacity: hoveredIndex === index ? 1 : 0 
-                    }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
+                    className="text-xs font-bold text-primary uppercase tracking-[0.2em] block mb-2"
+                    animate={{ y: hoveredIndex === i ? 0 : 10, opacity: hoveredIndex === i ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    Vedi progetto
+                    {project.category}
                   </motion.span>
-                </motion.div>
-              </motion.div>
-              
-              <motion.span 
-                className="text-sm text-white/50 uppercase tracking-wider block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.4 + index * 0.15 }}
-              >
-                {project.category}
-              </motion.span>
-              <motion.h3 
-                className="text-xl font-bold mt-1 tracking-tight text-white"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.5 + index * 0.15 }}
-              >
-                {project.title}
-              </motion.h3>
-              
-              <motion.div
-                className="h-0.5 bg-white/30 mt-4"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.4 }}
-              />
+                  <motion.h3
+                    className="text-xl font-display font-bold text-white tracking-tight"
+                    animate={{ y: hoveredIndex === i ? 0 : 10 }}
+                    transition={{ duration: 0.3, delay: 0.05 }}
+                  >
+                    {project.title}
+                  </motion.h3>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
