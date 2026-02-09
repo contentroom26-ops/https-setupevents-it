@@ -2,11 +2,9 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useMemo } from "react";
 import * as THREE from "three";
 
-const CORRIDOR_LENGTH = 120;
-const CORRIDOR_WIDTH = 6;
+const CORRIDOR_LENGTH = 80;
+const CORRIDOR_WIDTH = 12;
 const CORRIDOR_HEIGHT = 8;
-const TUBE_SPACING = 3;
-const TUBE_HEIGHT = 7;
 
 function ScrollCamera() {
   const { camera } = useThree();
@@ -23,120 +21,181 @@ function ScrollCamera() {
   }, []);
 
   useFrame(() => {
-    scrollRef.current += (targetRef.current - scrollRef.current) * 0.04;
+    scrollRef.current += (targetRef.current - scrollRef.current) * 0.05;
     const progress = scrollRef.current;
-
-    camera.position.z = 5 - progress * (CORRIDOR_LENGTH - 5);
-    camera.position.y = 1.65;
-    camera.position.x = Math.sin(progress * Math.PI * 2.5) * 0.08;
-    camera.position.y += Math.sin(progress * Math.PI * 14) * 0.025;
-
-    camera.lookAt(0, 1.4, camera.position.z - 20);
+    camera.position.z = 5 - progress * (CORRIDOR_LENGTH - 10);
+    camera.position.y = 2.5 - progress * 0.5;
   });
 
   return null;
 }
 
-function NeonTube({ position }: { position: [number, number, number] }) {
+function LightPanel({ position, rotation, width = 2, height = 6 }: { 
+  position: [number, number, number]; 
+  rotation?: [number, number, number];
+  width?: number;
+  height?: number;
+}) {
   return (
-    <group position={position}>
-      {/* Glowing tube */}
-      <mesh>
-        <cylinderGeometry args={[0.04, 0.04, TUBE_HEIGHT, 8]} />
-        <meshStandardMaterial
-          color="#ffffff"
-          emissive="#ffffff"
-          emissiveIntensity={4}
-          toneMapped={false}
-        />
-      </mesh>
-      {/* Soft glow around tube */}
-      <mesh>
-        <cylinderGeometry args={[0.12, 0.12, TUBE_HEIGHT, 8]} />
-        <meshStandardMaterial
-          color="#ffffff"
-          emissive="#eeeeff"
-          emissiveIntensity={1.5}
-          transparent
-          opacity={0.15}
-          toneMapped={false}
-        />
-      </mesh>
-      {/* Point light from tube */}
-      <pointLight
-        color="#e8e8ff"
-        intensity={1.8}
-        distance={6}
-        position={[0, 0, 0]}
+    <mesh position={position} rotation={rotation}>
+      <planeGeometry args={[width, height]} />
+      <meshStandardMaterial 
+        color="#ffffff" 
+        emissive="#ffffff" 
+        emissiveIntensity={0.8} 
+        toneMapped={false}
       />
-    </group>
+    </mesh>
   );
 }
 
-function CorridorScene() {
-  const tubePositions = useMemo(() => {
-    const positions: [number, number, number][] = [];
-    for (let z = 4; z > -CORRIDOR_LENGTH; z -= TUBE_SPACING) {
-      // Left wall tubes
-      positions.push([-CORRIDOR_WIDTH / 2 + 0.15, TUBE_HEIGHT / 2, z]);
-      // Right wall tubes
-      positions.push([CORRIDOR_WIDTH / 2 - 0.15, TUBE_HEIGHT / 2, z]);
+function CorridorGeometry() {
+  // Floor - dark reflective
+  const floorMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#0a0a0a",
+    metalness: 0.9,
+    roughness: 0.1,
+  }), []);
+
+  // Walls - light gray
+  const wallMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#e8e8e8",
+    metalness: 0.1,
+    roughness: 0.4,
+  }), []);
+
+  // Ceiling - white with ribs
+  const ceilingMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#f5f5f5",
+    metalness: 0.05,
+    roughness: 0.5,
+  }), []);
+
+  const ribMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#d0d0d0",
+    metalness: 0.1,
+    roughness: 0.3,
+  }), []);
+
+  // Generate ceiling ribs
+  const ribs = useMemo(() => {
+    const items = [];
+    for (let z = 5; z > -CORRIDOR_LENGTH; z -= 1.5) {
+      items.push(z);
     }
-    return positions;
+    return items;
+  }, []);
+
+  // Wall light panels
+  const lightPanels = useMemo(() => {
+    const items = [];
+    for (let z = 0; z > -CORRIDOR_LENGTH; z -= 12) {
+      items.push(z);
+    }
+    return items;
+  }, []);
+
+  // Seating rows (like the image)
+  const seats = useMemo(() => {
+    const items = [];
+    for (let z = -5; z > -CORRIDOR_LENGTH + 20; z -= 3) {
+      items.push(z);
+    }
+    return items;
   }, []);
 
   return (
     <group>
-      {/* Floor - dark reflective */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -CORRIDOR_LENGTH / 2]}>
-        <planeGeometry args={[CORRIDOR_WIDTH, CORRIDOR_LENGTH + 20]} />
-        <meshStandardMaterial
-          color="#050505"
-          metalness={0.98}
-          roughness={0.02}
-        />
+      {/* Floor */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -CORRIDOR_LENGTH / 2]} material={floorMaterial}>
+        <planeGeometry args={[CORRIDOR_WIDTH, CORRIDOR_LENGTH]} />
       </mesh>
 
-      {/* Left wall - pure black */}
-      <mesh
-        rotation={[0, Math.PI / 2, 0]}
-        position={[-CORRIDOR_WIDTH / 2, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH / 2]}
-      >
-        <planeGeometry args={[CORRIDOR_LENGTH + 20, CORRIDOR_HEIGHT]} />
-        <meshStandardMaterial color="#020202" metalness={0.3} roughness={0.8} />
+      {/* Central runway/path - slightly lighter */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, -CORRIDOR_LENGTH / 2]}>
+        <planeGeometry args={[3, CORRIDOR_LENGTH]} />
+        <meshStandardMaterial color="#1a1a1a" metalness={0.95} roughness={0.05} />
       </mesh>
 
-      {/* Right wall - pure black */}
-      <mesh
-        rotation={[0, -Math.PI / 2, 0]}
-        position={[CORRIDOR_WIDTH / 2, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH / 2]}
-      >
-        <planeGeometry args={[CORRIDOR_LENGTH + 20, CORRIDOR_HEIGHT]} />
-        <meshStandardMaterial color="#020202" metalness={0.3} roughness={0.8} />
+      {/* Left wall */}
+      <mesh position={[-CORRIDOR_WIDTH / 2, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH / 2]} material={wallMaterial}>
+        <planeGeometry args={[0.1, CORRIDOR_HEIGHT]} />
+      </mesh>
+      <mesh rotation={[0, Math.PI / 2, 0]} position={[-CORRIDOR_WIDTH / 2, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH / 2]} material={wallMaterial}>
+        <planeGeometry args={[CORRIDOR_LENGTH, CORRIDOR_HEIGHT]} />
       </mesh>
 
-      {/* Ceiling - black */}
-      <mesh
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, CORRIDOR_HEIGHT, -CORRIDOR_LENGTH / 2]}
-      >
-        <planeGeometry args={[CORRIDOR_WIDTH, CORRIDOR_LENGTH + 20]} />
-        <meshStandardMaterial color="#010101" metalness={0.1} roughness={0.9} />
+      {/* Right wall */}
+      <mesh rotation={[0, -Math.PI / 2, 0]} position={[CORRIDOR_WIDTH / 2, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH / 2]} material={wallMaterial}>
+        <planeGeometry args={[CORRIDOR_LENGTH, CORRIDOR_HEIGHT]} />
       </mesh>
 
-      {/* Neon tubes */}
-      {tubePositions.map((pos, i) => (
-        <NeonTube key={i} position={pos} />
+      {/* Ceiling */}
+      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, CORRIDOR_HEIGHT, -CORRIDOR_LENGTH / 2]} material={ceilingMaterial}>
+        <planeGeometry args={[CORRIDOR_WIDTH, CORRIDOR_LENGTH]} />
+      </mesh>
+
+      {/* Ceiling ribs */}
+      {ribs.map((z, i) => (
+        <mesh key={`rib-${i}`} position={[0, CORRIDOR_HEIGHT - 0.05, z]} material={ribMaterial}>
+          <boxGeometry args={[CORRIDOR_WIDTH, 0.1, 0.15]} />
+        </mesh>
       ))}
 
-      {/* End - darkness/faint glow */}
+      {/* Central ceiling light strip */}
+      <mesh position={[0, CORRIDOR_HEIGHT - 0.1, -CORRIDOR_LENGTH / 2]}>
+        <boxGeometry args={[2, 0.05, CORRIDOR_LENGTH]} />
+        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} toneMapped={false} />
+      </mesh>
+
+      {/* Wall light panels - left */}
+      {lightPanels.map((z, i) => (
+        <LightPanel 
+          key={`lp-l-${i}`} 
+          position={[-CORRIDOR_WIDTH / 2 + 0.1, CORRIDOR_HEIGHT / 2, z]} 
+          rotation={[0, Math.PI / 2, 0]} 
+          width={4}
+          height={CORRIDOR_HEIGHT - 1}
+        />
+      ))}
+
+      {/* Wall light panels - right */}
+      {lightPanels.map((z, i) => (
+        <LightPanel 
+          key={`lp-r-${i}`} 
+          position={[CORRIDOR_WIDTH / 2 - 0.1, CORRIDOR_HEIGHT / 2, z]} 
+          rotation={[0, -Math.PI / 2, 0]} 
+          width={4}
+          height={CORRIDOR_HEIGHT - 1}
+        />
+      ))}
+
+      {/* Seating rows - left side */}
+      {seats.map((z, i) => (
+        <group key={`seat-l-${i}`}>
+          {/* Seat block - left */}
+          <mesh position={[-3.5, 0.4, z]}>
+            <boxGeometry args={[2, 0.8, 0.5]} />
+            <meshStandardMaterial color="#1a1a1a" metalness={0.3} roughness={0.7} />
+          </mesh>
+          {/* Seat block - right */}
+          <mesh position={[3.5, 0.4, z]}>
+            <boxGeometry args={[2, 0.8, 0.5]} />
+            <meshStandardMaterial color="#1a1a1a" metalness={0.3} roughness={0.7} />
+          </mesh>
+        </group>
+      ))}
+
+      {/* End wall / stage */}
       <mesh position={[0, CORRIDOR_HEIGHT / 2, -CORRIDOR_LENGTH]}>
         <planeGeometry args={[CORRIDOR_WIDTH, CORRIDOR_HEIGHT]} />
-        <meshStandardMaterial
-          color="#000000"
-          emissive="#111122"
-          emissiveIntensity={0.1}
-        />
+        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
+      </mesh>
+
+      {/* Stage platform at the end */}
+      <mesh position={[0, 0.3, -CORRIDOR_LENGTH + 5]}>
+        <cylinderGeometry args={[4, 4.5, 0.6, 64]} />
+        <meshStandardMaterial color="#f0f0f0" metalness={0.3} roughness={0.2} />
       </mesh>
     </group>
   );
@@ -146,20 +205,21 @@ const Corridor3D = () => {
   return (
     <div className="fixed inset-0 z-0">
       <Canvas
-        camera={{ position: [0, 1.65, 5], fov: 70, near: 0.1, far: 200 }}
-        gl={{
-          antialias: true,
-          toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 0.8,
-        }}
+        camera={{ position: [0, 2.5, 5], fov: 60, near: 0.1, far: 200 }}
+        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
       >
-        <color attach="background" args={["#000000"]} />
-        <fog attach="fog" args={["#000000", 30, 100]} />
-
-        <ambientLight intensity={0.03} />
+        <color attach="background" args={["#0a0a0a"]} />
+        <fog attach="fog" args={["#0a0a0a", 30, 90]} />
+        
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[0, 10, 5]} intensity={0.5} />
+        <pointLight position={[0, 6, -10]} intensity={1} distance={30} />
+        <pointLight position={[0, 6, -30]} intensity={1} distance={30} />
+        <pointLight position={[0, 6, -50]} intensity={1} distance={30} />
+        <pointLight position={[0, 6, -70]} intensity={1} distance={30} />
 
         <ScrollCamera />
-        <CorridorScene />
+        <CorridorGeometry />
       </Canvas>
     </div>
   );

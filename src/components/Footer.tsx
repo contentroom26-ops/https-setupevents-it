@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black/40 backdrop-blur-sm text-white py-20" ref={ref}>
+    <footer className="bg-black/60 backdrop-blur-sm text-white py-20" ref={ref}>
       <div className="container-custom">
         {/* Top Section */}
         <motion.div 

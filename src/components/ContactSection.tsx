@@ -120,7 +120,7 @@ const ContactSection = () => {
   const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-white/30 focus:outline-none focus:border-white transition-colors placeholder:text-white/40 text-white";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-black/15" ref={ref}>
+    <section id="contact" className="py-24 md:py-32 bg-black/30 backdrop-blur-[1px]" ref={ref}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
