@@ -83,21 +83,51 @@ const ServicesSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08, ease }}
             >
-              <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 h-full group-hover:-translate-y-1">
-                <div className="flex items-start justify-between mb-6">
-                  <span className="text-3xl">{service.icon}</span>
-                  <span className="text-sm font-mono text-muted-foreground/50">
-                    [{service.number}]
-                  </span>
+              <motion.div
+                className="p-8 rounded-2xl bg-card border border-border h-full cursor-pointer overflow-hidden relative"
+                whileHover={{
+                  y: -6,
+                  boxShadow: "0 25px 50px -12px hsl(18 100% 50% / 0.12)",
+                }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* Hover gradient overlay */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(18 100% 50% / 0.05), transparent 60%)",
+                  }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                />
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-6">
+                    <motion.span
+                      className="text-3xl"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {service.icon}
+                    </motion.span>
+                    <span className="text-sm font-mono text-muted-foreground/50">
+                      [{service.number}]
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-display font-bold text-foreground mb-3 tracking-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                  <motion.div
+                    className="mt-6 h-[2px] rounded-full bg-primary"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    style={{ originX: 0 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  />
                 </div>
-                <h3 className="text-xl font-display font-bold text-foreground mb-3 tracking-tight">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="mt-6 h-[2px] bg-primary/0 group-hover:bg-primary transition-colors duration-500 rounded-full" />
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

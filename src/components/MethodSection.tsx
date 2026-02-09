@@ -54,19 +54,39 @@ const MethodSection = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease }}
+              transition={{ duration: 0.6, delay: i * 0.12, ease }}
             >
-              <div className="p-8 rounded-2xl border border-accent-foreground/10 bg-accent-foreground/5 hover:border-primary/50 hover:bg-accent-foreground/10 transition-all duration-500 h-full">
-                <span className="text-6xl font-display font-extrabold text-primary/20 group-hover:text-primary/40 transition-colors duration-500 block leading-none mb-6">
+              <motion.div
+                className="p-8 rounded-2xl border border-accent-foreground/10 bg-accent-foreground/5 h-full cursor-pointer"
+                whileHover={{
+                  y: -8,
+                  borderColor: "hsl(18 100% 50% / 0.5)",
+                  backgroundColor: "hsl(0 0% 98% / 0.08)",
+                  boxShadow: "0 20px 40px -12px hsl(18 100% 50% / 0.15)",
+                }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <motion.span
+                  className="text-6xl font-display font-extrabold text-primary/20 block leading-none mb-6"
+                  whileHover={{ color: "hsl(18 100% 50% / 0.5)" }}
+                  transition={{ duration: 0.3 }}
+                >
                   {step.number}
-                </span>
+                </motion.span>
                 <h3 className="text-2xl font-display font-bold text-accent-foreground mb-3 tracking-tight">
                   {step.title}
                 </h3>
                 <p className="text-accent-foreground/50 leading-relaxed text-sm">
                   {step.description}
                 </p>
-              </div>
+                <motion.div
+                  className="mt-6 h-[2px] rounded-full bg-primary"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  style={{ originX: 0 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </motion.div>
             </motion.div>
           ))}
         </div>
