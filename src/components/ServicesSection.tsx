@@ -72,20 +72,20 @@ const FlipCard = ({ service, index, isInView }: { service: typeof services[0]; i
       >
         {/* Front */}
         <div
-          className="absolute inset-0 bg-background p-8 border border-border flex flex-col justify-between"
+          className="absolute inset-0 bg-white/10 backdrop-blur-md p-8 border border-white/20 flex flex-col justify-between"
           style={{ backfaceVisibility: "hidden" }}
         >
-          <span className="text-sm text-muted-foreground">[{service.number}]</span>
-          <h3 className="text-2xl font-bold tracking-tight">{service.title}</h3>
+          <span className="text-sm text-white/50">[{service.number}]</span>
+          <h3 className="text-2xl font-bold tracking-tight text-white">{service.title}</h3>
         </div>
 
         {/* Back */}
         <div
-          className="absolute inset-0 bg-foreground text-background p-8 border border-border flex flex-col justify-center items-center text-center"
+          className="absolute inset-0 bg-white/20 backdrop-blur-md p-8 border border-white/20 flex flex-col justify-center items-center text-center"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
-          <h3 className="text-lg font-bold mb-3">{service.title}</h3>
-          <p className="text-background/80 text-sm leading-relaxed">{service.description}</p>
+          <h3 className="text-lg font-bold mb-3 text-white">{service.title}</h3>
+          <p className="text-white/70 text-sm leading-relaxed">{service.description}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -97,7 +97,7 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-secondary/85 backdrop-blur-sm" ref={ref}>
+    <section id="services" className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -107,7 +107,7 @@ const ServicesSection = () => {
         >
           <div>
             <motion.span
-              className="text-sm text-muted-foreground uppercase tracking-widest block mb-4"
+              className="text-sm text-white/50 uppercase tracking-widest block mb-4"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -115,7 +115,7 @@ const ServicesSection = () => {
               Servizi
             </motion.span>
             <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -125,7 +125,7 @@ const ServicesSection = () => {
             </motion.h2>
           </div>
           <motion.p
-            className="text-muted-foreground max-w-md"
+            className="text-white/60 max-w-md"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}

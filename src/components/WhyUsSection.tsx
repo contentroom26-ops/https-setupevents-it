@@ -79,7 +79,7 @@ const Stat = ({ stat, index, isInView }: StatProps) => {
       transition={{ duration: 0.3 }}
     >
       <motion.span 
-        className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter block"
+        className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter block text-white"
         whileHover={{ 
           scale: 1.02,
           transition: { duration: 0.2 }
@@ -95,7 +95,7 @@ const Stat = ({ stat, index, isInView }: StatProps) => {
         </motion.span>
       </motion.span>
       <motion.p 
-        className="text-muted-foreground mt-2 text-sm uppercase tracking-widest"
+        className="text-white/50 mt-2 text-sm uppercase tracking-widest"
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.6 + index * 0.15 }}
@@ -111,7 +111,7 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 bg-background/85 backdrop-blur-sm" ref={ref}>
+    <section className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-16"
@@ -120,7 +120,7 @@ const WhyUsSection = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.span 
-            className="text-sm text-muted-foreground uppercase tracking-widest block mb-4"
+            className="text-sm text-white/50 uppercase tracking-widest block mb-4"
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -128,7 +128,7 @@ const WhyUsSection = () => {
             Risultati
           </motion.span>
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}

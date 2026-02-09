@@ -117,10 +117,10 @@ const ContactSection = () => {
     }));
   };
 
-  const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-foreground/20 focus:outline-none focus:border-foreground transition-colors placeholder:text-foreground/40 text-foreground";
+  const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-white/30 focus:outline-none focus:border-white transition-colors placeholder:text-white/40 text-white";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-transparent" ref={ref}>
+    <section id="contact" className="py-24 md:py-32 bg-black/30 backdrop-blur-[1px]" ref={ref}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -131,7 +131,7 @@ const ContactSection = () => {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <motion.span 
-              className="text-sm text-muted-foreground uppercase tracking-widest block mb-4"
+              className="text-sm text-white/50 uppercase tracking-widest block mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -139,7 +139,7 @@ const ContactSection = () => {
               Contattaci
             </motion.span>
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -148,7 +148,7 @@ const ContactSection = () => {
               <span className="italic font-normal">progetto</span>
             </motion.h2>
             <motion.p 
-              className="text-muted-foreground max-w-xl mx-auto text-lg"
+              className="text-white/60 max-w-xl mx-auto text-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -172,15 +172,15 @@ const ContactSection = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.4 + i * 0.1 }}
               >
-                <ArrowRight className="w-4 h-4 text-foreground" />
-                <span className="text-sm font-medium">{benefit}</span>
+                <ArrowRight className="w-4 h-4 text-white" />
+                <span className="text-sm font-medium text-white">{benefit}</span>
               </motion.div>
             ))}
           </motion.div>
 
           {/* Form */}
           <motion.div
-            className="bg-background/80 backdrop-blur-md p-8 md:p-12 border border-white/10"
+            className="bg-white/10 backdrop-blur-md p-8 md:p-12 border border-white/20"
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
@@ -327,10 +327,10 @@ const ContactSection = () => {
                     name="privacy"
                     checked={formData.privacy}
                     onChange={handleChange}
-                    className="mt-1 w-4 h-4 border-foreground/20 accent-foreground"
+                    className="mt-1 w-4 h-4 border-white/30 accent-white"
                   />
-                  <span className="text-sm text-muted-foreground">
-                    Accetto la <a href="#" className="text-foreground underline">Privacy Policy</a> *
+                  <span className="text-sm text-white/60">
+                    Accetto la <a href="#" className="text-white underline">Privacy Policy</a> *
                   </span>
                 </label>
               </motion.div>
@@ -344,7 +344,7 @@ const ContactSection = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-foreground text-background px-8 py-5 font-bold tracking-tight transition-all duration-300 uppercase text-sm flex items-center justify-center gap-4 group rounded-full disabled:opacity-70"
+                  className="w-full bg-white text-black px-8 py-5 font-bold tracking-tight transition-all duration-300 uppercase text-sm flex items-center justify-center gap-4 group rounded-full disabled:opacity-70"
                   whileHover={{ scale: isSubmitting ? 1 : 1.05, y: isSubmitting ? 0 : -2 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                 >
