@@ -7,7 +7,7 @@ const StorySection = () => {
     once: true,
     margin: "-100px"
   });
-  return <section id="storia" className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
+  return <section id="storia" className="py-24 md:py-32 bg-black/20 backdrop-blur-[1px]" ref={ref}>
       <div className="container-custom">
         <div className="max-w-3xl">
           <motion.div initial={{

@@ -17,7 +17,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Transparent - 3D corridor shows through */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/15" />
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center">

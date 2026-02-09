@@ -111,7 +111,7 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
+    <section className="py-24 md:py-32 bg-black/20 backdrop-blur-[1px]" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-16"
