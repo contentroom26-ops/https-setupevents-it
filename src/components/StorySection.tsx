@@ -7,7 +7,7 @@ const StorySection = () => {
     once: true,
     margin: "-100px"
   });
-  return <section id="storia" className="py-24 md:py-32 bg-background/85 backdrop-blur-sm" ref={ref}>
+  return <section id="storia" className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
       <div className="container-custom">
         <div className="max-w-3xl">
           <motion.div initial={{
@@ -20,7 +20,7 @@ const StorySection = () => {
           duration: 0.8,
           ease: "easeOut"
         }}>
-            <motion.span className="text-sm text-muted-foreground uppercase tracking-widest block mb-4" initial={{
+            <motion.span className="text-sm text-white/50 uppercase tracking-widest block mb-4" initial={{
             opacity: 0,
             y: 20
           }} animate={isInView ? {
@@ -33,7 +33,7 @@ const StorySection = () => {
               La nostra storia
             </motion.span>
 
-            <motion.h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8" initial={{
+            <motion.h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 text-white" initial={{
             opacity: 0,
             y: 30
           }} animate={isInView ? {
@@ -47,7 +47,7 @@ const StorySection = () => {
               <span className="italic font-normal">all'eccellenza</span>
             </motion.h2>
 
-            <motion.div className="space-y-6 text-muted-foreground leading-relaxed" initial={{
+            <motion.div className="space-y-6 text-white/70 leading-relaxed" initial={{
             opacity: 0,
             y: 30
           }} animate={isInView ? {
@@ -71,8 +71,8 @@ Operiamo nel settore corporate, nei lanci prodotto e negli eventi esclusivi, cur
             duration: 0.5,
             delay: 0.5
           }}>
-              <div className="w-16 h-px bg-foreground" />
-              <span className="text-sm uppercase tracking-widest text-muted-foreground">
+              <div className="w-16 h-px bg-white/50" />
+              <span className="text-sm uppercase tracking-widest text-white/50">
                 Gabriel Lleshi, Founder
               </span>
             </motion.div>

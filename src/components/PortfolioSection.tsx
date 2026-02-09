@@ -38,7 +38,7 @@ const PortfolioSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-background/85 backdrop-blur-sm" ref={ref}>
+    <section id="portfolio" className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -48,7 +48,7 @@ const PortfolioSection = () => {
         >
           <div>
             <motion.span 
-              className="text-sm text-muted-foreground uppercase tracking-widest block mb-4"
+              className="text-sm text-white/50 uppercase tracking-widest block mb-4"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -56,7 +56,7 @@ const PortfolioSection = () => {
               Portfolio
             </motion.span>
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -66,7 +66,7 @@ const PortfolioSection = () => {
             </motion.h2>
           </div>
           <motion.p 
-            className="text-muted-foreground max-w-md"
+            className="text-white/60 max-w-md"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -90,9 +90,7 @@ const PortfolioSection = () => {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <motion.div 
-                className="relative overflow-hidden aspect-[4/5] mb-4"
-              >
+              <motion.div className="relative overflow-hidden aspect-[4/5] mb-4">
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -109,7 +107,6 @@ const PortfolioSection = () => {
                   transition={{ duration: 0.3 }}
                 />
                 
-                {/* Reveal overlay */}
                 <motion.div
                   className="absolute inset-0 flex items-center justify-center"
                   initial={{ opacity: 0 }}
@@ -131,7 +128,7 @@ const PortfolioSection = () => {
               </motion.div>
               
               <motion.span 
-                className="text-sm text-muted-foreground uppercase tracking-wider block"
+                className="text-sm text-white/50 uppercase tracking-wider block"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.4 + index * 0.15 }}
@@ -139,7 +136,7 @@ const PortfolioSection = () => {
                 {project.category}
               </motion.span>
               <motion.h3 
-                className="text-xl font-bold mt-1 tracking-tight"
+                className="text-xl font-bold mt-1 tracking-tight text-white"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.5 + index * 0.15 }}
@@ -147,9 +144,8 @@ const PortfolioSection = () => {
                 {project.title}
               </motion.h3>
               
-              {/* Hover underline - same as MethodSection */}
               <motion.div
-                className="h-0.5 bg-foreground/30 mt-4"
+                className="h-0.5 bg-white/30 mt-4"
                 initial={{ width: 0 }}
                 whileHover={{ width: "100%" }}
                 transition={{ duration: 0.4 }}
