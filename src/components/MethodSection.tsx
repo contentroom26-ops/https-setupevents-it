@@ -58,7 +58,7 @@ const MethodSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 bg-foreground text-background" ref={ref}>
+    <section className="py-24 md:py-32 bg-foreground/90 backdrop-blur-sm text-background" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="mb-16"

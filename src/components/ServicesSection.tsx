@@ -97,7 +97,7 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-secondary" ref={ref}>
+    <section id="services" className="py-24 md:py-32 bg-secondary/85 backdrop-blur-sm" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"

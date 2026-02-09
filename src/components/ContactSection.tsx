@@ -120,7 +120,7 @@ const ContactSection = () => {
   const inputClasses = "w-full px-0 py-4 bg-transparent border-0 border-b border-foreground/20 focus:outline-none focus:border-foreground transition-colors placeholder:text-foreground/40 text-foreground";
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-secondary" ref={ref}>
+    <section id="contact" className="py-24 md:py-32 bg-transparent" ref={ref}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -180,7 +180,7 @@ const ContactSection = () => {
 
           {/* Form */}
           <motion.div
-            className="bg-background p-8 md:p-12"
+            className="bg-background/80 backdrop-blur-md p-8 md:p-12 border border-white/10"
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}

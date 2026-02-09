@@ -38,7 +38,7 @@ const PortfolioSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-background" ref={ref}>
+    <section id="portfolio" className="py-24 md:py-32 bg-background/85 backdrop-blur-sm" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
