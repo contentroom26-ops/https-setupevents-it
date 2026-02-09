@@ -1,6 +1,9 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { ArrowRight } from "lucide-react";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const stats = [
   { number: 100, suffix: "%", label: "Clienti soddisfatti" },
@@ -8,100 +11,31 @@ const stats = [
   { number: 24, suffix: "h", label: "Tempo di risposta" },
 ];
 
-const features = [
-  {
-    title: "Regia completa",
-    description: "Gestiamo ogni aspetto del tuo evento per un risultato senza compromessi.",
-  },
-  {
-    title: "Estetica e precisione",
-    description: "Ogni dettaglio è curato con ossessione. Impeccabile in ogni elemento.",
-  },
-  {
-    title: "Timing perfetto",
-    description: "Gestione impeccabile del tempo e degli imprevisti.",
-  },
-];
-
-const statVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 80,
-      damping: 15,
-      delay: i * 0.15,
-    },
-  }),
-};
-
-const featureVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-      delay: 0.5 + i * 0.1,
-    },
-  }),
-};
-
-interface StatProps {
-  stat: typeof stats[0];
-  index: number;
-  isInView: boolean;
-}
-
-const Stat = ({ stat, index, isInView }: StatProps) => {
+const AnimatedStat = ({ stat, index, isInView }: { stat: typeof stats[0]; index: number; isInView: boolean }) => {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const rounded = useTransform(count, (v) => Math.round(v));
 
   useEffect(() => {
     if (isInView) {
-      animate(count, stat.number, { duration: 2, ease: "easeOut" });
+      animate(count, stat.number, { duration: 2.5, ease: "easeOut" });
     }
   }, [isInView, count, stat.number]);
 
   return (
     <motion.div
-      className="text-center group"
-      custom={index}
-      variants={statVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
+      className="text-center"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.15, ease }}
     >
-      <motion.span 
-        className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter block text-white"
-        whileHover={{ 
-          scale: 1.02,
-          transition: { duration: 0.2 }
-        }}
-      >
+      <div className="text-6xl md:text-7xl lg:text-8xl font-display font-extrabold text-foreground tracking-tighter">
         <motion.span>{rounded}</motion.span>
-        <motion.span
-          initial={{ opacity: 0, x: -10 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ delay: 0.5 + index * 0.15 }}
-        >
-          {stat.suffix}
-        </motion.span>
-      </motion.span>
-      <motion.p 
-        className="text-white/50 mt-2 text-sm uppercase tracking-widest"
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6 + index * 0.15 }}
-      >
+        <span className="text-primary">{stat.suffix}</span>
+      </div>
+      <p className="text-muted-foreground text-sm uppercase tracking-[0.2em] mt-3 font-medium">
         {stat.label}
-      </motion.p>
+      </p>
     </motion.div>
   );
 };
@@ -110,40 +44,59 @@ const WhyUsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="py-24 md:py-32 bg-black/40 backdrop-blur-[2px]" ref={ref}>
+    <section className="section-light py-28 md:py-40 relative grain" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
         >
-          <motion.span 
-            className="text-sm text-white/50 uppercase tracking-widest block mb-4"
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          <span className="text-sm font-bold text-primary uppercase tracking-[0.2em] block mb-6">
             Risultati
-          </motion.span>
-          <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Perché<br />
-            <span className="italic font-normal">sceglierci</span>
-          </motion.h2>
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground">
+            Perché{" "}
+            <span className="italic font-normal text-muted-foreground">sceglierci</span>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-20">
-          {stats.map((stat, index) => (
-            <Stat key={stat.label} stat={stat} index={index} isInView={isInView} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 mb-20">
+          {stats.map((stat, i) => (
+            <AnimatedStat key={stat.label} stat={stat} index={i} isInView={isInView} />
           ))}
         </div>
 
+        {/* CTA Banner */}
+        <motion.div
+          className="bg-accent rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3, ease }}
+        >
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-extrabold text-accent-foreground tracking-tighter mb-6">
+            Pronto a <span className="text-primary">stupire?</span>
+          </h3>
+          <p className="text-accent-foreground/50 text-lg mb-10 max-w-lg mx-auto">
+            Raccontaci la tua visione. Insieme creeremo qualcosa di straordinario.
+          </p>
+          <motion.button
+            onClick={scrollToContact}
+            className="bg-primary text-primary-foreground px-10 py-4 font-bold text-sm rounded-full inline-flex items-center gap-3 group"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Inizia il progetto
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );
