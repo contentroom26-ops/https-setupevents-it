@@ -96,11 +96,11 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(3rem,14vw,10rem)]">Not an</span>
-          <span className="block text-[clamp(3rem,14vw,10rem)]">ordinary</span>
+          <span className="block text-[clamp(3rem,14vw,10rem)]">We set</span>
+          <span className="block text-[clamp(3rem,14vw,10rem)]">the</span>
           <TextReveal>
             <span className="block text-[clamp(3rem,14vw,10rem)] italic font-normal text-primary">
-              Agency
+              Moments
             </span>
           </TextReveal>
         </motion.h1>
