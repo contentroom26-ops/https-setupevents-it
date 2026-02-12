@@ -7,18 +7,13 @@ import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const eventTypes = [
-  "Corporate Event", "Brand Activation", "Gala Dinner",
-  "Lancio Prodotto", "Convention", "Private Event",
-  "Fiera / Trade Show", "Altro",
-];
 
 const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nome: "", cognome: "", azienda: "", email: "", telefono: "",
-    tipoEvento: "", dataEvento: "", messaggio: "", privacy: false,
+    dataEvento: "", messaggio: "", privacy: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,13 +27,13 @@ const ContactSection = () => {
       const { error } = await supabase.functions.invoke("send-contact-email", {
         body: {
           nome: formData.nome, cognome: formData.cognome, azienda: formData.azienda,
-          email: formData.email, telefono: formData.telefono, tipoEvento: formData.tipoEvento,
+          email: formData.email, telefono: formData.telefono,
           dataEvento: formData.dataEvento, messaggio: formData.messaggio,
         },
       });
       if (error) throw error;
       toast({ title: "Richiesta inviata!", description: "Ti risponderemo entro 24 ore. Grazie!" });
-      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", tipoEvento: "", dataEvento: "", messaggio: "", privacy: false });
+      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", dataEvento: "", messaggio: "", privacy: false });
     } catch {
       toast({ title: "Errore", description: "Si è verificato un errore. Riprova più tardi.", variant: "destructive" });
     } finally {
@@ -119,13 +114,7 @@ const ContactSection = () => {
                 <input type="email" name="email" value={formData.email} onChange={handleChange} required className={inputCls} placeholder="Email *" />
                 <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required className={inputCls} placeholder="Telefono *" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <select name="tipoEvento" value={formData.tipoEvento} onChange={handleChange} required className={`${inputCls} cursor-pointer`}>
-                  <option value="">Tipo di evento *</option>
-                  {eventTypes.map((t) => (<option key={t} value={t}>{t}</option>))}
-                </select>
-                <input type="date" name="dataEvento" value={formData.dataEvento} onChange={handleChange} className={inputCls} />
-              </div>
+              <input type="date" name="dataEvento" value={formData.dataEvento} onChange={handleChange} className={inputCls} placeholder="Data evento" />
               <textarea name="messaggio" value={formData.messaggio} onChange={handleChange} required rows={4} className={`${inputCls} resize-none`} placeholder="Descrivi il tuo evento ideale... *" />
 
               <label className="flex items-start gap-3 cursor-pointer pt-2">
