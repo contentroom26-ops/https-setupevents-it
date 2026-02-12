@@ -65,7 +65,7 @@ const Navbar = () => {
             ))}
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-sm font-bold px-6 py-2.5 rounded-full bg-primary text-primary-foreground flex items-center gap-2 hover:brightness-110 transition-all"
+              className="text-sm font-bold px-6 py-2.5 rounded-full bg-white text-background flex items-center gap-2 hover:brightness-110 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -111,7 +111,7 @@ const Navbar = () => {
               ))}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-6 bg-primary text-primary-foreground px-8 py-4 font-bold text-sm rounded-full"
+                className="mt-6 bg-white text-background px-8 py-4 font-bold text-sm rounded-full"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.35 }}

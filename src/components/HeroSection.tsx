@@ -117,9 +117,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
         >
-          <p className="text-white/30 text-sm max-w-sm leading-relaxed">
-            Corporate events, brand activations e produzioni spettacolari.
-            Dalla visione all'applauso finale.
+          <p className="text-white/30 text-sm max-w-sm leading-relaxed uppercase tracking-wide">
+            Corporate Events, Brand Activation, Hostess Steward & Public Relations for Events
           </p>
 
           <motion.button
