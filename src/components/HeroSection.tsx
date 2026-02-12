@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import TextReveal from "./TextReveal";
 
@@ -99,17 +99,9 @@ const HeroSection = () => {
           <span className="block text-[clamp(2.5rem,10vw,8rem)]">We set the <TextReveal><span className="text-white">Moments</span></TextReveal></span>
         </motion.h1>
 
-        {/* Permanent floating accent */}
-        <motion.div
-          className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40"
-          animate={{ y: [0, -15, 0], scale: [1, 1.3, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20"
-          animate={{ y: [0, -10, 0], scale: [1, 1.5, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
+        {/* Permanent floating accent — CSS only */}
+        <div className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40 hero-dot-1" />
+        <div className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20 hero-dot-2" />
 
         <motion.div
           className="flex flex-col"
@@ -122,18 +114,14 @@ const HeroSection = () => {
           </p>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — CSS animation */}
         <motion.div
           className="flex items-center gap-3 mt-10 md:mt-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
         >
-          <motion.div
-            className="w-px h-10 bg-white/15 origin-top"
-            animate={{ scaleY: [1, 0.3, 1] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="w-px h-10 bg-white/15 origin-top scroll-indicator" />
           <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium">
             Scroll
           </span>
