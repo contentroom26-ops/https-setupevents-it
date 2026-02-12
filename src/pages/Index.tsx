@@ -15,7 +15,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <Marquee text="SETUP EVENTS © — CORPORATE — BRAND ACTIVATIONS — FIRENZE" />
+      <Marquee text="CORPORATE EVENTS — BRAND ACTIVATION — HOSTESS STEWARD & PUBLIC RELATIONS FOR EVENTS" />
       <StorySection />
       <MethodSection />
       <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
