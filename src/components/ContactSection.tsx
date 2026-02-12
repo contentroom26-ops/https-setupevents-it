@@ -68,13 +68,16 @@ const ContactSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease }}
           >
-            <span className="text-sm font-bold text-primary uppercase tracking-[0.2em] block mb-6">
-              Contattaci
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter leading-[0.95] text-accent-foreground mb-8">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="text-xs font-mono text-accent-foreground/30">[06]</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/50 font-medium">
+                Contattaci
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-8">
               Inizia il tuo
               <br />
-              <span className="italic font-normal text-accent-foreground/50">progetto</span>
+              <span className="text-accent-foreground/30">progetto</span>
             </h2>
             <p className="text-accent-foreground/50 text-lg leading-relaxed mb-10">
               Raccontaci la tua visione. Ti risponderemo entro 24 ore con una proposta personalizzata.
