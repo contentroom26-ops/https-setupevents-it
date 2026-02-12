@@ -80,7 +80,7 @@ const HeroSection = () => {
       >
         <div className="flex items-center justify-between">
           <span className="text-[10px] md:text-xs text-white/30 font-medium tracking-[0.3em] uppercase">
-            Firenze (ITA)
+            Events Agency — Firenze
           </span>
           <span className="text-[10px] md:text-xs text-white/30 font-mono">
             © — Play it Bold
@@ -96,7 +96,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(2.5rem,10vw,8rem)]">We set the <TextReveal><span className="italic font-normal text-primary">Moments</span></TextReveal></span>
+          <span className="block text-[clamp(2.5rem,10vw,8rem)]">We set the <TextReveal><span className="text-white">Moments</span></TextReveal></span>
         </motion.h1>
 
         {/* Permanent floating accent */}
@@ -124,7 +124,7 @@ const HeroSection = () => {
 
           <motion.button
             onClick={scrollToContact}
-            className="bg-primary text-primary-foreground px-7 md:px-10 py-3.5 md:py-4 font-bold text-sm rounded-full flex items-center gap-3 group self-start"
+            className="bg-white text-background px-7 md:px-10 py-3.5 md:py-4 font-bold text-sm rounded-full flex items-center gap-3 group self-start"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
