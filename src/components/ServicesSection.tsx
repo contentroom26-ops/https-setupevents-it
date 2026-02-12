@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -62,16 +62,25 @@ const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"],
+    offset: ["start center", "end center"],
   });
 
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  // Drive active index by scroll position
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const totalServices = services.length;
+    const idx = Math.min(Math.floor(v * totalServices), totalServices - 1);
+    if (idx >= 0 && idx !== activeIndex) {
+      setActiveIndex(idx);
+    }
+  });
 
   return (
     <section
       ref={sectionRef}
       id="services"
-      className="section-dark py-24 md:py-40 relative grain overflow-hidden"
+      className="section-dark py-24 md:py-40 min-h-[150vh] relative grain overflow-hidden"
     >
       <FloatingElements variant="lines" count={3} />
 
@@ -101,16 +110,7 @@ const ServicesSection = () => {
           Services
         </motion.h2>
 
-        <motion.p
-          className="text-muted-foreground text-sm md:text-base leading-relaxed mb-12 md:mb-16 max-w-xl"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1, ease }}
-        >
-          Competenze a 360° sotto lo stesso tetto. Dall'ideazione all'esecuzione,
-          ogni servizio è pensato per eventi d'impatto.
-        </motion.p>
+        <div className="mb-12 md:mb-16" />
 
         {/* Two-column layout: nav left, detail right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6">
@@ -124,13 +124,12 @@ const ServicesSection = () => {
           >
             <div className="space-y-0">
               {services.map((service, i) => (
-                <motion.button
+                <motion.div
                   key={service.number}
-                  onClick={() => setActiveIndex(i)}
-                  className={`w-full text-left px-4 py-4 md:py-5 border-b border-border/40 flex items-center gap-4 transition-all duration-400 group relative ${
+                  className={`w-full text-left px-4 py-4 md:py-5 border-b border-border/40 flex items-center gap-4 transition-all duration-400 group relative cursor-default ${
                     activeIndex === i
                       ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground/70"
+                      : "text-muted-foreground"
                   }`}
                   whileHover={{ x: 6 }}
                   transition={{ duration: 0.25, ease }}
@@ -162,7 +161,7 @@ const ServicesSection = () => {
                         : "opacity-0 -translate-x-2"
                     }`}
                   />
-                </motion.button>
+                </motion.div>
               ))}
             </div>
           </motion.div>
