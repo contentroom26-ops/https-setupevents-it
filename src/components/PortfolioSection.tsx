@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect } from "react";
 
+import dieselCard from "@/assets/diesel-card.jpg";
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
 import diesel3 from "@/assets/diesel-3.jpg";
@@ -20,7 +21,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const caseStudies = [
   {
-    image: dieselEvent3,
+    image: dieselCard,
     title: "Diesel",
     subtitle: "Fashion Night Event",
     year: "2025",
