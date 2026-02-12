@@ -112,6 +112,16 @@ const ServicesSection = () => {
             Services
           </motion.h2>
 
+          <motion.p
+            className="text-muted-foreground text-sm md:text-base mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease }}
+          >
+            I nostri servizi
+          </motion.p>
+
           {/* Two-column layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6">
             {/* Left — Service navigation list */}
