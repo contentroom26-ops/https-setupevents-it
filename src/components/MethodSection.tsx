@@ -46,7 +46,7 @@ const MethodSection = () => {
         </motion.div>
 
         <motion.h2
-          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-16 md:mb-24 max-w-4xl"
+          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-16 md:mb-20 max-w-4xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -56,49 +56,30 @@ const MethodSection = () => {
           <span className="text-accent-foreground/30">senza sorprese.</span>
         </motion.h2>
 
-        {/* Steps — editorial vertical timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-accent-foreground/10 hidden md:block" />
+        {/* Steps grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.number}
+              className="relative border-t border-accent-foreground/10 pt-8 pb-8 pr-6"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease }}
+            >
+              <div className="absolute -top-[5px] left-0 w-2.5 h-2.5 rounded-full bg-primary" />
 
-          <div className="space-y-0">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-10 md:py-16 border-b border-accent-foreground/8 group"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease }}
-              >
-                {/* Timeline dot */}
-                <div className="hidden md:flex md:col-span-1 items-start justify-center pt-2">
-                  <div className="w-3 h-3 rounded-full bg-primary relative z-10 ring-4 ring-accent" />
-                </div>
-
-                {/* Number */}
-                <div className="md:col-span-2">
-                  <span className="text-5xl md:text-7xl font-display font-extrabold text-accent-foreground/[0.06] leading-none">
-                    {step.number}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <div className="md:col-span-3 flex items-start">
-                  <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-bold text-accent-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <div className="md:col-span-6 flex items-start">
-                  <p className="text-accent-foreground/50 leading-relaxed text-sm md:text-base max-w-md">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              <span className="text-4xl md:text-5xl font-display font-extrabold text-accent-foreground/8 block mb-4">
+                {step.number}
+              </span>
+              <h3 className="text-lg md:text-xl font-display font-bold text-accent-foreground mb-3 tracking-tight">
+                {step.title}
+              </h3>
+              <p className="text-accent-foreground/40 leading-relaxed text-sm">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
