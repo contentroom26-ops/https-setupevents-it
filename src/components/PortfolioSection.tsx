@@ -134,7 +134,7 @@ const InfiniteGallery = () => {
 
     let animationId: number;
     let position = 0;
-    const speed = 0.5; // px per frame
+    const speed = 1.2; // px per frame
 
     const animate = () => {
       position += speed;
