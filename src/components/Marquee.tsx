@@ -1,26 +1,15 @@
-const words = [
-  "CORPORATE EVENTS",
-  "BRAND ACTIVATION",
-  "LAUNCH PRODUCT",
-  "HOSTESS & STEWARD",
-  "PUBLIC RELATIONS",
-  "LOCATION & SET-UP",
-  "A/V SERVICES",
-  "FIRENZE",
-];
-
-const Marquee = () => {
-  const content = words.join(" • ") + " • ";
+const Marquee = ({ text }: { text?: string }) => {
+  const defaultContent = "CORPORATE EVENTS • BRAND ACTIVATION • LAUNCH PRODUCT • HOSTESS & STEWARD • PUBLIC RELATIONS • LOCATION & SET-UP • A/V SERVICES • FIRENZE • ";
+  const content = text ? text + " • " : defaultContent;
 
   return (
-    <div className="section-dark py-5 overflow-hidden border-y border-accent-foreground/10">
+    <div className="py-6 md:py-8 overflow-hidden border-y border-border/30">
       <div className="flex whitespace-nowrap animate-marquee">
-        <span className="text-sm font-display font-bold tracking-[0.3em] text-accent-foreground/40 uppercase">
-          {content}
-        </span>
-        <span className="text-sm font-display font-bold tracking-[0.3em] text-accent-foreground/40 uppercase">
-          {content}
-        </span>
+        {Array(3).fill(null).map((_, i) => (
+          <span key={i} className="text-[clamp(1.5rem,4vw,3.5rem)] font-display font-extrabold tracking-tighter text-foreground/8 uppercase mx-4">
+            {content}
+          </span>
+        ))}
       </div>
     </div>
   );

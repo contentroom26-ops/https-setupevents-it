@@ -33,7 +33,7 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border py-3"
+            ? "bg-background/90 backdrop-blur-xl border-b border-border py-3"
             : "bg-transparent py-5"
         }`}
         initial={{ y: -100 }}
@@ -44,9 +44,7 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className={`font-display text-xl font-extrabold tracking-tight transition-colors duration-300 ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}
+            className="font-display text-xl font-extrabold tracking-tight text-white"
           >
             SETUP<span className="text-primary">EVENTS</span>
           </a>
@@ -58,8 +56,8 @@ const Navbar = () => {
                 onClick={() => scrollToSection(link.href)}
                 className={`text-sm font-medium tracking-wide transition-colors duration-300 ${
                   isScrolled
-                    ? "text-muted-foreground hover:text-foreground"
-                    : "text-white/70 hover:text-white"
+                    ? "text-foreground/60 hover:text-foreground"
+                    : "text-white/60 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -81,9 +79,9 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <X className="w-6 h-6 text-white" />
             ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <Menu className="w-6 h-6 text-white" />
             )}
           </button>
         </div>
@@ -92,7 +90,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-accent flex flex-col md:hidden"
+            className="fixed inset-0 z-40 bg-background flex flex-col md:hidden"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -103,7 +101,7 @@ const Navbar = () => {
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-accent-foreground text-4xl font-display font-extrabold tracking-tight"
+                  className="text-foreground text-4xl font-display font-extrabold tracking-tight"
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
