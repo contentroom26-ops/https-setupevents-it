@@ -37,46 +37,32 @@ const StorySection = () => {
         </motion.h2>
 
         {/* Founder section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mt-16 md:mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1, ease }}
-          >
-            <blockquote className="text-lg md:text-xl text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-6 mb-8">
-              "Dopo anni nel mondo dell'intrattenimento, ho capito che gli eventi migliori nascono
-              dall'ossessione per i dettagli. Ogni luce, ogni suono, ogni momento deve essere
-              pensato per creare qualcosa di indimenticabile."
-            </blockquote>
+        <motion.div
+          className="space-y-6 text-muted-foreground leading-relaxed mt-16 md:mt-24 max-w-3xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
+        >
+          <p>
+            Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
+          </p>
 
-            <div className="pl-6 flex items-center gap-3">
-              <div className="w-px h-8 bg-border" />
-              <div>
-                <p className="font-display font-bold text-foreground text-sm tracking-tight">Gabriel Lleshi</p>
-                <p className="text-muted-foreground text-xs uppercase tracking-[0.15em]">Founder & Creative Director</p>
-              </div>
+          <div className="flex items-center gap-3 py-2">
+            <div className="w-px h-8 bg-border" />
+            <div>
+              <p className="font-display font-bold text-foreground text-sm tracking-tight">Gabriel Lleshi</p>
+              <p className="text-muted-foreground text-xs uppercase tracking-[0.15em]">Founder & Creative Director</p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="space-y-6 text-muted-foreground leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2, ease }}
-          >
-            <p>
-              Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
-            </p>
-            <p>
-              Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
-            </p>
-            <p>
-              Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
-            </p>
-          </motion.div>
-        </div>
+          <p>
+            Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
+          </p>
+          <p>
+            Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
