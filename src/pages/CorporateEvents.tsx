@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -42,12 +43,15 @@ const CorporateEvents = () => (
             ))}
           </div>
 
-          <Link to="/#contact" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-sm hover:opacity-90 transition-opacity">
+          <a href="#contact-form" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-sm hover:opacity-90 transition-opacity">
             Richiedi un preventivo
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>
+    <div id="contact-form">
+      <ContactSection />
+    </div>
     <Footer />
     <WhatsAppButton />
   </div>
