@@ -22,10 +22,6 @@ const Footer = () => {
             <h3 className="font-display text-2xl font-extrabold tracking-tight mb-4">
               SETUP<span className="text-primary">EVENTS</span>
             </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Creiamo esperienze memorabili per brand ambiziosi.
-              Dalla visione all'applauso finale.
-            </p>
           </div>
 
           <motion.button
