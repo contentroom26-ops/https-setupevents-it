@@ -4,38 +4,38 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* SetupEvents — Bold Contrast Design System */
+/* SetupEvents — Dark Noir Luxury Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 4%;
+    --background: 0 0% 97%;
+    --foreground: 0 0% 6%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    --card-foreground: 0 0% 6%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
+    --popover-foreground: 0 0% 6%;
 
-    /* Rose Copper Accent */
-    --primary: 15 55% 58%;
+    /* Deep Red / Diesel Red accent */
+    --primary: 0 72% 51%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
+    --secondary: 0 0% 94%;
     --secondary-foreground: 0 0% 9%;
 
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 42%;
 
     /* Dark sections */
-    --accent: 0 0% 4%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 0% 5%;
+    --accent-foreground: 0 0% 96%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 50 100% 50%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 72% 51%;
 
     --radius: 0.75rem;
 
@@ -73,7 +73,7 @@
 
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-12;
   }
 
   .section-light {
