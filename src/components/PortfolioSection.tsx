@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
-import { useState, useEffect, useCallback } from "react";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
@@ -19,13 +18,25 @@ import dieselEvent8 from "@/assets/diesel-event-8.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const projects = [
-  { image: dieselEvent3, title: "Diesel Collection", category: "Product Launch", year: "2025" },
-  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event", year: "2025" },
-  { image: dieselEvent5, title: "Diesel Shopping", category: "Brand Activation", year: "2025" },
-  { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event", year: "2024" },
-  { image: diesel2, title: "VIP Experience", category: "Exclusive Event", year: "2024" },
-  { image: dieselEvent1, title: "Store Opening", category: "Brand Activation", year: "2024" },
+const caseStudies = [
+  {
+    image: dieselEvent3,
+    title: "Diesel",
+    subtitle: "Fashion Night Event",
+    year: "2025",
+    category: "Brand Activation",
+    description:
+      "Evento esclusivo organizzato per Diesel presso una delle location più iconiche di Firenze. Abbiamo curato ogni aspetto: dall'allestimento scenografico al coordinamento dello staff, dalla gestione degli ospiti VIP alla produzione audio-video. Un'esperienza immersiva che ha combinato moda, musica e intrattenimento per oltre 300 invitati.",
+  },
+  {
+    image: diesel1,
+    title: "Mediolanum",
+    subtitle: "Corporate Convention",
+    year: "2024",
+    category: "Corporate Event",
+    description:
+      "Convention aziendale per Banca Mediolanum con oltre 500 partecipanti. Gestione completa dell'evento: scouting della location, allestimento scenografico, coordinamento dei relatori, servizio hostess e steward, produzione audio-video e live streaming. Un evento che ha rafforzato l'identità del brand e creato connessioni significative.",
+  },
 ];
 
 const galleryImages = [
@@ -34,23 +45,138 @@ const galleryImages = [
   diesel1, diesel2, diesel3, diesel4, diesel9,
 ];
 
-const PortfolioSection = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+/* ── Flip Card Component ─────────────────────────────── */
+const FlipCard = ({
+  study,
+  index,
+}: {
+  study: (typeof caseStudies)[0];
+  index: number;
+}) => {
+  const [flipped, setFlipped] = useState(false);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((p) => (p + 1) % galleryImages.length);
-  }, []);
+  return (
+    <motion.div
+      className="relative w-full cursor-pointer"
+      style={{ perspective: 1200 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.15, ease }}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+    >
+      <motion.div
+        className="relative w-full aspect-[4/5] md:aspect-[3/4]"
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Front */}
+        <div
+          className="absolute inset-0 rounded-2xl overflow-hidden"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <img
+            src={study.image}
+            alt={study.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute top-5 left-6">
+            <span className="text-xs font-mono text-white/40">
+              [{String(index + 1).padStart(2, "0")}]
+            </span>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2">
+              {study.category}
+            </span>
+            <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight">
+              {study.title}
+            </h3>
+            <span className="text-xs text-white/40 font-mono mt-1 block">
+              {study.year}
+            </span>
+          </div>
+        </div>
 
-  const prevSlide = () => {
-    setCurrentSlide((p) => (p - 1 + galleryImages.length) % galleryImages.length);
-  };
+        {/* Back */}
+        <div
+          className="absolute inset-0 rounded-2xl overflow-hidden bg-secondary/90 border border-border/30 backdrop-blur-sm flex flex-col justify-center p-8 md:p-12"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">
+            {study.category} — {study.year}
+          </span>
+          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-foreground tracking-tight mb-2">
+            {study.title}
+          </h3>
+          <p className="text-sm text-muted-foreground/60 font-medium mb-6">
+            {study.subtitle}
+          </p>
+          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+            {study.description}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* ── Infinite Marquee Gallery ────────────────────────── */
+const InfiniteGallery = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 3500);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
+    const el = scrollRef.current;
+    if (!el) return;
 
+    let animationId: number;
+    let position = 0;
+    const speed = 0.5; // px per frame
+
+    const animate = () => {
+      position += speed;
+      // Reset when first set is fully scrolled past
+      const halfWidth = el.scrollWidth / 2;
+      if (position >= halfWidth) {
+        position = 0;
+      }
+      el.style.transform = `translateX(-${position}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
+
+  // Duplicate images for seamless loop
+  const doubledImages = [...galleryImages, ...galleryImages];
+
+  return (
+    <div className="overflow-hidden">
+      <div ref={scrollRef} className="flex gap-3 md:gap-5 will-change-transform">
+        {doubledImages.map((img, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 w-[55vw] md:w-[260px] lg:w-[300px] aspect-[3/4] rounded-lg overflow-hidden"
+          >
+            <img
+              src={img}
+              alt={`Event photo ${(i % galleryImages.length) + 1}`}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ── Main Section ────────────────────────────────────── */
+const PortfolioSection = () => {
   return (
     <section id="portfolio" className="section-dark py-20 md:py-40 relative grain overflow-hidden">
       <FloatingElements variant="dots" count={8} />
@@ -68,16 +194,6 @@ const PortfolioSection = () => {
               Projects
             </span>
           </motion.div>
-
-          <motion.span
-            className="text-xs font-mono text-muted-foreground"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2, ease }}
-          >
-            [{projects.length}]
-          </motion.span>
         </div>
 
         <motion.h2
@@ -90,147 +206,28 @@ const PortfolioSection = () => {
           Case studies
         </motion.h2>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              className="group cursor-pointer relative overflow-hidden rounded-xl"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div className="aspect-[4/5] relative overflow-hidden">
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                  animate={{ scale: hoveredIndex === i ? 1.06 : 1 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  loading="lazy"
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                  animate={{ opacity: hoveredIndex === i ? 1 : 0.4 }}
-                  transition={{ duration: 0.3 }}
-                />
-
-                <div className="absolute top-4 left-4 md:top-5 md:left-6">
-                  <span className="text-xs font-mono text-white/40">
-                    [{String(i + 1).padStart(2, "0")}]
-                  </span>
-                </div>
-
-                <motion.div
-                  className="absolute top-4 right-4 md:top-5 md:right-6"
-                  animate={{
-                    opacity: hoveredIndex === i ? 1 : 0,
-                    y: hoveredIndex === i ? 0 : 10,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ArrowUpRight className="w-5 h-5 text-white" />
-                </motion.div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                  <motion.span
-                    className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2"
-                    animate={{
-                      y: hoveredIndex === i ? 0 : 8,
-                      opacity: hoveredIndex === i ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {project.category}
-                  </motion.span>
-                  <div className="flex items-end justify-between">
-                    <motion.h3
-                      className="text-lg md:text-2xl font-display font-bold text-white tracking-tight"
-                      animate={{ y: hoveredIndex === i ? 0 : 8 }}
-                      transition={{ duration: 0.3, delay: 0.05 }}
-                    >
-                      {project.title}
-                    </motion.h3>
-                    <span className="text-xs text-white/40 font-mono">{project.year}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+        {/* Two flip cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {caseStudies.map((study, i) => (
+            <FlipCard key={study.title} study={study} index={i} />
           ))}
         </div>
       </div>
 
-      {/* Gallery carousel */}
+      {/* Auto-scrolling gallery */}
       <motion.div
-        className="mt-16 md:mt-28 relative"
+        className="mt-16 md:mt-28"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease }}
       >
         <div className="container-custom mb-6 md:mb-10">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl md:text-2xl font-display font-bold text-foreground tracking-tight">
-              Gallery
-            </h3>
-            <div className="flex gap-2">
-              <button
-                onClick={prevSlide}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
-                aria-label="Next"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+          <h3 className="text-xl md:text-2xl font-display font-bold text-foreground tracking-tight">
+            Gallery
+          </h3>
         </div>
-
-        <div className="overflow-hidden pl-5 md:pl-12">
-          <motion.div
-            className="flex gap-3 md:gap-5"
-            animate={{ x: `-${currentSlide * 280}px` }}
-            transition={{ type: "tween", duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                className="flex-shrink-0 w-[65vw] md:w-[280px] lg:w-[320px] aspect-[3/4] rounded-lg overflow-hidden"
-              >
-                <img
-                  src={img}
-                  alt={`Event photo ${i + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        <div className="container-custom mt-6">
-          <div className="flex gap-1 justify-start">
-            {galleryImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentSlide(i)}
-                className={`h-0.5 rounded-full transition-all duration-300 ${
-                  i === currentSlide ? "bg-primary w-8" : "bg-border w-3"
-                }`}
-                aria-label={`Go to image ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        <InfiniteGallery />
       </motion.div>
     </section>
   );
