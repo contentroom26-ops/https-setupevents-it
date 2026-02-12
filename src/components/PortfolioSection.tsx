@@ -18,12 +18,12 @@ import dieselEvent8 from "@/assets/diesel-event-8.jpg";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const projects = [
-  { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation", year: "2025" },
-  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event", year: "2025" },
   { image: dieselEvent3, title: "Diesel Collection", category: "Product Launch", year: "2025" },
+  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event", year: "2025" },
+  { image: dieselEvent5, title: "Diesel Shopping", category: "Brand Activation", year: "2025" },
   { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event", year: "2024" },
   { image: diesel2, title: "VIP Experience", category: "Exclusive Event", year: "2024" },
-  { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation", year: "2024" },
+  { image: dieselEvent1, title: "Store Opening", category: "Brand Activation", year: "2024" },
 ];
 
 const galleryImages = [
@@ -44,7 +44,6 @@ const PortfolioSection = () => {
     setCurrentSlide((p) => (p - 1 + galleryImages.length) % galleryImages.length);
   };
 
-  // Auto-advance carousel
   useEffect(() => {
     const timer = setInterval(nextSlide, 3500);
     return () => clearInterval(timer);
@@ -53,8 +52,7 @@ const PortfolioSection = () => {
   return (
     <section id="portfolio" className="section-dark py-20 md:py-40 relative grain overflow-hidden">
       <div className="container-custom">
-        {/* Section label */}
-        <div className="flex items-center justify-between mb-12 md:mb-20">
+        <div className="flex items-center justify-between mb-6">
           <motion.div
             className="flex items-center gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -62,15 +60,25 @@ const PortfolioSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease }}
           >
-            <span className="text-xs font-mono text-accent-foreground/30">[04]</span>
-            <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/50 font-medium">
+            <span className="text-xs font-mono text-muted-foreground">[04]</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
               Projects
             </span>
           </motion.div>
+
+          <motion.span
+            className="text-xs font-mono text-muted-foreground"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
+          >
+            [{projects.length}]
+          </motion.span>
         </div>
 
         <motion.h2
-          className="text-3xl md:text-5xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] text-accent-foreground mb-12 md:mb-20"
+          className="text-3xl md:text-5xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-12 md:mb-20"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -79,12 +87,12 @@ const PortfolioSection = () => {
           Case studies
         </motion.h2>
 
-        {/* Project grid - 2 columns */}
+        {/* Project grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              className="group cursor-pointer relative overflow-hidden rounded-xl md:rounded-2xl"
+              className="group cursor-pointer relative overflow-hidden rounded-xl"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -92,7 +100,7 @@ const PortfolioSection = () => {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="aspect-[4/5] md:aspect-[4/5] relative overflow-hidden">
+              <div className="aspect-[4/5] relative overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -103,7 +111,7 @@ const PortfolioSection = () => {
                 />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                  animate={{ opacity: hoveredIndex === i ? 1 : 0.5 }}
+                  animate={{ opacity: hoveredIndex === i ? 1 : 0.4 }}
                   transition={{ duration: 0.3 }}
                 />
 
@@ -152,7 +160,7 @@ const PortfolioSection = () => {
         </div>
       </div>
 
-      {/* Full-width image carousel */}
+      {/* Gallery carousel */}
       <motion.div
         className="mt-16 md:mt-28 relative"
         initial={{ opacity: 0 }}
@@ -160,22 +168,22 @@ const PortfolioSection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease }}
       >
-        <div className="container-custom mb-8 md:mb-12">
+        <div className="container-custom mb-6 md:mb-10">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl md:text-3xl font-display font-bold text-accent-foreground tracking-tight">
+            <h3 className="text-xl md:text-2xl font-display font-bold text-foreground tracking-tight">
               Gallery
             </h3>
             <div className="flex gap-2">
               <button
                 onClick={prevSlide}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent-foreground/20 flex items-center justify-center text-accent-foreground/60 hover:bg-accent-foreground/10 transition-colors"
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
                 aria-label="Previous"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent-foreground/20 flex items-center justify-center text-accent-foreground/60 hover:bg-accent-foreground/10 transition-colors"
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
                 aria-label="Next"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -184,18 +192,16 @@ const PortfolioSection = () => {
           </div>
         </div>
 
-        {/* Carousel strip */}
-        <div className="overflow-hidden">
+        <div className="overflow-hidden pl-5 md:pl-12">
           <motion.div
             className="flex gap-3 md:gap-5"
-            animate={{ x: `-${currentSlide * (100 / 3)}%` }}
+            animate={{ x: `-${currentSlide * 280}px` }}
             transition={{ type: "spring", stiffness: 200, damping: 30 }}
-            style={{ width: `${(galleryImages.length / 3) * 100}%` }}
           >
             {galleryImages.map((img, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-[70vw] md:w-[30vw] aspect-[3/4] md:aspect-[4/5] rounded-lg md:rounded-xl overflow-hidden"
+                className="flex-shrink-0 w-[65vw] md:w-[280px] lg:w-[320px] aspect-[3/4] rounded-lg overflow-hidden"
               >
                 <img
                   src={img}
@@ -208,15 +214,14 @@ const PortfolioSection = () => {
           </motion.div>
         </div>
 
-        {/* Progress dots */}
-        <div className="container-custom mt-6 md:mt-8">
-          <div className="flex gap-1.5 justify-center md:justify-start">
+        <div className="container-custom mt-6">
+          <div className="flex gap-1 justify-start">
             {galleryImages.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentSlide(i)}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === currentSlide ? "bg-primary w-8" : "bg-accent-foreground/20 w-3"
+                className={`h-0.5 rounded-full transition-all duration-300 ${
+                  i === currentSlide ? "bg-primary w-8" : "bg-border w-3"
                 }`}
                 aria-label={`Go to image ${i + 1}`}
               />

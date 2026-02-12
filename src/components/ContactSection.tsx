@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Send, ArrowRight, Loader2 } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -54,12 +54,12 @@ const ContactSection = () => {
   };
 
   const inputCls =
-    "w-full px-4 py-3.5 bg-accent-foreground/5 border border-accent-foreground/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-accent-foreground placeholder:text-accent-foreground/30 text-sm";
+    "w-full px-4 py-3.5 bg-foreground/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground placeholder:text-muted-foreground text-sm";
 
   return (
-    <section id="contact" className="section-dark py-28 md:py-40 relative grain">
+    <section id="contact" className="section-dark py-24 md:py-40 relative grain">
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left - Copy */}
           <motion.div
             className="flex flex-col justify-center"
@@ -69,17 +69,17 @@ const ContactSection = () => {
             transition={{ duration: 0.8, ease }}
           >
             <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-mono text-accent-foreground/30">[06]</span>
-              <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/50 font-medium">
+              <span className="text-xs font-mono text-muted-foreground">[06]</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
                 Contattaci
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-foreground mb-8">
               Inizia il tuo
               <br />
-              <span className="text-accent-foreground/30">progetto</span>
+              <span className="text-muted-foreground">progetto</span>
             </h2>
-            <p className="text-accent-foreground/50 text-lg leading-relaxed mb-10">
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10">
               Raccontaci la tua visione. Ti risponderemo entro 24 ore con una proposta personalizzata.
             </p>
 
@@ -94,7 +94,7 @@ const ContactSection = () => {
                   transition={{ delay: 0.3 + i * 0.1, ease }}
                 >
                   <div className="w-2 h-2 rounded-full bg-primary" />
-                  <span className="text-accent-foreground/70 font-medium">{b}</span>
+                  <span className="text-foreground/70 font-medium">{b}</span>
                 </motion.div>
               ))}
             </div>
@@ -129,7 +129,7 @@ const ContactSection = () => {
 
               <label className="flex items-start gap-3 cursor-pointer pt-2">
                 <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange} className="mt-1 w-4 h-4 accent-primary rounded" />
-                <span className="text-sm text-accent-foreground/40">
+                <span className="text-sm text-muted-foreground">
                   Accetto la <a href="#" className="text-primary hover:underline">Privacy Policy</a> *
                 </span>
               </label>

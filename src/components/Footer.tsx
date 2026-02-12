@@ -7,11 +7,11 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="bg-accent text-accent-foreground pt-20 pb-8 relative">
+    <footer className="bg-background text-foreground pt-20 pb-8 relative border-t border-border">
       <div className="container-custom">
         {/* Top */}
         <motion.div
-          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 mb-16 pb-16 border-b border-accent-foreground/10"
+          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 mb-16 pb-16 border-b border-border"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ const Footer = () => {
             <h3 className="font-display text-2xl font-extrabold tracking-tight mb-4">
               SETUP<span className="text-primary">EVENTS</span>
             </h3>
-            <p className="text-accent-foreground/50 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               Creiamo esperienze memorabili per brand ambiziosi.
               Dalla visione all'applauso finale.
             </p>
@@ -29,7 +29,7 @@ const Footer = () => {
 
           <motion.button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 text-accent-foreground/50 hover:text-accent-foreground transition-colors text-sm uppercase tracking-[0.2em] font-medium group"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm uppercase tracking-[0.2em] font-medium group"
             whileHover={{ y: -2 }}
           >
             Torna su
@@ -38,10 +38,10 @@ const Footer = () => {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-16">
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-accent-foreground/80">Servizi</h4>
-            <ul className="space-y-3 text-accent-foreground/40">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Servizi</h4>
+            <ul className="space-y-3 text-muted-foreground">
               {["Corporate Events", "Brand Activations", "Event Production", "Hostess & Staff", "Public Relations"].map((item) => (
                 <li key={item}>
                   <a href="#services" className="hover:text-primary transition-colors text-sm">{item}</a>
@@ -51,8 +51,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-accent-foreground/80">Link</h4>
-            <ul className="space-y-3 text-accent-foreground/40">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Link</h4>
+            <ul className="space-y-3 text-muted-foreground">
               {[
                 { name: "Portfolio", href: "#portfolio" },
                 { name: "Contatti", href: "#contact" },
@@ -67,8 +67,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-accent-foreground/80">Contatti</h4>
-            <ul className="space-y-4 text-accent-foreground/40 text-sm">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Contatti</h4>
+            <ul className="space-y-4 text-muted-foreground text-sm">
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />
                 <a href="mailto:info@setupevents.it" className="hover:text-primary transition-colors">info@setupevents.it</a>
@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-accent-foreground/80">Social</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Social</h4>
             <div className="flex gap-3">
               {[
                 { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gabrielleshi_events/" },
@@ -96,7 +96,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-accent-foreground/10 flex items-center justify-center text-accent-foreground/40 hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all"
+                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all"
                   aria-label={social.label}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-accent-foreground/25 text-xs pt-8 border-t border-accent-foreground/5">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted-foreground text-xs pt-8 border-t border-border">
           <p>© {new Date().getFullYear()} SetupEvents by Gabriel Lleshi</p>
           <p>P.IVA: 07386270487</p>
         </div>
