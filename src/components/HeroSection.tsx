@@ -96,13 +96,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(3rem,14vw,10rem)]">We set</span>
-          <span className="block text-[clamp(3rem,14vw,10rem)]">the</span>
-          <TextReveal>
-            <span className="block text-[clamp(3rem,14vw,10rem)] italic font-normal text-primary">
-              Moments
-            </span>
-          </TextReveal>
+          <span className="block text-[clamp(2.5rem,10vw,8rem)]">We set the <TextReveal><span className="italic font-normal text-primary">Moments</span></TextReveal></span>
         </motion.h1>
 
         {/* Permanent floating accent */}
