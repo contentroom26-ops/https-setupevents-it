@@ -6,10 +6,10 @@ const AnimatedBackground = () => {
       {/* Base dark */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* Warm gold orb - top left */}
+      {/* Magenta/Purple orb - top left */}
       <motion.div
-        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vh] rounded-full opacity-50 blur-[120px]"
-        style={{ background: "radial-gradient(circle, hsl(35 80% 50% / 0.7), hsl(25 70% 40% / 0.3), transparent 70%)" }}
+        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vh] rounded-full opacity-60 blur-[120px]"
+        style={{ background: "radial-gradient(circle, hsl(290 90% 45% / 0.8), hsl(320 80% 50% / 0.4), transparent 70%)" }}
         animate={{
           x: ["-5%", "5%", "-5%"],
           y: ["-5%", "5%", "-5%"],
@@ -18,10 +18,10 @@ const AnimatedBackground = () => {
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Amber/bronze orb - top center */}
+      {/* Lighter purple/pink orb - top center */}
       <motion.div
-        className="absolute -top-[10%] left-[30%] w-[50vw] h-[50vh] rounded-full opacity-35 blur-[100px]"
-        style={{ background: "radial-gradient(circle, hsl(30 75% 45% / 0.6), hsl(20 60% 35% / 0.3), transparent 70%)" }}
+        className="absolute -top-[10%] left-[30%] w-[50vw] h-[50vh] rounded-full opacity-40 blur-[100px]"
+        style={{ background: "radial-gradient(circle, hsl(280 70% 55% / 0.6), hsl(310 60% 45% / 0.3), transparent 70%)" }}
         animate={{
           x: ["0%", "10%", "0%"],
           y: ["0%", "8%", "0%"],
@@ -30,10 +30,10 @@ const AnimatedBackground = () => {
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Deep warm glow - bottom right */}
+      {/* Deep violet glow - bottom right */}
       <motion.div
-        className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vh] rounded-full opacity-30 blur-[130px]"
-        style={{ background: "radial-gradient(circle, hsl(25 70% 45% / 0.5), hsl(15 50% 30% / 0.3), transparent 70%)" }}
+        className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vh] rounded-full opacity-35 blur-[130px]"
+        style={{ background: "radial-gradient(circle, hsl(270 60% 40% / 0.5), hsl(300 50% 35% / 0.3), transparent 70%)" }}
         animate={{
           x: ["5%", "-5%", "5%"],
           y: ["5%", "-5%", "5%"],
