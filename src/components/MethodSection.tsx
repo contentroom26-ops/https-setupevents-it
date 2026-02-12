@@ -6,28 +6,23 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const steps = [
   {
     number: "01",
-    title: "Ascolta e impara",
-    description: "Ogni collaborazione inizia con la comprensione. Analizziamo a fondo la tua attività, le sfide e gli obiettivi che vuoi raggiungere.",
+    title: "Brief",
+    description: "Ascoltiamo le tue esigenze e obiettivi. Analizziamo ogni dettaglio per capire la tua visione.",
   },
   {
     number: "02",
-    title: "Prima la strategia",
-    description: "Prima di qualsiasi azione, ci allineiamo sulla direzione. Che sia un evento corporate o un lancio prodotto.",
+    title: "Concept",
+    description: "Sviluppiamo idee creative e proposte visive su misura per il tuo brand.",
   },
   {
     number: "03",
-    title: "Produzione in sprint",
-    description: "Lavoriamo in cicli mirati con check regolari. Vedrai i progressi settimanalmente, non mensilmente.",
+    title: "Produzione",
+    description: "Gestiamo ogni aspetto: location, fornitori, staff, tecnologie e logistica.",
   },
   {
     number: "04",
     title: "Evento",
-    description: "Coordiniamo ogni elemento per un'esecuzione perfetta. Dal primo ospite all'ultimo applauso.",
-  },
-  {
-    number: "05",
-    title: "Lancia e impara",
-    description: "Restiamo sul posto per l'implementazione e misuriamo ciò che conta. Ogni progetto ci insegna qualcosa.",
+    description: "Coordiniamo ogni elemento per un'esecuzione perfetta e senza compromessi.",
   },
 ];
 
@@ -72,7 +67,7 @@ const MethodSection = () => {
         </motion.p>
 
         {/* Steps grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
