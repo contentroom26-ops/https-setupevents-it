@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import FloatingElements from "./FloatingElements";
 import { useState, useEffect, useCallback } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -51,6 +52,7 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="section-dark py-20 md:py-40 relative grain overflow-hidden">
+      <FloatingElements variant="dots" count={8} />
       <div className="container-custom">
         <div className="flex items-center justify-between mb-6">
           <motion.div

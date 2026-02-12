@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -33,6 +34,7 @@ const steps = [
 const MethodSection = () => {
   return (
     <section className="section-light py-24 md:py-40 relative grain overflow-hidden">
+      <FloatingElements variant="circles" count={4} />
       <div className="container-custom">
         {/* Section label */}
         <motion.div

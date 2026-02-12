@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -58,6 +59,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="section-dark py-24 md:py-40 relative grain">
+      <FloatingElements variant="lines" count={3} />
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left - Copy */}

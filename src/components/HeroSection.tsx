@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import TextReveal from "./TextReveal";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -90,17 +91,31 @@ const HeroSection = () => {
       {/* Main content */}
       <motion.div className="relative z-10 container-custom pb-12 md:pb-20" style={{ opacity, y }}>
         <motion.h1
-          className="font-display font-extrabold text-white leading-[0.85] tracking-[-0.05em] mb-6 md:mb-10"
+          className="font-display font-bold text-white leading-[0.85] tracking-[-0.05em] mb-6 md:mb-10"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="block text-[clamp(3rem,14vw,10rem)]">Not an</span>
           <span className="block text-[clamp(3rem,14vw,10rem)]">ordinary</span>
-          <span className="block text-[clamp(3rem,14vw,10rem)] italic font-normal text-primary">
-            Agency
-          </span>
+          <TextReveal>
+            <span className="block text-[clamp(3rem,14vw,10rem)] italic font-normal text-primary">
+              Agency
+            </span>
+          </TextReveal>
         </motion.h1>
+
+        {/* Permanent floating accent */}
+        <motion.div
+          className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40"
+          animate={{ y: [0, -15, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20"
+          animate={{ y: [0, -10, 0], scale: [1, 1.5, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
 
         <motion.div
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
