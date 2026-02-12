@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -48,6 +49,7 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="section-dark py-24 md:py-40 relative grain">
+      <FloatingElements variant="lines" count={4} />
       <div className="container-custom">
         <motion.div
           className="flex items-center gap-4 mb-8"

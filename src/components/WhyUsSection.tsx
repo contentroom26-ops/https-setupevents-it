@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -58,6 +59,7 @@ const WhyUsSection = () => {
 
   return (
     <section className="section-light py-24 md:py-40 relative grain" ref={ref}>
+      <FloatingElements variant="circles" count={3} />
       <div className="container-custom">
         <motion.div
           className="flex items-center gap-4 mb-16 md:mb-20"

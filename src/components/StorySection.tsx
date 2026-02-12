@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const StorySection = () => {
   return (
     <section id="storia" className="section-dark py-24 md:py-40 relative grain">
+      <FloatingElements variant="dots" count={6} />
       <div className="container-custom">
         {/* Section label */}
         <motion.div
