@@ -177,26 +177,40 @@ const ServicesSection = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -15, scale: 0.98 }}
                   transition={{ duration: 0.45, ease }}
-                  className="relative bg-secondary/30 border border-border/30 rounded-2xl p-8 md:p-10 lg:p-12 backdrop-blur-sm"
+                  className={`relative rounded-2xl p-8 md:p-10 lg:p-12 backdrop-blur-sm ${
+                    activeIndex % 3 === 0
+                      ? "bg-secondary/30 border border-border/30"
+                      : activeIndex % 3 === 1
+                        ? "bg-white text-background border border-white/20"
+                        : "bg-primary border border-primary/30"
+                  }`}
                 >
                   {/* Big background number */}
                   <motion.span
-                    className="absolute top-4 right-6 md:top-6 md:right-10 text-[7rem] md:text-[9rem] font-display font-extrabold text-foreground/[0.03] leading-none select-none pointer-events-none"
+                    className={`absolute top-4 right-6 md:top-6 md:right-10 text-[7rem] md:text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${
+                      activeIndex % 3 === 0 ? "text-foreground/[0.03]" : activeIndex % 3 === 1 ? "text-background/[0.06]" : "text-white/10"
+                    }`}
                     style={{ y: parallaxY }}
                   >
                     {services[activeIndex].number}
                   </motion.span>
 
                   <div className="relative z-10">
-                    <h3 className="text-xl md:text-3xl lg:text-4xl font-display font-extrabold tracking-tight text-foreground mb-4 md:mb-6">
+                    <h3 className={`text-xl md:text-3xl lg:text-4xl font-display font-extrabold tracking-tight mb-4 md:mb-6 ${
+                      activeIndex % 3 === 0 ? "text-foreground" : activeIndex % 3 === 1 ? "text-background" : "text-white"
+                    }`}>
                       {services[activeIndex].title}
                     </h3>
 
-                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-lg">
+                    <p className={`text-sm md:text-base leading-relaxed mb-8 max-w-lg ${
+                      activeIndex % 3 === 0 ? "text-muted-foreground" : activeIndex % 3 === 1 ? "text-background/70" : "text-white/80"
+                    }`}>
                       {services[activeIndex].description}
                     </p>
 
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50 font-medium block mb-3">
+                    <span className={`text-[10px] uppercase tracking-[0.2em] font-medium block mb-3 ${
+                      activeIndex % 3 === 0 ? "text-muted-foreground/50" : activeIndex % 3 === 1 ? "text-background/40" : "text-white/50"
+                    }`}>
                       Categories
                     </span>
 
@@ -204,7 +218,9 @@ const ServicesSection = () => {
                       {services[activeIndex].categories.map((cat, ci) => (
                         <motion.span
                           key={cat}
-                          className="text-xs px-4 py-1.5 rounded-full border border-border/50 text-muted-foreground/70 font-medium"
+                          className={`text-xs px-4 py-1.5 rounded-full border font-medium ${
+                            activeIndex % 3 === 0 ? "border-border/50 text-muted-foreground/70" : activeIndex % 3 === 1 ? "border-background/20 text-background/60" : "border-white/30 text-white/70"
+                          }`}
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: ci * 0.05, duration: 0.35, ease }}
@@ -216,11 +232,15 @@ const ServicesSection = () => {
 
                     <Link
                       to={services[activeIndex].link}
-                      className="inline-flex items-center gap-2.5 text-sm font-bold text-foreground hover:text-primary transition-colors duration-300 group"
+                      className={`inline-flex items-center gap-2.5 text-sm font-bold transition-colors duration-300 group ${
+                        activeIndex % 3 === 0 ? "text-foreground hover:text-primary" : activeIndex % 3 === 1 ? "text-background hover:text-background/70" : "text-white hover:text-white/80"
+                      }`}
                     >
                       <span className="relative">
                         Scopri di più
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                        <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${
+                          activeIndex % 3 === 0 ? "bg-primary" : activeIndex % 3 === 1 ? "bg-background" : "bg-white"
+                        }`} />
                       </span>
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
