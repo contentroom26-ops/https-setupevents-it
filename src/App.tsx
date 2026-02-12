@@ -12,6 +12,7 @@ import BrandActivation from "./pages/BrandActivation";
 import EventProductions from "./pages/EventProductions";
 import HostessStaff from "./pages/HostessStaff";
 import PublicRelations from "./pages/PublicRelations";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
