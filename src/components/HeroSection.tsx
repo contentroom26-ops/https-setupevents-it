@@ -1,9 +1,22 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { ArrowRight, Pause, Play } from "lucide-react";
+import { useRef, useState } from "react";
 
 const HeroSection = () => {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -20,19 +33,29 @@ const HeroSection = () => {
       {/* Video background */}
       <div className="absolute inset-0">
         <video
+          ref={videoRef}
           autoPlay
           loop
+          muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-        {/* Dark overlay for readability */}
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50" />
         {/* Grain */}
         <div className="absolute inset-0 opacity-[0.035]" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }} />
+        {/* Pause/Play button */}
+        <motion.button
+          onClick={toggleVideo}
+          className="absolute top-24 right-6 md:right-12 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+        </motion.button>
       </div>
 
       <motion.div className="relative z-10 container-custom w-full" style={{ opacity, y }}>
