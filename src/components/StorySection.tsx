@@ -69,17 +69,13 @@ const StorySection = () => {
             transition={{ duration: 0.7, delay: 0.2, ease }}
           >
             <p>
-              Così è nata Setup Events. Niente approcci standardizzati,
-              niente promesse vuote. Solo un team che vive e respira eventi, con una
-              conoscenza profonda del territorio fiorentino e delle dinamiche che
-              rendono un evento davvero memorabile.
+              Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
             </p>
             <p>
-              Operiamo nel settore corporate, nei lanci prodotto e negli eventi esclusivi,
-              curando ogni dettaglio con un approccio strategico, creativo e professionale.
+              Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
             </p>
-            <p className="text-foreground font-medium">
-              Questo è lo stile Setup Events©. Semplice, ma non facile.
+            <p>
+              Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
             </p>
           </motion.div>
         </div>
