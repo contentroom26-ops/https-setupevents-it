@@ -56,15 +56,6 @@ const MethodSection = () => {
           <span className="text-accent-foreground/30">senza sorprese.</span>
         </motion.h2>
 
-        <motion.p
-          className="text-accent-foreground/50 max-w-2xl mb-16 md:mb-20 leading-relaxed"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2, ease }}
-        >
-          Ogni fase è studiata per ridurre al minimo gli attriti e massimizzare l'impatto. Dalla prima chiamata alla consegna finale, saprete esattamente dove stiamo andando.
-        </motion.p>
 
         {/* Steps grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
