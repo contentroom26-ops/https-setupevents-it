@@ -83,7 +83,7 @@ const HeroSection = () => {
             Events Agency — Firenze
           </span>
           <span className="text-[10px] md:text-xs text-white/30 font-mono">
-            © — Play it Bold
+            © Setup Events
           </span>
         </div>
       </motion.div>
