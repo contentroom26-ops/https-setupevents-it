@@ -62,15 +62,16 @@ const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start center", "end center"],
+    offset: ["start start", "end end"],
   });
 
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
-  // Drive active index by scroll position
+  // Evenly distribute services across scroll progress
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const totalServices = services.length;
-    const idx = Math.min(Math.floor(v * totalServices), totalServices - 1);
+    const total = services.length;
+    // Clamp so last service shows fully before section ends
+    const idx = Math.min(Math.floor(v * total), total - 1);
     if (idx >= 0 && idx !== activeIndex) {
       setActiveIndex(idx);
     }
@@ -80,11 +81,12 @@ const ServicesSection = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="section-dark py-24 md:py-40 min-h-[150vh] relative grain overflow-hidden"
+      className="section-dark relative grain overflow-hidden"
+      style={{ height: `${services.length * 60 + 40}vh` }}
     >
       <FloatingElements variant="lines" count={3} />
 
-      <div className="container-custom">
+      <div className="container-custom sticky top-0 py-24 md:py-40 min-h-screen flex flex-col justify-center">
         {/* Section label */}
         <motion.div
           className="flex items-center gap-4 mb-6"
