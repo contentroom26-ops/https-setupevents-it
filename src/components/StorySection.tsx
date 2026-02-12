@@ -44,21 +44,19 @@ const StorySection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease }}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-primary font-display font-bold text-lg">GL</span>
-              </div>
-              <div>
-                <p className="font-display font-bold text-foreground text-sm">Gabriel Lleshi</p>
-                <p className="text-muted-foreground text-xs">Founder & Creative Director</p>
-              </div>
-            </div>
-
-            <blockquote className="text-lg md:text-xl text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-6">
+            <blockquote className="text-lg md:text-xl text-foreground/80 leading-relaxed italic border-l-2 border-primary pl-6 mb-8">
               "Dopo anni nel mondo dell'intrattenimento, ho capito che gli eventi migliori nascono
               dall'ossessione per i dettagli. Ogni luce, ogni suono, ogni momento deve essere
               pensato per creare qualcosa di indimenticabile."
             </blockquote>
+
+            <div className="pl-6 flex items-center gap-3">
+              <div className="w-px h-8 bg-border" />
+              <div>
+                <p className="font-display font-bold text-foreground text-sm tracking-tight">Gabriel Lleshi</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-[0.15em]">Founder & Creative Director</p>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
