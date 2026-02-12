@@ -5,7 +5,7 @@ import StorySection from "@/components/StorySection";
 import MethodSection from "@/components/MethodSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
-import WhyUsSection from "@/components/WhyUsSection";
+
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -21,7 +21,7 @@ const Index = () => {
       <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
       <ServicesSection />
       <PortfolioSection />
-      <WhyUsSection />
+      
       <ContactSection />
       <Footer />
       <WhatsAppButton />
