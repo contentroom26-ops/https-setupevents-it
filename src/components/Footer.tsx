@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -42,9 +43,15 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Servizi</h4>
             <ul className="space-y-3 text-muted-foreground">
-              {["Corporate Events", "Brand Activations", "Event Production", "Hostess & Staff", "Public Relations"].map((item) => (
-                <li key={item}>
-                  <a href="#services" className="hover:text-primary transition-colors text-sm">{item}</a>
+              {[
+                { name: "Corporate Events", href: "/corporate-events" },
+                { name: "Brand Activation", href: "/brand-activation" },
+                { name: "Event Productions", href: "/event-productions" },
+                { name: "Hostess & Staff", href: "/hostess-staff" },
+                { name: "Public Relations", href: "/public-relations" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link to={item.href} className="hover:text-primary transition-colors text-sm">{item.name}</Link>
                 </li>
               ))}
             </ul>
@@ -56,11 +63,15 @@ const Footer = () => {
               {[
                 { name: "Portfolio", href: "#portfolio" },
                 { name: "Contatti", href: "#contact" },
-                { name: "Privacy Policy", href: "#" },
-                { name: "Cookie Policy", href: "#" },
+                { name: "Privacy Policy", href: "/privacy-policy" },
+                { name: "Cookie Policy", href: "/cookie-policy" },
               ].map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="hover:text-primary transition-colors text-sm">{item.name}</a>
+                  {item.href.startsWith("/") ? (
+                    <Link to={item.href} className="hover:text-primary transition-colors text-sm">{item.name}</Link>
+                  ) : (
+                    <a href={item.href} className="hover:text-primary transition-colors text-sm">{item.name}</a>
+                  )}
                 </li>
               ))}
             </ul>

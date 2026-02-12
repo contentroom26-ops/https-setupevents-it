@@ -18,7 +18,7 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nome: "", cognome: "", azienda: "", email: "", telefono: "",
-    tipoEvento: "", dataEvento: "", budget: "", messaggio: "", privacy: false,
+    tipoEvento: "", dataEvento: "", messaggio: "", privacy: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,12 +33,12 @@ const ContactSection = () => {
         body: {
           nome: formData.nome, cognome: formData.cognome, azienda: formData.azienda,
           email: formData.email, telefono: formData.telefono, tipoEvento: formData.tipoEvento,
-          dataEvento: formData.dataEvento, budget: formData.budget, messaggio: formData.messaggio,
+          dataEvento: formData.dataEvento, messaggio: formData.messaggio,
         },
       });
       if (error) throw error;
       toast({ title: "Richiesta inviata!", description: "Ti risponderemo entro 24 ore. Grazie!" });
-      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", tipoEvento: "", dataEvento: "", budget: "", messaggio: "", privacy: false });
+      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", tipoEvento: "", dataEvento: "", messaggio: "", privacy: false });
     } catch {
       toast({ title: "Errore", description: "Si è verificato un errore. Riprova più tardi.", variant: "destructive" });
     } finally {
@@ -126,13 +126,12 @@ const ContactSection = () => {
                 </select>
                 <input type="date" name="dataEvento" value={formData.dataEvento} onChange={handleChange} className={inputCls} />
               </div>
-              <input type="text" name="budget" value={formData.budget} onChange={handleChange} className={inputCls} placeholder="Budget indicativo" />
               <textarea name="messaggio" value={formData.messaggio} onChange={handleChange} required rows={4} className={`${inputCls} resize-none`} placeholder="Descrivi il tuo evento ideale... *" />
 
               <label className="flex items-start gap-3 cursor-pointer pt-2">
                 <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange} className="mt-1 w-4 h-4 accent-primary rounded" />
                 <span className="text-sm text-muted-foreground">
-                  Accetto la <a href="#" className="text-primary hover:underline">Privacy Policy</a> *
+                  Accetto la <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a> *
                 </span>
               </label>
 
