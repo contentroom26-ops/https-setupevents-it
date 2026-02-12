@@ -7,6 +7,7 @@ import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
 import diesel3 from "@/assets/diesel-3.jpg";
 import diesel4 from "@/assets/diesel-4.jpg";
+import diesel9 from "@/assets/diesel-9.jpg";
 import dieselEvent1 from "@/assets/diesel-event-1.jpg";
 import dieselEvent2 from "@/assets/diesel-event-2.jpg";
 import dieselEvent3 from "@/assets/diesel-event-3.jpg";
@@ -30,7 +31,7 @@ const projects = [
 const galleryImages = [
   dieselEvent1, dieselEvent2, dieselEvent3, dieselEvent4,
   dieselEvent5, dieselEvent6, dieselEvent7, dieselEvent8,
-  diesel1, diesel2, diesel3, diesel4,
+  diesel1, diesel2, diesel3, diesel4, diesel9,
 ];
 
 const PortfolioSection = () => {
@@ -198,7 +199,7 @@ const PortfolioSection = () => {
           <motion.div
             className="flex gap-3 md:gap-5"
             animate={{ x: `-${currentSlide * 280}px` }}
-            transition={{ type: "spring", stiffness: 200, damping: 30 }}
+            transition={{ type: "tween", duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {galleryImages.map((img, i) => (
               <div
