@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
-import AnimatedBackground from "./AnimatedBackground";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -18,10 +17,25 @@ const HeroSection = () => {
 
   return (
     <section ref={ref} className="relative h-screen flex items-end overflow-hidden pb-24 md:pb-32">
-      <AnimatedBackground />
+      {/* Video background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/50" />
+        {/* Grain */}
+        <div className="absolute inset-0 opacity-[0.035]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }} />
+      </div>
 
       <motion.div className="relative z-10 container-custom w-full" style={{ opacity, y }}>
-        {/* Overline */}
         <motion.div
           className="mb-8"
           initial={{ opacity: 0, y: 20 }}
@@ -33,25 +47,19 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Main headline - large, editorial */}
         <motion.h1
           className="font-display font-extrabold text-white leading-[0.9] tracking-[-0.04em] mb-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(2.5rem,8vw,7rem)]">
-            Creiamo
-          </span>
-          <span className="block text-[clamp(2.5rem,8vw,7rem)] text-primary">
-            esperienze
-          </span>
+          <span className="block text-[clamp(2.5rem,8vw,7rem)]">Creiamo</span>
+          <span className="block text-[clamp(2.5rem,8vw,7rem)] text-primary">esperienze</span>
           <span className="block text-[clamp(2rem,5vw,4rem)] font-normal italic text-white/30 mt-2">
             che restano nella memoria
           </span>
         </motion.h1>
 
-        {/* Bottom row: description + CTA */}
         <motion.div
           className="flex flex-col md:flex-row md:items-end justify-between gap-8"
           initial={{ opacity: 0, y: 30 }}
@@ -76,7 +84,7 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll line - left side */}
+      {/* Scroll line */}
       <motion.div
         className="absolute bottom-10 left-8 md:left-12 flex items-center gap-3"
         initial={{ opacity: 0 }}
@@ -88,7 +96,7 @@ const HeroSection = () => {
           animate={{ scaleY: [1, 0.3, 1] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         />
-        <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium rotate-0">
+        <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium">
           Scroll
         </span>
       </motion.div>
