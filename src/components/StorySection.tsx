@@ -77,37 +77,6 @@ const StorySection = () => {
             </p>
           </motion.div>
         </div>
-
-        {/* Stats row */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-20 md:mt-24 pt-12 md:pt-16 border-t border-border"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3, ease }}
-        >
-          {[
-            { value: "100%", label: "Clienti soddisfatti" },
-            { value: "20+", label: "Eventi realizzati" },
-            { value: "24h", label: "Tempo di risposta" },
-            { value: "∞", label: "Cura dei dettagli" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease }}
-            >
-              <span className="text-3xl md:text-4xl font-display font-extrabold text-foreground tracking-tighter block mb-1">
-                {stat.value}
-              </span>
-              <span className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-[0.15em]">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
