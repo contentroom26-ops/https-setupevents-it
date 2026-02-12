@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
@@ -11,12 +12,12 @@ import dieselEvent5 from "@/assets/diesel-event-5.jpg";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const projects = [
-  { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation" },
-  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event" },
-  { image: dieselEvent2, title: "Diesel Collection", category: "Product Launch" },
-  { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event" },
-  { image: diesel2, title: "VIP Experience", category: "Exclusive Event" },
-  { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation" },
+  { image: dieselEvent1, title: "Diesel Store Opening", category: "Brand Activation", year: "2025" },
+  { image: diesel1, title: "Diesel Fashion Night", category: "Fashion Event", year: "2025" },
+  { image: dieselEvent2, title: "Diesel Collection", category: "Product Launch", year: "2024" },
+  { image: dieselEvent4, title: "Fashion Showcase", category: "Fashion Event", year: "2024" },
+  { image: diesel2, title: "VIP Experience", category: "Exclusive Event", year: "2024" },
+  { image: dieselEvent5, title: "Shopping Experience", category: "Brand Activation", year: "2023" },
 ];
 
 const PortfolioSection = () => {
@@ -25,41 +26,48 @@ const PortfolioSection = () => {
   return (
     <section id="portfolio" className="section-dark py-28 md:py-40 relative grain overflow-hidden">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+        {/* Section label */}
+        <div className="flex items-center justify-between mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-          >
-            <span className="text-sm font-bold text-primary uppercase tracking-[0.2em] block mb-6">
-              Portfolio
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter leading-[0.95] text-accent-foreground">
-              I nostri
-              <br />
-              <span className="italic font-normal text-accent-foreground/50">eventi</span>
-            </h2>
-          </motion.div>
-          <motion.p
-            className="text-accent-foreground/50 max-w-md text-lg"
+            className="flex items-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease }}
+          >
+            <span className="text-xs font-mono text-accent-foreground/30">[04]</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/50 font-medium">
+              Projects
+            </span>
+          </motion.div>
+
+          <motion.span
+            className="text-xs font-mono text-accent-foreground/30"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease }}
           >
-            Una selezione dei nostri progetti più recenti.
-            Ogni evento racconta una storia unica.
-          </motion.p>
+            [{projects.length}]
+          </motion.span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.h2
+          className="text-4xl md:text-5xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] text-accent-foreground mb-20"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease }}
+        >
+          Case studies
+        </motion.h2>
+
+        {/* Project grid - 2 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              className={`group cursor-pointer relative overflow-hidden rounded-2xl ${
-                i === 0 || i === 3 ? "md:col-span-2 lg:col-span-1" : ""
-              }`}
+              className="group cursor-pointer relative overflow-hidden rounded-2xl"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -72,32 +80,58 @@ const PortfolioSection = () => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
-                  animate={{ scale: hoveredIndex === i ? 1.08 : 1 }}
+                  animate={{ scale: hoveredIndex === i ? 1.06 : 1 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
                   loading="lazy"
                 />
                 {/* Overlay */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                  animate={{ opacity: hoveredIndex === i ? 1 : 0.4 }}
+                  animate={{ opacity: hoveredIndex === i ? 1 : 0.5 }}
                   transition={{ duration: 0.3 }}
                 />
+
+                {/* Number */}
+                <div className="absolute top-5 left-6">
+                  <span className="text-xs font-mono text-white/40">
+                    [{String(i + 1).padStart(2, "0")}]
+                  </span>
+                </div>
+
+                {/* Arrow */}
+                <motion.div
+                  className="absolute top-5 right-6"
+                  animate={{
+                    opacity: hoveredIndex === i ? 1 : 0,
+                    y: hoveredIndex === i ? 0 : 10,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ArrowUpRight className="w-5 h-5 text-white" />
+                </motion.div>
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <motion.span
-                    className="text-xs font-bold text-primary uppercase tracking-[0.2em] block mb-2"
-                    animate={{ y: hoveredIndex === i ? 0 : 10, opacity: hoveredIndex === i ? 1 : 0 }}
+                    className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2"
+                    animate={{
+                      y: hoveredIndex === i ? 0 : 8,
+                      opacity: hoveredIndex === i ? 1 : 0,
+                    }}
                     transition={{ duration: 0.3 }}
                   >
                     {project.category}
                   </motion.span>
-                  <motion.h3
-                    className="text-xl font-display font-bold text-white tracking-tight"
-                    animate={{ y: hoveredIndex === i ? 0 : 10 }}
-                    transition={{ duration: 0.3, delay: 0.05 }}
-                  >
-                    {project.title}
-                  </motion.h3>
+                  <div className="flex items-end justify-between">
+                    <motion.h3
+                      className="text-xl md:text-2xl font-display font-bold text-white tracking-tight"
+                      animate={{ y: hoveredIndex === i ? 0 : 8 }}
+                      transition={{ duration: 0.3, delay: 0.05 }}
+                    >
+                      {project.title}
+                    </motion.h3>
+                    <span className="text-xs text-white/40 font-mono">{project.year}</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
