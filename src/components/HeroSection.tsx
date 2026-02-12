@@ -1,11 +1,27 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Pause, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const HeroSection = () => {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+
+  // Force video to play on mount
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise) {
+        playPromise.catch(() => {
+          // Autoplay blocked, keep muted and retry
+          video.muted = true;
+          video.play().catch(() => {});
+        });
+      }
+    }
+  }, []);
 
   const toggleVideo = () => {
     if (videoRef.current) {
@@ -29,7 +45,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative h-screen flex items-end overflow-hidden pb-24 md:pb-32">
+    <section ref={ref} className="relative h-[100svh] flex items-end overflow-hidden pb-16 md:pb-32">
       {/* Video background */}
       <div className="absolute inset-0">
         <video
@@ -38,8 +54,10 @@ const HeroSection = () => {
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50" />
@@ -50,7 +68,7 @@ const HeroSection = () => {
         {/* Pause/Play button */}
         <motion.button
           onClick={toggleVideo}
-          className="absolute top-24 right-6 md:right-12 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors"
+          className="absolute top-20 right-4 md:top-24 md:right-12 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -60,36 +78,36 @@ const HeroSection = () => {
 
       <motion.div className="relative z-10 container-custom w-full" style={{ opacity, y }}>
         <motion.div
-          className="mb-8"
+          className="mb-6 md:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <span className="text-xs uppercase tracking-[0.35em] text-white/40 font-medium">
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/40 font-medium">
             Event Agency — Firenze, Italia
           </span>
         </motion.div>
 
         <motion.h1
-          className="font-display font-extrabold text-white leading-[0.9] tracking-[-0.04em] mb-10"
+          className="font-display font-extrabold text-white leading-[0.9] tracking-[-0.04em] mb-8 md:mb-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block text-[clamp(2.5rem,8vw,7rem)]">Creiamo</span>
-          <span className="block text-[clamp(2.5rem,8vw,7rem)] text-primary">esperienze</span>
-          <span className="block text-[clamp(2rem,5vw,4rem)] font-normal italic text-white/30 mt-2">
+          <span className="block text-[clamp(2rem,10vw,7rem)]">Creiamo</span>
+          <span className="block text-[clamp(2rem,10vw,7rem)] text-primary">esperienze</span>
+          <span className="block text-[clamp(1.2rem,4vw,4rem)] font-normal italic text-white/30 mt-2">
             che restano nella memoria
           </span>
         </motion.h1>
 
         <motion.div
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
         >
-          <p className="text-white/35 text-sm md:text-base max-w-md leading-relaxed">
+          <p className="text-white/35 text-sm max-w-md leading-relaxed">
             Corporate events, brand activations e produzioni spettacolari.
             <br className="hidden md:block" />
             Dalla visione all'applauso finale.
@@ -97,7 +115,7 @@ const HeroSection = () => {
 
           <motion.button
             onClick={scrollToContact}
-            className="bg-primary text-accent px-8 py-4 font-bold text-sm rounded-full flex items-center gap-3 group self-start md:self-auto"
+            className="bg-primary text-primary-foreground px-6 md:px-8 py-3.5 md:py-4 font-bold text-sm rounded-full flex items-center gap-3 group self-start md:self-auto"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -109,13 +127,13 @@ const HeroSection = () => {
 
       {/* Scroll line */}
       <motion.div
-        className="absolute bottom-10 left-8 md:left-12 flex items-center gap-3"
+        className="absolute bottom-6 md:bottom-10 left-5 md:left-12 flex items-center gap-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
         <motion.div
-          className="w-px h-12 bg-white/15 origin-top"
+          className="w-px h-10 md:h-12 bg-white/15 origin-top"
           animate={{ scaleY: [1, 0.3, 1] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         />
