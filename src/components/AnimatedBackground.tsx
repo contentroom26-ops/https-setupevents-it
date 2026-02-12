@@ -9,7 +9,7 @@ const AnimatedBackground = () => {
       {/* Animated gradient orbs */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full opacity-30 blur-[120px]"
-        style={{ background: "radial-gradient(circle, hsl(50 100% 50% / 0.6), transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, hsl(38 70% 55% / 0.5), transparent 70%)" }}
         animate={{
           x: ["-10%", "30%", "10%", "-10%"],
           y: ["-20%", "10%", "40%", "-20%"],
