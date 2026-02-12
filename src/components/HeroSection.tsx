@@ -112,7 +112,7 @@ const HeroSection = () => {
         />
 
         <motion.div
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+          className="flex flex-col"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
@@ -120,16 +120,6 @@ const HeroSection = () => {
           <p className="text-white/30 text-sm max-w-sm leading-relaxed uppercase tracking-wide">
             Corporate Events, Brand Activation, Hostess Steward & Public Relations for Events
           </p>
-
-          <motion.button
-            onClick={scrollToContact}
-            className="bg-white text-background px-7 md:px-10 py-3.5 md:py-4 font-bold text-sm rounded-full flex items-center gap-3 group self-start"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Parliamone
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </motion.button>
         </motion.div>
 
         {/* Scroll indicator */}
