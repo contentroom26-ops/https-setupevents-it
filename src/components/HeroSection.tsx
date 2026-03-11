@@ -43,6 +43,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
   });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.6]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
@@ -71,60 +72,99 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         />
       </motion.div>
 
-      {/* Top bar */}
+      {/* Top-right controls */}
       <motion.div
-        className="relative z-10 container-custom pt-20 md:pt-32"
+        className="relative z-10 flex justify-end container-custom pt-20 md:pt-28"
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 1.2, delay: 0.3 }}
+        transition={{ duration: 1, delay: 0.3 }}
       >
-        <div className="flex items-center justify-between">
-          <span className="text-[8px] md:text-[10px] text-white/40 font-medium tracking-[0.3em] uppercase drop-shadow-lg">
-            Events Agency — Firenze
+        <div className="flex items-center gap-3">
+          <span className="text-[8px] md:text-[10px] text-white/30 font-mono tracking-wider hidden sm:inline">
+            EVENTS AGENCY — FIRENZE
           </span>
-          <div className="flex items-center gap-2">
-            <span className="text-[8px] md:text-[10px] text-white/40 font-mono drop-shadow-lg hidden sm:inline">
-              © Setup Events
-            </span>
-            <motion.button
-              onClick={toggleVideo}
-              className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-colors"
-              whileTap={{ scale: 0.9 }}
-            >
-              {isPlaying ? <Pause size={10} /> : <Play size={10} />}
-            </motion.button>
-          </div>
+          <motion.button
+            onClick={toggleVideo}
+            className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-colors"
+            whileTap={{ scale: 0.9 }}
+          >
+            {isPlaying ? <Pause size={10} /> : <Play size={10} />}
+          </motion.button>
         </div>
       </motion.div>
 
       <div className="flex-1" />
 
-      {/* Minimal scroll indicator */}
+      {/* Main hero content — bottom-left aligned like the PDF */}
       <motion.div
-        className="relative z-10 flex justify-center pb-8 md:pb-12"
+        className="relative z-10 container-custom pb-10 md:pb-16"
+        style={{ y: contentY }}
+      >
+        {/* Tagline */}
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-[-0.04em] text-white leading-[0.95] mb-6 md:mb-8 ml-6 md:ml-14 lg:ml-16"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
+          transition={{ duration: 0.9, ease }}
+        >
+          <span className="block">WE SET</span>
+          <span className="block">
+            THE{" "}
+            <span className="text-white/50">MOMENT</span>
+          </span>
+        </motion.h1>
+
+        {/* Horizontal divider */}
+        <motion.div
+          className="h-px bg-white/15 mb-5 md:mb-6 ml-6 md:ml-14 lg:ml-16 max-w-xl"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: showContent ? 1 : 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease }}
+          style={{ transformOrigin: "left" }}
+        />
+
+        {/* Services + scroll indicator */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ml-6 md:ml-14 lg:ml-16">
+          <motion.p
+            className="text-white/35 text-[9px] md:text-[11px] tracking-[0.25em] uppercase leading-relaxed max-w-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showContent ? 1 : 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Corporate Events, Brand Activation, Hostess
+            <br className="hidden sm:block" />{" "}
+            Steward & Public Relations for Events
+          </motion.p>
+
+          {/* Scroll indicator — bottom-left style from PDF */}
+          <motion.div
+            className="flex items-center gap-3 cursor-pointer group sm:mr-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showContent ? 1 : 0 }}
+            transition={{ delay: 1 }}
+            onClick={() =>
+              document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            <div className="w-px h-6 bg-white/20 group-hover:bg-white/40 transition-colors" />
+            <span className="text-white/25 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/50 transition-colors">
+              Scroll
+            </span>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Right-side dots — page indicator style from PDF */}
+      <motion.div
+        className="absolute right-5 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center gap-3 hidden md:flex"
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
+        transition={{ delay: 1.2 }}
       >
-        <motion.div
-          className="flex flex-col items-center gap-2 cursor-pointer group"
-          onClick={() =>
-            document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })
-          }
-          whileHover={{ y: 4 }}
-          transition={{ duration: 0.3 }}
-        >
-          <span className="text-white/20 text-[8px] uppercase tracking-[0.3em] font-medium group-hover:text-white/40 transition-colors">
-            Scroll
-          </span>
-          <div className="w-5 h-8 rounded-full border border-white/15 flex items-start justify-center pt-1.5 group-hover:border-white/30 transition-colors">
-            <motion.div
-              className="w-0.5 h-1.5 rounded-full bg-white/40"
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
+        <div className="w-2 h-2 rounded-full bg-primary" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
       </motion.div>
     </section>
   );
