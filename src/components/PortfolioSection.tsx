@@ -34,8 +34,7 @@ const caseStudies = [
     image: diesel1,
     title: "Mediolanum",
     subtitle: "Corporate Convention",
-    year: "2024",
-    category: "Corporate Event",
+    year: "2025",
     description:
       "Convention aziendale per Banca Mediolanum con 120 invitati. Gestione completa: scouting location, allestimento scenografico, coordinamento relatori, hostess e steward, produzione audio-video e live streaming.",
   },
