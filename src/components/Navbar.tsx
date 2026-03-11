@@ -45,9 +45,8 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="font-display text-xl font-extrabold tracking-tight text-white"
           >
-            SETUP<span className="text-primary">EVENTS</span>
+            <img src={logo} alt="SetupEvents" className="h-8 w-auto" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
