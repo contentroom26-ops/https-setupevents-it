@@ -159,7 +159,7 @@ const InfiniteGallery = () => {
 
   return (
     <div className="overflow-hidden">
-      <div ref={scrollRef} className="flex gap-3 md:gap-5 will-change-transform">
+      <div ref={scrollRef} className="flex gap-3 md:gap-5 will-change-transform" style={{ willChange: 'transform' }}>
         {doubledImages.map((img, i) => (
           <div
             key={i}
