@@ -283,19 +283,23 @@ const DesktopServices = () => {
 
 /* ── Mobile static section ──────────────────────────── */
 const MobileServices = () => (
-  <section id="services" className="section-dark py-16 relative grain overflow-hidden">
-    <FloatingElements variant="lines" count={3} />
+  <section id="services" className="section-dark py-12 relative grain overflow-hidden">
+    <FloatingElements variant="lines" count={2} />
     <div className="container-custom">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-[10px] font-mono text-muted-foreground">[02]</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
+      </div>
       <motion.h2
-        className="text-2xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-6"
-        initial={{ opacity: 0, y: 20 }}
+        className="text-xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-5"
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease }}
+        transition={{ duration: 0.5, ease }}
       >
         Services
       </motion.h2>
-      <div className="space-y-4">
+      <div className="space-y-3">
         {services.map((service, i) => (
           <ServiceCard key={service.number} service={service} index={i} />
         ))}
