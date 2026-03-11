@@ -71,7 +71,7 @@ const getCardStyle = (idx: number) => {
     underline: "bg-primary",
   };
   if (variant === 1) return {
-    card: "bg-white text-background border border-white/20",
+    card: "bg-[hsl(30,20%,92%)] border border-[hsl(30,10%,85%)]",
     number: "text-background/[0.06]",
     title: "text-background",
     desc: "text-background/70",
@@ -81,7 +81,7 @@ const getCardStyle = (idx: number) => {
     underline: "bg-background",
   };
   return {
-    card: "bg-primary border border-primary/30",
+    card: "bg-[hsl(0,72%,51%)] border border-[hsl(0,72%,45%)]",
     number: "text-white/10",
     title: "text-white",
     desc: "text-white/80",
