@@ -164,27 +164,15 @@ const DesktopServices = () => {
     >
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <FloatingElements variant="lines" count={3} />
-        <div className="container-custom w-full">
-          <motion.div
-            className="flex items-center gap-4 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease }}
-          >
+        <div className="container-custom w-full py-12">
+          <div className="flex items-center gap-4 mb-6">
             <span className="text-xs font-mono text-muted-foreground">[03]</span>
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            className="text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-12 lg:mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease }}
-          >
+          <h2 className="text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-12 lg:mb-16">
             Services
-          </motion.h2>
+          </h2>
 
           <div className="grid grid-cols-12 gap-6">
             {/* Left nav */}
