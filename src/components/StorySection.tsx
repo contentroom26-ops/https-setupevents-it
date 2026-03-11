@@ -52,7 +52,7 @@ const StorySection = () => {
       >
         {/* Section label */}
         <motion.div
-          className="flex items-center gap-3 mb-10 md:mb-20"
+          className="flex items-center gap-3 mb-10 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -64,46 +64,30 @@ const StorySection = () => {
           </span>
         </motion.div>
 
-        {/* Big editorial statement */}
-        <motion.h2
-          className="text-xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.1] md:leading-[1.05] text-white mb-10 md:mb-20 max-w-5xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
+        {/* Compact glass card */}
+        <motion.div
+          className="max-w-2xl rounded-2xl bg-black/30 backdrop-blur-md border border-white/[0.06] px-6 md:px-10 py-8 md:py-12 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease }}
         >
-          Non organizziamo semplici eventi.{" "}
-          <span className="text-white/60">
-            Creiamo esperienze strategiche che trasformano brand, connettono persone e generano risultati concreti.
-          </span>
-        </motion.h2>
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-display font-extrabold tracking-tight leading-[1.15] text-white mb-6">
+            Non organizziamo eventi.{" "}
+            <span className="text-white/50">Creiamo esperienze che lasciano il segno.</span>
+          </h2>
 
-        {/* Body text */}
-        <motion.div
-          className="space-y-5 text-white/70 text-sm md:text-base leading-relaxed mt-10 md:mt-24 max-w-3xl drop-shadow-[0_1px_10px_rgba(0,0,0,0.4)]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
-        >
-          <p>
-            Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
+          <p className="text-white/55 text-[13px] md:text-sm leading-relaxed mb-6">
+            Agenzia fiorentina con oltre dieci anni nel settore, specializzata in eventi corporate, brand activation e PR strategiche. Uniamo conoscenza del territorio, relazioni consolidate e staff selezionato per offrire un servizio su misura — preciso, discreto, efficace.
           </p>
 
-          <div className="flex items-center gap-3 py-2">
-            <div className="w-px h-8 bg-white/20" />
+          <div className="flex items-center gap-3 pt-2 border-t border-white/[0.06]">
+            <div className="w-px h-7 bg-white/15" />
             <div>
               <p className="font-display font-bold text-white text-sm tracking-tight">Gabriel Lleshi</p>
-              <p className="text-white/50 text-[10px] md:text-xs uppercase tracking-[0.15em]">Founder & Creative Director</p>
+              <p className="text-white/35 text-[10px] uppercase tracking-[0.15em]">Founder & Creative Director</p>
             </div>
           </div>
-
-          <p>
-            Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
-          </p>
-          <p>
-            Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
-          </p>
         </motion.div>
       </motion.div>
     </section>
