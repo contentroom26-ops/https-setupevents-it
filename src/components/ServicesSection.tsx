@@ -158,7 +158,7 @@ const DesktopServices = () => {
       ref={sectionRef}
       id="services"
       className="section-dark relative grain"
-      style={{ height: `${services.length * 45}vh` }}
+      style={{ height: `${(services.length + 1) * 100}vh` }}
     >
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
         <FloatingElements variant="lines" count={3} />
