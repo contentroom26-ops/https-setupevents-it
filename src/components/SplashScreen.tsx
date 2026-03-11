@@ -27,7 +27,6 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
           <motion.div
             className="absolute inset-x-0 top-0 bg-background z-[2]"
             initial={{ height: "50%" }}
-            animate={phase === "split" ? { height: 0 } : { height: "50%" }}
             exit={{ height: 0 }}
             transition={{ duration: 0.8, ease }}
           />
@@ -35,7 +34,6 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
           <motion.div
             className="absolute inset-x-0 bottom-0 bg-background z-[2]"
             initial={{ height: "50%" }}
-            animate={phase === "split" ? { height: 0 } : { height: "50%" }}
             exit={{ height: 0 }}
             transition={{ duration: 0.8, ease }}
           />
