@@ -258,7 +258,7 @@ const PortfolioSection = () => {
             Gallery
           </h3>
         </div>
-        <InfiniteGallery />
+        <ScrollGallery />
       </motion.div>
       </div>
     </section>
