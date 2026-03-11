@@ -27,6 +27,7 @@ const caseStudies = [
     subtitle: "Fashion Night Event",
     year: "2025",
     category: "Brand Activation",
+    link: "/case-study/diesel",
     description:
       "Evento esclusivo organizzato per Diesel presso lo store di Firenze. L'evento è stato pensato per coinvolgere un pubblico in linea con il posizionamento del brand e valorizzarne l'identità. Ci siamo occupati del servizio di pubbliche relazioni, curando la selezione e la gestione degli ospiti. Abbiamo fornito hostess professionali, selezionate in coerenza con l'immagine e lo stile richiesti. Inoltre, abbiamo coordinato il service audio-video, assicurando un supporto tecnico puntuale e un'esecuzione fluida dell'intera serata.",
   },
