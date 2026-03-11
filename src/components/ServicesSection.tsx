@@ -160,9 +160,9 @@ const DesktopServices = () => {
       ref={sectionRef}
       id="services"
       className="section-dark relative grain"
-      style={{ height: `${services.length * 80}vh` }}
+      style={{ height: `${services.length * 100}vh` }}
     >
-      <div className="sticky top-0 h-screen flex items-center">
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <FloatingElements variant="lines" count={3} />
         <div className="container-custom w-full">
           <motion.div
