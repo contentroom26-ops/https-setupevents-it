@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
-import { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 import dieselMarbleBg from "@/assets/diesel-marble-bg.jpg";
 import dieselCard from "@/assets/diesel-card.jpg";
@@ -123,48 +122,66 @@ const FlipCard = ({
   );
 };
 
-/* ── Scrollable Gallery with Arrows ───────────────────── */
+/* ── Auto-scroll Gallery with mouse-speed boost ──────── */
 const ScrollGallery = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef(0);
+  const speedRef = useRef(1);
+  const animRef = useRef<number>(0);
 
-  const scroll = (direction: "left" | "right") => {
-    const el = scrollRef.current;
+  const doubledImages = [...galleryImages, ...galleryImages];
+
+  useEffect(() => {
+    const el = trackRef.current;
     if (!el) return;
-    const scrollAmount = 320;
-    el.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  };
+
+    const baseSpeed = 0.8;
+
+    const animate = () => {
+      positionRef.current += baseSpeed * speedRef.current;
+      const halfWidth = el.scrollWidth / 2;
+      if (positionRef.current >= halfWidth) positionRef.current = 0;
+      if (positionRef.current < 0) positionRef.current = halfWidth;
+      el.style.transform = `translateX(-${positionRef.current}px)`;
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animRef.current);
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width; // 0 to 1
+    // Left side = slow/reverse, right side = fast forward
+    if (x < 0.3) {
+      speedRef.current = -0.5 + x * 2; // -0.5 to 0.1
+    } else if (x > 0.7) {
+      speedRef.current = 1 + (x - 0.7) * 10; // 1 to 4
+    } else {
+      speedRef.current = 1;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    speedRef.current = 1;
+  }, []);
 
   return (
-    <div className="relative group/gallery">
-      {/* Left arrow */}
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/[0.1] flex items-center justify-center text-white/60 hover:text-white hover:bg-black/60 transition-all duration-300 opacity-0 group-hover/gallery:opacity-100"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-
-      {/* Right arrow */}
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/[0.1] flex items-center justify-center text-white/60 hover:text-white hover:bg-black/60 transition-all duration-300 opacity-0 group-hover/gallery:opacity-100"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-
+    <div
+      className="relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black/60 to-transparent z-[1] pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black/60 to-transparent z-[1] pointer-events-none" />
 
       <div
-        ref={scrollRef}
-        className="flex gap-4 md:gap-5 overflow-x-auto scrollbar-hide px-4 md:px-8 scroll-smooth"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        ref={trackRef}
+        className="flex gap-4 md:gap-5 will-change-transform"
       >
-        {galleryImages.map((img, i) => (
+        {doubledImages.map((img, i) => (
           <motion.div
             key={i}
             className="flex-shrink-0 w-[60vw] md:w-[280px] lg:w-[320px] aspect-[3/4] rounded-xl overflow-hidden cursor-pointer relative group/card"
@@ -173,11 +190,10 @@ const ScrollGallery = () => {
           >
             <img
               src={img}
-              alt={`Diesel event photo ${i + 1}`}
+              alt={`Diesel event photo ${(i % galleryImages.length) + 1}`}
               className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
               loading="lazy"
             />
-            {/* Hover overlay glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 border-2 border-white/0 group-hover/card:border-white/20 rounded-xl transition-all duration-500" />
           </motion.div>
