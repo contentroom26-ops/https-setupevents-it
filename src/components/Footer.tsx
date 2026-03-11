@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import logoIcon from "@/assets/logo-icon.png";
 import { Link } from "react-router-dom";
 
 const ease = [0.22, 1, 0.36, 1] as const;
