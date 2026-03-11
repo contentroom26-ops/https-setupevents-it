@@ -5,7 +5,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const StorySection = () => {
   return (
-    <section id="storia" className="section-dark py-24 md:py-40 relative grain">
+    <section id="storia" className="py-24 md:py-40 relative" style={{ backgroundColor: 'hsl(40, 20%, 95%)' }}>
       <FloatingElements variant="dots" count={6} />
       <div className="container-custom">
         {/* Section label */}
