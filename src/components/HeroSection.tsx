@@ -5,15 +5,17 @@ import logoIcon from "@/assets/logo-icon.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const HeroSection = () => {
+const HeroSection = ({ ready = true }: { ready?: boolean }) => {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
+    if (!ready) return;
     const video = videoRef.current;
     if (video) {
+      video.currentTime = 0;
       video.muted = true;
       const playPromise = video.play();
       if (playPromise) {
@@ -22,11 +24,11 @@ const HeroSection = () => {
           video.play().catch(() => {});
         });
       }
+      setIsPlaying(true);
     }
-    // Reveal content after a beat
     const timer = setTimeout(() => setShowContent(true), 800);
     return () => clearTimeout(timer);
-  }, []);
+  }, [ready]);
 
   const toggleVideo = () => {
     if (videoRef.current) {
@@ -50,7 +52,7 @@ const HeroSection = () => {
       <motion.div className="absolute inset-0" style={{ scale: videoScale }}>
         <video
           ref={videoRef}
-          autoPlay
+          
           loop
           muted
           playsInline
