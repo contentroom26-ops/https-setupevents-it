@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Pause, Play, ChevronDown } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import logoTexture from "@/assets/logo-texture.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
