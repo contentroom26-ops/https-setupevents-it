@@ -76,38 +76,38 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   const s = getCardStyle(index);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.05, ease }}
-      className={`relative rounded-2xl p-5 backdrop-blur-sm ${s.card}`}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.4, delay: index * 0.03, ease }}
+      className={`relative rounded-xl p-4 backdrop-blur-sm ${s.card}`}
     >
-      <span className={`absolute top-2 right-4 text-[3.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>
+      <span className={`absolute top-1 right-3 text-[2.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>
         {service.number}
       </span>
       <div className="relative z-10">
-        <h3 className={`text-lg font-display font-extrabold tracking-tight mb-3 ${s.title}`}>
+        <h3 className={`text-base font-display font-extrabold tracking-tight mb-2 ${s.title}`}>
           {service.title}
         </h3>
-        <p className={`text-xs leading-relaxed mb-4 ${s.desc}`}>
+        <p className={`text-[11px] leading-relaxed mb-3 ${s.desc}`}>
           {service.description}
         </p>
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1 mb-3">
           {service.categories.map((cat) => (
-            <span key={cat} className={`text-[10px] px-3 py-1 rounded-full border font-medium ${s.tag}`}>
+            <span key={cat} className={`text-[9px] px-2 py-0.5 rounded-full border font-medium ${s.tag}`}>
               {cat}
             </span>
           ))}
         </div>
         <Link
           to={service.link}
-          className={`inline-flex items-center gap-2 text-sm font-bold transition-colors duration-300 group ${s.link}`}
+          className={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors duration-300 group ${s.link}`}
         >
           <span className="relative">
             Scopri di più
-            <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
+            <span className={`absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
           </span>
-          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
     </motion.div>
