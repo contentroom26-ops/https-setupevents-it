@@ -25,7 +25,7 @@ const caseStudies = [
     image: dieselCard,
     title: "Diesel",
     subtitle: "Fashion Night Event",
-    year: "2025",
+    year: "2024",
     category: "Brand Activation",
     description:
       "Evento esclusivo nello store Diesel di Firenze: PR strategiche, selezione ospiti, hostess professionali e service audio-video completo per una serata dal forte impatto sul brand.",
