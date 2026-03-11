@@ -20,7 +20,6 @@ const StorySection = () => {
 
   return (
     <section ref={sectionRef} id="storia" className="relative">
-      {/* Expanding container effect */}
       <motion.div
         className="py-28 md:py-44 relative overflow-hidden"
         style={{
@@ -64,7 +63,7 @@ const StorySection = () => {
             </span>
           </motion.div>
 
-          {/* Massive headline with clip reveal */}
+          {/* Headline with clip reveal */}
           <div className="mb-20 md:mb-28 max-w-5xl overflow-hidden">
             <motion.h2
               className="text-[clamp(1.6rem,5vw,3.8rem)] font-display font-black tracking-[-0.04em] leading-[1.08]"
@@ -90,54 +89,43 @@ const StorySection = () => {
             </div>
           </div>
 
-          {/* Content grid with stagger */}
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            {/* Col 1: Founder */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease }}
-              className="md:border-r md:pr-10"
-              style={{ borderColor: "hsl(0, 0%, 82%)" }}
-            >
-              <p className="font-display font-bold text-base tracking-tight mb-1" style={{ color: "hsl(0, 0%, 12%)" }}>
-                Gabriel Lleshi
-              </p>
-              <p className="text-[10px] uppercase tracking-[0.25em] mb-5" style={{ color: "hsl(0, 72%, 51%)" }}>
-                Founder & Creative Director
-              </p>
-              <p className="text-[13px] leading-[1.8]" style={{ color: "hsl(0, 0%, 48%)" }}>
-                Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata rendono il nostro approccio distintivo.
-              </p>
-            </motion.div>
+          {/* Body text — single flowing block */}
+          <motion.div
+            className="max-w-3xl space-y-6"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
+              Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
+            </p>
+            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
+              Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
+            </p>
+            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
+              Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
+            </p>
 
-            {/* Col 2 */}
+            {/* Founder signature at the bottom */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-4 pt-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.12, ease }}
-              className="md:border-r md:pr-10"
-              style={{ borderColor: "hsl(0, 0%, 82%)" }}
+              transition={{ duration: 0.6, delay: 0.3, ease }}
             >
-              <p className="text-[13px] leading-[1.8]" style={{ color: "hsl(0, 0%, 48%)" }}>
-                Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione.
-              </p>
+              <div className="w-10 h-px" style={{ backgroundColor: "hsl(0, 72%, 51%)" }} />
+              <div>
+                <p className="font-display font-bold text-sm tracking-tight" style={{ color: "hsl(0, 0%, 12%)" }}>
+                  Gabriel Lleshi
+                </p>
+                <p className="text-[10px] uppercase tracking-[0.25em]" style={{ color: "hsl(0, 0%, 55%)" }}>
+                  Founder & Creative Director
+                </p>
+              </div>
             </motion.div>
-
-            {/* Col 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.24, ease }}
-            >
-              <p className="text-[13px] leading-[1.8]" style={{ color: "hsl(0, 0%, 48%)" }}>
-                Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, perfettamente in linea con l'immagine del cliente.
-              </p>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
