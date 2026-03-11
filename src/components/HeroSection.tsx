@@ -2,6 +2,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import TextReveal from "./TextReveal";
+import logoIcon from "@/assets/logo-icon.png";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -39,13 +42,11 @@ const HeroSection = () => {
   });
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.6], [0.12, 0]);
 
   return (
-    <section ref={ref} className="relative h-[100svh] flex flex-col justify-between overflow-hidden">
+    <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
       {/* Video background */}
       <div className="absolute inset-0">
         <video
@@ -59,7 +60,7 @@ const HeroSection = () => {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }} />
@@ -73,9 +74,25 @@ const HeroSection = () => {
         </motion.button>
       </div>
 
+      {/* Central S logo watermark */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center z-[1] pointer-events-none"
+        style={{ scale: logoScale, opacity: logoOpacity }}
+      >
+        <motion.img
+          src={logoIcon}
+          alt=""
+          className="w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[380px] h-auto select-none"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.2, ease }}
+          style={{ filter: "brightness(1.4) contrast(0.9)" }}
+        />
+      </motion.div>
+
       {/* Top info bar */}
-      <motion.div 
-        className="relative z-10 container-custom pt-28 md:pt-32"
+      <motion.div
+        className="relative z-10 container-custom pt-28 md:pt-36"
         style={{ opacity }}
       >
         <div className="flex items-center justify-between">
@@ -88,15 +105,20 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
+      {/* Spacer to push content to bottom */}
+      <div className="flex-1" />
+
       {/* Main content */}
       <motion.div className="relative z-10 container-custom pb-12 md:pb-20" style={{ opacity, y }}>
         <motion.h1
           className="font-display font-bold text-white leading-[0.85] tracking-[-0.05em] mb-6 md:mb-10"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 0.3, ease }}
         >
-          <span className="block text-[clamp(2.5rem,10vw,8rem)]">We set the <TextReveal><span className="text-white">Moments</span></TextReveal></span>
+          <span className="block text-[clamp(2.5rem,10vw,8rem)]">
+            We set the <TextReveal><span className="text-white">Moments</span></TextReveal>
+          </span>
         </motion.h1>
 
         {/* Permanent floating accent — CSS only */}
@@ -114,7 +136,7 @@ const HeroSection = () => {
           </p>
         </motion.div>
 
-        {/* Scroll indicator — CSS animation */}
+        {/* Scroll indicator */}
         <motion.div
           className="flex items-center gap-3 mt-10 md:mt-16"
           initial={{ opacity: 0 }}

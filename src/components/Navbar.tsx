@@ -34,20 +34,26 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-background/90 backdrop-blur-xl border-b border-border py-2"
-            : "bg-transparent py-3"
+            ? "bg-background/90 backdrop-blur-xl border-b border-border"
+            : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="container-custom flex items-center justify-between">
+        <div className="container-custom flex items-center justify-between h-16 md:h-20">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="block overflow-hidden"
+            className="flex items-center"
           >
-            <img src={logo} alt="SetupEvents" className="h-24 md:h-32 w-auto -my-6 md:-my-8 drop-shadow-lg transition-all duration-300" />
+            <img
+              src={logo}
+              alt="SetupEvents"
+              className={`w-auto drop-shadow-lg transition-all duration-300 ${
+                isScrolled ? "h-20 md:h-28 -my-4 md:-my-6" : "h-24 md:h-32 -my-5 md:-my-8"
+              }`}
+            />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
