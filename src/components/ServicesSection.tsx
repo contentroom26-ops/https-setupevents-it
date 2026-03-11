@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import FloatingElements from "./FloatingElements";
@@ -10,357 +10,271 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const services = [
   {
     number: "01",
-    title: "Corporate\nEvents",
+    title: "Corporate Events",
     description:
       "Organizzazione di meeting, convention, cene aziendali e team building per rafforzare il brand e creare connessioni significative.",
     categories: ["Convention", "Team Building", "Cene Aziendali", "Meeting"],
     link: "/corporate-events",
+    span: "col-span-2 row-span-2", // large
   },
   {
     number: "02",
-    title: "Brand\nActivations",
+    title: "Brand Activations",
     description:
       "Lanci prodotto ed esperienze immersive studiate per massimizzare visibilità, engagement e impatto sul mercato.",
     categories: ["Lancio Prodotto", "Pop-up Events", "Experiential Marketing"],
     link: "/brand-activation",
+    span: "col-span-1 row-span-1", // small
   },
   {
     number: "03",
-    title: "Hostess\n& Staff",
+    title: "Hostess & Staff",
     description:
       "Personale selezionato e formato per accoglienza, promozione e immagine durante gli eventi.",
     categories: ["Hostess", "Steward", "Promoter", "Staff Tecnico"],
     link: "/hostess-staff",
+    span: "col-span-1 row-span-1", // small
   },
   {
     number: "04",
-    title: "Public\nRelations",
+    title: "Public Relations",
     description:
       "Gestione dei contatti e degli ospiti accuratamente selezionata. Selezione del target e cura delle relazioni.",
     categories: ["Guest Management", "VIP Relations", "Networking"],
     link: "/public-relations",
+    span: "col-span-1 row-span-2", // tall
   },
   {
     number: "05",
-    title: "Location\n& Set-up",
+    title: "Location & Set-up",
     description:
       "Scouting delle migliori location e allestimenti scenografici su misura. Dal concept alla realizzazione.",
-    categories: ["Scouting", "Set Design", "Allestimenti", "Scenografia"],
+    categories: ["Scouting", "Set Design", "Allestimenti"],
     link: "/event-productions",
+    span: "col-span-1 row-span-1", // small
   },
   {
     number: "06",
-    title: "A/V\nProduction",
+    title: "A/V Production",
     description:
       "Servizi audio-video professionali con tecnologie all'avanguardia per produzioni impeccabili.",
     categories: ["Audio", "Video", "Lighting", "Live Streaming"],
     link: "/event-productions",
+    span: "col-span-1 row-span-1", // small
   },
 ];
 
-/* ── Full-screen slide ─────────────── */
-const ServiceSlide = ({
+const getCardStyle = (idx: number) => {
+  const variant = idx % 3;
+  if (variant === 0)
+    return {
+      card: "bg-secondary/30 border-border/30",
+      number: "text-foreground/[0.04]",
+      title: "text-foreground",
+      desc: "text-muted-foreground",
+      tag: "border-border/50 text-muted-foreground/70",
+      link: "text-foreground hover:text-primary",
+      underline: "bg-primary",
+      glow: "group-hover:shadow-[0_0_60px_-12px_hsl(var(--primary)/0.3)]",
+    };
+  if (variant === 1)
+    return {
+      card: "bg-white text-background border-white/20",
+      number: "text-background/[0.06]",
+      title: "text-background",
+      desc: "text-background/70",
+      tag: "border-background/20 text-background/60",
+      link: "text-background hover:text-background/70",
+      underline: "bg-background",
+      glow: "group-hover:shadow-[0_0_60px_-12px_hsl(0_0%_100%/0.2)]",
+    };
+  return {
+    card: "bg-primary border-primary/30",
+    number: "text-white/10",
+    title: "text-white",
+    desc: "text-white/80",
+    tag: "border-white/30 text-white/70",
+    link: "text-white hover:text-white/80",
+    underline: "bg-white",
+    glow: "group-hover:shadow-[0_0_60px_-12px_hsl(var(--primary)/0.4)]",
+  };
+};
+
+/* ── Bento Card ────────────────────── */
+const BentoCard = ({
   service,
   index,
-  isActive,
-  progress,
+  isMobile,
 }: {
   service: (typeof services)[0];
   index: number;
-  isActive: boolean;
-  progress: number; // 0-1 within this slide
+  isMobile: boolean;
 }) => {
-  const isEven = index % 2 === 0;
+  const [isHovered, setIsHovered] = useState(false);
+  const s = getCardStyle(index);
+  const isLarge = service.span.includes("col-span-2") || service.span.includes("row-span-2");
 
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center"
-      initial={false}
-      animate={{
-        opacity: isActive ? 1 : 0,
-        scale: isActive ? 1 : 0.92,
-      }}
-      transition={{ duration: 0.6, ease }}
-      style={{ pointerEvents: isActive ? "auto" : "none" }}
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease }}
+      className={`${isMobile ? "" : service.span} group relative`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ perspective: "1000px" }}
     >
-      {/* Giant background number */}
-      <motion.span
-        className="absolute font-display font-extrabold text-foreground/[0.03] select-none pointer-events-none leading-none"
-        style={{
-          fontSize: "clamp(12rem, 30vw, 28rem)",
-          right: isEven ? "5%" : "auto",
-          left: isEven ? "auto" : "5%",
-        }}
-        initial={false}
+      <motion.div
+        className={`relative h-full rounded-2xl border backdrop-blur-sm overflow-hidden transition-shadow duration-500 ${s.card} ${s.glow}`}
         animate={{
-          y: isActive ? 0 : 60,
-          opacity: isActive ? 1 : 0,
+          rotateX: isHovered && !isMobile ? -2 : 0,
+          rotateY: isHovered && !isMobile ? 3 : 0,
+          z: isHovered && !isMobile ? 20 : 0,
         }}
-        transition={{ duration: 0.8, ease }}
+        transition={{ duration: 0.4, ease }}
+        style={{ transformStyle: "preserve-3d" }}
       >
-        {service.number}
-      </motion.span>
+        {/* Animated gradient border on hover */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(135deg, hsl(var(--primary) / 0.15), transparent 40%, transparent 60%, hsl(var(--primary) / 0.1))",
+          }}
+        />
 
-      {/* Content */}
-      <div className="container-custom relative z-10">
+        {/* Big background number */}
+        <motion.span
+          className={`absolute font-display font-extrabold leading-none select-none pointer-events-none ${s.number} ${
+            isLarge ? "text-[10rem] top-4 right-6" : "text-[5rem] top-2 right-4"
+          }`}
+          animate={{
+            scale: isHovered ? 1.1 : 1,
+            rotate: isHovered ? -3 : 0,
+          }}
+          transition={{ duration: 0.5, ease }}
+        >
+          {service.number}
+        </motion.span>
+
         <div
-          className={`flex flex-col ${
-            isEven ? "items-start text-left" : "items-end text-right"
+          className={`relative z-10 flex flex-col justify-between h-full ${
+            isLarge && !isMobile ? "p-8 lg:p-10" : "p-5 lg:p-6"
           }`}
         >
-          {/* Number pill */}
-          <motion.div
-            className="flex items-center gap-3 mb-6"
-            initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0,
-              x: isActive ? 0 : isEven ? -30 : 30,
-            }}
-            transition={{ duration: 0.5, delay: 0.1, ease }}
-          >
-            <span className="text-xs font-mono text-primary">{service.number}</span>
-            <span className="w-12 h-px bg-primary" />
-            <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">
-              Service
-            </span>
-          </motion.div>
+          <div>
+            <motion.span
+              className={`text-[10px] font-mono tracking-wider block mb-2 ${s.desc}`}
+              animate={{ x: isHovered ? 4 : 0 }}
+              transition={{ duration: 0.3, ease }}
+            >
+              {service.number}
+            </motion.span>
+            <h3
+              className={`font-display font-extrabold tracking-tight mb-3 ${s.title} ${
+                isLarge && !isMobile ? "text-2xl lg:text-3xl" : "text-lg lg:text-xl"
+              }`}
+            >
+              {service.title}
+            </h3>
+            <p
+              className={`leading-relaxed mb-4 ${s.desc} ${
+                isLarge && !isMobile ? "text-sm max-w-md" : "text-xs"
+              }`}
+            >
+              {service.description}
+            </p>
+          </div>
 
-          {/* Title */}
-          <motion.h3
-            className="font-display font-extrabold tracking-tighter text-foreground leading-[0.9] mb-8 whitespace-pre-line"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)" }}
-            initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0,
-              y: isActive ? 0 : 40,
-            }}
-            transition={{ duration: 0.6, delay: 0.15, ease }}
-          >
-            {service.title}
-          </motion.h3>
+          <div>
+            {/* Categories with staggered reveal */}
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {service.categories.map((cat, ci) => (
+                <motion.span
+                  key={cat}
+                  className={`text-[10px] px-3 py-1 rounded-full border font-medium ${s.tag}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 + ci * 0.05, duration: 0.35, ease }}
+                >
+                  {cat}
+                </motion.span>
+              ))}
+            </div>
 
-          {/* Description */}
-          <motion.p
-            className="text-sm md:text-base leading-relaxed text-muted-foreground mb-8 max-w-md"
-            initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0,
-              y: isActive ? 0 : 25,
-            }}
-            transition={{ duration: 0.5, delay: 0.25, ease }}
-          >
-            {service.description}
-          </motion.p>
-
-          {/* Categories */}
-          <motion.div
-            className={`flex flex-wrap gap-2 mb-10 ${isEven ? "" : "justify-end"}`}
-            initial={false}
-            animate={{ opacity: isActive ? 1 : 0 }}
-            transition={{ duration: 0.4, delay: 0.3, ease }}
-          >
-            {service.categories.map((cat, ci) => (
-              <motion.span
-                key={cat}
-                className="text-[10px] md:text-xs px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-border/40 text-muted-foreground/70 font-medium"
-                initial={false}
-                animate={{
-                  opacity: isActive ? 1 : 0,
-                  scale: isActive ? 1 : 0.8,
-                }}
-                transition={{ delay: 0.3 + ci * 0.05, duration: 0.35, ease }}
-              >
-                {cat}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0,
-              y: isActive ? 0 : 15,
-            }}
-            transition={{ duration: 0.4, delay: 0.35, ease }}
-          >
             <Link
               to={service.link}
-              className="inline-flex items-center gap-3 text-sm font-bold text-foreground hover:text-primary transition-colors duration-300 group"
+              className={`inline-flex items-center gap-2 text-sm font-bold transition-colors duration-300 group/link ${s.link}`}
             >
               <span className="relative">
                 Scopri di più
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover/link:w-full ${s.underline}`}
+                />
               </span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <motion.span
+                animate={{ x: isHovered ? 4 : 0 }}
+                transition={{ duration: 0.3, ease }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
             </Link>
-          </motion.div>
+          </div>
         </div>
-      </div>
-
-      {/* Side progress line */}
-      <div
-        className={`absolute top-1/2 -translate-y-1/2 flex flex-col gap-3 ${
-          isEven ? "right-6 lg:right-10" : "left-6 lg:left-10"
-        }`}
-      >
-        {services.map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-[2px] rounded-full bg-border/30 overflow-hidden"
-            style={{ height: 28 }}
-          >
-            <motion.div
-              className="w-full bg-primary rounded-full"
-              initial={false}
-              animate={{
-                height: i === index ? "100%" : i < index ? "100%" : "0%",
-                opacity: i === index ? 1 : i < index ? 0.3 : 0,
-              }}
-              transition={{ duration: 0.4, ease }}
-            />
-          </motion.div>
-        ))}
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
 
-/* ── Desktop: scroll-driven fullscreen ── */
-const DesktopServices = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+/* ── Main Section ────────────────────── */
+const ServicesSection = () => {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
   });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const total = services.length;
-    const idx = Math.max(0, Math.min(Math.floor(v * total), total - 1));
-    setActiveIndex(idx);
-  });
+  const headerY = useTransform(scrollYProgress, [0, 0.3], [60, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   return (
     <section
       ref={sectionRef}
       id="services"
-      className="section-dark relative grain"
-      style={{ height: `${services.length * 100}vh` }}
+      className="section-dark relative grain py-20 lg:py-32 overflow-hidden"
     >
-      <div className="sticky top-0 h-screen" style={{ overflow: "clip" }}>
-        <FloatingElements variant="lines" count={3} />
+      <FloatingElements variant="lines" count={3} />
+      <div className="container-custom">
+        {/* Header */}
+        <motion.div style={{ y: headerY, opacity: headerOpacity }} className="mb-12 lg:mb-20">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-xs font-mono text-muted-foreground">[02]</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
+              Servizi
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground">
+            Services
+          </h2>
+        </motion.div>
 
-        {/* Section label — top left */}
-        <div className="absolute top-8 left-6 lg:left-10 z-20 flex items-center gap-4">
-          <span className="text-xs font-mono text-muted-foreground">[02]</span>
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
-            Servizi
-          </span>
+        {/* Bento Grid */}
+        <div
+          className={
+            isMobile
+              ? "grid grid-cols-1 gap-4"
+              : "grid grid-cols-3 auto-rows-[minmax(220px,auto)] gap-4 lg:gap-5"
+          }
+        >
+          {services.map((service, i) => (
+            <BentoCard key={service.number} service={service} index={i} isMobile={!!isMobile} />
+          ))}
         </div>
-
-        {/* Counter — top right */}
-        <div className="absolute top-8 right-6 lg:right-10 z-20 flex items-baseline gap-1 font-mono">
-          <span className="text-2xl font-bold text-foreground">
-            {String(activeIndex + 1).padStart(2, "0")}
-          </span>
-          <span className="text-xs text-muted-foreground/50">
-            / {String(services.length).padStart(2, "0")}
-          </span>
-        </div>
-
-        {/* Slides */}
-        {services.map((service, i) => (
-          <ServiceSlide
-            key={service.number}
-            service={service}
-            index={i}
-            isActive={activeIndex === i}
-            progress={0}
-          />
-        ))}
       </div>
     </section>
   );
-};
-
-/* ── Mobile: stacked cards ─────────── */
-const MobileServices = () => (
-  <section id="services" className="section-dark py-16 relative grain overflow-hidden">
-    <FloatingElements variant="lines" count={3} />
-    <div className="container-custom">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease }}
-        className="mb-10"
-      >
-        <div className="flex items-center gap-4 mb-4">
-          <span className="text-xs font-mono text-muted-foreground">[02]</span>
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
-            Servizi
-          </span>
-        </div>
-        <h2 className="text-3xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground">
-          Services
-        </h2>
-      </motion.div>
-
-      <div className="space-y-6">
-        {services.map((service, i) => {
-          const isEven = i % 2 === 0;
-          return (
-            <motion.div
-              key={service.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.05, ease }}
-              className="relative rounded-2xl border border-border/20 bg-secondary/20 backdrop-blur-sm p-6 overflow-hidden"
-            >
-              <span className="absolute top-2 right-4 text-[4rem] font-display font-extrabold leading-none select-none pointer-events-none text-foreground/[0.03]">
-                {service.number}
-              </span>
-              <div className="relative z-10">
-                <span className="text-[10px] font-mono text-primary mb-2 block">{service.number}</span>
-                <h3 className="text-xl font-display font-extrabold tracking-tight text-foreground mb-3">
-                  {service.title.replace("\n", " ")}
-                </h3>
-                <p className="text-xs leading-relaxed text-muted-foreground mb-4">{service.description}</p>
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {service.categories.map((cat) => (
-                    <span
-                      key={cat}
-                      className="text-[10px] px-3 py-1 rounded-full border border-border/40 text-muted-foreground/70 font-medium"
-                    >
-                      {cat}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  to={service.link}
-                  className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors duration-300 group"
-                >
-                  <span className="relative">
-                    Scopri di più
-                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
-                  </span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-);
-
-/* ── Main export ────────────────────── */
-const ServicesSection = () => {
-  const isMobile = useIsMobile();
-  return isMobile ? <MobileServices /> : <DesktopServices />;
 };
 
 export default ServicesSection;
