@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
-import logoIcon from "@/assets/logo-icon.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -46,20 +45,13 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="flex items-center gap-2"
+            className="flex items-center"
           >
-            <img
-              src={logoIcon}
-              alt=""
-              className={`w-auto drop-shadow-lg transition-all duration-300 ${
-                isScrolled ? "h-8 md:h-10" : "h-10 md:h-12"
-              }`}
-            />
             <img
               src={logo}
               alt="SetupEvents"
               className={`w-auto drop-shadow-lg transition-all duration-300 ${
-                isScrolled ? "h-16 md:h-24 -my-3 md:-my-5" : "h-20 md:h-28 -my-4 md:-my-7"
+                isScrolled ? "h-20 md:h-28 -my-4 md:-my-6" : "h-24 md:h-32 -my-5 md:-my-8"
               }`}
             />
           </a>
