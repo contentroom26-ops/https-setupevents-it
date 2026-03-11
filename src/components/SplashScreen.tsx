@@ -1,93 +1,106 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import logoS from "@/assets/logo-s.png";
-import logoFull from "@/assets/logo-full.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
-  const [phase, setPhase] = useState<"s" | "expand" | "split">("s");
+  const [phase, setPhase] = useState<"enter" | "pulse" | "explode">("enter");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("expand"), 1600);
-    const t2 = setTimeout(() => setPhase("split"), 2800);
-    const t3 = setTimeout(() => onComplete(), 3600);
+    const t1 = setTimeout(() => setPhase("pulse"), 1200);
+    const t2 = setTimeout(() => setPhase("explode"), 2400);
+    const t3 = setTimeout(() => onComplete(), 3400);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete]);
 
   return (
     <AnimatePresence>
-      {phase !== "split" ? (
+      {phase !== "explode" ? (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-background"
+          className="fixed inset-0 z-[9999] bg-background overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease }}
+          transition={{ duration: 0.6, ease }}
         >
-          {/* Curtain top */}
+          {/* Radial glow behind the S */}
           <motion.div
-            className="absolute inset-x-0 top-0 bg-background z-[2]"
-            initial={{ height: "50%" }}
-            exit={{ height: 0 }}
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: phase === "pulse" ? 1 : 0 }}
+            exit={{ opacity: 0, scale: 3 }}
             transition={{ duration: 0.8, ease }}
-          />
-          {/* Curtain bottom */}
-          <motion.div
-            className="absolute inset-x-0 bottom-0 bg-background z-[2]"
-            initial={{ height: "50%" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.8, ease }}
-          />
+          >
+            <div
+              className="w-[120vw] h-[120vw] rounded-full"
+              style={{
+                background: "radial-gradient(circle, hsl(0 72% 51% / 0.15) 0%, transparent 60%)",
+              }}
+            />
+          </motion.div>
 
-          {/* Center content */}
-          <div className="absolute inset-0 flex items-center justify-center z-[3]">
-            {/* Big S logo */}
+          {/* Particle rings that expand on exit */}
+          {[1, 2, 3].map((ring) => (
+            <motion.div
+              key={ring}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20"
+              initial={{ width: 0, height: 0, opacity: 0 }}
+              animate={
+                phase === "pulse"
+                  ? {
+                      width: ring * 120,
+                      height: ring * 120,
+                      opacity: 0.3 / ring,
+                    }
+                  : { width: 0, height: 0, opacity: 0 }
+              }
+              exit={{
+                width: ring * 800,
+                height: ring * 800,
+                opacity: 0,
+              }}
+              transition={{
+                duration: phase === "pulse" ? 1.2 : 0.8,
+                delay: ring * 0.1,
+                ease,
+              }}
+            />
+          ))}
+
+          {/* The S — massive */}
+          <div className="absolute inset-0 flex items-center justify-center">
             <motion.img
               src={logoS}
               alt=""
-              initial={{ opacity: 0, scale: 0.3, rotate: -90 }}
+              initial={{ opacity: 0, scale: 0.2, rotate: -180 }}
               animate={
-                phase === "s"
+                phase === "enter"
                   ? { opacity: 1, scale: 1, rotate: 0 }
-                  : { opacity: 0, scale: 2.5, rotate: 10 }
+                  : { opacity: 1, scale: 1.05, rotate: 0 }
               }
+              exit={{ opacity: 0, scale: 8, rotate: 30 }}
               transition={{
-                duration: phase === "s" ? 1.2 : 0.7,
-                ease,
+                duration: phase === "enter" ? 1.2 : 0.6,
+                ease: phase === "enter" ? ease : [0.16, 1, 0.3, 1],
               }}
-              className="absolute"
-              style={{ width: "clamp(200px, 40vw, 450px)" }}
-            />
-
-            {/* Full logo appears after S expands */}
-            <motion.img
-              src={logoFull}
-              alt="Setup Events"
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={
-                phase === "expand"
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 0, scale: 0.6 }
-              }
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 0.8, ease }}
-              className="absolute"
-              style={{ width: "clamp(300px, 50vw, 650px)" }}
+              style={{
+                width: "clamp(400px, 80vw, 900px)",
+                filter: phase === "pulse" ? "drop-shadow(0 0 80px hsl(0 72% 51% / 0.4))" : "none",
+                transition: "filter 0.8s ease",
+              }}
             />
           </div>
 
-          {/* Horizontal line that expands */}
+          {/* Horizontal slash line */}
           <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-px bg-primary z-[4]"
-            initial={{ width: 0 }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-primary z-10"
+            initial={{ width: 0, left: "50%" }}
             animate={
-              phase === "s"
-                ? { width: 0 }
-                : phase === "expand"
-                ? { width: "30vw" }
-                : { width: "100vw" }
+              phase === "pulse"
+                ? { width: "40vw", left: "30%" }
+                : { width: 0, left: "50%" }
             }
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease }}
+            exit={{ width: "120vw", left: "-10%", opacity: 0 }}
+            transition={{ duration: 0.7, ease }}
           />
         </motion.div>
       ) : null}
