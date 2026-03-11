@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HeroStoryTransition from "@/components/HeroStoryTransition";
-import Marquee from "@/components/Marquee";
 import StorySection from "@/components/StorySection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
@@ -10,6 +9,8 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SplashScreen from "@/components/SplashScreen";
+import SideAccent from "@/components/SideAccent";
+import Marquee from "@/components/Marquee";
 
 const Index = () => {
   const [splashDone, setSplashDone] = useState(false);
@@ -21,7 +22,6 @@ const Index = () => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      // Force scroll to top when splash completes
       window.scrollTo(0, 0);
     }
     return () => { document.body.style.overflow = ""; };
@@ -32,6 +32,7 @@ const Index = () => {
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
       <div style={{ opacity: splashDone ? 1 : 0, transition: "opacity 0.4s ease" }}>
         <Navbar />
+        <SideAccent />
         <HeroSection ready={splashDone} />
         <HeroStoryTransition />
         <StorySection />
