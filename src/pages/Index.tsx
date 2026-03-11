@@ -33,6 +33,7 @@ const Index = () => {
       <div style={{ opacity: splashDone ? 1 : 0, transition: "opacity 0.4s ease" }}>
         <Navbar />
         <HeroSection ready={splashDone} />
+        <HeroStoryTransition />
         <StorySection />
         <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
         <ServicesSection />
