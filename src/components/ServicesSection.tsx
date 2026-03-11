@@ -80,7 +80,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.4, delay: index * 0.03, ease }}
-      className={`relative rounded-xl p-4 backdrop-blur-sm ${s.card}`}
+      className={`relative rounded-xl p-4 ${s.card}`}
     >
       <span className={`absolute top-1 right-3 text-[2.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>
         {service.number}
@@ -229,7 +229,7 @@ const DesktopServices = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -15, scale: 0.98 }}
                     transition={{ duration: 0.45, ease }}
-                    className={`relative rounded-2xl p-10 lg:p-12 backdrop-blur-sm ${s.card}`}
+                    className={`relative rounded-2xl p-10 lg:p-12 ${s.card}`}
                   >
                     <motion.span
                       className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}
