@@ -225,12 +225,17 @@ const DesktopServices = () => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
-                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                    transition={{ duration: 0.45, ease }}
-                    className={`relative rounded-2xl p-10 lg:p-12 ${s.card}`}
+                    className={`relative rounded-2xl p-10 lg:p-12 overflow-hidden ${s.card}`}
                   >
+                    {/* Wipe reveal curtain */}
+                    <motion.div
+                      className="absolute inset-0 bg-[hsl(var(--background))] z-20 origin-left"
+                      initial={{ scaleX: 1 }}
+                      animate={{ scaleX: 0 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+                      style={{ transformOrigin: "right" }}
+                    />
+
                     <motion.span
                       className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}
                       style={{ y: parallaxY }}
@@ -238,7 +243,12 @@ const DesktopServices = () => {
                       {services[activeIndex].number}
                     </motion.span>
 
-                    <div className="relative z-10">
+                    <motion.div
+                      className="relative z-10"
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    >
                       <h3 className={`text-3xl lg:text-4xl font-display font-extrabold tracking-tight mb-6 ${s.title}`}>
                         {services[activeIndex].title}
                       </h3>
@@ -253,7 +263,7 @@ const DesktopServices = () => {
                             className={`text-xs px-4 py-1.5 rounded-full border font-medium ${s.tag}`}
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: ci * 0.05, duration: 0.35, ease }}
+                            transition={{ delay: 0.35 + ci * 0.05, duration: 0.35, ease }}
                           >
                             {cat}
                           </motion.span>
@@ -269,7 +279,7 @@ const DesktopServices = () => {
                         </span>
                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </Link>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 </AnimatePresence>
               </div>
