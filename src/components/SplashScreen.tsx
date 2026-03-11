@@ -38,7 +38,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 2 }}
             transition={{ duration: 0.6, ease }}
-            style={{ width: "clamp(250px, 55vw, 500px)" }}
+            style={{ width: "clamp(180px, 50vw, 500px)" }}
           />
 
           <motion.div

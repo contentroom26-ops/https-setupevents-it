@@ -53,7 +53,7 @@ const ContactSection = () => {
     "w-full px-4 py-3.5 bg-foreground/5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground placeholder:text-muted-foreground text-sm";
 
   return (
-    <section id="contact" className="section-dark py-24 md:py-40 relative grain">
+    <section id="contact" className="section-dark py-16 md:py-40 relative grain">
       <FloatingElements variant="lines" count={3} />
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -71,7 +71,7 @@ const ContactSection = () => {
                 Contattaci
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-foreground mb-8">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-foreground mb-6 md:mb-8">
               Inizia il tuo
               <br />
               <span className="text-muted-foreground">progetto</span>
