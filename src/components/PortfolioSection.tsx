@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect } from "react";
 
