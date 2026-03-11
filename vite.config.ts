@@ -18,10 +18,26 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: false,
+      },
       workbox: {
         navigateFallbackDenylist: [/^\/~oauth/],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff,woff2}"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:jpg|jpeg)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "images",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+            },
+          },
+        ],
       },
       manifest: {
         name: "SetupEvents – Organizzazione Eventi Firenze",
@@ -30,7 +46,8 @@ export default defineConfig(({ mode }) => ({
         theme_color: "#0a0a0a",
         background_color: "#0a0a0a",
         display: "standalone",
-        start_url: "/",
+        scope: "/",
+        start_url: "/?source=pwa",
         icons: [
           {
             src: "/favicon.png",
@@ -38,12 +55,12 @@ export default defineConfig(({ mode }) => ({
             type: "image/png",
           },
           {
-            src: "/favicon.png",
+            src: "/apple-touch-icon.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/favicon.png",
+            src: "/apple-touch-icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
