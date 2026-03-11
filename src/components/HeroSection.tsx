@@ -100,29 +100,6 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         className="relative z-10 container-custom pb-10 md:pb-16"
         style={{ y: contentY }}
       >
-        {/* Tagline */}
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-[-0.04em] text-white leading-[0.95] mb-6 md:mb-8 ml-6 md:ml-14 lg:ml-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
-          transition={{ duration: 0.9, ease }}
-        >
-          <span className="block">WE SET</span>
-          <span className="block">
-            THE{" "}
-            <span className="text-white/50">MOMENT</span>
-          </span>
-        </motion.h1>
-
-        {/* Horizontal divider */}
-        <motion.div
-          className="h-px bg-white/15 mb-5 md:mb-6 ml-6 md:ml-14 lg:ml-16 max-w-xl"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: showContent ? 1 : 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease }}
-          style={{ transformOrigin: "left" }}
-        />
-
         {/* Services + scroll indicator */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ml-6 md:ml-14 lg:ml-16">
           <motion.p
@@ -136,7 +113,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
             Steward & Public Relations for Events
           </motion.p>
 
-          {/* Scroll indicator — bottom-left style from PDF */}
+          {/* Scroll indicator */}
           <motion.div
             className="flex items-center gap-3 cursor-pointer group sm:mr-4"
             initial={{ opacity: 0 }}
