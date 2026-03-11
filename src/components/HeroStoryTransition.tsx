@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import logoTexture from "@/assets/logo-texture.png";
 
 const HeroStoryTransition = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -9,92 +8,78 @@ const HeroStoryTransition = () => {
     offset: ["start end", "end start"],
   });
 
-  // Logo zooms in and fades out as a "fly-through" bridge
-  const logoScale = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.6, 2.5, 6]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7], [0.5, 0.25, 0]);
+  // Curtain wipe — two panels pull apart
+  const leftX = useTransform(scrollYProgress, [0.05, 0.45], ["0%", "-100%"]);
+  const rightX = useTransform(scrollYProgress, [0.05, 0.45], ["0%", "100%"]);
+  const curtainOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0]);
 
-  // Horizontal lines sweep across
-  const line1X = useTransform(scrollYProgress, [0.1, 0.6], ["-100%", "100%"]);
-  const line2X = useTransform(scrollYProgress, [0.15, 0.65], ["100%", "-100%"]);
-
-  // Ambient glow follows scroll
-  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1.5, 0.3]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], [0, 0.4, 0.2, 0]);
-
-  // Vignette intensifies mid-scroll
-  const vignetteOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 0.7, 0.7, 0]);
+  // Center line grows then shrinks
+  const lineScaleY = useTransform(scrollYProgress, [0.0, 0.25, 0.5], [0, 1, 0]);
+  const lineOpacity = useTransform(scrollYProgress, [0.0, 0.15, 0.45, 0.55], [0, 0.6, 0.6, 0]);
 
   // Text reveal
-  const textOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.65, 0.85], [0, 1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0.25, 0.45, 0.65, 0.85], [40, 0, 0, -40]);
-  const textScale = useTransform(scrollYProgress, [0.25, 0.45, 0.65, 0.85], [0.9, 1, 1, 1.05]);
+  const textOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 0.85], [0, 1, 1, 0]);
+  const textY = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 0.85], [60, 0, 0, -50]);
+
+  // Ambient glow
+  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 0.35, 0]);
 
   return (
-    <div ref={ref} className="relative h-[120vh] md:h-[150vh] overflow-hidden">
-      {/* Sticky container */}
+    <div ref={ref} className="relative h-[100vh] md:h-[130vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-background">
-        {/* Primary glow */}
+
+        {/* Curtain left */}
         <motion.div
-          className="absolute w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none"
+          className="absolute inset-y-0 left-0 w-1/2 bg-background z-10"
+          style={{ x: leftX, opacity: curtainOpacity }}
+        >
+          <div className="absolute inset-y-0 right-0 w-px bg-white/5" />
+        </motion.div>
+
+        {/* Curtain right */}
+        <motion.div
+          className="absolute inset-y-0 right-0 w-1/2 bg-background z-10"
+          style={{ x: rightX, opacity: curtainOpacity }}
+        >
+          <div className="absolute inset-y-0 left-0 w-px bg-white/5" />
+        </motion.div>
+
+        {/* Center vertical line */}
+        <motion.div
+          className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/30 to-transparent z-20"
           style={{
-            background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)",
-            scale: glowScale,
+            height: "60vh",
+            scaleY: lineScaleY,
+            opacity: lineOpacity,
+            transformOrigin: "center",
+          }}
+        />
+
+        {/* Ambient glow */}
+        <motion.div
+          className="absolute w-[50vw] h-[50vw] rounded-full blur-[100px] pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
             opacity: glowOpacity,
           }}
         />
 
-        {/* Zooming logo */}
-        <motion.img
-          src={logoTexture}
-          alt=""
-          className="absolute w-[clamp(200px,45vw,500px)] select-none pointer-events-none"
-          style={{
-            scale: logoScale,
-            opacity: logoOpacity,
-            willChange: "transform, opacity",
-          }}
-          draggable={false}
-        />
-
-        {/* Sweeping lines */}
+        {/* Text */}
         <motion.div
-          className="absolute top-[40%] w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          style={{ x: line1X }}
-        />
-        <motion.div
-          className="absolute top-[60%] w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-          style={{ x: line2X }}
-        />
-
-        {/* Radial vignette */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            opacity: vignetteOpacity,
-            background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background)) 100%)",
-          }}
-        />
-
-        {/* Teaser text */}
-        <motion.div
-          className="absolute z-10 text-center px-6"
-          style={{ opacity: textOpacity, y: textY, scale: textScale }}
+          className="relative z-30 text-center px-6"
+          style={{ opacity: textOpacity, y: textY }}
         >
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/30 font-medium mb-3">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/25 font-medium mb-4">
             [01] Chi siamo
           </p>
-          <p className="text-lg md:text-3xl lg:text-4xl font-display font-bold tracking-tight text-white/80 max-w-2xl leading-tight">
+          <p className="text-xl md:text-3xl lg:text-5xl font-display font-bold tracking-tight text-white/90 max-w-3xl leading-[1.1]">
             Dove ogni dettaglio
             <span className="text-white/40"> diventa esperienza</span>
           </p>
         </motion.div>
 
-        {/* Grain overlay */}
-        <div className="absolute inset-0 grain pointer-events-none opacity-50" />
-
-        {/* Top & bottom fades */}
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent z-20" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent z-20" />
+        {/* Grain */}
+        <div className="absolute inset-0 grain pointer-events-none opacity-40 z-40" />
       </div>
     </div>
   );
