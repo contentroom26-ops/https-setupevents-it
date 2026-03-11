@@ -102,17 +102,6 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
       >
         {/* Services + scroll indicator */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ml-6 md:ml-14 lg:ml-16">
-          <motion.p
-            className="text-white/35 text-[9px] md:text-[11px] tracking-[0.25em] uppercase leading-relaxed max-w-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showContent ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            Corporate Events, Brand Activation, Hostess
-            <br className="hidden sm:block" />{" "}
-            Steward & Public Relations for Events
-          </motion.p>
-
           {/* Scroll indicator */}
           <motion.div
             className="flex items-center gap-3 cursor-pointer group sm:mr-4"
