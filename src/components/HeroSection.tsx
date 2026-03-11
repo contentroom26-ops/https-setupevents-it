@@ -26,7 +26,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
       }
       setIsPlaying(true);
     }
-    const timer = setTimeout(() => setShowContent(true), 800);
+    const timer = setTimeout(() => setShowContent(true), 500);
     return () => clearTimeout(timer);
   }, [ready]);
 
