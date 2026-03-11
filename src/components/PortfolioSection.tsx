@@ -245,6 +245,7 @@ const PortfolioSection = () => {
         </div>
         <InfiniteGallery />
       </motion.div>
+      </div>
     </section>
   );
 };
