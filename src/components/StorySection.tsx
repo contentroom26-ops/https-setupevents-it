@@ -67,27 +67,45 @@ const StorySection = () => {
         {/* Compact glass card */}
         <motion.div
           className="max-w-2xl rounded-2xl bg-black/30 backdrop-blur-md border border-white/[0.06] px-6 md:px-10 py-8 md:py-12 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease }}
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease }}
         >
-          <h2 className="text-lg md:text-2xl lg:text-3xl font-display font-extrabold tracking-tight leading-[1.15] text-white mb-6">
+          <motion.h2
+            className="text-lg md:text-2xl lg:text-3xl font-display font-extrabold tracking-tight leading-[1.15] text-white mb-6"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2, ease }}
+          >
             Non organizziamo eventi.{" "}
             <span className="text-white/50">Creiamo esperienze che lasciano il segno.</span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-white/55 text-[13px] md:text-sm leading-relaxed mb-6">
-            Agenzia fiorentina con oltre dieci anni nel settore, specializzata in eventi corporate, brand activation e PR strategiche. Uniamo conoscenza del territorio, relazioni consolidate e staff selezionato per offrire un servizio su misura — preciso, discreto, efficace.
-          </p>
+          <motion.p
+            className="text-white/55 text-[13px] md:text-sm leading-relaxed mb-6"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.35, ease }}
+          >
+            Agenzia fiorentina con oltre dieci anni nel settore, specializzata in eventi corporate, brand activation e PR strategiche. Mettiamo a disposizione hostess e steward altamente selezionati, professionali e in linea con l'immagine del cliente. Conoscenza del territorio, relazioni consolidate e un approccio su misura — preciso, discreto, efficace.
+          </motion.p>
 
-          <div className="flex items-center gap-3 pt-2 border-t border-white/[0.06]">
+          <motion.div
+            className="flex items-center gap-3 pt-2 border-t border-white/[0.06]"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5, ease }}
+          >
             <div className="w-px h-7 bg-white/15" />
             <div>
               <p className="font-display font-bold text-white text-sm tracking-tight">Gabriel Lleshi</p>
               <p className="text-white/35 text-[10px] uppercase tracking-[0.15em]">Founder & Creative Director</p>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
