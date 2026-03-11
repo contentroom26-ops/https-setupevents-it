@@ -117,34 +117,16 @@ const HeroSection = () => {
             {/* Glass bar */}
             <div className="mx-4 md:mx-8 lg:mx-12 mb-6 md:mb-10 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden">
               <div className="px-6 md:px-10 py-5 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                {/* Left: tagline */}
-                <div className="flex items-center gap-4">
-                  <motion.img
-                    src={logoIcon}
-                    alt="Setup Events"
-                    className="w-8 h-8 md:w-10 md:h-10 opacity-60"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 0.6 }}
-                    transition={{ duration: 1.2, delay: 0.3, ease }}
-                  />
-                  <div>
-                    <motion.h1
-                      className="font-display text-lg md:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.8, delay: 0.4, ease }}
-                    >
-                      We Set the Moments
-                    </motion.h1>
-                    <motion.p
-                      className="text-white/40 text-[10px] md:text-xs tracking-widest uppercase mt-0.5"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.8 }}
-                    >
-                      Corporate Events · Brand Activation · Hostess & Staff · PR
-                    </motion.p>
-                  </div>
+                {/* Left: services only */}
+                <div>
+                  <motion.p
+                    className="text-white/40 text-[10px] md:text-xs tracking-widest uppercase"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                  >
+                    Corporate Events · Brand Activation · Hostess & Staff · PR
+                  </motion.p>
                 </div>
 
                 {/* Right: scroll CTA */}
