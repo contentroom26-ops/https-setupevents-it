@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import storyBg from "@/assets/story-bg.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -10,64 +11,69 @@ const StorySection = () => {
     offset: ["start end", "end start"],
   });
 
-  const clipPath = useTransform(
-    scrollYProgress,
-    [0, 0.15],
-    ["inset(8% 4% 8% 4% round 2rem)", "inset(0% 0% 0% 0% round 0rem)"]
-  );
-  const scale = useTransform(scrollYProgress, [0, 0.15], [0.92, 1]);
-  const counterY = useTransform(scrollYProgress, [0.2, 0.8], [0, -100]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.05]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 0.7, 0.7, 0.85]);
+  const contentY = useTransform(scrollYProgress, [0.1, 0.4], [60, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
 
   return (
-    <section ref={sectionRef} id="storia" className="relative">
+    <section
+      ref={sectionRef}
+      id="storia"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Parallax background image */}
       <motion.div
-        className="py-28 md:py-44 relative overflow-hidden"
-        style={{
-          backgroundColor: "hsl(40, 12%, 93%)",
-          clipPath,
-          scale,
-        }}
+        className="absolute inset-0 z-0"
+        style={{ y: imgY, scale: imgScale }}
       >
-        {/* Large decorative number */}
-        <motion.span
-          className="absolute right-6 md:right-16 top-12 font-display font-black select-none pointer-events-none leading-none"
-          style={{
-            y: counterY,
-            fontSize: "clamp(8rem, 25vw, 20rem)",
-            color: "hsl(0, 0%, 0%)",
-            opacity: 0.03,
-          }}
+        <img
+          src={storyBg}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+
+      {/* Dark overlay that shifts with scroll */}
+      <motion.div
+        className="absolute inset-0 z-[1]"
+        style={{
+          opacity: overlayOpacity,
+          background: "linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 5% / 0.6) 40%, hsl(0 0% 0%) 100%)",
+        }}
+      />
+
+      {/* Content */}
+      <motion.div
+        className="container-custom relative z-10 py-28 md:py-44"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
+        {/* Label */}
+        <motion.div
+          className="flex items-center gap-3 mb-16 md:mb-24"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease }}
         >
-          01
-        </motion.span>
-
-        <div className="container-custom relative z-10">
-          {/* Label */}
           <motion.div
-            className="flex items-center gap-3 mb-20 md:mb-28"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="w-8 h-px bg-primary"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease }}
-          >
-            <motion.div
-              className="w-8 h-px"
-              style={{ backgroundColor: "hsl(0, 72%, 51%)" }}
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, ease }}
-            />
-            <span className="text-[11px] uppercase tracking-[0.35em] font-medium" style={{ color: "hsl(0, 0%, 50%)" }}>
-              Chi siamo
-            </span>
-          </motion.div>
+            transition={{ duration: 0.8, delay: 0.2, ease }}
+          />
+          <span className="text-[11px] uppercase tracking-[0.35em] font-medium text-white/50">
+            Chi siamo
+          </span>
+        </motion.div>
 
-          {/* Headline with clip reveal */}
-          <div className="mb-20 md:mb-28 max-w-5xl overflow-hidden">
+        {/* Headline with clip reveal */}
+        <div className="mb-16 md:mb-24 max-w-5xl">
+          <div className="overflow-hidden">
             <motion.h2
-              className="text-[clamp(1.6rem,5vw,3.8rem)] font-display font-black tracking-[-0.04em] leading-[1.08]"
-              style={{ color: "hsl(0, 0%, 10%)" }}
+              className="text-[clamp(1.6rem,5vw,3.8rem)] font-display font-black tracking-[-0.04em] leading-[1.08] text-white"
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
@@ -75,58 +81,57 @@ const StorySection = () => {
             >
               Non organizziamo semplici eventi.
             </motion.h2>
-            <div className="overflow-hidden mt-2">
-              <motion.h2
-                className="text-[clamp(1.6rem,5vw,3.8rem)] font-display font-black tracking-[-0.04em] leading-[1.08]"
-                style={{ color: "hsl(0, 0%, 65%)" }}
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.9, delay: 0.12, ease }}
-              >
-                Creiamo esperienze che lasciano il segno.
-              </motion.h2>
-            </div>
           </div>
-
-          {/* Body text — single flowing block */}
-          <motion.div
-            className="max-w-3xl space-y-6"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease }}
-          >
-            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
-              Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
-            </p>
-            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
-              Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
-            </p>
-            <p className="text-[13px] md:text-[15px] leading-[1.9]" style={{ color: "hsl(0, 0%, 45%)" }}>
-              Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
-            </p>
-
-            {/* Founder signature at the bottom */}
-            <motion.div
-              className="flex items-center gap-4 pt-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+          <div className="overflow-hidden mt-2">
+            <motion.h2
+              className="text-[clamp(1.6rem,5vw,3.8rem)] font-display font-black tracking-[-0.04em] leading-[1.08] text-white/50"
+              initial={{ y: "100%" }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3, ease }}
+              transition={{ duration: 0.9, delay: 0.12, ease }}
             >
-              <div className="w-10 h-px" style={{ backgroundColor: "hsl(0, 72%, 51%)" }} />
-              <div>
-                <p className="font-display font-bold text-sm tracking-tight" style={{ color: "hsl(0, 0%, 12%)" }}>
-                  Gabriel Lleshi
-                </p>
-                <p className="text-[10px] uppercase tracking-[0.25em]" style={{ color: "hsl(0, 0%, 55%)" }}>
-                  Founder & Creative Director
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+              Creiamo esperienze che lasciano il segno.
+            </motion.h2>
+          </div>
         </div>
+
+        {/* Body text */}
+        <motion.div
+          className="max-w-2xl space-y-5"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
+        >
+          <p className="text-[13px] md:text-[15px] leading-[1.9] text-white/60">
+            Siamo un'agenzia di organizzazione eventi con una profonda conoscenza del territorio fiorentino. Relazioni consolidate e una rete selezionata di contatti qualificati rendono il nostro approccio distintivo e affidabile.
+          </p>
+          <p className="text-[13px] md:text-[15px] leading-[1.9] text-white/60">
+            Con oltre dieci anni di esperienza nel settore dell'intrattenimento e delle pubbliche relazioni, progettiamo e realizziamo eventi con metodo, discrezione e precisione. Affianchiamo aziende e privati offrendo un servizio PR strategico e uno staff di hostess e steward altamente selezionati, professionali e perfettamente in linea con l'immagine del cliente.
+          </p>
+          <p className="text-[13px] md:text-[15px] leading-[1.9] text-white/60">
+            Grazie a una struttura flessibile e a partner di comprovata qualità, siamo in grado di gestire richieste specifiche e fornire servizi personalizzati, costruiti su misura per ogni progetto.
+          </p>
+
+          {/* Founder */}
+          <motion.div
+            className="flex items-center gap-4 pt-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease }}
+          >
+            <div className="w-10 h-px bg-primary" />
+            <div>
+              <p className="font-display font-bold text-sm tracking-tight text-white">
+                Gabriel Lleshi
+              </p>
+              <p className="text-[10px] uppercase tracking-[0.25em] text-white/40">
+                Founder & Creative Director
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
       </motion.div>
     </section>
   );
