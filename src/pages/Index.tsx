@@ -31,7 +31,7 @@ const Index = () => {
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
       <div style={{ opacity: splashDone ? 1 : 0, transition: "opacity 0.6s ease" }}>
         <Navbar />
-        <HeroSection />
+        <HeroSection ready={splashDone} />
         <StorySection />
         <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
         <ServicesSection />
