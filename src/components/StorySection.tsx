@@ -33,6 +33,8 @@ const StorySection = () => {
           src={storyBg}
           alt=""
           className="w-full h-full object-cover object-center"
+          loading="lazy"
+          decoding="async"
         />
       </motion.div>
 
