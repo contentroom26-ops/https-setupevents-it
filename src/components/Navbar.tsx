@@ -35,7 +35,7 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
             ? "bg-background/90 backdrop-blur-xl border-b border-border py-2"
-            : "bg-transparent py-4"
+            : "bg-transparent py-3"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -45,8 +45,9 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
+            className="block overflow-hidden"
           >
-            <img src={logo} alt="SetupEvents" className="h-36 md:h-[12.5rem] w-auto drop-shadow-lg transition-all duration-300" />
+            <img src={logo} alt="SetupEvents" className="h-24 md:h-32 w-auto -my-6 md:-my-8 drop-shadow-lg transition-all duration-300" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
