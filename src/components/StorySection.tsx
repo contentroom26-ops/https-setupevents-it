@@ -11,9 +11,9 @@ const StorySection = () => {
     offset: ["start end", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.15, 1.25]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 0.6, 0.6, 0.3]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.03, 1.06]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 0.45, 0.45, 0.3]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   return (
