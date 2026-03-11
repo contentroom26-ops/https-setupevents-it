@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import HeroStoryTransition from "@/components/HeroStoryTransition";
 import Marquee from "@/components/Marquee";
 import StorySection from "@/components/StorySection";
 import ServicesSection from "@/components/ServicesSection";
