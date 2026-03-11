@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const StorySection = () => {
   return (
-    <section id="storia" className="section-dark py-24 md:py-40 relative grain">
-      <FloatingElements variant="dots" count={6} />
+    <section id="storia" className="py-24 md:py-40 relative" style={{ backgroundColor: 'hsl(40, 20%, 95%)' }}>
       <div className="container-custom">
         {/* Section label */}
         <motion.div
@@ -16,29 +14,31 @@ const StorySection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-xs font-mono text-muted-foreground">[01]</span>
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
+          <span className="text-xs font-mono" style={{ color: 'hsl(0, 0%, 40%)' }}>[01]</span>
+          <span className="text-xs uppercase tracking-[0.3em] font-medium" style={{ color: 'hsl(0, 0%, 40%)' }}>
             Chi siamo
           </span>
         </motion.div>
 
         {/* Big editorial statement */}
         <motion.h2
-          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-foreground mb-16 md:mb-20 max-w-5xl"
+          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] mb-16 md:mb-20 max-w-5xl"
+          style={{ color: 'hsl(0, 0%, 10%)' }}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease }}
         >
           Non organizziamo semplici eventi.{" "}
-          <span className="text-muted-foreground">
+          <span style={{ color: 'hsl(0, 0%, 45%)' }}>
             Creiamo esperienze strategiche che trasformano brand, connettono persone e generano risultati concreti.
           </span>
         </motion.h2>
 
         {/* Founder section */}
         <motion.div
-          className="space-y-6 text-muted-foreground leading-relaxed mt-16 md:mt-24 max-w-3xl"
+          className="space-y-6 leading-relaxed mt-16 md:mt-24 max-w-3xl"
+          style={{ color: 'hsl(0, 0%, 40%)' }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,10 +49,10 @@ const StorySection = () => {
           </p>
 
           <div className="flex items-center gap-3 py-2">
-            <div className="w-px h-8 bg-border" />
+            <div className="w-px h-8" style={{ backgroundColor: 'hsl(0, 0%, 75%)' }} />
             <div>
-              <p className="font-display font-bold text-foreground text-sm tracking-tight">Gabriel Lleshi</p>
-              <p className="text-muted-foreground text-xs uppercase tracking-[0.15em]">Founder & Creative Director</p>
+              <p className="font-display font-bold text-sm tracking-tight" style={{ color: 'hsl(0, 0%, 10%)' }}>Gabriel Lleshi</p>
+              <p className="text-xs uppercase tracking-[0.15em]" style={{ color: 'hsl(0, 0%, 50%)' }}>Founder & Creative Director</p>
             </div>
           </div>
 
