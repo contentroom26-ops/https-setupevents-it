@@ -19,11 +19,8 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
         >
-          <div className="max-w-md flex items-center gap-4">
-            <img src={logoIcon} alt="SetupEvents" className="h-16 w-auto opacity-80" />
-            <h3 className="font-display text-2xl font-extrabold tracking-tight">
-              SETUP<span className="text-primary">EVENTS</span>
-            </h3>
+          <div className="max-w-md">
+            <img src={logoIcon} alt="SetupEvents" className="h-20 w-auto" />
           </div>
 
           <motion.button
