@@ -4,12 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const leftLinks = [
+const navLinks = [
   { name: "Chi siamo", href: "#storia" },
   { name: "Servizi", href: "#services" },
-];
-
-const rightLinks = [
   { name: "Portfolio", href: "#portfolio" },
   { name: "Contatti", href: "#contact" },
 ];
@@ -22,90 +19,6 @@ const serviceItems = [
   { title: "Location & Set-up", desc: "Scouting e allestimenti scenografici", link: "/event-productions" },
   { title: "Audio & Video", desc: "Produzione tecnica AV professionale", link: "/event-productions" },
 ];
-
-const NavItem = ({
-  link,
-  onScroll,
-  onMouseEnter,
-  onMouseLeave,
-  showDropdown,
-  onDropdownClose,
-}: {
-  link: { name: string; href: string };
-  onScroll: (href: string) => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  showDropdown?: boolean;
-  onDropdownClose?: () => void;
-}) => {
-  if (link.name === "Servizi") {
-    return (
-      <div className="relative" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        <button
-          onClick={() => onScroll(link.href)}
-          className="relative px-3 py-2 text-[11px] uppercase tracking-[0.25em] font-medium text-white/40 hover:text-white transition-all duration-500"
-        >
-          {link.name}
-        </button>
-        <AnimatePresence>
-          {showDropdown && (
-            <motion.div
-              className="absolute top-full left-1/2 pt-4"
-              style={{ x: "-50%" }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 4 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="w-[380px] bg-[hsl(var(--background))]/95 backdrop-blur-3xl border border-white/[0.05] rounded-xl overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.6)]">
-                <div className="p-1.5">
-                  {serviceItems.map((item, i) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.04, duration: 0.25 }}
-                    >
-                      <Link
-                        to={item.link}
-                        className="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/[0.04] transition-all duration-300"
-                        onClick={onDropdownClose}
-                      >
-                        <div className="w-6 h-6 rounded-md bg-white/[0.03] border border-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover:border-primary/20 transition-all duration-300">
-                          <span className="text-white/20 text-[9px] font-mono group-hover:text-primary/60 transition-colors duration-300">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[12px] font-semibold text-white/70 group-hover:text-white transition-colors duration-300">
-                            {item.title}
-                          </p>
-                          <p className="text-[10px] text-white/20 group-hover:text-white/35 transition-colors duration-300 truncate">
-                            {item.desc}
-                          </p>
-                        </div>
-                        <ArrowRight className="w-3 h-3 text-white/0 group-hover:text-white/30 group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  return (
-    <button
-      onClick={() => onScroll(link.href)}
-      className="relative px-3 py-2 text-[11px] uppercase tracking-[0.25em] font-medium text-white/40 hover:text-white transition-all duration-500"
-    >
-      {link.name}
-    </button>
-  );
-};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -141,55 +54,117 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-          isScrolled
-            ? "bg-[hsl(var(--background))]/70 backdrop-blur-2xl border-b border-white/[0.03]"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-6"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="container-custom flex items-center justify-between h-16 md:h-20">
-          {/* Left links — desktop */}
-          <div className="hidden md:flex items-center gap-1 flex-1 justify-end">
-            {leftLinks.map((link) => (
-              <NavItem
-                key={link.name}
-                link={link}
-                onScroll={scrollToSection}
-                onMouseEnter={link.name === "Servizi" ? handleMouseEnter : undefined}
-                onMouseLeave={link.name === "Servizi" ? handleMouseLeave : undefined}
-                showDropdown={link.name === "Servizi" ? showServices : undefined}
-                onDropdownClose={() => setShowServices(false)}
-              />
-            ))}
-          </div>
-
-          {/* Center logo */}
+        {/* Glassmorphism container */}
+        <motion.div
+          className={`mt-3 md:mt-4 flex items-center justify-between rounded-2xl border transition-all duration-700 w-full max-w-6xl px-3 md:px-5 ${
+            isScrolled
+              ? "bg-white/[0.06] border-white/[0.1] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]"
+              : "bg-white/[0.03] border-white/[0.05] backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+          }`}
+          style={{ height: isScrolled ? 56 : 60 }}
+          layout
+          transition={{ duration: 0.5 }}
+        >
+          {/* Logo */}
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="flex items-center mx-6 md:mx-10 relative"
+            className="flex items-center"
           >
             <img
               src={logo}
               alt="SetupEvents"
               className={`w-auto drop-shadow-lg transition-all duration-500 ${
-                isScrolled ? "h-16 md:h-24 -my-2 md:-my-4" : "h-20 md:h-28 -my-3 md:-my-6"
+                isScrolled ? "h-14 md:h-20 -my-2 md:-my-4" : "h-16 md:h-24 -my-3 md:-my-5"
               }`}
             />
           </a>
 
-          {/* Right links — desktop */}
-          <div className="hidden md:flex items-center gap-1 flex-1">
-            {rightLinks.map((link) => (
-              <NavItem key={link.name} link={link} onScroll={scrollToSection} />
-            ))}
-            <div className="w-px h-4 bg-white/[0.06] mx-3" />
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-0.5">
+            {navLinks.map((link) =>
+              link.name === "Servizi" ? (
+                <div
+                  key={link.name}
+                  className="relative"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="group relative px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
+                  >
+                    {link.name}
+                    <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/[0.04] transition-all duration-400" />
+                  </button>
+
+                  <AnimatePresence>
+                    {showServices && (
+                      <motion.div
+                        className="absolute top-full left-1/2 pt-3"
+                        style={{ x: "-50%" }}
+                        initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <div className="w-[360px] bg-white/[0.07] backdrop-blur-3xl border border-white/[0.1] rounded-2xl overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                          <div className="p-2">
+                            {serviceItems.map((item, i) => (
+                              <motion.div
+                                key={item.title}
+                                initial={{ opacity: 0, y: 6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.04, duration: 0.2 }}
+                              >
+                                <Link
+                                  to={item.link}
+                                  className="group/item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/[0.06] transition-all duration-300"
+                                  onClick={() => setShowServices(false)}
+                                >
+                                  <div className="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center flex-shrink-0 group-hover/item:border-white/[0.15] group-hover/item:bg-white/[0.08] transition-all duration-300">
+                                    <span className="text-white/25 text-[9px] font-mono group-hover/item:text-white/50 transition-colors duration-300">
+                                      {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-[12px] font-semibold text-white/70 group-hover/item:text-white transition-colors duration-300">
+                                      {item.title}
+                                    </p>
+                                    <p className="text-[10px] text-white/20 group-hover/item:text-white/35 transition-colors duration-300 truncate">
+                                      {item.desc}
+                                    </p>
+                                  </div>
+                                  <ArrowRight className="w-3 h-3 text-white/0 group-hover/item:text-white/30 group-hover/item:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  className="group relative px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
+                >
+                  {link.name}
+                  <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/[0.04] transition-all duration-400" />
+                </button>
+              )
+            )}
+            <div className="w-px h-5 bg-white/[0.08] mx-2" />
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-[10px] uppercase tracking-[0.2em] font-semibold px-5 py-2 rounded-full border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 flex items-center gap-2 transition-all duration-500"
+              className="text-[10px] uppercase tracking-[0.18em] font-semibold px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15] flex items-center gap-2 transition-all duration-400"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -200,7 +175,7 @@ const Navbar = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -209,21 +184,21 @@ const Navbar = () => {
               <Menu className="w-5 h-5 text-white/60" />
             )}
           </button>
-        </div>
+        </motion.div>
       </motion.nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-[hsl(var(--background))]/98 backdrop-blur-3xl flex flex-col md:hidden"
+            className="fixed inset-0 z-40 bg-white/[0.03] backdrop-blur-3xl flex flex-col md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex-1 flex flex-col items-center justify-center gap-6">
-              {[...leftLinks, ...rightLinks].map((link, i) => (
+              {navLinks.map((link, i) => (
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
@@ -236,14 +211,14 @@ const Navbar = () => {
                 </motion.button>
               ))}
               <motion.div
-                className="w-8 h-px bg-white/[0.06] mt-2"
+                className="w-8 h-px bg-white/[0.08]"
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ delay: 0.35 }}
               />
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-2 border border-white/[0.08] text-white/50 px-8 py-3 font-medium text-xs rounded-full uppercase tracking-[0.2em]"
+                className="mt-2 bg-white/[0.06] border border-white/[0.1] text-white/50 px-8 py-3 font-medium text-xs rounded-xl uppercase tracking-[0.2em]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
