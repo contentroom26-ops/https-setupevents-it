@@ -1,55 +1,45 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import logoIcon from "@/assets/logo-icon.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const words = ["Corporate Events", "Brand Activation", "Hostess & Staff", "Public Relations"];
+const services = [
+  { label: "Corporate Events", num: "01" },
+  { label: "Brand Activation", num: "02" },
+  { label: "Hostess & Staff", num: "03" },
+  { label: "Public Relations", num: "04" },
+];
 
 const HeroSection = () => {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activeWord, setActiveWord] = useState(0);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       video.muted = true;
-      const playPromise = video.play();
-      if (playPromise) {
-        playPromise.catch(() => {
-          video.muted = true;
-          video.play().catch(() => {});
-        });
-      }
+      const p = video.play();
+      if (p) p.catch(() => { video.muted = true; video.play().catch(() => {}); });
     }
   }, []);
 
-  // Rotate words
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveWord((prev) => (prev + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(interval);
+    const t = setInterval(() => setActive((p) => (p + 1) % services.length), 3500);
+    return () => clearInterval(t);
   }, []);
 
   const toggleVideo = () => {
     if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
+      isPlaying ? videoRef.current.pause() : videoRef.current.play();
       setIsPlaying(!isPlaying);
     }
   };
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
@@ -59,15 +49,7 @@ const HeroSection = () => {
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
       {/* Video background */}
       <div className="absolute inset-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
+        <video ref={videoRef} autoPlay loop muted playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover">
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/55" />
@@ -90,8 +72,7 @@ const HeroSection = () => {
         style={{ scale: logoScale, opacity: logoOpacity }}
       >
         <motion.img
-          src={logoIcon}
-          alt=""
+          src={logoIcon} alt=""
           className="w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[380px] h-auto select-none"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -100,113 +81,138 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Top info bar */}
-      <motion.div
-        className="relative z-10 container-custom pt-28 md:pt-36"
-        style={{ opacity }}
-      >
+      {/* Top bar */}
+      <motion.div className="relative z-10 container-custom pt-28 md:pt-36" style={{ opacity }}>
         <div className="flex items-center justify-between">
-          <span className="text-[10px] md:text-xs text-white/30 font-medium tracking-[0.3em] uppercase">
-            Events Agency — Firenze
-          </span>
-          <span className="text-[10px] md:text-xs text-white/30 font-mono">
-            © Setup Events
-          </span>
+          <span className="text-[10px] md:text-xs text-white/30 font-medium tracking-[0.3em] uppercase">Events Agency — Firenze</span>
+          <span className="text-[10px] md:text-xs text-white/30 font-mono">© Setup Events</span>
         </div>
       </motion.div>
 
-      {/* Spacer */}
-      <div className="flex-1" />
+      {/* Center — giant rotating text */}
+      <div className="flex-1 flex items-center relative z-10">
+        <div className="container-custom w-full">
+          {/* Giant number background */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={`num-${active}`}
+              className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 text-[20rem] md:text-[30rem] font-display font-extrabold text-white/[0.03] leading-none select-none pointer-events-none"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6, ease }}
+            >
+              {services[active].num}
+            </motion.span>
+          </AnimatePresence>
 
-      {/* Main content */}
-      <motion.div className="relative z-10 container-custom pb-12 md:pb-20" style={{ opacity, y }}>
-        {/* Rotating service words */}
-        <div className="mb-6 md:mb-10 overflow-hidden">
-          <motion.div
-            className="flex items-baseline gap-3 md:gap-5"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease }}
-          >
-            <span className="text-[10px] md:text-xs text-primary font-mono tracking-wider">
-              [{String(activeWord + 1).padStart(2, "0")}]
-            </span>
-            <div className="relative h-[clamp(2.8rem,9vw,7rem)]">
-              {words.map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="absolute left-0 top-0 font-display font-extrabold text-white text-[clamp(2.5rem,8.5vw,6.5rem)] leading-[0.95] tracking-[-0.04em] whitespace-nowrap"
-                  initial={false}
-                  animate={{
-                    y: activeWord === i ? 0 : activeWord > i ? -80 : 80,
-                    opacity: activeWord === i ? 1 : 0,
-                    filter: activeWord === i ? "blur(0px)" : "blur(8px)",
+          <div className="relative">
+            {/* Small label */}
+            <motion.div
+              className="flex items-center gap-3 mb-4 md:mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <div className="w-8 h-px bg-primary" />
+              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-[0.25em] font-medium">
+                I nostri servizi
+              </span>
+            </motion.div>
+
+            {/* Main rotating word — split letter animation */}
+            <div className="overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={active}
+                  className="font-display font-extrabold text-white text-[clamp(2.2rem,8vw,6rem)] md:text-[clamp(3rem,6.5vw,5.5rem)] leading-[0.9] tracking-[-0.04em]"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: 0.025, delayChildren: 0.05 } },
+                    exit: { transition: { staggerChildren: 0.015, staggerDirection: -1 } },
                   }}
-                  transition={{ duration: 0.7, ease }}
                 >
-                  {word}
-                </motion.span>
+                  {services[active].label.split("").map((char, i) => (
+                    <motion.span
+                      key={`${active}-${i}`}
+                      className="inline-block"
+                      style={{ whiteSpace: char === " " ? "pre" : undefined }}
+                      variants={{
+                        hidden: { y: 120, opacity: 0, rotateX: -40 },
+                        visible: { y: 0, opacity: 1, rotateX: 0, transition: { duration: 0.6, ease } },
+                        exit: { y: -80, opacity: 0, rotateX: 20, transition: { duration: 0.35, ease } },
+                      }}
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress bar */}
+            <div className="mt-6 md:mt-8 flex items-center gap-3">
+              {services.map((s, i) => (
+                <button
+                  key={s.num}
+                  onClick={() => setActive(i)}
+                  className="group relative flex items-center gap-2"
+                >
+                  <div className="relative w-12 md:w-16 h-[2px] bg-white/10 rounded-full overflow-hidden">
+                    {active === i && (
+                      <motion.div
+                        className="absolute inset-y-0 left-0 bg-primary rounded-full"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 3.5, ease: "linear" }}
+                        key={`bar-${active}-${i}`}
+                      />
+                    )}
+                  </div>
+                  <span className={`text-[9px] font-mono transition-colors duration-300 ${
+                    active === i ? "text-primary" : "text-white/15 group-hover:text-white/30"
+                  }`}>
+                    {s.num}
+                  </span>
+                </button>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom content */}
+      <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ opacity, y }}>
+        <div className="flex items-end justify-between">
+          <motion.p
+            className="text-white/20 text-xs md:text-sm max-w-xs leading-relaxed tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.9, ease }}
+          >
+            Dalla strategia all'esecuzione,<br />curiamo ogni dettaglio.
+          </motion.p>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+          >
+            <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium">
+              Scroll
+            </span>
+            <div className="w-px h-10 bg-white/15 origin-top scroll-indicator" />
           </motion.div>
         </div>
 
-        {/* Service tags row */}
-        <motion.div
-          className="flex flex-wrap items-center gap-2 md:gap-3 mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease }}
-        >
-          {words.map((word, i) => (
-            <button
-              key={word}
-              onClick={() => setActiveWord(i)}
-              className={`text-[10px] md:text-xs px-3 md:px-4 py-1.5 rounded-full border font-medium uppercase tracking-wider transition-all duration-500 ${
-                activeWord === i
-                  ? "border-primary/60 text-white bg-primary/10"
-                  : "border-white/10 text-white/25 hover:text-white/50 hover:border-white/20"
-              }`}
-            >
-              {word}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Decorative line */}
-        <motion.div
-          className="w-16 md:w-24 h-px bg-gradient-to-r from-primary to-transparent mb-6"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 1, ease }}
-          style={{ transformOrigin: "left" }}
-        />
-
-        {/* Permanent floating accent — CSS only */}
+        {/* Floating accents */}
         <div className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40 hero-dot-1" />
         <div className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20 hero-dot-2" />
-
-        <motion.p
-          className="text-white/25 text-xs md:text-sm max-w-md leading-relaxed tracking-wide"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9, ease }}
-        >
-          Organizziamo eventi esclusivi a Firenze. Dalla strategia all'esecuzione, curiamo ogni dettaglio.
-        </motion.p>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="flex items-center gap-3 mt-10 md:mt-14"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          <div className="w-px h-10 bg-white/15 origin-top scroll-indicator" />
-          <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium">
-            Scroll
-          </span>
-        </motion.div>
       </motion.div>
     </section>
   );
