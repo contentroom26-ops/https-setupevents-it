@@ -16,6 +16,7 @@ const BrandActivation = lazy(() => import("./pages/BrandActivation"));
 const EventProductions = lazy(() => import("./pages/EventProductions"));
 const HostessStaff = lazy(() => import("./pages/HostessStaff"));
 const PublicRelations = lazy(() => import("./pages/PublicRelations"));
+const DieselCaseStudy = lazy(() => import("./pages/DieselCaseStudy"));
 
 const queryClient = new QueryClient();
 
