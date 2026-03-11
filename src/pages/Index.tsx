@@ -33,7 +33,6 @@ const Index = () => {
         <Navbar />
         <SideAccent />
         <HeroSection ready={splashDone} />
-        <ScrollDissolve />
         <StorySection />
         <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
         <ServicesSection />
