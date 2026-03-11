@@ -147,8 +147,10 @@ const DesktopServices = () => {
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const total = services.length;
-    const idx = Math.min(Math.floor(v * total), total - 1);
-    if (idx >= 0) setActiveIndex(idx);
+    // Map progress [0..1] evenly across services, clamped
+    const raw = v * total;
+    const idx = Math.max(0, Math.min(Math.floor(raw), total - 1));
+    setActiveIndex(idx);
   });
 
   const s = getCardStyle(activeIndex);
