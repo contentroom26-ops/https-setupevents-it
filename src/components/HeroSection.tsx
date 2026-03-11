@@ -111,19 +111,37 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </div>
       </motion.div>
 
-      {/* Centered logo watermark */}
+      {/* Centered interactive logo */}
       <motion.div
         className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 1.2, delay: 0.3 }}
       >
-        <img
-          src={logoTexture}
-          alt=""
-          className="w-[clamp(160px,35vw,400px)] opacity-70 select-none drop-shadow-2xl"
-          draggable={false}
-        />
+        <motion.div
+          className="relative"
+          style={{
+            transform: `translate3d(${mouse.x * 18}px, ${mouse.y * 14}px, 0) rotateY(${mouse.x * 6}deg) rotateX(${-mouse.y * 6}deg)`,
+            transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1)",
+            willChange: "transform",
+          }}
+        >
+          {/* Glow behind logo */}
+          <div
+            className="absolute inset-0 blur-3xl opacity-20 scale-150"
+            style={{
+              background: `radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)`,
+              transform: `translate3d(${mouse.x * -8}px, ${mouse.y * -8}px, 0)`,
+              transition: "transform 0.5s ease-out",
+            }}
+          />
+          <img
+            src={logoTexture}
+            alt=""
+            className="relative w-[clamp(160px,35vw,400px)] opacity-70 select-none drop-shadow-2xl"
+            draggable={false}
+          />
+        </motion.div>
       </motion.div>
 
       <div className="flex-1" />
