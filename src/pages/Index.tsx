@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import HeroStoryTransition from "@/components/HeroStoryTransition";
 import StorySection from "@/components/StorySection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
@@ -11,12 +10,12 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
 import Marquee from "@/components/Marquee";
+import ScrollDissolve from "@/components/ScrollDissolve";
 
 const Index = () => {
   const [splashDone, setSplashDone] = useState(false);
   const handleSplashComplete = useCallback(() => setSplashDone(true), []);
 
-  // Lock scroll during splash
   useEffect(() => {
     if (!splashDone) {
       document.body.style.overflow = "hidden";
@@ -34,7 +33,7 @@ const Index = () => {
         <Navbar />
         <SideAccent />
         <HeroSection ready={splashDone} />
-        <HeroStoryTransition />
+        <ScrollDissolve />
         <StorySection />
         <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
         <ServicesSection />
