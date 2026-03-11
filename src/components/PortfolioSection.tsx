@@ -190,7 +190,7 @@ const PortfolioSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease }}
           >
-            <span className="text-xs font-mono text-muted-foreground">[04]</span>
+            <span className="text-xs font-mono text-muted-foreground">[03]</span>
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
               Projects
             </span>

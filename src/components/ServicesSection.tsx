@@ -166,7 +166,7 @@ const DesktopServices = () => {
         <FloatingElements variant="lines" count={3} />
         <div className="container-custom w-full py-12">
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-xs font-mono text-muted-foreground">[03]</span>
+            <span className="text-xs font-mono text-muted-foreground">[02]</span>
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
           </div>
 

@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import Marquee from "@/components/Marquee";
 import StorySection from "@/components/StorySection";
-import MethodSection from "@/components/MethodSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 
@@ -17,7 +16,6 @@ const Index = () => {
       <HeroSection />
       <Marquee text="CORPORATE EVENTS — BRAND ACTIVATION — HOSTESS STEWARD & PUBLIC RELATIONS FOR EVENTS" />
       <StorySection />
-      <MethodSection />
       <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
       <ServicesSection />
       <PortfolioSection />
