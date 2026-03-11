@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect } from "react";
 
@@ -26,6 +27,7 @@ const caseStudies = [
     subtitle: "Fashion Night Event",
     year: "2025",
     category: "Brand Activation",
+    link: "/case-study/diesel",
     description:
       "Evento esclusivo organizzato per Diesel presso lo store di Firenze. L'evento è stato pensato per coinvolgere un pubblico in linea con il posizionamento del brand e valorizzarne l'identità. Ci siamo occupati del servizio di pubbliche relazioni, curando la selezione e la gestione degli ospiti. Abbiamo fornito hostess professionali, selezionate in coerenza con l'immagine e lo stile richiesti. Inoltre, abbiamo coordinato il service audio-video, assicurando un supporto tecnico puntuale e un'esecuzione fluida dell'intera serata.",
   },
@@ -55,10 +57,17 @@ const FlipCard = ({
   index: number;
 }) => {
   const [flipped, setFlipped] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (study.link) {
+      navigate(study.link);
+    }
+  };
 
   return (
     <motion.div
-      className="relative w-full cursor-pointer"
+      className={`relative w-full ${study.link ? "cursor-pointer" : "cursor-default"}`}
       style={{ perspective: 1200 }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +75,7 @@ const FlipCard = ({
       transition={{ duration: 0.6, delay: index * 0.15, ease }}
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
+      onClick={handleClick}
     >
       <motion.div
         className="relative w-full aspect-[4/5] md:aspect-[3/4]"
