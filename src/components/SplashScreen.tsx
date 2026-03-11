@@ -10,9 +10,8 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     const t = setTimeout(() => {
       setVisible(false);
-      // Small delay for exit animation to finish
-      setTimeout(onComplete, 600);
-    }, 2000);
+      setTimeout(onComplete, 400);
+    }, 1400);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -22,9 +21,8 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease }}
+          transition={{ duration: 0.4, ease }}
         >
-          {/* Simple glow — no heavy filters */}
           <div
             className="absolute w-[60vw] h-[60vw] rounded-full opacity-20 pointer-events-none"
             style={{
@@ -32,28 +30,23 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
             }}
           />
 
-          {/* The S — large, clean entrance */}
           <motion.img
             src={logoS}
             alt=""
             className="relative z-10"
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 2.5 }}
-            transition={{
-              duration: 0.8,
-              ease,
-            }}
+            exit={{ opacity: 0, scale: 2 }}
+            transition={{ duration: 0.6, ease }}
             style={{ width: "clamp(250px, 55vw, 500px)" }}
           />
 
-          {/* Subtle line */}
           <motion.div
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-px bg-primary/40 z-20"
             initial={{ width: 0 }}
             animate={{ width: "25vw" }}
             exit={{ width: "100vw", opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease }}
+            transition={{ duration: 0.5, delay: 0.3, ease }}
           />
         </motion.div>
       )}
