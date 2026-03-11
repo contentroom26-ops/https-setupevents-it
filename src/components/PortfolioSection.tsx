@@ -25,7 +25,7 @@ const caseStudies = [
     image: dieselCard,
     title: "Diesel",
     subtitle: "Fashion Night Event",
-    year: "2025",
+    year: "2024",
     category: "Brand Activation",
     description:
       "Evento esclusivo nello store Diesel di Firenze: PR strategiche, selezione ospiti, hostess professionali e service audio-video completo per una serata dal forte impatto sul brand.",
@@ -34,7 +34,7 @@ const caseStudies = [
     image: diesel1,
     title: "Mediolanum",
     subtitle: "Corporate Convention",
-    year: "2024",
+    year: "2025",
     category: "Corporate Event",
     description:
       "Convention aziendale per Banca Mediolanum con 120 invitati. Gestione completa: scouting location, allestimento scenografico, coordinamento relatori, hostess e steward, produzione audio-video e live streaming.",
@@ -107,19 +107,19 @@ const FlipCard = ({
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-2xl overflow-hidden bg-secondary/90 border border-border/30 backdrop-blur-sm flex flex-col justify-center p-8 md:p-12"
+          className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">
             {study.category} — {study.year}
           </span>
-          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-foreground tracking-tight mb-2">
+          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">
             {study.title}
           </h3>
-          <p className="text-sm text-muted-foreground/60 font-medium mb-6">
+          <p className="text-sm text-white/35 font-medium mb-6">
             {study.subtitle}
           </p>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+          <p className="text-sm md:text-base text-white/55 leading-relaxed">
             {study.description}
           </p>
         </div>
