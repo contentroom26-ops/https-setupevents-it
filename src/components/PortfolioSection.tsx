@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import dieselMarbleBg from "@/assets/diesel-marble-bg.jpg";
 import dieselCard from "@/assets/diesel-card.jpg";
