@@ -109,7 +109,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         <img
           src={logoTexture}
           alt=""
-          className="w-[clamp(120px,25vw,280px)] opacity-[0.08] select-none"
+          className="w-[clamp(160px,35vw,400px)] opacity-[0.35] select-none drop-shadow-2xl"
           draggable={false}
         />
       </motion.div>
