@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect } from "react";
 
+import dieselMarbleBg from "@/assets/diesel-marble-bg.jpg";
 import dieselCard from "@/assets/diesel-card.jpg";
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
