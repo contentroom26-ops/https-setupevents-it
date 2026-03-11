@@ -37,7 +37,7 @@ const caseStudies = [
     year: "2024",
     category: "Corporate Event",
     description:
-      "Convention aziendale per Banca Mediolanum con oltre 500 partecipanti. Gestione completa dell'evento: scouting della location, allestimento scenografico, coordinamento dei relatori, servizio hostess e steward, produzione audio-video e live streaming. Un evento che ha rafforzato l'identità del brand e creato connessioni significative.",
+      "Convention aziendale per Banca Mediolanum con 120 invitati. Gestione completa: scouting location, allestimento scenografico, coordinamento relatori, hostess e steward, produzione audio-video e live streaming.",
   },
 ];
 
