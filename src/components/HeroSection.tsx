@@ -1,15 +1,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import TextReveal from "./TextReveal";
 import logoIcon from "@/assets/logo-icon.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+const words = ["Corporate Events", "Brand Activation", "Hostess & Staff", "Public Relations"];
 
 const HeroSection = () => {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [activeWord, setActiveWord] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -23,6 +25,14 @@ const HeroSection = () => {
         });
       }
     }
+  }, []);
+
+  // Rotate words
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveWord((prev) => (prev + 1) % words.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const toggleVideo = () => {
@@ -105,40 +115,89 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* Spacer to push content to bottom */}
+      {/* Spacer */}
       <div className="flex-1" />
 
       {/* Main content */}
       <motion.div className="relative z-10 container-custom pb-12 md:pb-20" style={{ opacity, y }}>
-        <motion.h1
-          className="font-display font-bold text-white leading-[0.85] tracking-[-0.05em] mb-6 md:mb-10"
-          initial={{ opacity: 0, y: 60 }}
+        {/* Rotating service words */}
+        <div className="mb-6 md:mb-10 overflow-hidden">
+          <motion.div
+            className="flex items-baseline gap-3 md:gap-5"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease }}
+          >
+            <span className="text-[10px] md:text-xs text-primary font-mono tracking-wider">
+              [{String(activeWord + 1).padStart(2, "0")}]
+            </span>
+            <div className="relative h-[clamp(2.8rem,9vw,7rem)]">
+              {words.map((word, i) => (
+                <motion.span
+                  key={word}
+                  className="absolute left-0 top-0 font-display font-extrabold text-white text-[clamp(2.5rem,8.5vw,6.5rem)] leading-[0.95] tracking-[-0.04em] whitespace-nowrap"
+                  initial={false}
+                  animate={{
+                    y: activeWord === i ? 0 : activeWord > i ? -80 : 80,
+                    opacity: activeWord === i ? 1 : 0,
+                    filter: activeWord === i ? "blur(0px)" : "blur(8px)",
+                  }}
+                  transition={{ duration: 0.7, ease }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Service tags row */}
+        <motion.div
+          className="flex flex-wrap items-center gap-2 md:gap-3 mb-8 md:mb-10"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease }}
+          transition={{ duration: 0.7, delay: 0.6, ease }}
         >
-          <span className="block text-[clamp(2.5rem,10vw,8rem)]">
-            We set the <TextReveal><span className="text-white">Moments</span></TextReveal>
-          </span>
-        </motion.h1>
+          {words.map((word, i) => (
+            <button
+              key={word}
+              onClick={() => setActiveWord(i)}
+              className={`text-[10px] md:text-xs px-3 md:px-4 py-1.5 rounded-full border font-medium uppercase tracking-wider transition-all duration-500 ${
+                activeWord === i
+                  ? "border-primary/60 text-white bg-primary/10"
+                  : "border-white/10 text-white/25 hover:text-white/50 hover:border-white/20"
+              }`}
+            >
+              {word}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Decorative line */}
+        <motion.div
+          className="w-16 md:w-24 h-px bg-gradient-to-r from-primary to-transparent mb-6"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 1, ease }}
+          style={{ transformOrigin: "left" }}
+        />
 
         {/* Permanent floating accent — CSS only */}
         <div className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40 hero-dot-1" />
         <div className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20 hero-dot-2" />
 
-        <motion.div
-          className="flex flex-col"
-          initial={{ opacity: 0, y: 30 }}
+        <motion.p
+          className="text-white/25 text-xs md:text-sm max-w-md leading-relaxed tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
+          transition={{ duration: 0.7, delay: 0.9, ease }}
         >
-          <p className="text-white/30 text-sm max-w-sm leading-relaxed uppercase tracking-wide">
-            Corporate Events, Brand Activation, Hostess Steward & Public Relations for Events
-          </p>
-        </motion.div>
+          Organizziamo eventi esclusivi a Firenze. Dalla strategia all'esecuzione, curiamo ogni dettaglio.
+        </motion.p>
 
         {/* Scroll indicator */}
         <motion.div
-          className="flex items-center gap-3 mt-10 md:mt-16"
+          className="flex items-center gap-3 mt-10 md:mt-14"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
