@@ -99,6 +99,21 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </div>
       </motion.div>
 
+      {/* Centered logo watermark */}
+      <motion.div
+        className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent ? 1 : 0 }}
+        transition={{ duration: 1.2, delay: 0.3 }}
+      >
+        <img
+          src={logoTexture}
+          alt=""
+          className="w-[clamp(120px,25vw,280px)] opacity-[0.08] select-none"
+          draggable={false}
+        />
+      </motion.div>
+
       <div className="flex-1" />
 
       {/* Bottom glass bar */}
