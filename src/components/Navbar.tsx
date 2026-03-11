@@ -46,7 +46,7 @@ const Navbar = () => {
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
           >
-            <img src={logo} alt="SetupEvents" className="h-8 w-auto" />
+            <img src={logo} alt="SetupEvents" className="h-12 md:h-14 w-auto drop-shadow-lg" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
