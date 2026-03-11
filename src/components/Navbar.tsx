@@ -34,8 +34,8 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-background/90 backdrop-blur-xl border-b border-border py-3"
-            : "bg-transparent py-5"
+            ? "bg-background/90 backdrop-blur-xl border-b border-border py-2"
+            : "bg-transparent py-4"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -46,7 +46,7 @@ const Navbar = () => {
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
           >
-            <img src={logo} alt="SetupEvents" className="h-12 md:h-14 w-auto drop-shadow-lg" />
+            <img src={logo} alt="SetupEvents" className="h-16 md:h-20 w-auto drop-shadow-lg transition-all duration-300" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
