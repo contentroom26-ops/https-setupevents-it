@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import logoIcon from "@/assets/logo-icon.png";
 import { Link } from "react-router-dom";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -18,8 +19,9 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
         >
-          <div className="max-w-md">
-            <h3 className="font-display text-2xl font-extrabold tracking-tight mb-4">
+          <div className="max-w-md flex items-center gap-4">
+            <img src={logoIcon} alt="SetupEvents" className="h-16 w-auto opacity-80" />
+            <h3 className="font-display text-2xl font-extrabold tracking-tight">
               SETUP<span className="text-primary">EVENTS</span>
             </h3>
           </div>
