@@ -162,7 +162,7 @@ const DesktopServices = () => {
       className="section-dark relative grain"
       style={{ height: `${services.length * 100}vh` }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+      <div className="sticky top-0 h-screen flex items-center" style={{ overflow: 'clip' }}>
         <FloatingElements variant="lines" count={3} />
         <div className="container-custom w-full py-12">
           <div className="flex items-center gap-4 mb-6">
