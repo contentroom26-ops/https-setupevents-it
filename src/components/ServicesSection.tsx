@@ -60,14 +60,14 @@ const services = [
 
 const getCardStyle = (_idx: number) => {
   return {
-    card: "bg-[hsl(30,20%,92%)] border border-[hsl(30,10%,85%)]",
-    number: "text-background/[0.06]",
-    title: "text-background",
-    desc: "text-background/70",
-    label: "text-background/40",
-    tag: "border-background/20 text-background/60",
-    link: "text-background hover:text-background/70",
-    underline: "bg-background",
+    card: "bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]",
+    number: "text-white/[0.04]",
+    title: "text-white",
+    desc: "text-white/55",
+    label: "text-white/30",
+    tag: "border-white/[0.1] text-white/50",
+    link: "text-white/70 hover:text-white",
+    underline: "bg-white",
   };
 };
 
