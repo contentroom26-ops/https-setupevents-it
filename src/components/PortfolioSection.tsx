@@ -223,9 +223,11 @@ const PortfolioSection = () => {
         </motion.h2>
 
         {/* Two flip cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" style={{ perspective: '800px' }}>
           {caseStudies.map((study, i) => (
-            <FlipCard key={study.title} study={study} index={i} />
+            <div key={study.title} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
+              <FlipCard study={study} index={i} />
+            </div>
           ))}
         </div>
       </div>
