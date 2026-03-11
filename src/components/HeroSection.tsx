@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import logoIcon from "@/assets/logo-icon.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -26,6 +27,7 @@ const HeroSection = () => {
     }
   }, []);
 
+  // Rotate words
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveWord((prev) => (prev + 1) % words.length);
@@ -49,11 +51,13 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.6], [0.12, 0]);
 
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
-      {/* Video background — full screen, no heavy overlay */}
+      {/* Video background */}
       <div className="absolute inset-0">
         <video
           ref={videoRef}
@@ -66,15 +70,10 @@ const HeroSection = () => {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-        {/* Very subtle vignette only — no dark overlay covering video text */}
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 35%, transparent 55%, transparent 100%)"
-        }} />
-        {/* Grain texture */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }} />
-        {/* Play/Pause button */}
         <motion.button
           onClick={toggleVideo}
           className="absolute top-20 right-4 md:top-24 md:right-12 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors"
@@ -85,31 +84,44 @@ const HeroSection = () => {
         </motion.button>
       </div>
 
-      {/* Spacer — pushes content to bottom */}
-      <div className="flex-1" />
-
-      {/* Bottom content strip — sits over the gradient fade */}
+      {/* Central S logo watermark */}
       <motion.div
-        className="relative z-10 container-custom pb-8 md:pb-14"
-        style={{ opacity, y }}
+        className="absolute inset-0 flex items-center justify-center z-[1] pointer-events-none"
+        style={{ scale: logoScale, opacity: logoOpacity }}
       >
-        {/* Agency identifier */}
-        <motion.div
-          className="flex items-center justify-between mb-6 md:mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease }}
-        >
-          <span className="text-[10px] md:text-xs text-white/40 font-medium tracking-[0.3em] uppercase">
+        <motion.img
+          src={logoIcon}
+          alt=""
+          className="w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[380px] h-auto select-none"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.2, ease }}
+          style={{ filter: "brightness(1.4) contrast(0.9)" }}
+        />
+      </motion.div>
+
+      {/* Top info bar */}
+      <motion.div
+        className="relative z-10 container-custom pt-28 md:pt-36"
+        style={{ opacity }}
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] md:text-xs text-white/30 font-medium tracking-[0.3em] uppercase">
             Events Agency — Firenze
           </span>
           <span className="text-[10px] md:text-xs text-white/30 font-mono">
             © Setup Events
           </span>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Rotating service word */}
-        <div className="mb-5 md:mb-6 overflow-hidden">
+      {/* Spacer */}
+      <div className="flex-1" />
+
+      {/* Main content */}
+      <motion.div className="relative z-10 container-custom pb-12 md:pb-20" style={{ opacity, y }}>
+        {/* Rotating service words */}
+        <div className="mb-6 md:mb-10 overflow-hidden">
           <motion.div
             className="flex items-baseline gap-3 md:gap-5"
             initial={{ opacity: 0, y: 60 }}
@@ -119,11 +131,11 @@ const HeroSection = () => {
             <span className="text-[10px] md:text-xs text-primary font-mono tracking-wider">
               [{String(activeWord + 1).padStart(2, "0")}]
             </span>
-            <div className="relative h-[clamp(2.2rem,7vw,5.5rem)]">
+            <div className="relative h-[clamp(2.8rem,9vw,7rem)]">
               {words.map((word, i) => (
                 <motion.span
                   key={word}
-                  className="absolute left-0 top-0 font-display font-extrabold text-white text-[clamp(2rem,7vw,5rem)] leading-[0.95] tracking-[-0.04em] whitespace-nowrap"
+                  className="absolute left-0 top-0 font-display font-extrabold text-white text-[clamp(2.5rem,8.5vw,6.5rem)] leading-[0.95] tracking-[-0.04em] whitespace-nowrap"
                   initial={false}
                   animate={{
                     y: activeWord === i ? 0 : activeWord > i ? -80 : 80,
@@ -139,9 +151,9 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Service tags */}
+        {/* Service tags row */}
         <motion.div
-          className="flex flex-wrap items-center gap-2 md:gap-3 mb-6"
+          className="flex flex-wrap items-center gap-2 md:gap-3 mb-8 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6, ease }}
@@ -163,36 +175,38 @@ const HeroSection = () => {
 
         {/* Decorative line */}
         <motion.div
-          className="w-16 md:w-24 h-px bg-gradient-to-r from-primary to-transparent mb-4"
+          className="w-16 md:w-24 h-px bg-gradient-to-r from-primary to-transparent mb-6"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 1, ease }}
           style={{ transformOrigin: "left" }}
         />
 
-        {/* Subtitle + scroll indicator row */}
-        <div className="flex items-end justify-between">
-          <motion.p
-            className="text-white/30 text-xs md:text-sm max-w-sm leading-relaxed tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9, ease }}
-          >
-            Organizziamo eventi esclusivi a Firenze. Dalla strategia all'esecuzione, curiamo ogni dettaglio.
-          </motion.p>
+        {/* Permanent floating accent — CSS only */}
+        <div className="absolute top-1/4 right-8 md:right-20 w-3 h-3 rounded-full bg-primary/40 hero-dot-1" />
+        <div className="absolute top-1/3 right-16 md:right-32 w-1.5 h-1.5 rounded-full bg-white/20 hero-dot-2" />
 
-          <motion.div
-            className="flex items-center gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-          >
-            <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium hidden md:block">
-              Scroll
-            </span>
-            <div className="w-px h-10 bg-white/15 origin-top scroll-indicator" />
-          </motion.div>
-        </div>
+        <motion.p
+          className="text-white/25 text-xs md:text-sm max-w-md leading-relaxed tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9, ease }}
+        >
+          Organizziamo eventi esclusivi a Firenze. Dalla strategia all'esecuzione, curiamo ogni dettaglio.
+        </motion.p>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="flex items-center gap-3 mt-10 md:mt-14"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <div className="w-px h-10 bg-white/15 origin-top scroll-indicator" />
+          <span className="text-white/20 text-[10px] uppercase tracking-[0.3em] font-medium">
+            Scroll
+          </span>
+        </motion.div>
       </motion.div>
     </section>
   );
