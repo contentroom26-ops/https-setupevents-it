@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import storyBg from "@/assets/story-bg.png";
+import storyBg from "@/assets/story-bg-2.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
