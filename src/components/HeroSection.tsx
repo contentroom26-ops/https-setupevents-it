@@ -52,7 +52,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
       <motion.div className="absolute inset-0" style={{ scale: videoScale }}>
         <video
           ref={videoRef}
-          autoPlay
+          
           loop
           muted
           playsInline
