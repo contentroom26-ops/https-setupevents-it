@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect } from "react";
 
+import dieselMarbleBg from "@/assets/diesel-marble-bg.jpg";
 import dieselCard from "@/assets/diesel-card.jpg";
 import diesel1 from "@/assets/diesel-1.jpg";
 import diesel2 from "@/assets/diesel-2.jpg";
@@ -181,7 +182,19 @@ const InfiniteGallery = () => {
 /* ── Main Section ────────────────────────────────────── */
 const PortfolioSection = () => {
   return (
-    <section id="portfolio" className="section-dark py-20 md:py-40 relative grain overflow-hidden">
+    <section id="portfolio" className="relative overflow-hidden">
+      {/* Marble background */}
+      <div className="absolute inset-0">
+        <img
+          src={dieselMarbleBg}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <div className="relative z-10 py-20 md:py-40">
       <FloatingElements variant="dots" count={8} />
       <div className="container-custom">
         <div className="flex items-center justify-between mb-6">
@@ -210,9 +223,11 @@ const PortfolioSection = () => {
         </motion.h2>
 
         {/* Two flip cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" style={{ perspective: '800px' }}>
           {caseStudies.map((study, i) => (
-            <FlipCard key={study.title} study={study} index={i} />
+            <div key={study.title} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
+              <FlipCard study={study} index={i} />
+            </div>
           ))}
         </div>
       </div>
@@ -232,6 +247,7 @@ const PortfolioSection = () => {
         </div>
         <InfiniteGallery />
       </motion.div>
+      </div>
     </section>
   );
 };
