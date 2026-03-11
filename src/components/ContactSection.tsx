@@ -66,7 +66,7 @@ const ContactSection = () => {
             transition={{ duration: 0.8, ease }}
           >
             <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-mono text-muted-foreground">[06]</span>
+              <span className="text-xs font-mono text-muted-foreground">[04]</span>
               <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
                 Contattaci
               </span>
