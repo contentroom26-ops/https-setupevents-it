@@ -106,7 +106,7 @@ const FlipCard = ({
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-2xl overflow-hidden bg-secondary/90 border border-border/30 backdrop-blur-sm flex flex-col justify-center p-8 md:p-12"
+          className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">
