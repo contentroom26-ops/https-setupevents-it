@@ -58,19 +58,8 @@ const services = [
   },
 ];
 
-const getCardStyle = (idx: number) => {
-  const variant = idx % 3;
-  if (variant === 0) return {
-    card: "bg-secondary/30 border border-border/30",
-    number: "text-foreground/[0.03]",
-    title: "text-foreground",
-    desc: "text-muted-foreground",
-    label: "text-muted-foreground/50",
-    tag: "border-border/50 text-muted-foreground/70",
-    link: "text-foreground hover:text-primary",
-    underline: "bg-primary",
-  };
-  if (variant === 1) return {
+const getCardStyle = (_idx: number) => {
+  return {
     card: "bg-[hsl(30,20%,92%)] border border-[hsl(30,10%,85%)]",
     number: "text-background/[0.06]",
     title: "text-background",
@@ -79,16 +68,6 @@ const getCardStyle = (idx: number) => {
     tag: "border-background/20 text-background/60",
     link: "text-background hover:text-background/70",
     underline: "bg-background",
-  };
-  return {
-    card: "bg-[hsl(0,72%,51%)] border border-[hsl(0,72%,45%)]",
-    number: "text-white/10",
-    title: "text-white",
-    desc: "text-white/80",
-    label: "text-white/50",
-    tag: "border-white/30 text-white/70",
-    link: "text-white hover:text-white/80",
-    underline: "bg-white",
   };
 };
 
