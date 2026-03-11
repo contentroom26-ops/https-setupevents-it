@@ -144,10 +144,10 @@ const DesktopServices = () => {
     offset: ["start start", "end end"],
   });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const total = services.length;
-    // Map progress [0..1] evenly across services, clamped
     const raw = v * total;
     const idx = Math.max(0, Math.min(Math.floor(raw), total - 1));
     setActiveIndex(idx);
@@ -162,97 +162,138 @@ const DesktopServices = () => {
       className="section-dark relative grain"
       style={{ height: `${services.length * 100}vh` }}
     >
-      <div className="sticky top-0 h-screen flex items-center" style={{ overflow: 'clip' }}>
+      <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
+        {/* Top progress bar */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
+          <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
+        </div>
+
         <FloatingElements variant="lines" count={3} />
-        <div className="container-custom w-full py-12">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-xs font-mono text-muted-foreground">[02]</span>
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
-          </div>
 
-          <h2 className="text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-12 lg:mb-16">
-            Services
-          </h2>
-
-          <div className="grid grid-cols-12 gap-6">
-            {/* Left nav */}
-            <div className="col-span-5 xl:col-span-4">
-              <div className="space-y-0">
-                {services.map((service, i) => (
-                  <div
-                    key={service.number}
-                    className={`w-full text-left px-4 py-5 border-b border-border/40 flex items-center gap-4 transition-all duration-400 relative cursor-default ${
-                      activeIndex === i ? "text-foreground" : "text-muted-foreground"
-                    }`}
-                  >
-                    <motion.div
-                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary"
-                      initial={false}
-                      animate={{ opacity: activeIndex === i ? 1 : 0, scaleY: activeIndex === i ? 1 : 0 }}
-                      transition={{ duration: 0.35, ease }}
-                    />
-                    <span className={`text-[10px] font-mono transition-colors duration-300 ${activeIndex === i ? "text-primary" : "text-muted-foreground/40"}`}>
-                      {service.number}
-                    </span>
-                    <span className="text-base font-semibold tracking-tight font-display">{service.title}</span>
-                    <ArrowRight className={`w-3.5 h-3.5 ml-auto transition-all duration-300 ${activeIndex === i ? "opacity-100 translate-x-0 text-primary" : "opacity-0 -translate-x-2"}`} />
-                  </div>
-                ))}
-              </div>
+        <div className="flex-1 flex items-center">
+          <div className="container-custom w-full py-12">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-xs font-mono text-muted-foreground">[02]</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
             </div>
 
-            {/* Right detail */}
-            <div className="col-span-7 xl:col-span-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                  transition={{ duration: 0.45, ease }}
-                  className={`relative rounded-2xl p-10 lg:p-12 backdrop-blur-sm ${s.card}`}
-                >
-                  <motion.span
-                    className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}
-                    style={{ y: parallaxY }}
-                  >
-                    {services[activeIndex].number}
-                  </motion.span>
+            <div className="flex items-end justify-between mb-12 lg:mb-16">
+              <h2 className="text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground">
+                Services
+              </h2>
+              {/* Counter */}
+              <motion.div
+                className="flex items-center gap-3"
+                key={activeIndex}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-3xl font-display font-extrabold text-primary tabular-nums">
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="text-muted-foreground/40 text-sm font-mono">/</span>
+                <span className="text-muted-foreground/40 text-sm font-mono">
+                  {String(services.length).padStart(2, "0")}
+                </span>
+              </motion.div>
+            </div>
 
-                  <div className="relative z-10">
-                    <h3 className={`text-3xl lg:text-4xl font-display font-extrabold tracking-tight mb-6 ${s.title}`}>
-                      {services[activeIndex].title}
-                    </h3>
-                    <p className={`text-base leading-relaxed mb-8 max-w-lg ${s.desc}`}>
-                      {services[activeIndex].description}
-                    </p>
-                    <span className={`text-[10px] uppercase tracking-[0.2em] font-medium block mb-3 ${s.label}`}>Categories</span>
-                    <div className="flex flex-wrap gap-2 mb-10">
-                      {services[activeIndex].categories.map((cat, ci) => (
-                        <motion.span
-                          key={cat}
-                          className={`text-xs px-4 py-1.5 rounded-full border font-medium ${s.tag}`}
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: ci * 0.05, duration: 0.35, ease }}
-                        >
-                          {cat}
-                        </motion.span>
-                      ))}
-                    </div>
-                    <Link
-                      to={services[activeIndex].link}
-                      className={`inline-flex items-center gap-2.5 text-sm font-bold transition-colors duration-300 group ${s.link}`}
+            <div className="grid grid-cols-12 gap-6">
+              {/* Left nav */}
+              <div className="col-span-5 xl:col-span-4">
+                <div className="space-y-0">
+                  {services.map((service, i) => (
+                    <div
+                      key={service.number}
+                      className={`w-full text-left px-4 py-5 border-b border-border/40 flex items-center gap-4 transition-all duration-400 relative cursor-default ${
+                        activeIndex === i ? "text-foreground" : "text-muted-foreground"
+                      }`}
                     >
-                      <span className="relative">
-                        Scopri di più
-                        <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
+                      <motion.div
+                        className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary"
+                        initial={false}
+                        animate={{ opacity: activeIndex === i ? 1 : 0, scaleY: activeIndex === i ? 1 : 0 }}
+                        transition={{ duration: 0.35, ease }}
+                      />
+                      <span className={`text-[10px] font-mono transition-colors duration-300 ${activeIndex === i ? "text-primary" : "text-muted-foreground/40"}`}>
+                        {service.number}
                       </span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
+                      <span className="text-base font-semibold tracking-tight font-display">{service.title}</span>
+                      <ArrowRight className={`w-3.5 h-3.5 ml-auto transition-all duration-300 ${activeIndex === i ? "opacity-100 translate-x-0 text-primary" : "opacity-0 -translate-x-2"}`} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Scroll hint */}
+                <motion.div
+                  className="mt-6 flex items-center gap-2 text-muted-foreground/30"
+                  animate={{ opacity: activeIndex < services.length - 1 ? 1 : 0 }}
+                >
+                  <motion.div className="w-4 h-7 rounded-full border border-muted-foreground/20 flex items-start justify-center p-1">
+                    <motion.div
+                      className="w-1 h-1.5 rounded-full bg-primary"
+                      animate={{ y: [0, 8, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                  </motion.div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Scorri</span>
                 </motion.div>
-              </AnimatePresence>
+              </div>
+
+              {/* Right detail */}
+              <div className="col-span-7 xl:col-span-8">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                    transition={{ duration: 0.45, ease }}
+                    className={`relative rounded-2xl p-10 lg:p-12 backdrop-blur-sm ${s.card}`}
+                  >
+                    <motion.span
+                      className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}
+                      style={{ y: parallaxY }}
+                    >
+                      {services[activeIndex].number}
+                    </motion.span>
+
+                    <div className="relative z-10">
+                      <h3 className={`text-3xl lg:text-4xl font-display font-extrabold tracking-tight mb-6 ${s.title}`}>
+                        {services[activeIndex].title}
+                      </h3>
+                      <p className={`text-base leading-relaxed mb-8 max-w-lg ${s.desc}`}>
+                        {services[activeIndex].description}
+                      </p>
+                      <span className={`text-[10px] uppercase tracking-[0.2em] font-medium block mb-3 ${s.label}`}>Categories</span>
+                      <div className="flex flex-wrap gap-2 mb-10">
+                        {services[activeIndex].categories.map((cat, ci) => (
+                          <motion.span
+                            key={cat}
+                            className={`text-xs px-4 py-1.5 rounded-full border font-medium ${s.tag}`}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: ci * 0.05, duration: 0.35, ease }}
+                          >
+                            {cat}
+                          </motion.span>
+                        ))}
+                      </div>
+                      <Link
+                        to={services[activeIndex].link}
+                        className={`inline-flex items-center gap-2.5 text-sm font-bold transition-colors duration-300 group ${s.link}`}
+                      >
+                        <span className="relative">
+                          Scopri di più
+                          <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
+                        </span>
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
