@@ -116,10 +116,10 @@ const FlipCard = ({
           <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">
             {study.title}
           </h3>
-          <p className="text-sm text-white/35 font-medium mb-6">
+          <p className="text-sm text-white/50 font-medium mb-6">
             {study.subtitle}
           </p>
-          <p className="text-sm md:text-base text-white/55 leading-relaxed">
+          <p className="text-[13px] md:text-base text-white/75 leading-relaxed">
             {study.description}
           </p>
         </div>
