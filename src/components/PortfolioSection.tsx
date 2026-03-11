@@ -80,8 +80,10 @@ const FlipCard = ({
         >
           <img
             src={study.image}
-            alt={study.title}
+            alt={`${study.title} - ${study.category}`}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute top-5 left-6">
