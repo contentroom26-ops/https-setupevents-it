@@ -54,7 +54,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
