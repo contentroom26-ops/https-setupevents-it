@@ -182,7 +182,19 @@ const InfiniteGallery = () => {
 /* ── Main Section ────────────────────────────────────── */
 const PortfolioSection = () => {
   return (
-    <section id="portfolio" className="section-dark py-20 md:py-40 relative grain overflow-hidden">
+    <section id="portfolio" className="relative overflow-hidden">
+      {/* Marble background */}
+      <div className="absolute inset-0">
+        <img
+          src={dieselMarbleBg}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <div className="relative z-10 py-20 md:py-40">
       <FloatingElements variant="dots" count={8} />
       <div className="container-custom">
         <div className="flex items-center justify-between mb-6">
