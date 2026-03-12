@@ -83,8 +83,19 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="flex items-center"
+            className="flex items-center gap-1.5"
           >
+            <span
+              className="font-display font-bold animate-s-pulse select-none"
+              style={{
+                fontSize: isScrolled ? "clamp(1.4rem, 2.5vw, 2rem)" : "clamp(1.6rem, 3vw, 2.4rem)",
+                transition: "font-size 0.5s ease",
+                lineHeight: 1,
+              }}
+              aria-hidden="true"
+            >
+              S
+            </span>
             <img
               src={logo}
               alt="SetupEvents"

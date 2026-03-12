@@ -244,3 +244,13 @@
   animation: float 2.5s ease-in-out infinite;
   transform-origin: top;
 }
+
+/* S logo color pulse */
+@keyframes s-pulse-color {
+  0%, 100% { color: hsl(0 0% 100%); }
+  50% { color: hsl(0 85% 55%); }
+}
+
+.animate-s-pulse {
+  animation: s-pulse-color 2.5s ease-in-out infinite;
+}
