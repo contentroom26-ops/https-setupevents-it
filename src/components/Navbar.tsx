@@ -180,7 +180,7 @@ const Navbar = () => {
             <div className="w-px h-5 bg-white/[0.08] mx-2" />
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-[10px] uppercase tracking-[0.18em] font-semibold px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15] flex items-center gap-2 transition-all duration-400"
+              className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.18em] font-semibold px-3 md:px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15] flex items-center gap-1.5 md:gap-2 transition-all duration-400"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
             >
