@@ -48,9 +48,7 @@ const ContactSection = () => {
     }));
   };
 
-  const handleLavoraConNoi = () => {
-    window.location.href = "mailto:hostess@setupevents.it?subject=Candidatura%20-%20Lavora%20con%20noi";
-  };
+  
 
   return (
     <section id="contact" className="relative py-20 md:py-28 overflow-hidden">
