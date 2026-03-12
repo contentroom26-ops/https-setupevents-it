@@ -12,6 +12,13 @@ import dieselEvent5 from "@/assets/diesel-event-5.jpg";
 import dieselEvent6 from "@/assets/diesel-event-6.jpg";
 import dieselEvent7 from "@/assets/diesel-event-7.jpg";
 import dieselEvent8 from "@/assets/diesel-event-8.jpg";
+import dieselEvent9 from "@/assets/diesel-event-9.jpg";
+import dieselEvent10 from "@/assets/diesel-event-10.jpg";
+import dieselEvent11 from "@/assets/diesel-event-11.jpg";
+import dieselEvent12 from "@/assets/diesel-event-12.jpg";
+import dieselEvent13 from "@/assets/diesel-event-13.jpg";
+import dieselEvent14 from "@/assets/diesel-event-14.jpg";
+import dieselEvent15 from "@/assets/diesel-event-15.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -38,7 +45,9 @@ const caseStudies = [
 
 const galleryImages = [
   dieselEvent1, dieselEvent4, dieselEvent5, dieselEvent6,
-  dieselEvent7, dieselEvent8, diesel9,
+  dieselEvent7, dieselEvent8, diesel9, dieselEvent9,
+  dieselEvent10, dieselEvent11, dieselEvent12, dieselEvent13,
+  dieselEvent14, dieselEvent15,
 ];
 
 /* ── Flip Card Component ─────────────────────────────── */
