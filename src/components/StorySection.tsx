@@ -24,7 +24,7 @@ const StorySection = () => {
     >
       {/* Parallax background image */}
       <motion.div
-        className="absolute inset-0 -top-[5%] -bottom-[5%] z-0"
+        className="absolute inset-0 -top-[5%] -bottom-[5%] z-0 will-change-transform"
         style={{ y: bgY, scale: bgScale }}
       >
         <img

@@ -29,7 +29,7 @@ const HeroStoryTransition = () => {
   const crossOpacity = useTransform(scrollYProgress, [0.35, 0.5, 0.75], [0, 1, 0]);
 
   return (
-    <div ref={ref} className="relative h-[100vh] md:h-[130vh]">
+    <div ref={ref} className="relative h-[80vh] md:h-[130vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-background">
 
         {/* Curtain left */}
