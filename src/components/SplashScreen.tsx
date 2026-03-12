@@ -9,12 +9,13 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("hold"), 800);
-    const t2 = setTimeout(() => setPhase("exit"), 2000);
+    // Use requestAnimationFrame for smoother phase transitions
+    const t1 = setTimeout(() => requestAnimationFrame(() => setPhase("hold")), 600);
+    const t2 = setTimeout(() => requestAnimationFrame(() => setPhase("exit")), 1600);
     const t3 = setTimeout(() => {
       setVisible(false);
-      setTimeout(onComplete, 500);
-    }, 2600);
+      requestAnimationFrame(() => onComplete());
+    }, 2100);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete]);
 
