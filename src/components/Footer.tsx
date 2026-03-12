@@ -111,15 +111,15 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
         >
-          <p className="text-sm text-muted-foreground">Vuoi far parte del nostro team?</p>
+          <p className="text-sm text-muted-foreground">Vuoi lavorare con noi come hostess o staff per eventi?</p>
           <motion.a
-            href="mailto:hostess@setupevents.it?subject=Candidatura%20-%20Lavora%20con%20noi"
+            href="mailto:hostess@setupevents.it?subject=Candidatura%20Hostess%20-%20Lavora%20con%20noi"
             className="group inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-6 py-3.5 rounded-full font-semibold text-sm border border-border hover:border-primary/50 transition-colors duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
             <Users className="w-4 h-4 text-primary" />
-            Lavora con noi
+            Lavora con noi come Hostess
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </motion.a>
         </motion.div>
