@@ -89,7 +89,7 @@ const Navbar = () => {
               src={logo}
               alt="SetupEvents"
               className={`w-auto drop-shadow-lg transition-all duration-500 ${
-                isScrolled ? "h-16 md:h-24 -my-3 md:-my-5" : "h-20 md:h-28 -my-5 md:-my-7"
+                isScrolled ? "h-20 md:h-28 -my-4 md:-my-7" : "h-24 md:h-32 -my-6 md:-my-9"
               }`}
             />
           </a>
