@@ -75,7 +75,7 @@ const Navbar = () => {
               ? "bg-white/[0.06] border-white/[0.1] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]"
               : "bg-white/[0.03] border-white/[0.05] backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
           }`}
-          style={{ height: isScrolled ? 56 : 60 }}
+          style={{ height: isScrolled ? 56 : 64 }}
           layout
           transition={{ duration: 0.5 }}
         >
@@ -89,7 +89,7 @@ const Navbar = () => {
               src={logo}
               alt="SetupEvents"
               className={`w-auto drop-shadow-lg transition-all duration-500 ${
-                isScrolled ? "h-14 md:h-20 -my-2 md:-my-4" : "h-16 md:h-24 -my-3 md:-my-5"
+                isScrolled ? "h-16 md:h-24 -my-3 md:-my-5" : "h-20 md:h-28 -my-5 md:-my-7"
               }`}
             />
           </a>
