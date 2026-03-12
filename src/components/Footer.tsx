@@ -19,9 +19,7 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
         >
-          <div className="max-w-md">
-            <img src={logoIcon} alt="SetupEvents" className="h-20 w-auto" />
-          </div>
+          <div />
 
           <motion.button
             onClick={scrollToTop}

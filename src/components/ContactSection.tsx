@@ -85,60 +85,16 @@ const ContactSection = () => {
             transition={{ duration: 0.8, ease }}
           >
             <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-8">
-                LET'S
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-6">
+                Raccontaci il tuo
                 <br />
-                <span className="italic font-normal text-muted-foreground">CREATE</span>
-                <br />
-                TOGETHER
+                <span className="italic font-normal text-muted-foreground">progetto</span>
               </h2>
 
-              <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-md mb-10">
-                Raccontaci la tua visione. Ti risponderemo entro 24 ore con una proposta personalizzata.
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-md">
+                Compila il form e ti ricontattiamo per creare insieme qualcosa di straordinario.
               </p>
-
-              {/* Stats row */}
-              <div className="flex gap-8 mb-12">
-                {[
-                  { num: "24h", label: "Risposta" },
-                  { num: "100+", label: "Eventi" },
-                  { num: "∞", label: "Idee" },
-                ].map((s, i) => (
-                  <motion.div
-                    key={s.label}
-                    className="text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1, ease }}
-                  >
-                    <div className="text-2xl md:text-3xl font-display font-extrabold text-primary">{s.num}</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{s.label}</div>
-                  </motion.div>
-                ))}
-              </div>
             </div>
-
-            {/* Lavora con noi */}
-            <motion.div
-              className="border-t border-border pt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, ease }}
-            >
-              <p className="text-sm text-muted-foreground mb-4">Vuoi far parte del nostro team?</p>
-              <motion.button
-                onClick={handleLavoraConNoi}
-                className="group inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-6 py-3.5 rounded-full font-semibold text-sm border border-border hover:border-primary/50 transition-colors duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Users className="w-4 h-4 text-primary" />
-                Lavora con noi
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </motion.button>
-            </motion.div>
           </motion.div>
 
           {/* Right - Form card */}
