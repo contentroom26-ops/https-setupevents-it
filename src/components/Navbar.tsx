@@ -95,7 +95,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden sm:flex items-center gap-0.5">
             {navLinks.map((link) =>
               link.name === "Servizi" ? (
                 <div
@@ -106,7 +106,7 @@ const Navbar = () => {
                 >
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="group relative px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
+                    className="group relative px-2 sm:px-3 md:px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.15em] md:tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
                   >
                     {link.name}
                     <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/[0.04] transition-all duration-400" />
@@ -170,7 +170,7 @@ const Navbar = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="group relative px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
+                  className="group relative px-2 sm:px-3 md:px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.15em] md:tracking-[0.2em] font-medium text-white/50 hover:text-white transition-all duration-400"
                 >
                   {link.name}
                   <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/[0.04] transition-all duration-400" />
@@ -180,7 +180,7 @@ const Navbar = () => {
             <div className="w-px h-5 bg-white/[0.08] mx-2" />
             <motion.button
               onClick={() => scrollToSection("#contact")}
-              className="text-[10px] uppercase tracking-[0.18em] font-semibold px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15] flex items-center gap-2 transition-all duration-400"
+              className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.18em] font-semibold px-3 md:px-5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-white/60 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15] flex items-center gap-1.5 md:gap-2 transition-all duration-400"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -191,7 +191,7 @@ const Navbar = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
+            className="sm:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -207,7 +207,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-white/[0.03] backdrop-blur-3xl flex flex-col md:hidden"
+            className="fixed inset-0 z-40 bg-white/[0.03] backdrop-blur-3xl flex flex-col sm:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
