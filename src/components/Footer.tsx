@@ -111,6 +111,27 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Lavora con noi */}
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 pb-8 border-b border-border"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+        >
+          <p className="text-sm text-muted-foreground">Vuoi far parte del nostro team?</p>
+          <motion.a
+            href="mailto:hostess@setupevents.it?subject=Candidatura%20-%20Lavora%20con%20noi"
+            className="group inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-6 py-3.5 rounded-full font-semibold text-sm border border-border hover:border-primary/50 transition-colors duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Users className="w-4 h-4 text-primary" />
+            Lavora con noi
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </motion.a>
+        </motion.div>
+
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted-foreground text-xs pt-8 border-t border-border">
           <p>© {new Date().getFullYear()} SetupEvents by Gabriel Lleshi</p>
