@@ -95,7 +95,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden sm:flex items-center gap-0.5">
             {navLinks.map((link) =>
               link.name === "Servizi" ? (
                 <div
