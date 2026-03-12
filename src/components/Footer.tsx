@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-10">
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-6 text-foreground/80">Servizi</h4>
             <ul className="space-y-3 text-muted-foreground">
