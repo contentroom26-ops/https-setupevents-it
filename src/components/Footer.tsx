@@ -84,7 +84,7 @@ const Footer = () => {
             <div className="flex gap-3">
               {[
                 { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gabrielleshi_events/" },
-                { icon: Linkedin, label: "LinkedIn", href: "#" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/feed/" },
               ].map((social) => (
                 <motion.a
                   key={social.label}
