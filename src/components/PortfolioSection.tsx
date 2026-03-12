@@ -45,7 +45,9 @@ const caseStudies = [
 
 const galleryImages = [
   dieselEvent1, dieselEvent4, dieselEvent5, dieselEvent6,
-  dieselEvent7, dieselEvent8, diesel9,
+  dieselEvent7, dieselEvent8, diesel9, dieselEvent9,
+  dieselEvent10, dieselEvent11, dieselEvent12, dieselEvent13,
+  dieselEvent14, dieselEvent15,
 ];
 
 /* ── Flip Card Component ─────────────────────────────── */
