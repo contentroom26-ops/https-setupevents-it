@@ -166,7 +166,7 @@ const ContactSection = () => {
                   <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange}
                     className="mt-1 w-4 h-4 accent-primary rounded" />
                   <span className="text-sm text-muted-foreground">
-                    Accetto la <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a> *
+                    Accetto la <Link to="/privacy-policy" className="text-primary hover:underline">Privacy Policy</Link> *
                   </span>
                 </label>
 
