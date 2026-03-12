@@ -191,7 +191,7 @@ const Navbar = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
+            className="sm:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
