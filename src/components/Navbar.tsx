@@ -83,8 +83,19 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="flex items-center relative"
+            className="flex items-center gap-1.5"
           >
+            <span
+              className="font-display font-bold animate-s-pulse select-none"
+              style={{
+                fontSize: isScrolled ? "clamp(1.4rem, 2.5vw, 2rem)" : "clamp(1.6rem, 3vw, 2.4rem)",
+                transition: "font-size 0.5s ease",
+                lineHeight: 1,
+              }}
+              aria-hidden="true"
+            >
+              S
+            </span>
             <img
               src={logo}
               alt="SetupEvents"
@@ -92,21 +103,6 @@ const Navbar = () => {
                 isScrolled ? "h-20 md:h-28 -my-4 md:-my-7" : "h-24 md:h-32 -my-6 md:-my-9"
               }`}
             />
-            <span
-              className="absolute font-display font-bold animate-s-pulse pointer-events-none select-none"
-              style={{
-                left: "0.15em",
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: isScrolled ? "clamp(1.1rem, 2.2vw, 1.6rem)" : "clamp(1.3rem, 2.6vw, 1.9rem)",
-                transition: "font-size 0.5s ease",
-                mixBlendMode: "screen",
-                opacity: 0,
-              }}
-              aria-hidden="true"
-            >
-              S
-            </span>
           </a>
 
           {/* Desktop links */}
