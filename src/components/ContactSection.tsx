@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Send, Loader2, ArrowRight, Users } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import FloatingElements from "./FloatingElements";
@@ -48,9 +49,7 @@ const ContactSection = () => {
     }));
   };
 
-  const handleLavoraConNoi = () => {
-    window.location.href = "mailto:hostess@setupevents.it?subject=Candidatura%20-%20Lavora%20con%20noi";
-  };
+  
 
   return (
     <section id="contact" className="relative py-20 md:py-28 overflow-hidden">
@@ -168,7 +167,7 @@ const ContactSection = () => {
                   <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange}
                     className="mt-1 w-4 h-4 accent-primary rounded" />
                   <span className="text-sm text-muted-foreground">
-                    Accetto la <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a> *
+                    Accetto la <Link to="/privacy-policy" className="text-primary hover:underline">Privacy Policy</Link> *
                   </span>
                 </label>
 

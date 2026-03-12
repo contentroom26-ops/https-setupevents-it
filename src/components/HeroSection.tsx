@@ -48,7 +48,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
       {/* Video background */}
-      <motion.div className="absolute inset-0" style={{ scale: videoScale }}>
+      <motion.div className="absolute inset-0 will-change-transform" style={{ scale: videoScale }}>
         <video
           ref={videoRef}
           loop
