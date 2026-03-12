@@ -159,7 +159,7 @@ const ContactSection = () => {
                 <div className="relative">
                   <textarea name="messaggio" value={formData.messaggio} onChange={handleChange} required rows={4}
                     className="w-full px-4 py-3.5 bg-background border border-border rounded-xl focus:outline-none focus:border-primary/60 transition-colors text-foreground placeholder:text-muted-foreground text-sm resize-none peer"
-                    placeholder="Descrivi il tuo evento ideale... *" />
+                    placeholder="Raccontaci di cosa hai bisogno: servizi, obiettivi, dettagli... *" />
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 peer-focus:w-full rounded-full" />
                 </div>
 
