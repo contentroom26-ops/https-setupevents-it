@@ -25,7 +25,8 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease }}
+          transition={{ duration: 0.4, ease }}
+          style={{ willChange: "opacity" }}
         >
           {/* Radial glow */}
           <motion.div

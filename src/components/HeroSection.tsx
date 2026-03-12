@@ -55,7 +55,8 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover md:object-cover object-center"
+          style={{ objectPosition: "center center", minWidth: "100%", minHeight: "100%" }}
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
