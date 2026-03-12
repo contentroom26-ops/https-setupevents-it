@@ -53,7 +53,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-40 overflow-hidden">
+    <section id="contact" className="relative py-20 md:py-28 overflow-hidden">
       {/* Background split */}
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-0 right-0 w-1/2 h-full bg-card hidden lg:block" />

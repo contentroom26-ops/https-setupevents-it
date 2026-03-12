@@ -8,18 +8,10 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="bg-background text-foreground pt-20 pb-8 relative border-t border-border">
+    <footer className="bg-background text-foreground pt-12 pb-8 relative border-t border-border">
       <div className="container-custom">
-        {/* Top */}
-        <motion.div
-          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 mb-16 pb-16 border-b border-border"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-        >
-          <div />
-
+        {/* Torna su */}
+        <div className="flex justify-end mb-10">
           <motion.button
             onClick={scrollToTop}
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm uppercase tracking-[0.2em] font-medium group"
@@ -28,7 +20,7 @@ const Footer = () => {
             Torna su
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
           </motion.button>
-        </motion.div>
+        </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-16">
