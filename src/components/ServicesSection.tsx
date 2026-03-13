@@ -71,24 +71,40 @@ const getCardStyle = (_idx: number) => {
   };
 };
 
-/* ── Service Card (used on mobile) ──────────────────── */
+/* ── Service Card (used on mobile) — with scroll-driven reveal ── */
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const s = getCardStyle(index);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 95%", "start 60%"],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+  const x = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? -20 : 20, 0]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.4, delay: index * 0.03, ease }}
-      className={`relative rounded-xl p-4 ${s.card}`}
+      ref={cardRef}
+      style={{ opacity, y, scale, x }}
+      className={`relative rounded-xl p-5 ${s.card} will-change-transform`}
     >
+      {/* Wipe accent line */}
+      <motion.div
+        className="absolute top-0 left-0 w-full h-[2px] bg-primary origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
       <span className={`absolute top-1 right-3 text-[2.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>
         {service.number}
       </span>
       <div className="relative z-10">
-        <h3 className={`text-base font-display font-extrabold tracking-tight mb-2 ${s.title}`}>
-          {service.title}
-        </h3>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[10px] font-mono text-primary">{service.number}</span>
+          <h3 className={`text-base font-display font-extrabold tracking-tight ${s.title}`}>
+            {service.title}
+          </h3>
+        </div>
         <p className={`text-[11px] leading-relaxed mb-3 ${s.desc}`}>
           {service.description}
         </p>
@@ -111,6 +127,60 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         </Link>
       </div>
     </motion.div>
+  );
+};
+
+/* ── Mobile scroll-animated section ─────────────────── */
+const MobileServices = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <section ref={sectionRef} id="services" className="section-dark py-14 relative grain overflow-hidden">
+      {/* Top progress bar */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
+        <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
+      </div>
+
+      <FloatingElements variant="lines" count={2} />
+      <div className="container-custom">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-[10px] font-mono text-muted-foreground">[02]</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
+        </div>
+
+        <motion.h2
+          className="text-2xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-2"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease }}
+        >
+          Services
+        </motion.h2>
+
+        {/* Counter */}
+        <motion.p
+          className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 font-mono mb-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          {String(services.length).padStart(2, "0")} servizi — scorri per scoprire
+        </motion.p>
+
+        <div className="space-y-4">
+          {services.map((service, i) => (
+            <ServiceCard key={service.number} service={service} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -142,7 +212,6 @@ const DesktopServices = () => {
       style={{ height: `${services.length * 100}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
-        {/* Top progress bar */}
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
         </div>
@@ -160,7 +229,6 @@ const DesktopServices = () => {
               <h2 className="text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground">
                 Services
               </h2>
-              {/* Counter */}
               <motion.div
                 className="flex items-center gap-3"
                 key={activeIndex}
@@ -179,7 +247,6 @@ const DesktopServices = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-6">
-              {/* Left nav */}
               <div className="col-span-5 xl:col-span-4">
                 <div className="space-y-0">
                   {services.map((service, i) => (
@@ -204,7 +271,6 @@ const DesktopServices = () => {
                   ))}
                 </div>
 
-                {/* Scroll hint */}
                 <motion.div
                   className="mt-6 flex items-center gap-2 text-muted-foreground/30"
                   animate={{ opacity: activeIndex < services.length - 1 ? 1 : 0 }}
@@ -220,14 +286,12 @@ const DesktopServices = () => {
                 </motion.div>
               </div>
 
-              {/* Right detail */}
               <div className="col-span-7 xl:col-span-8">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
                     className={`relative rounded-2xl p-10 lg:p-12 overflow-hidden ${s.card}`}
                   >
-                    {/* Wipe reveal curtain */}
                     <motion.div
                       className="absolute inset-0 bg-[hsl(var(--background))] z-20 origin-left"
                       initial={{ scaleX: 1 }}
@@ -235,14 +299,12 @@ const DesktopServices = () => {
                       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
                       style={{ transformOrigin: "right" }}
                     />
-
                     <motion.span
                       className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}
                       style={{ y: parallaxY }}
                     >
                       {services[activeIndex].number}
                     </motion.span>
-
                     <motion.div
                       className="relative z-10"
                       initial={{ opacity: 0, x: 30 }}
@@ -290,33 +352,6 @@ const DesktopServices = () => {
     </section>
   );
 };
-
-/* ── Mobile static section ──────────────────────────── */
-const MobileServices = () => (
-  <section id="services" className="section-dark py-12 relative grain overflow-hidden">
-    <FloatingElements variant="lines" count={2} />
-    <div className="container-custom">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-[10px] font-mono text-muted-foreground">[02]</span>
-        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">Servizi</span>
-      </div>
-      <motion.h2
-        className="text-xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-5"
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, ease }}
-      >
-        Services
-      </motion.h2>
-      <div className="space-y-3">
-        {services.map((service, i) => (
-          <ServiceCard key={service.number} service={service} index={i} />
-        ))}
-      </div>
-    </div>
-  </section>
-);
 
 /* ── Main export ────────────────────────────────────── */
 const ServicesSection = () => {
