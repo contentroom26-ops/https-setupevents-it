@@ -75,7 +75,10 @@ const Navbar = () => {
               ? "bg-white/[0.06] border-white/[0.1] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]"
               : "bg-white/[0.03] border-white/[0.05] backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
           }`}
-          style={{ height: isScrolled ? 56 : 64 }}
+          style={{
+            height: isScrolled ? 56 : 64,
+            WebkitBackdropFilter: isScrolled ? "blur(40px)" : "blur(24px)",
+          }}
           layout
           transition={{ duration: 0.5 }}
         >
