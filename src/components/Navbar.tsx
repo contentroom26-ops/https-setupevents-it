@@ -3,28 +3,32 @@ import logo from "@/assets/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const navLinks = [
-  { name: "Chi siamo", href: "#storia" },
-  { name: "Servizi", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Contatti", href: "#contact" },
-];
-
-const serviceItems = [
-  { title: "Corporate Events", desc: "Meeting, convention e team building", link: "/corporate-events" },
-  { title: "Brand Activations", desc: "Lanci prodotto ed esperienze immersive", link: "/brand-activation" },
-  { title: "Hostess & Staff", desc: "Personale selezionato per ogni evento", link: "/hostess-staff" },
-  { title: "Public Relations", desc: "Gestione relazioni e guest management", link: "/public-relations" },
-  { title: "Location & Set-up", desc: "Scouting e allestimenti scenografici", link: "/event-productions" },
-  { title: "Audio & Video", desc: "Produzione tecnica AV professionale", link: "/event-productions" },
+const serviceKeys = ["corporate", "brand", "hostess", "pr", "location", "av"] as const;
+const serviceLinks = [
+  "/corporate-events",
+  "/brand-activation",
+  "/hostess-staff",
+  "/public-relations",
+  "/event-productions",
+  "/event-productions",
 ];
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const navLinks = [
+    { name: t("nav.about"), href: "#storia" },
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.portfolio"), href: "#portfolio" },
+    { name: t("nav.contact"), href: "#contact" },
+  ];
 
   useEffect(() => {
     let ticking = false;
@@ -68,7 +72,6 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Glassmorphism container */}
         <motion.div
           className={`mt-3 md:mt-4 flex items-center justify-between rounded-2xl border transition-all duration-700 w-full max-w-6xl px-3 md:px-5 ${
             isScrolled
@@ -100,7 +103,7 @@ const Navbar = () => {
           {/* Desktop links */}
           <div className="hidden sm:flex items-center gap-0.5">
             {navLinks.map((link) =>
-              link.name === "Servizi" ? (
+              link.name === t("nav.services") ? (
                 <div
                   key={link.name}
                   className="relative"
@@ -125,22 +128,21 @@ const Navbar = () => {
                         exit={{ opacity: 0, y: 4, scale: 0.98 }}
                         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                       >
-                      <div className="w-[380px] bg-[hsl(var(--background))]/95 backdrop-blur-3xl border border-white/[0.12] rounded-2xl overflow-hidden shadow-[0_30px_80px_-10px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(255,255,255,0.03)]">
-                          {/* Top glow line */}
+                        <div className="w-[380px] bg-[hsl(var(--background))]/95 backdrop-blur-3xl border border-white/[0.12] rounded-2xl overflow-hidden shadow-[0_30px_80px_-10px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(255,255,255,0.03)]">
                           <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                           <div className="px-4 pt-4 pb-1">
-                            <p className="text-[9px] uppercase tracking-[0.4em] text-white/30 font-semibold">I nostri servizi</p>
+                            <p className="text-[9px] uppercase tracking-[0.4em] text-white/30 font-semibold">{t("nav.ourServices")}</p>
                           </div>
                           <div className="p-2">
-                            {serviceItems.map((item, i) => (
+                            {serviceKeys.map((key, i) => (
                               <motion.div
-                                key={item.title}
+                                key={key}
                                 initial={{ opacity: 0, y: 6 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.04, duration: 0.2 }}
                               >
                                 <Link
-                                  to={item.link}
+                                  to={serviceLinks[i]}
                                   className="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/[0.08] transition-all duration-300"
                                   onClick={() => setShowServices(false)}
                                 >
@@ -151,10 +153,10 @@ const Navbar = () => {
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <p className="text-[13px] font-semibold text-white/80 group-hover/item:text-white transition-colors duration-300">
-                                      {item.title}
+                                      {t(`navServices.${key}.title`)}
                                     </p>
                                     <p className="text-[11px] text-white/30 group-hover/item:text-white/50 transition-colors duration-300 truncate">
-                                      {item.desc}
+                                      {t(`navServices.${key}.desc`)}
                                     </p>
                                   </div>
                                   <ArrowRight className="w-3.5 h-3.5 text-white/10 group-hover/item:text-white/40 group-hover/item:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
@@ -162,7 +164,6 @@ const Navbar = () => {
                               </motion.div>
                             ))}
                           </div>
-                          {/* Bottom glow line */}
                           <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                         </div>
                       </motion.div>
@@ -180,6 +181,7 @@ const Navbar = () => {
                 </button>
               )
             )}
+            <LanguageSwitcher />
             <div className="w-px h-5 bg-white/[0.08] mx-2" />
             <motion.button
               onClick={() => scrollToSection("#contact")}
@@ -187,22 +189,25 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
             >
-              Preventivo
+              {t("nav.quote")}
               <ArrowUpRight className="w-3 h-3" />
             </motion.button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="sm:hidden p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-white/60" />
-            ) : (
-              <Menu className="w-5 h-5 text-white/60" />
-            )}
-          </button>
+          {/* Mobile hamburger + lang */}
+          <div className="sm:hidden flex items-center gap-1">
+            <LanguageSwitcher />
+            <button
+              className="p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 text-white/60" />
+              ) : (
+                <Menu className="w-5 h-5 text-white/60" />
+              )}
+            </button>
+          </div>
         </motion.div>
       </motion.nav>
 
@@ -242,7 +247,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Richiedi preventivo
+                {t("nav.requestQuote")}
               </motion.button>
             </div>
           </motion.div>

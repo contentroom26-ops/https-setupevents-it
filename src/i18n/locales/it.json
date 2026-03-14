@@ -1,0 +1,158 @@
+{
+  "seo": {
+    "title": "Organizzazione Eventi a Firenze | SetupEvents by Gabriel Lleshi",
+    "description": "SetupEvents di Gabriel Lleshi organizza eventi esclusivi a Firenze: corporate, privati, luxury e VIP. Location, catering, PR e produzione completa.",
+    "ogTitle": "Organizzazione Eventi a Firenze | SetupEvents",
+    "ogDescription": "Eventi esclusivi e su misura a Firenze: corporate, privati, VIP e luxury. Produzione completa con Gabriel Lleshi e SetupEvents."
+  },
+  "nav": {
+    "about": "Chi siamo",
+    "services": "Servizi",
+    "portfolio": "Portfolio",
+    "contact": "Contatti",
+    "quote": "Preventivo",
+    "requestQuote": "Richiedi preventivo",
+    "ourServices": "I nostri servizi"
+  },
+  "hero": {
+    "agency": "EVENTS AGENCY — FIRENZE",
+    "scroll": "Scroll"
+  },
+  "story": {
+    "label": "Chi siamo",
+    "heading": "Non organizziamo eventi.",
+    "headingSub": "Creiamo esperienze che lasciano il segno.",
+    "description": "Agenzia fiorentina con oltre dieci anni nel settore, specializzata in eventi corporate, brand activation e PR strategiche. Mettiamo a disposizione hostess e steward altamente selezionati, professionali e in linea con l'immagine del cliente. Conoscenza del territorio, relazioni consolidate e un approccio su misura — preciso, discreto, efficace.",
+    "founderRole": "Founder & Creative Director"
+  },
+  "marquee": "CORPORATE EVENTS • BRAND ACTIVATION • LAUNCH PRODUCT • HOSTESS & STEWARD • PUBLIC RELATIONS • LOCATION & SET-UP • A/V SERVICES • FIRENZE • ",
+  "services": {
+    "label": "Servizi",
+    "heading": "Services",
+    "counter": "servizi — scorri per scoprire",
+    "scroll": "Scorri",
+    "categories": "Categories",
+    "learnMore": "Scopri di più",
+    "items": [
+      {
+        "title": "Corporate Events",
+        "description": "Organizzazione di meeting, convention, cene aziendali e team building per rafforzare il brand e creare connessioni significative.",
+        "categories": ["Convention", "Team Building", "Cene Aziendali", "Meeting"]
+      },
+      {
+        "title": "Brand Activations",
+        "description": "Lanci prodotto ed esperienze immersive studiate per massimizzare visibilità, engagement e impatto sul mercato.",
+        "categories": ["Lancio Prodotto", "Pop-up Events", "Experiential Marketing"]
+      },
+      {
+        "title": "Hostess & Staff",
+        "description": "Personale selezionato e formato per accoglienza, promozione e immagine durante gli eventi. Professionalità garantita.",
+        "categories": ["Hostess", "Steward", "Promoter", "Staff Tecnico"]
+      },
+      {
+        "title": "Public Relations",
+        "description": "Gestione dei contatti e degli ospiti accuratamente selezionata. Selezione del target e cura delle relazioni per ogni evento.",
+        "categories": ["Guest Management", "VIP Relations", "Networking"]
+      },
+      {
+        "title": "Location & Set-up",
+        "description": "Scouting delle migliori location e allestimenti scenografici su misura. Dal concept alla realizzazione.",
+        "categories": ["Scouting", "Set Design", "Allestimenti", "Scenografia"]
+      },
+      {
+        "title": "A/V Production",
+        "description": "Servizi audio-video professionali con tecnologie all'avanguardia per produzioni impeccabili e d'impatto.",
+        "categories": ["Audio", "Video", "Lighting", "Live Streaming"]
+      }
+    ]
+  },
+  "portfolio": {
+    "label": "Projects",
+    "heading": "Case studies",
+    "gallery": "Gallery",
+    "cases": [
+      {
+        "subtitle": "Fashion Night Event",
+        "category": "Brand Activation",
+        "description": "Evento esclusivo nello store Diesel di Firenze: PR strategiche, selezione ospiti, hostess professionali e service audio-video completo per una serata dal forte impatto sul brand."
+      },
+      {
+        "subtitle": "Corporate Convention",
+        "category": "Corporate Event",
+        "description": "Convention aziendale per Banca Mediolanum con 120 invitati. Gestione completa: scouting location, allestimento scenografico, coordinamento relatori, hostess e steward, produzione audio-video e live streaming."
+      }
+    ]
+  },
+  "clients": {
+    "label": "Brand",
+    "eventsCount": "20+ eventi realizzati"
+  },
+  "method": {
+    "label": "Il nostro processo",
+    "heading": "Un processo collaudato che garantisce risultati,",
+    "headingSub": "senza sorprese.",
+    "steps": [
+      { "title": "Brief", "description": "Ascoltiamo le tue esigenze e obiettivi. Analizziamo ogni dettaglio per capire la tua visione." },
+      { "title": "Concept", "description": "Sviluppiamo idee creative e proposte visive su misura per il tuo brand." },
+      { "title": "Produzione", "description": "Gestiamo ogni aspetto: location, fornitori, staff, tecnologie e logistica." },
+      { "title": "Evento", "description": "Coordiniamo ogni elemento per un'esecuzione perfetta e senza compromessi." }
+    ]
+  },
+  "whyUs": {
+    "label": "Perché sceglierci",
+    "heading": "Non ci limitiamo a fornire un evento.",
+    "headingSub": "Avviciniamo il tuo pubblico.",
+    "stats": ["Clienti soddisfatti", "Eventi realizzati", "Tempo di risposta"],
+    "cta": "Inizia il tuo progetto"
+  },
+  "finalCta": {
+    "label": "[08] — Contattaci",
+    "heading": "PRONTO A",
+    "headingSub": "STUPIRE?",
+    "description": "Raccontaci la tua visione. Insieme creeremo qualcosa di straordinario.",
+    "cta": "Inizia il progetto"
+  },
+  "contact": {
+    "label": "Contattaci",
+    "heading": "Raccontaci il tuo",
+    "headingSub": "progetto",
+    "description": "Compila il form e ti ricontattiamo per creare insieme qualcosa di straordinario.",
+    "formTitle": "Richiedi un preventivo",
+    "formSubtitle": "Compila il form e ti ricontattiamo noi.",
+    "firstName": "Nome *",
+    "lastName": "Cognome *",
+    "company": "Azienda (opzionale)",
+    "email": "Email *",
+    "phone": "Telefono *",
+    "eventDate": "Data evento",
+    "message": "Raccontaci di cosa hai bisogno: servizi, obiettivi, dettagli... *",
+    "privacy": "Accetto la",
+    "privacyLink": "Privacy Policy",
+    "submit": "Invia richiesta",
+    "submitting": "Invio in corso...",
+    "successTitle": "Richiesta inviata!",
+    "successDesc": "Ti risponderemo entro 24 ore. Grazie!",
+    "errorTitle": "Errore",
+    "errorDesc": "Si è verificato un errore. Riprova più tardi.",
+    "privacyWarning": "Devi accettare la privacy policy."
+  },
+  "footer": {
+    "services": "Servizi",
+    "links": "Link",
+    "contacts": "Contatti",
+    "social": "Social",
+    "backToTop": "Torna su",
+    "portfolio": "Portfolio",
+    "contactLink": "Contatti",
+    "workWithUs": "Vuoi lavorare con noi come hostess o staff per eventi?",
+    "workCta": "Lavora con noi come Hostess"
+  },
+  "navServices": {
+    "corporate": { "title": "Corporate Events", "desc": "Meeting, convention e team building" },
+    "brand": { "title": "Brand Activations", "desc": "Lanci prodotto ed esperienze immersive" },
+    "hostess": { "title": "Hostess & Staff", "desc": "Personale selezionato per ogni evento" },
+    "pr": { "title": "Public Relations", "desc": "Gestione relazioni e guest management" },
+    "location": { "title": "Location & Set-up", "desc": "Scouting e allestimenti scenografici" },
+    "av": { "title": "Audio & Video", "desc": "Produzione tecnica AV professionale" }
+  }
+}

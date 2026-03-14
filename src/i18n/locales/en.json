@@ -1,0 +1,158 @@
+{
+  "seo": {
+    "title": "Event Planning in Florence | SetupEvents by Gabriel Lleshi",
+    "description": "SetupEvents by Gabriel Lleshi organizes exclusive events in Florence: corporate, private, luxury and VIP. Venues, catering, PR and full production.",
+    "ogTitle": "Event Planning in Florence | SetupEvents",
+    "ogDescription": "Exclusive and bespoke events in Florence: corporate, private, VIP and luxury. Full production with Gabriel Lleshi and SetupEvents."
+  },
+  "nav": {
+    "about": "About Us",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "quote": "Get a Quote",
+    "requestQuote": "Request a quote",
+    "ourServices": "Our services"
+  },
+  "hero": {
+    "agency": "EVENTS AGENCY — FLORENCE",
+    "scroll": "Scroll"
+  },
+  "story": {
+    "label": "About Us",
+    "heading": "We don't organize events.",
+    "headingSub": "We create experiences that leave a mark.",
+    "description": "A Florence-based agency with over ten years in the industry, specializing in corporate events, brand activations and strategic PR. We provide highly selected, professional hostesses and stewards aligned with our clients' image. Local expertise, established relationships and a tailor-made approach — precise, discreet, effective.",
+    "founderRole": "Founder & Creative Director"
+  },
+  "marquee": "CORPORATE EVENTS • BRAND ACTIVATION • PRODUCT LAUNCH • HOSTESS & STEWARD • PUBLIC RELATIONS • VENUE & SET-UP • A/V SERVICES • FLORENCE • ",
+  "services": {
+    "label": "Services",
+    "heading": "Services",
+    "counter": "services — scroll to discover",
+    "scroll": "Scroll",
+    "categories": "Categories",
+    "learnMore": "Learn more",
+    "items": [
+      {
+        "title": "Corporate Events",
+        "description": "Organization of meetings, conventions, corporate dinners and team building to strengthen the brand and create meaningful connections.",
+        "categories": ["Conventions", "Team Building", "Corporate Dinners", "Meetings"]
+      },
+      {
+        "title": "Brand Activations",
+        "description": "Product launches and immersive experiences designed to maximize visibility, engagement and market impact.",
+        "categories": ["Product Launch", "Pop-up Events", "Experiential Marketing"]
+      },
+      {
+        "title": "Hostess & Staff",
+        "description": "Selected and trained personnel for reception, promotion and brand image during events. Guaranteed professionalism.",
+        "categories": ["Hostess", "Steward", "Promoter", "Technical Staff"]
+      },
+      {
+        "title": "Public Relations",
+        "description": "Carefully selected contact and guest management. Target selection and relationship care for every event.",
+        "categories": ["Guest Management", "VIP Relations", "Networking"]
+      },
+      {
+        "title": "Location & Set-up",
+        "description": "Scouting of the best venues and bespoke scenic setups. From concept to realization.",
+        "categories": ["Scouting", "Set Design", "Installations", "Scenography"]
+      },
+      {
+        "title": "A/V Production",
+        "description": "Professional audio-video services with cutting-edge technologies for flawless and impactful productions.",
+        "categories": ["Audio", "Video", "Lighting", "Live Streaming"]
+      }
+    ]
+  },
+  "portfolio": {
+    "label": "Projects",
+    "heading": "Case studies",
+    "gallery": "Gallery",
+    "cases": [
+      {
+        "subtitle": "Fashion Night Event",
+        "category": "Brand Activation",
+        "description": "Exclusive event at the Diesel store in Florence: strategic PR, guest selection, professional hostesses and full audio-video service for a high-impact brand evening."
+      },
+      {
+        "subtitle": "Corporate Convention",
+        "category": "Corporate Event",
+        "description": "Corporate convention for Banca Mediolanum with 120 guests. Full management: venue scouting, scenic setup, speaker coordination, hostesses and stewards, audio-video production and live streaming."
+      }
+    ]
+  },
+  "clients": {
+    "label": "Brands",
+    "eventsCount": "20+ events delivered"
+  },
+  "method": {
+    "label": "Our Process",
+    "heading": "A proven process that delivers results,",
+    "headingSub": "without surprises.",
+    "steps": [
+      { "title": "Brief", "description": "We listen to your needs and goals. We analyze every detail to understand your vision." },
+      { "title": "Concept", "description": "We develop creative ideas and bespoke visual proposals for your brand." },
+      { "title": "Production", "description": "We manage every aspect: venue, suppliers, staff, technologies and logistics." },
+      { "title": "Event", "description": "We coordinate every element for a flawless, uncompromising execution." }
+    ]
+  },
+  "whyUs": {
+    "label": "Why Choose Us",
+    "heading": "We don't just deliver events.",
+    "headingSub": "We engage your audience.",
+    "stats": ["Satisfied clients", "Events delivered", "Response time"],
+    "cta": "Start your project"
+  },
+  "finalCta": {
+    "label": "[08] — Contact Us",
+    "heading": "READY TO",
+    "headingSub": "IMPRESS?",
+    "description": "Tell us your vision. Together we'll create something extraordinary.",
+    "cta": "Start the project"
+  },
+  "contact": {
+    "label": "Contact Us",
+    "heading": "Tell us about your",
+    "headingSub": "project",
+    "description": "Fill out the form and we'll get back to you to create something extraordinary together.",
+    "formTitle": "Request a quote",
+    "formSubtitle": "Fill out the form and we'll contact you.",
+    "firstName": "First Name *",
+    "lastName": "Last Name *",
+    "company": "Company (optional)",
+    "email": "Email *",
+    "phone": "Phone *",
+    "eventDate": "Event date",
+    "message": "Tell us what you need: services, goals, details... *",
+    "privacy": "I accept the",
+    "privacyLink": "Privacy Policy",
+    "submit": "Send request",
+    "submitting": "Sending...",
+    "successTitle": "Request sent!",
+    "successDesc": "We'll get back to you within 24 hours. Thank you!",
+    "errorTitle": "Error",
+    "errorDesc": "An error occurred. Please try again later.",
+    "privacyWarning": "You must accept the privacy policy."
+  },
+  "footer": {
+    "services": "Services",
+    "links": "Links",
+    "contacts": "Contacts",
+    "social": "Social",
+    "backToTop": "Back to top",
+    "portfolio": "Portfolio",
+    "contactLink": "Contact",
+    "workWithUs": "Want to work with us as hostess or event staff?",
+    "workCta": "Work with us as Hostess"
+  },
+  "navServices": {
+    "corporate": { "title": "Corporate Events", "desc": "Meetings, conventions and team building" },
+    "brand": { "title": "Brand Activations", "desc": "Product launches and immersive experiences" },
+    "hostess": { "title": "Hostess & Staff", "desc": "Selected personnel for every event" },
+    "pr": { "title": "Public Relations", "desc": "Relationship management and guest management" },
+    "location": { "title": "Location & Set-up", "desc": "Scouting and scenic installations" },
+    "av": { "title": "Audio & Video", "desc": "Professional AV technical production" }
+  }
+}
