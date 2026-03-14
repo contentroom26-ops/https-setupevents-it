@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const Marquee = ({ text }: { text?: string }) => {
-  const defaultContent = "CORPORATE EVENTS • BRAND ACTIVATION • LAUNCH PRODUCT • HOSTESS & STEWARD • PUBLIC RELATIONS • LOCATION & SET-UP • A/V SERVICES • FIRENZE • ";
-  const content = text ? text + " • " : defaultContent;
+  const { t } = useTranslation();
+  const content = text || t("marquee");
 
   return (
     <div className="py-6 md:py-8 overflow-hidden border-y border-border/30 relative">
