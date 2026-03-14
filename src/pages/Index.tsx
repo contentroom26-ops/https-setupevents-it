@@ -34,7 +34,7 @@ const Index = () => {
         <SideAccent />
         <HeroSection ready={splashDone} />
         <StorySection />
-        <Marquee text="SERVICES — EVENTS — PRODUCTION — HOSTESS — PR — AV" />
+        <Marquee />
         <ServicesSection />
         <PortfolioSection />
         <ContactSection />
