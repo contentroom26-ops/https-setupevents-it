@@ -1,0 +1,158 @@
+{
+  "seo": {
+    "title": "佛罗伦萨活动策划 | SetupEvents - Gabriel Lleshi",
+    "description": "SetupEvents由Gabriel Lleshi创立，在佛罗伦萨策划高端活动：企业活动、私人活动、奢华活动及VIP活动。场地、餐饮、公关及全方位制作服务。",
+    "ogTitle": "佛罗伦萨活动策划 | SetupEvents",
+    "ogDescription": "佛罗伦萨定制高端活动：企业、私人、VIP及奢华活动。Gabriel Lleshi和SetupEvents提供全方位制作服务。"
+  },
+  "nav": {
+    "about": "关于我们",
+    "services": "服务",
+    "portfolio": "作品集",
+    "contact": "联系我们",
+    "quote": "获取报价",
+    "requestQuote": "请求报价",
+    "ourServices": "我们的服务"
+  },
+  "hero": {
+    "agency": "活动策划公司 — 佛罗伦萨",
+    "scroll": "滚动"
+  },
+  "story": {
+    "label": "关于我们",
+    "heading": "我们不只是组织活动。",
+    "headingSub": "我们创造令人难忘的体验。",
+    "description": "佛罗伦萨本地机构，拥有十余年行业经验，专注于企业活动、品牌激活及战略公关。我们提供经过严格筛选的专业礼仪人员，与客户品牌形象完美契合。深厚的本地资源、稳固的合作关系以及量身定制的服务——精准、低调、高效。",
+    "founderRole": "创始人兼创意总监"
+  },
+  "marquee": "企业活动 • 品牌激活 • 产品发布 • 礼仪人员 • 公共关系 • 场地布置 • 音视频服务 • 佛罗伦萨 • ",
+  "services": {
+    "label": "服务",
+    "heading": "服务项目",
+    "counter": "项服务 — 滚动查看",
+    "scroll": "滚动",
+    "categories": "分类",
+    "learnMore": "了解更多",
+    "items": [
+      {
+        "title": "企业活动",
+        "description": "组织会议、大型会展、企业晚宴和团队建设，以加强品牌形象和建立有意义的联系。",
+        "categories": ["会展", "团队建设", "企业晚宴", "会议"]
+      },
+      {
+        "title": "品牌激活",
+        "description": "产品发布和沉浸式体验，旨在最大化品牌曝光率、参与度和市场影响力。",
+        "categories": ["产品发布", "快闪活动", "体验式营销"]
+      },
+      {
+        "title": "礼仪人员",
+        "description": "经过专业培训的人员负责活动接待、推广和品牌形象展示。确保专业素质。",
+        "categories": ["女礼仪", "男礼仪", "推广人员", "技术人员"]
+      },
+      {
+        "title": "公共关系",
+        "description": "精心挑选的联系人和宾客管理。为每场活动进行目标筛选和关系维护。",
+        "categories": ["宾客管理", "VIP接待", "社交网络"]
+      },
+      {
+        "title": "场地布置",
+        "description": "寻找最佳场地并提供定制化舞台设计。从概念到实现。",
+        "categories": ["场地搜寻", "舞台设计", "布置", "场景设计"]
+      },
+      {
+        "title": "音视频制作",
+        "description": "采用尖端技术的专业音视频服务，打造完美而震撼的制作效果。",
+        "categories": ["音响", "视频", "灯光", "直播"]
+      }
+    ]
+  },
+  "portfolio": {
+    "label": "项目",
+    "heading": "案例研究",
+    "gallery": "图片库",
+    "cases": [
+      {
+        "subtitle": "时尚之夜",
+        "category": "品牌激活",
+        "description": "在佛罗伦萨Diesel门店举办的独家活动：战略公关、宾客筛选、专业礼仪人员及完整音视频服务，打造对品牌影响深远的精彩夜晚。"
+      },
+      {
+        "subtitle": "企业大会",
+        "category": "企业活动",
+        "description": "为Banca Mediolanum举办的120人企业大会。全面管理：场地搜寻、舞台布置、演讲者协调、礼仪人员、音视频制作及直播。"
+      }
+    ]
+  },
+  "clients": {
+    "label": "品牌",
+    "eventsCount": "20+场活动"
+  },
+  "method": {
+    "label": "我们的流程",
+    "heading": "经过验证的流程保证结果，",
+    "headingSub": "没有意外。",
+    "steps": [
+      { "title": "需求分析", "description": "倾听您的需求和目标。分析每一个细节，理解您的愿景。" },
+      { "title": "概念设计", "description": "为您的品牌开发创意方案和量身定制的视觉提案。" },
+      { "title": "制作执行", "description": "管理每个环节：场地、供应商、人员、技术和物流。" },
+      { "title": "活动呈现", "description": "协调每一个元素，确保完美无瑕的执行效果。" }
+    ]
+  },
+  "whyUs": {
+    "label": "为何选择我们",
+    "heading": "我们不仅仅是举办活动。",
+    "headingSub": "我们拉近您与受众的距离。",
+    "stats": ["客户满意度", "已完成活动", "响应时间"],
+    "cta": "开始您的项目"
+  },
+  "finalCta": {
+    "label": "[08] — 联系我们",
+    "heading": "准备好",
+    "headingSub": "惊艳全场？",
+    "description": "告诉我们您的愿景。让我们一起创造非凡。",
+    "cta": "开始项目"
+  },
+  "contact": {
+    "label": "联系我们",
+    "heading": "告诉我们您的",
+    "headingSub": "项目",
+    "description": "填写表格，我们将与您联系，共同创造非凡。",
+    "formTitle": "请求报价",
+    "formSubtitle": "填写表格，我们会联系您。",
+    "firstName": "名 *",
+    "lastName": "姓 *",
+    "company": "公司（选填）",
+    "email": "邮箱 *",
+    "phone": "电话 *",
+    "eventDate": "活动日期",
+    "message": "告诉我们您的需求：服务、目标、细节... *",
+    "privacy": "我同意",
+    "privacyLink": "隐私政策",
+    "submit": "发送请求",
+    "submitting": "发送中...",
+    "successTitle": "请求已发送！",
+    "successDesc": "我们将在24小时内回复您。谢谢！",
+    "errorTitle": "错误",
+    "errorDesc": "发生错误。请稍后再试。",
+    "privacyWarning": "您必须接受隐私政策。"
+  },
+  "footer": {
+    "services": "服务",
+    "links": "链接",
+    "contacts": "联系方式",
+    "social": "社交媒体",
+    "backToTop": "返回顶部",
+    "portfolio": "作品集",
+    "contactLink": "联系我们",
+    "workWithUs": "想作为礼仪人员或活动工作人员加入我们吗？",
+    "workCta": "加入我们成为礼仪人员"
+  },
+  "navServices": {
+    "corporate": { "title": "企业活动", "desc": "会议、大会和团队建设" },
+    "brand": { "title": "品牌激活", "desc": "产品发布和沉浸式体验" },
+    "hostess": { "title": "礼仪人员", "desc": "为每场活动精选人员" },
+    "pr": { "title": "公共关系", "desc": "关系管理和宾客管理" },
+    "location": { "title": "场地布置", "desc": "场地搜寻和舞台布置" },
+    "av": { "title": "音视频", "desc": "专业音视频技术制作" }
+  }
+}
