@@ -108,6 +108,12 @@
     "label": "Why Choose Us",
     "heading": "We don't just deliver events.",
     "headingSub": "We engage your audience.",
+    "bullets": [
+      { "title": "24-Hour Response", "desc": "No endless waiting. We get back to you within a day with a concrete, tailored proposal." },
+      { "title": "Strong Local Network", "desc": "Trusted suppliers, venues and professionals in Florence. Relationships built over 10+ years in the industry." },
+      { "title": "Guaranteed Reliability", "desc": "Every detail is managed with precision. Zero surprises, zero compromises on quality." },
+      { "title": "Creative Problem Solving", "desc": "Unexpected issues? We turn them into opportunities. Fast, smart solutions for every situation." }
+    ],
     "stats": ["Satisfied clients", "Events delivered", "Response time"],
     "cta": "Start your project"
   },

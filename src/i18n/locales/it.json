@@ -108,6 +108,12 @@
     "label": "Perché sceglierci",
     "heading": "Non ci limitiamo a fornire un evento.",
     "headingSub": "Avviciniamo il tuo pubblico.",
+    "bullets": [
+      { "title": "Risposta in 24 ore", "desc": "Nessuna attesa infinita. Ti ricontattiamo entro un giorno con una proposta concreta e su misura." },
+      { "title": "Network locale consolidato", "desc": "Fornitori, location e professionisti fidati a Firenze. Relazioni costruite in oltre 10 anni nel settore." },
+      { "title": "Affidabilità garantita", "desc": "Ogni dettaglio viene gestito con precisione. Zero imprevisti, zero compromessi sulla qualità." },
+      { "title": "Problem solving creativo", "desc": "Imprevisti? Li trasformiamo in opportunità. Soluzioni rapide e intelligenti per ogni situazione." }
+    ],
     "stats": ["Clienti soddisfatti", "Eventi realizzati", "Tempo di risposta"],
     "cta": "Inizia il tuo progetto"
   },
