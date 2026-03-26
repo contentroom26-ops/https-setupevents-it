@@ -10,15 +10,15 @@
     "services": "服务",
     "portfolio": "作品集",
     "contact": "联系我们",
-    "quote": "获取报价",
-    "requestQuote": "请求报价",
+    "quote": "免费报价",
+    "requestQuote": "立即获取报价",
     "ourServices": "我们的服务"
   },
   "hero": {
     "agency": "活动策划公司 — 佛罗伦萨",
     "headline": "将创意化为盛事。",
     "subheadline": "24小时响应。完美执行。佛罗伦萨。",
-    "cta": "获取免费报价",
+    "cta": "立即获取免费报价 →",
     "scroll": "滚动"
   },
   "story": {
@@ -37,7 +37,7 @@
     "swipe": "滑动",
     "tapHint": "点击了解更多",
     "categories": "分类",
-    "learnMore": "了解更多",
+    "learnMore": "了解详情 →",
     "items": [
       {
         "title": "企业活动",
@@ -114,22 +114,22 @@
       { "title": "创意问题解决", "desc": "突发状况？我们将其转化为机遇。为每种情况提供快速、智能的解决方案。" }
     ],
     "stats": ["客户满意度", "已完成活动", "响应时间"],
-    "cta": "开始您的项目"
+    "cta": "告诉我们您的活动 →"
   },
   "finalCta": {
     "label": "[08] — 联系我们",
     "heading": "准备好",
     "headingSub": "惊艳全场？",
     "description": "告诉我们您的愿景。让我们一起创造非凡。",
-    "cta": "开始项目"
+    "cta": "告诉我们您的活动 →"
   },
   "contact": {
     "label": "联系我们",
     "heading": "告诉我们您的",
     "headingSub": "项目",
     "description": "填写表格，我们将与您联系，共同创造非凡。",
-    "formTitle": "请求报价",
-    "formSubtitle": "填写表格，我们会联系您。",
+    "formTitle": "24小时内免费报价",
+    "formSubtitle": "填写表格 — 明天前回复您。",
     "firstName": "名 *",
     "lastName": "姓 *",
     "company": "公司（选填）",
@@ -139,7 +139,7 @@
     "message": "告诉我们您的需求：服务、目标、细节... *",
     "privacy": "我同意",
     "privacyLink": "隐私政策",
-    "submit": "发送请求",
+    "submit": "获取我的免费报价 →",
     "submitting": "发送中...",
     "successTitle": "请求已发送！",
     "successDesc": "我们将在24小时内回复您。谢谢！",
@@ -156,7 +156,7 @@
     "portfolio": "作品集",
     "contactLink": "联系我们",
     "workWithUs": "想作为礼仪人员或活动工作人员加入我们吗？",
-    "workCta": "加入我们成为礼仪人员"
+    "workCta": "立即申请 →"
   },
   "navServices": {
     "corporate": { "title": "企业活动", "desc": "会议、大会和团队建设" },
