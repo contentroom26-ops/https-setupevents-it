@@ -193,8 +193,16 @@ const Navbar = () => {
             </motion.button>
           </div>
 
-          {/* Mobile hamburger + lang */}
-          <div className="lg:hidden flex items-center gap-1">
+          {/* Mobile/Tablet: CTA + lang + hamburger */}
+          <div className="lg:hidden flex items-center gap-2">
+            <motion.button
+              onClick={() => scrollToSection("#contact")}
+              className="text-[9px] uppercase tracking-[0.12em] font-semibold px-3 py-1.5 rounded-xl bg-primary/90 text-primary-foreground flex items-center gap-1.5 whitespace-nowrap flex-shrink-0"
+              whileTap={{ scale: 0.95 }}
+            >
+              {t("nav.quote")}
+              <ArrowUpRight className="w-3 h-3 flex-shrink-0" />
+            </motion.button>
             <LanguageSwitcher />
             <button
               className="p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
