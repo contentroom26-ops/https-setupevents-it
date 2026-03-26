@@ -28,9 +28,16 @@ const Index = () => {
   }, [splashDone]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
-      <div style={{ opacity: splashDone ? 1 : 0, transition: "opacity 0.4s ease" }}>
+      <div
+        className="min-h-screen"
+        style={{
+          opacity: splashDone ? 1 : 0,
+          transition: "opacity 0.5s ease",
+          visibility: splashDone ? "visible" : "hidden",
+        }}
+      >
         <Navbar />
         <SideAccent />
         <HeroSection ready={splashDone} />
