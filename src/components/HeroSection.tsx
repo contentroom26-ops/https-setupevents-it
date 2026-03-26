@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, MessageCircle, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -58,6 +58,12 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   };
 
+  const openWhatsApp = () => {
+    const phoneNumber = "393284163053";
+    const message = encodeURIComponent("Salve, vorrei organizzare un evento, vorrei avere più informazioni.");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  };
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.6]);
@@ -80,36 +86,84 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
         </video>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 40%, hsl(var(--background) / 0.7) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none bg-black/40" />
         <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: overlayOpacity, background: "hsl(var(--background))" }} />
       </motion.div>
 
+      {/* Top bar: agency label + video toggle */}
       <motion.div
-        className="relative z-10 flex justify-end container-custom pt-20 md:pt-28"
+        className="relative z-10 flex justify-between items-center container-custom pt-20 md:pt-28"
         initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 1, delay: 0.3 }}
       >
-        <div className="flex items-center gap-3">
-          <span className="text-[8px] md:text-[10px] text-white/30 font-mono tracking-wider hidden sm:inline">
-            {t("hero.agency")}
-          </span>
-          <motion.button
-            onClick={toggleVideo}
-            className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-colors"
-            whileTap={{ scale: 0.9 }}
-          >
-            {isPlaying ? <Pause size={10} /> : <Play size={10} />}
-          </motion.button>
-        </div>
+        <span className="text-[8px] md:text-[10px] text-white/30 font-mono tracking-wider hidden sm:inline">
+          {t("hero.agency")}
+        </span>
+        <motion.button
+          onClick={toggleVideo}
+          className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-colors"
+          whileTap={{ scale: 0.9 }}
+        >
+          {isPlaying ? <Pause size={10} /> : <Play size={10} />}
+        </motion.button>
       </motion.div>
 
-      <div className="flex-1" />
+      {/* Center content: headline + CTAs */}
+      <div className="flex-1 flex items-center justify-center">
+        <motion.div
+          className="relative z-10 container-custom text-center px-6"
+          style={{ y: contentY }}
+        >
+          <motion.h1
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 30 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            {t("hero.headline")}
+          </motion.h1>
 
-      <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ y: contentY }}>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 ml-6 md:ml-14 lg:ml-16">
+          <motion.p
+            className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide max-w-lg mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            {t("hero.subheadline")}
+          </motion.p>
+
           <motion.div
-            className="flex items-center gap-3 cursor-pointer group sm:mr-4"
+            className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+          >
+            <button
+              onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
+              className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm md:text-base tracking-wide hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-primary/25"
+            >
+              {t("hero.cta")}
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={openWhatsApp}
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white/80 font-medium text-sm md:text-base tracking-wide hover:bg-white/10 hover:border-white/30 hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
+            >
+              <MessageCircle size={16} />
+              {t("hero.ctaWhatsapp")}
+            </button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Bottom scroll indicator */}
+      <motion.div className="relative z-10 container-custom pb-8 md:pb-14" style={{ y: contentY }}>
+        <div className="flex justify-center">
+          <motion.div
+            className="flex items-center gap-3 cursor-pointer group"
             initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 1.5 }}
             onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
           >
             <div className="w-px h-6 bg-white/20 group-hover:bg-white/40 transition-colors" />
@@ -120,6 +174,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </div>
       </motion.div>
 
+      {/* Side dots */}
       <motion.div
         className="absolute right-5 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-3 hidden md:flex"
         initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
