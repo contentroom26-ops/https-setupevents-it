@@ -91,9 +91,14 @@
     will-change: transform;
   }
 
-  /* Smoother image rendering */
+  /* Smoother image rendering & layout containment */
   img {
     content-visibility: auto;
+  }
+
+  /* Contain layout paint for heavy sections */
+  section {
+    contain: layout style;
   }
 }
 

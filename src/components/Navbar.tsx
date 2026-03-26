@@ -82,8 +82,6 @@ const Navbar = () => {
             height: isScrolled ? 60 : 72,
             WebkitBackdropFilter: isScrolled ? "blur(40px)" : "blur(24px)",
           }}
-          layout
-          transition={{ duration: 0.5 }}
         >
           {/* Logo */}
           <a

@@ -3,23 +3,24 @@ import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import dieselMarbleBg from "@/assets/diesel-marble-bg.jpg";
-import dieselCard from "@/assets/diesel-card.jpg";
-import diesel1 from "@/assets/diesel-1.jpg";
-import diesel9 from "@/assets/diesel-9.jpg";
-import dieselEvent1 from "@/assets/diesel-event-1.jpg";
-import dieselEvent4 from "@/assets/diesel-event-4.jpg";
-import dieselEvent5 from "@/assets/diesel-event-5.jpg";
-import dieselEvent6 from "@/assets/diesel-event-6.jpg";
-import dieselEvent7 from "@/assets/diesel-event-7.jpg";
-import dieselEvent8 from "@/assets/diesel-event-8.jpg";
-import dieselEvent9 from "@/assets/diesel-event-9.jpg";
-import dieselEvent10 from "@/assets/diesel-event-10.jpg";
-import dieselEvent11 from "@/assets/diesel-event-11.jpg";
-import dieselEvent12 from "@/assets/diesel-event-12.jpg";
-import dieselEvent13 from "@/assets/diesel-event-13.jpg";
-import dieselEvent14 from "@/assets/diesel-event-14.jpg";
-import dieselEvent15 from "@/assets/diesel-event-15.jpg";
+// Use string paths for lazy loading — images load on scroll, not on page load
+const dieselMarbleBg = new URL("@/assets/diesel-marble-bg.jpg", import.meta.url).href;
+const dieselCard = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
+const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
+const diesel9 = new URL("@/assets/diesel-9.jpg", import.meta.url).href;
+const dieselEvent1 = new URL("@/assets/diesel-event-1.jpg", import.meta.url).href;
+const dieselEvent4 = new URL("@/assets/diesel-event-4.jpg", import.meta.url).href;
+const dieselEvent5 = new URL("@/assets/diesel-event-5.jpg", import.meta.url).href;
+const dieselEvent6 = new URL("@/assets/diesel-event-6.jpg", import.meta.url).href;
+const dieselEvent7 = new URL("@/assets/diesel-event-7.jpg", import.meta.url).href;
+const dieselEvent8 = new URL("@/assets/diesel-event-8.jpg", import.meta.url).href;
+const dieselEvent9 = new URL("@/assets/diesel-event-9.jpg", import.meta.url).href;
+const dieselEvent10 = new URL("@/assets/diesel-event-10.jpg", import.meta.url).href;
+const dieselEvent11 = new URL("@/assets/diesel-event-11.jpg", import.meta.url).href;
+const dieselEvent12 = new URL("@/assets/diesel-event-12.jpg", import.meta.url).href;
+const dieselEvent13 = new URL("@/assets/diesel-event-13.jpg", import.meta.url).href;
+const dieselEvent14 = new URL("@/assets/diesel-event-14.jpg", import.meta.url).href;
+const dieselEvent15 = new URL("@/assets/diesel-event-15.jpg", import.meta.url).href;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

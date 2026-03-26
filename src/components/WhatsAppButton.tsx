@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { forwardRef } from "react";
 
-const WhatsAppButton = () => {
+const WhatsAppButton = forwardRef<HTMLButtonElement>((_, ref) => {
   const openWhatsApp = () => {
     const phoneNumber = "393284163053";
     const message = encodeURIComponent("Salve, vorrei organizzare un evento, vorrei avere più informazioni.");
@@ -10,6 +11,7 @@ const WhatsAppButton = () => {
 
   return (
     <motion.button
+      ref={ref}
       onClick={openWhatsApp}
       className="whatsapp-btn rounded-full"
       initial={{ scale: 0, opacity: 0 }}
@@ -22,6 +24,8 @@ const WhatsAppButton = () => {
       <MessageCircle className="w-6 h-6 text-white" fill="white" />
     </motion.button>
   );
-};
+});
+
+WhatsAppButton.displayName = "WhatsAppButton";
 
 export default WhatsAppButton;
