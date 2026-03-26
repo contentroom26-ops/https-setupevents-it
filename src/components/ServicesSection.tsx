@@ -34,14 +34,9 @@ const getCardStyle = (_idx: number) => ({
 
 const MobileServices = () => {
   const { t } = useTranslation();
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleExpand = (idx: number) => {
-    setExpandedIndex(expandedIndex === idx ? null : idx);
-  };
 
   return (
-    <section id="services" className="section-dark py-14 relative grain overflow-hidden">
+    <section id="services" className="section-dark py-12 relative grain overflow-hidden">
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         {/* Header */}
@@ -57,91 +52,46 @@ const MobileServices = () => {
           {t("services.heading")}
         </motion.h2>
 
-        {/* Grid 2×3 — all services visible immediately */}
-        <div className="grid grid-cols-2 gap-3">
+        {/* Service list — clean, tappable, functional */}
+        <div className="space-y-2.5">
           {serviceNumbers.map((num, i) => {
             const Icon = serviceIcons[i];
-            const isExpanded = expandedIndex === i;
             const title = t(`services.items.${i}.title`);
             const description = t(`services.items.${i}.description`);
 
             return (
               <motion.div
                 key={i}
-                className={`relative rounded-xl overflow-hidden transition-all duration-300 ${
-                  isExpanded ? "col-span-2" : ""
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.4, delay: i * 0.06, ease }}
-                layout
+                initial={{ opacity: 0, x: -15 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.35, delay: i * 0.05, ease }}
               >
-                <button
-                  onClick={() => toggleExpand(i)}
-                  className={`w-full text-left rounded-xl border transition-all duration-300 ${
-                    isExpanded
-                      ? "bg-primary/10 border-primary/30 p-5"
-                      : "bg-black/30 backdrop-blur-sm border-white/[0.06] p-4 active:scale-[0.97]"
-                  }`}
+                <Link
+                  to={serviceLinks[i]}
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] active:scale-[0.98] active:bg-white/[0.06] transition-all duration-200 group"
                 >
-                  {/* Compact view — always visible */}
-                  <div className="flex items-start gap-3">
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
-                      isExpanded ? "bg-primary/20" : "bg-white/[0.05]"
-                    }`}>
-                      <Icon className={`w-4 h-4 transition-colors duration-300 ${
-                        isExpanded ? "text-primary" : "text-white/40"
-                      }`} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-[9px] font-mono text-primary/60 block mb-0.5">{num}</span>
-                      <h3 className="text-[13px] font-display font-bold text-white leading-tight tracking-tight">{title}</h3>
-                    </div>
+                  {/* Icon */}
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-active:bg-primary/20 transition-colors">
+                    <Icon className="w-5 h-5 text-primary" />
                   </div>
 
-                  {/* Expanded details */}
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-3 mt-3 border-t border-white/[0.08]">
-                          <p className="text-[12px] leading-relaxed text-white/55 mb-3">{description}</p>
-                          <Link
-                            to={serviceLinks[i]}
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-primary group"
-                          >
-                            {t("services.learnMore")}
-                            <ArrowRight className="w-3 h-3 transition-transform group-active:translate-x-1" />
-                          </Link>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </button>
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[9px] font-mono text-primary/50">{num}</span>
+                      <h3 className="text-[14px] font-display font-bold text-white tracking-tight truncate">{title}</h3>
+                    </div>
+                    <p className="text-[11px] text-white/40 leading-snug line-clamp-1">{description}</p>
+                  </div>
+
+                  {/* Arrow */}
+                  <ArrowRight className="w-4 h-4 text-white/20 flex-shrink-0 group-active:translate-x-1 transition-transform" />
+                </Link>
               </motion.div>
             );
           })}
         </div>
-
-        {/* CTA bottom */}
-        <motion.div
-          className="mt-6 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <p className="text-[10px] text-muted-foreground/40 uppercase tracking-[0.2em]">
-            {t("services.tapHint", "Tap per scoprire di più")}
-          </p>
-        </motion.div>
       </div>
     </section>
   );
