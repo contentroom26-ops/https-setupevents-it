@@ -58,7 +58,6 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   };
 
-
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.6]);
@@ -80,82 +79,80 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
         </video>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 40%, hsl(var(--background) / 0.7) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none bg-black/40" />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none bg-black/45" />
         <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: overlayOpacity, background: "hsl(var(--background))" }} />
       </motion.div>
 
-      {/* Top bar: agency label + video toggle */}
+      {/* Top bar */}
       <motion.div
         className="relative z-10 flex justify-between items-center container-custom pt-20 md:pt-28"
         initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 1, delay: 0.3 }}
       >
-        <span className="text-[8px] md:text-[10px] text-white/30 font-mono tracking-wider hidden sm:inline">
+        <span className="text-[8px] md:text-[10px] text-white/25 font-mono tracking-wider hidden sm:inline">
           {t("hero.agency")}
         </span>
         <motion.button
           onClick={toggleVideo}
-          className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-colors"
+          className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/40 hover:text-white hover:border-white/25 hover:bg-white/10 transition-all duration-300"
           whileTap={{ scale: 0.9 }}
         >
-          {isPlaying ? <Pause size={10} /> : <Play size={10} />}
+          {isPlaying ? <Pause size={11} /> : <Play size={11} />}
         </motion.button>
       </motion.div>
 
-      {/* Center content: headline + CTAs */}
+      {/* Center content */}
       <div className="flex-1 flex items-center justify-center">
-        <motion.div
-          className="relative z-10 container-custom text-center px-6"
-          style={{ y: contentY }}
-        >
+        <motion.div className="relative z-10 container-custom text-center px-6" style={{ y: contentY }}>
           <motion.h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 30 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white tracking-tighter leading-[1.05]"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             {t("hero.headline")}
           </motion.h1>
 
           <motion.p
-            className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide max-w-lg mx-auto"
+            className="mt-5 md:mt-8 text-sm sm:text-base md:text-lg text-white/50 font-medium tracking-wide max-w-lg mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
           >
             {t("hero.subheadline")}
           </motion.p>
 
           <motion.div
-            className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            className="mt-10 md:mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <button
+            <motion.button
               onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
-              className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm md:text-base tracking-wide hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-primary/25"
+              className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-primary text-primary-foreground font-bold text-sm md:text-base tracking-wide shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.5)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.6)]"
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
             >
               {t("hero.cta")}
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
 
       {/* Bottom scroll indicator */}
-      <motion.div className="relative z-10 container-custom pb-8 md:pb-14" style={{ y: contentY }}>
+      <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ y: contentY }}>
         <div className="flex justify-center">
           <motion.div
             className="flex items-center gap-3 cursor-pointer group"
             initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
-            transition={{ delay: 1.5 }}
+            transition={{ delay: 1.6 }}
             onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
           >
-            <div className="w-px h-6 bg-white/20 group-hover:bg-white/40 transition-colors" />
-            <span className="text-white/25 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/50 transition-colors">
+            <div className="w-px h-7 bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
+            <span className="text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/40 transition-colors duration-300">
               {t("hero.scroll")}
             </span>
           </motion.div>
@@ -164,14 +161,14 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
 
       {/* Side dots */}
       <motion.div
-        className="absolute right-5 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-3 hidden md:flex"
+        className="absolute right-6 md:right-10 lg:right-14 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-3.5 hidden md:flex"
         initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.3 }}
       >
-        <div className="w-2 h-2 rounded-full bg-primary" />
-        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary)/0.4)]" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
       </motion.div>
     </section>
   );
