@@ -13,4 +13,7 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://setupevents.it/sitemap.xml
+Disallow: /api/
+Disallow: /_/
+
+Sitemap: https://www.setupevents.it/sitemap.xml
