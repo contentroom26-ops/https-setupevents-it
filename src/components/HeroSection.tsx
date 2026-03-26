@@ -133,7 +133,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           transition={{ duration: 0.8, delay: 1.2 }}
         >
           <motion.button
-            onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm tracking-wide shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.5)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.6)]"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.95 }}
