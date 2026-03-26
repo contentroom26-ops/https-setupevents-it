@@ -73,13 +73,13 @@ const Navbar = () => {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div
-          className={`mt-3 md:mt-4 flex items-center justify-between rounded-2xl border transition-all duration-700 w-full max-w-6xl px-3 md:px-5 ${
+          className={`mt-3 md:mt-4 flex items-center justify-between rounded-2xl border transition-all duration-700 w-full max-w-6xl px-4 md:px-6 ${
             isScrolled
               ? "bg-white/[0.06] border-white/[0.1] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]"
               : "bg-white/[0.03] border-white/[0.05] backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
           }`}
           style={{
-            height: isScrolled ? 56 : 64,
+            height: isScrolled ? 60 : 72,
             WebkitBackdropFilter: isScrolled ? "blur(40px)" : "blur(24px)",
           }}
           layout
@@ -95,7 +95,7 @@ const Navbar = () => {
               src={logo}
               alt="SetupEvents"
               className={`w-auto drop-shadow-lg transition-all duration-500 ${
-                isScrolled ? "h-20 md:h-28 -my-4 md:-my-7" : "h-24 md:h-32 -my-6 md:-my-9"
+                isScrolled ? "h-24 md:h-32 -my-5 md:-my-8" : "h-28 md:h-36 -my-7 md:-my-10"
               }`}
             />
           </a>
