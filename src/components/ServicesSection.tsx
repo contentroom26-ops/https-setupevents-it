@@ -122,7 +122,7 @@ const DesktopServices = () => {
   const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
 
   return (
-    <section ref={sectionRef} id="services" className="section-dark relative grain" style={{ height: `${serviceNumbers.length * 100}vh` }}>
+    <section ref={sectionRef} id="services" className="section-dark relative grain" style={{ height: `${serviceNumbers.length * 60}vh` }}>
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
@@ -154,11 +154,15 @@ const DesktopServices = () => {
                     </div>
                   ))}
                 </div>
-                <motion.div className="mt-6 flex items-center gap-2 text-muted-foreground/30" animate={{ opacity: activeIndex < serviceNumbers.length - 1 ? 1 : 0 }}>
-                  <motion.div className="w-4 h-7 rounded-full border border-muted-foreground/20 flex items-start justify-center p-1">
-                    <motion.div className="w-1 h-1.5 rounded-full bg-primary" animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} />
+                <motion.div 
+                  className="mt-6 flex items-center gap-2" 
+                  animate={{ opacity: activeIndex < serviceNumbers.length - 1 ? 1 : 0.3 }}
+                >
+                  <motion.div className="w-5 h-8 rounded-full border border-primary/40 flex items-start justify-center p-1">
+                    <motion.div className="w-1.5 h-2 rounded-full bg-primary" animate={{ y: [0, 10, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} />
                   </motion.div>
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium">{t("services.scroll")}</span>
+                  <span className="text-[11px] uppercase tracking-[0.2em] font-medium text-muted-foreground/60">{t("services.scroll")}</span>
+                  <span className="text-[10px] text-primary font-mono ml-1">{String(activeIndex + 1).padStart(2, "0")}/{String(serviceNumbers.length).padStart(2, "0")}</span>
                 </motion.div>
               </div>
               <div className="col-span-7 xl:col-span-8">
