@@ -20,26 +20,44 @@ const ClientsSection = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-background" ref={ref}>
+    <section className="py-24 md:py-32 bg-background relative" ref={ref}>
       <div className="container-custom">
-        <motion.div className="flex items-center justify-between mb-12" initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease: "easeOut" }}>
-          <motion.span className="text-sm text-muted-foreground uppercase tracking-widest" initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }}>
-            {t("clients.label")}
-          </motion.span>
-          <motion.span className="text-sm text-muted-foreground" initial={{ opacity: 0, x: 20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }}>
-            {t("clients.eventsCount")}
-          </motion.span>
+        <motion.div
+          className="flex items-center justify-between mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="flex items-center gap-3">
+            <div className="h-px w-8 bg-primary/30" />
+            <span className="text-sm text-muted-foreground uppercase tracking-[0.2em] font-medium">{t("clients.label")}</span>
+          </div>
+          <span className="text-sm text-muted-foreground/60">{t("clients.eventsCount")}</span>
         </motion.div>
 
-        <motion.div className="flex flex-wrap items-center justify-center gap-8 md:gap-16" variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {clients.map((client) => (
-            <motion.span key={client} className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/20 hover:text-foreground transition-all duration-300 tracking-tight cursor-default hover:scale-110" variants={itemVariants} whileHover={{ scale: 1.1, color: "hsl(var(--foreground))", transition: { duration: 0.2 } }}>
+            <motion.span
+              key={client}
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/15 tracking-tight cursor-default transition-all duration-500 hover:text-foreground hover:scale-110 hover:text-gradient-primary"
+              variants={itemVariants}
+            >
               {client}
             </motion.span>
           ))}
         </motion.div>
 
-        <motion.div className="mt-16 h-px bg-border" initial={{ scaleX: 0, originX: 0 }} animate={isInView ? { scaleX: 1 } : {}} transition={{ duration: 1.2, delay: 0.6, ease: "easeInOut" }} />
+        <motion.div
+          className="mt-20 section-divider"
+          initial={{ scaleX: 0, originX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.2, delay: 0.6, ease: "easeInOut" }}
+        />
       </div>
     </section>
   );
