@@ -43,6 +43,7 @@ const Footer = () => {
                 { name: t("footer.contactLink"), href: "#contact" },
                 { name: "Privacy Policy", href: "/privacy-policy" },
                 { name: "Cookie Policy", href: "/cookie-policy" },
+                { name: "Termini e Condizioni", href: "/termini-condizioni" },
               ].map((item) => (
                 <li key={item.name}>
                   {item.href.startsWith("/") ? (
