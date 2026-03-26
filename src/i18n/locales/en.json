@@ -10,15 +10,15 @@
     "services": "Services",
     "portfolio": "Portfolio",
     "contact": "Contact",
-    "quote": "Get a Quote",
-    "requestQuote": "Request a quote",
+    "quote": "Free Quote",
+    "requestQuote": "Get your quote now",
     "ourServices": "Our services"
   },
   "hero": {
     "agency": "EVENTS AGENCY — FLORENCE",
     "headline": "We turn ideas into events.",
     "subheadline": "24h response. Flawless execution. Florence.",
-    "cta": "Get a free quote",
+    "cta": "Get your free quote →",
     "scroll": "Scroll"
   },
   "story": {
@@ -37,7 +37,7 @@
     "swipe": "Swipe",
     "tapHint": "Tap to learn more",
     "categories": "Categories",
-    "learnMore": "Learn more",
+    "learnMore": "See how →",
     "items": [
       {
         "title": "Corporate Events",
@@ -114,22 +114,22 @@
       { "title": "Creative Problem Solving", "desc": "Unexpected issues? We turn them into opportunities. Fast, smart solutions for every situation." }
     ],
     "stats": ["Satisfied clients", "Events delivered", "Response time"],
-    "cta": "Start your project"
+    "cta": "Tell us about your event →"
   },
   "finalCta": {
     "label": "[08] — Contact Us",
     "heading": "READY TO",
     "headingSub": "IMPRESS?",
     "description": "Tell us your vision. Together we'll create something extraordinary.",
-    "cta": "Start the project"
+    "cta": "Tell us about your event →"
   },
   "contact": {
     "label": "Contact Us",
     "heading": "Tell us about your",
     "headingSub": "project",
     "description": "Fill out the form and we'll get back to you to create something extraordinary together.",
-    "formTitle": "Request a quote",
-    "formSubtitle": "Fill out the form and we'll contact you.",
+    "formTitle": "Free quote within 24h",
+    "formSubtitle": "Fill the form — we'll reply by tomorrow.",
     "firstName": "First Name *",
     "lastName": "Last Name *",
     "company": "Company (optional)",
@@ -139,7 +139,7 @@
     "message": "Tell us what you need: services, goals, details... *",
     "privacy": "I accept the",
     "privacyLink": "Privacy Policy",
-    "submit": "Send request",
+    "submit": "I want my free quote →",
     "submitting": "Sending...",
     "successTitle": "Request sent!",
     "successDesc": "We'll get back to you within 24 hours. Thank you!",
@@ -156,7 +156,7 @@
     "portfolio": "Portfolio",
     "contactLink": "Contact",
     "workWithUs": "Want to work with us as hostess or event staff?",
-    "workCta": "Work with us as Hostess"
+    "workCta": "Apply now →"
   },
   "navServices": {
     "corporate": { "title": "Corporate Events", "desc": "Meetings, conventions and team building" },

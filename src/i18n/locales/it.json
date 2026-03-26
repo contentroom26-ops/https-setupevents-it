@@ -10,15 +10,15 @@
     "services": "Servizi",
     "portfolio": "Portfolio",
     "contact": "Contatti",
-    "quote": "Preventivo",
-    "requestQuote": "Richiedi preventivo",
+    "quote": "Preventivo gratuito",
+    "requestQuote": "Ottieni il tuo preventivo ora",
     "ourServices": "I nostri servizi"
   },
   "hero": {
     "agency": "EVENTS AGENCY — FIRENZE",
     "headline": "Trasformiamo idee in eventi.",
     "subheadline": "Risposta in 24h. Esecuzione impeccabile. Firenze.",
-    "cta": "Richiedi preventivo gratuito",
+    "cta": "Ottieni il tuo preventivo →",
     "scroll": "Scroll"
   },
   "story": {
@@ -37,7 +37,7 @@
     "swipe": "Scorri",
     "tapHint": "Tocca per scoprire di più",
     "categories": "Categories",
-    "learnMore": "Scopri di più",
+    "learnMore": "Scopri come →",
     "items": [
       {
         "title": "Corporate Events",
@@ -114,22 +114,22 @@
       { "title": "Problem solving creativo", "desc": "Imprevisti? Li trasformiamo in opportunità. Soluzioni rapide e intelligenti per ogni situazione." }
     ],
     "stats": ["Clienti soddisfatti", "Eventi realizzati", "Tempo di risposta"],
-    "cta": "Inizia il tuo progetto"
+    "cta": "Parlaci del tuo evento →"
   },
   "finalCta": {
     "label": "[08] — Contattaci",
     "heading": "PRONTO A",
     "headingSub": "STUPIRE?",
     "description": "Raccontaci la tua visione. Insieme creeremo qualcosa di straordinario.",
-    "cta": "Inizia il progetto"
+    "cta": "Raccontaci il tuo evento →"
   },
   "contact": {
     "label": "Contattaci",
     "heading": "Raccontaci il tuo",
     "headingSub": "progetto",
     "description": "Compila il form e ti ricontattiamo per creare insieme qualcosa di straordinario.",
-    "formTitle": "Richiedi un preventivo",
-    "formSubtitle": "Compila il form e ti ricontattiamo noi.",
+    "formTitle": "Preventivo gratuito in 24h",
+    "formSubtitle": "Compila il form — ti rispondiamo entro domani.",
     "firstName": "Nome *",
     "lastName": "Cognome *",
     "company": "Azienda (opzionale)",
@@ -139,7 +139,7 @@
     "message": "Raccontaci di cosa hai bisogno: servizi, obiettivi, dettagli... *",
     "privacy": "Accetto la",
     "privacyLink": "Privacy Policy",
-    "submit": "Invia richiesta",
+    "submit": "Voglio il mio preventivo →",
     "submitting": "Invio in corso...",
     "successTitle": "Richiesta inviata!",
     "successDesc": "Ti risponderemo entro 24 ore. Grazie!",
@@ -156,7 +156,7 @@
     "portfolio": "Portfolio",
     "contactLink": "Contatti",
     "workWithUs": "Vuoi lavorare con noi come hostess o staff per eventi?",
-    "workCta": "Lavora con noi come Hostess"
+    "workCta": "Candidati ora →"
   },
   "navServices": {
     "corporate": { "title": "Corporate Events", "desc": "Meeting, convention e team building" },
