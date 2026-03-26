@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Pause, Play, MessageCircle, ArrowRight } from "lucide-react";
+import { Pause, Play, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -58,11 +58,6 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   };
 
-  const openWhatsApp = () => {
-    const phoneNumber = "393284163053";
-    const message = encodeURIComponent("Salve, vorrei organizzare un evento, vorrei avere più informazioni.");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-  };
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
@@ -146,13 +141,6 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>
 
-            <button
-              onClick={openWhatsApp}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white/80 font-medium text-sm md:text-base tracking-wide hover:bg-white/10 hover:border-white/30 hover:text-white hover:scale-105 active:scale-95 transition-all duration-300"
-            >
-              <MessageCircle size={16} />
-              {t("hero.ctaWhatsapp")}
-            </button>
           </motion.div>
         </motion.div>
       </div>
