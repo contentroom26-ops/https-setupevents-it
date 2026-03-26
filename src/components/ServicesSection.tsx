@@ -1,6 +1,6 @@
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useState, useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FloatingElements from "./FloatingElements";
@@ -30,73 +30,151 @@ const getCardStyle = (_idx: number) => ({
   underline: "bg-white",
 });
 
-const ServiceCard = ({ index }: { index: number }) => {
-  const { t } = useTranslation();
-  const s = getCardStyle(index);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 95%", "start 60%"] });
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const x = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? -20 : 20, 0]);
-
-  const title = t(`services.items.${index}.title`);
-  const description = t(`services.items.${index}.description`);
-  const categories: string[] = t(`services.items.${index}.categories`, { returnObjects: true }) as string[];
-
-  return (
-    <motion.div ref={cardRef} style={{ opacity, y, scale, x }} className={`relative rounded-xl p-5 ${s.card} will-change-transform`}>
-      <motion.div className="absolute top-0 left-0 w-full h-[2px] bg-primary origin-left" style={{ scaleX: scrollYProgress }} />
-      <span className={`absolute top-1 right-3 text-[2.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>{serviceNumbers[index]}</span>
-      <div className="relative z-10">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono text-primary">{serviceNumbers[index]}</span>
-          <h3 className={`text-base font-display font-extrabold tracking-tight ${s.title}`}>{title}</h3>
-        </div>
-        <p className={`text-[11px] leading-relaxed mb-3 ${s.desc}`}>{description}</p>
-        <div className="flex flex-wrap gap-1 mb-3">
-          {categories.map((cat: string) => (
-            <span key={cat} className={`text-[9px] px-2 py-0.5 rounded-full border font-medium ${s.tag}`}>{cat}</span>
-          ))}
-        </div>
-        <Link to={serviceLinks[index]} className={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors duration-300 group ${s.link}`}>
-          <span className="relative">
-            {t("services.learnMore")}
-            <span className={`absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
-          </span>
-          <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-};
-
 const MobileServices = () => {
   const { t } = useTranslation();
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const total = serviceNumbers.length;
+
+  const goTo = (idx: number) => {
+    setDirection(idx > activeIndex ? 1 : -1);
+    setActiveIndex(idx);
+  };
+
+  const next = () => goTo(activeIndex < total - 1 ? activeIndex + 1 : 0);
+  const prev = () => goTo(activeIndex > 0 ? activeIndex - 1 : total - 1);
+
+  // Swipe handling
+  const dragStart = useRef(0);
+  const handleDragEnd = (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
+    if (info.offset.x < -50 || info.velocity.x < -300) next();
+    else if (info.offset.x > 50 || info.velocity.x > 300) prev();
+  };
+
+  const s = getCardStyle(activeIndex);
+  const title = t(`services.items.${activeIndex}.title`);
+  const description = t(`services.items.${activeIndex}.description`);
+  const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
+
+  const variants = {
+    enter: (d: number) => ({ x: d > 0 ? 200 : -200, opacity: 0, scale: 0.9 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (d: number) => ({ x: d > 0 ? -200 : 200, opacity: 0, scale: 0.9 }),
+  };
 
   return (
-    <section ref={sectionRef} id="services" className="section-dark py-14 relative grain overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
-        <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
-      </div>
+    <section id="services" className="section-dark py-14 relative grain overflow-hidden">
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         <div className="flex items-center gap-3 mb-4">
           <span className="text-[10px] font-mono text-muted-foreground">[02]</span>
           <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("services.label")}</span>
         </div>
-        <motion.h2 className="text-2xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-2" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, ease }}>
+        <motion.h2
+          className="text-2xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-2"
+          initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          transition={{ duration: 0.5, ease }}
+        >
           {t("services.heading")}
         </motion.h2>
-        <motion.p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 font-mono mb-6" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-          {String(serviceNumbers.length).padStart(2, "0")} {t("services.counter")}
-        </motion.p>
-        <div className="space-y-4">
-          {serviceNumbers.map((_, i) => <ServiceCard key={i} index={i} />)}
+
+        {/* Counter */}
+        <div className="flex items-center justify-between mb-5">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 font-mono">
+            {String(total).padStart(2, "0")} {t("services.counter")}
+          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-display font-extrabold text-primary tabular-nums">{String(activeIndex + 1).padStart(2, "0")}</span>
+            <span className="text-muted-foreground/30 text-xs font-mono">/</span>
+            <span className="text-muted-foreground/30 text-xs font-mono">{String(total).padStart(2, "0")}</span>
+          </div>
         </div>
+
+        {/* Swipeable card */}
+        <div className="relative min-h-[320px] touch-pan-y">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={activeIndex}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.35, ease }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragEnd={handleDragEnd}
+              className={`relative rounded-2xl p-6 ${s.card} cursor-grab active:cursor-grabbing`}
+            >
+              <span className={`absolute top-2 right-4 text-[3.5rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`}>
+                {serviceNumbers[activeIndex]}
+              </span>
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[10px] font-mono text-primary">{serviceNumbers[activeIndex]}</span>
+                  <h3 className={`text-lg font-display font-extrabold tracking-tight ${s.title}`}>{title}</h3>
+                </div>
+                <p className={`text-[12px] leading-relaxed mb-4 ${s.desc}`}>{description}</p>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {categories.map((cat: string, ci: number) => (
+                    <motion.span
+                      key={cat}
+                      className={`text-[9px] px-2.5 py-0.5 rounded-full border font-medium ${s.tag}`}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + ci * 0.04, duration: 0.25 }}
+                    >
+                      {cat}
+                    </motion.span>
+                  ))}
+                </div>
+                <Link to={serviceLinks[activeIndex]} className={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors duration-300 group ${s.link}`}>
+                  <span className="relative">
+                    {t("services.learnMore")}
+                    <span className={`absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${s.underline}`} />
+                  </span>
+                  <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex items-center justify-between mt-5">
+          <div className="flex gap-2">
+            <button onClick={prev} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] flex items-center justify-center text-white/50 active:scale-90 transition-transform">
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button onClick={next} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] flex items-center justify-center text-white/50 active:scale-90 transition-transform">
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+          {/* Dots */}
+          <div className="flex gap-1.5">
+            {serviceNumbers.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex ? "w-6 bg-primary" : "w-1.5 bg-white/15"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Swipe hint */}
+        <motion.p
+          className="text-center text-[10px] text-muted-foreground/30 uppercase tracking-[0.2em] mt-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          ← {t("services.swipe", "Swipe")} →
+        </motion.p>
       </div>
     </section>
   );
