@@ -99,7 +99,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden sm:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) =>
               link.name === t("nav.services") ? (
                 <div
