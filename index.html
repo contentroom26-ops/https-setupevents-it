@@ -13,10 +13,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4" />
-    <title>Organizzazione Eventi a Firenze | SetupEvents by Gabriel Lleshi</title>
-    <meta name="description" content="SetupEvents di Gabriel Lleshi organizza eventi esclusivi a Firenze: corporate, privati, luxury e VIP. Location, catering, PR e produzione completa. Contattaci ora per il tuo evento su misura." />
+
+    <title>Organizzazione Eventi Firenze | Hostess, Steward e Promoter | SetupEvents</title>
+    <meta name="description" content="SetupEvents: agenzia leader nell'organizzazione eventi a Firenze. Servizio hostess e steward, promoter per eventi VIP, eventi aziendali, feste private e allestimenti su misura. Richiedi un preventivo gratuito." />
     <meta name="author" content="SetupEvents" />
-    <meta name="keywords" content="organizzazione eventi Firenze, event planner Firenze, agenzia eventi Firenze, eventi aziendali Firenze, eventi privati Firenze, eventi luxury Firenze, SetupEvents, Gabriel Lleshi" />
+    <meta name="keywords" content="organizzazione eventi Firenze, servizio hostess e steward, servizio promoter eventi, eventi aziendali Firenze, feste private Firenze, allestimenti eventi Firenze, promoter VIP Firenze, agenzia eventi Toscana, hostess fiere Firenze, event planner Firenze, SetupEvents, Gabriel Lleshi" />
 
     <link rel="canonical" href="https://www.setupevents.it/" />
     <link rel="alternate" hreflang="it" href="https://www.setupevents.it/?lang=it" />
@@ -25,16 +26,18 @@
     <link rel="alternate" hreflang="x-default" href="https://www.setupevents.it/" />
 
     <!-- Open Graph / Social Preview -->
-    <meta property="og:title" content="Organizzazione Eventi a Firenze | SetupEvents" />
-    <meta property="og:description" content="Eventi esclusivi e su misura a Firenze: corporate, privati, VIP e luxury. Produzione completa con Gabriel Lleshi e SetupEvents." />
+    <meta property="og:title" content="Organizzazione Eventi Firenze | Hostess, Steward e Promoter | SetupEvents" />
+    <meta property="og:description" content="Agenzia specializzata in organizzazione eventi a Firenze: servizio hostess e steward, promoter per eventi e VIP, eventi aziendali, feste private e allestimenti scenografici." />
     <meta property="og:url" content="https://www.setupevents.it/" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://www.setupevents.it/images/evento-firenze.jpg" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="SetupEvents" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Organizzazione Eventi a Firenze | SetupEvents" />
-    <meta name="twitter:description" content="SetupEvents organizza eventi di lusso e aziendali a Firenze. Contattaci per un progetto esclusivo." />
+    <meta name="twitter:title" content="Organizzazione Eventi Firenze | Hostess, Steward e Promoter | SetupEvents" />
+    <meta name="twitter:description" content="SetupEvents organizza eventi aziendali e feste private a Firenze. Servizio hostess, steward e promoter VIP. Allestimenti su misura." />
     <meta name="twitter:image" content="https://www.setupevents.it/images/evento-firenze.jpg" />
 
     <!-- Local SEO GEO Tags -->
@@ -43,26 +46,56 @@
     <meta name="geo.position" content="43.7696;11.2558" />
     <meta name="ICBM" content="43.7696, 11.2558" />
 
-    <!-- Structured Data Schema Markup (Google Local SEO) -->
+    <!-- Structured Data: LocalBusiness + EventPlanning -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "EventPlanning",
+      "@type": "LocalBusiness",
+      "additionalType": "https://schema.org/EventPlanning",
       "name": "SetupEvents",
-      "founder": "Gabriel Lleshi",
+      "founder": {
+        "@type": "Person",
+        "name": "Gabriel Lleshi"
+      },
       "url": "https://www.setupevents.it",
-      "description": "SetupEvents è un'agenzia specializzata in organizzazione eventi a Firenze: eventi aziendali, privati, luxury, VIP, PR e produzione completa.",
+      "description": "Agenzia specializzata in organizzazione eventi a Firenze: eventi aziendali, feste private, allestimenti scenografici, servizio hostess e steward, promoter per eventi e VIP.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Firenze",
         "addressRegion": "Toscana",
+        "postalCode": "50100",
         "addressCountry": "IT"
       },
-      "areaServed": {
-        "@type": "City",
-        "name": "Firenze"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.7696,
+        "longitude": 11.2558
       },
-      "telephone": "+393284163053"
+      "areaServed": [
+        { "@type": "City", "name": "Firenze" },
+        { "@type": "State", "name": "Toscana" }
+      ],
+      "telephone": "+393284163053",
+      "priceRange": "€€€",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi eventi",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Organizzazione eventi aziendali Firenze" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Servizio hostess e steward" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Servizio promoter per eventi e VIP" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Allestimenti eventi Firenze" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Feste private Firenze" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand activation e lancio prodotti" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Public Relations e guest management" } }
+        ]
+      }
     }
     </script>
   </head>
