@@ -102,45 +102,47 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </motion.button>
       </motion.div>
 
-      {/* Center content — positioned in lower third to avoid video logo */}
-      <div className="flex-1 flex items-end pb-24 md:pb-32">
-        <motion.div className="relative z-10 container-custom text-left px-6" style={{ y: contentY }}>
-          <motion.h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white tracking-tighter leading-[1.05] max-w-3xl"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {t("hero.headline")}
-          </motion.h1>
+      {/* Content — bottom-left to keep video center logo clear */}
+      <div className="flex-1" />
+      <motion.div
+        className="relative z-10 container-custom px-6 pb-20 md:pb-24"
+        style={{ y: contentY }}
+      >
+        <motion.h1
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[1.05] max-w-2xl"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {t("hero.headline")}
+        </motion.h1>
 
-          <motion.p
-            className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/50 font-medium tracking-wide max-w-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-          >
-            {t("hero.subheadline")}
-          </motion.p>
+        <motion.p
+          className="mt-3 md:mt-5 text-xs sm:text-sm md:text-base text-white/50 font-medium tracking-wide max-w-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+        >
+          {t("hero.subheadline")}
+        </motion.p>
 
-          <motion.div
-            className="mt-8 md:mt-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+        <motion.div
+          className="mt-6 md:mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+        >
+          <motion.button
+            onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
+            className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm tracking-wide shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.5)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.6)]"
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <motion.button
-              onClick={() => document.getElementById("contatti")?.scrollIntoView({ behavior: "smooth" })}
-              className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-primary text-primary-foreground font-bold text-sm md:text-base tracking-wide shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.5)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.6)]"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {t("hero.cta")}
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
-            </motion.button>
-          </motion.div>
+            {t("hero.cta")}
+            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+          </motion.button>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Bottom scroll indicator */}
       <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ y: contentY }}>
