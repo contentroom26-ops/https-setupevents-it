@@ -99,7 +99,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden sm:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) =>
               link.name === t("nav.services") ? (
                 <div
@@ -194,7 +194,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile hamburger + lang */}
-          <div className="sm:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             <LanguageSwitcher />
             <button
               className="p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
@@ -214,7 +214,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-white/[0.03] backdrop-blur-3xl flex flex-col sm:hidden"
+            className="fixed inset-0 z-40 bg-white/[0.03] backdrop-blur-3xl flex flex-col lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
