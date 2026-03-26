@@ -102,11 +102,11 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </motion.button>
       </motion.div>
 
-      {/* Center content */}
-      <div className="flex-1 flex items-center justify-center">
-        <motion.div className="relative z-10 container-custom text-center px-6" style={{ y: contentY }}>
+      {/* Center content — positioned in lower third to avoid video logo */}
+      <div className="flex-1 flex items-end pb-24 md:pb-32">
+        <motion.div className="relative z-10 container-custom text-left px-6" style={{ y: contentY }}>
           <motion.h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white tracking-tighter leading-[1.05]"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white tracking-tighter leading-[1.05] max-w-3xl"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -115,7 +115,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           </motion.h1>
 
           <motion.p
-            className="mt-5 md:mt-8 text-sm sm:text-base md:text-lg text-white/50 font-medium tracking-wide max-w-lg mx-auto"
+            className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/50 font-medium tracking-wide max-w-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
             transition={{ duration: 0.8, delay: 0.9 }}
@@ -124,7 +124,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           </motion.p>
 
           <motion.div
-            className="mt-10 md:mt-12"
+            className="mt-8 md:mt-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
             transition={{ duration: 0.8, delay: 1.2 }}
