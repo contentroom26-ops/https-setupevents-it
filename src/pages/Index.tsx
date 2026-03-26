@@ -27,29 +27,39 @@ const Index = () => {
     return () => { document.body.style.overflow = ""; };
   }, [splashDone]);
 
-  return (
+    return (
     <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
-      <div
-        className="min-h-screen"
-        style={{
-          opacity: splashDone ? 1 : 0,
-          transition: "opacity 0.5s ease",
-          visibility: splashDone ? "visible" : "hidden",
-        }}
-      >
-        <Navbar />
-        <SideAccent />
-        <HeroSection ready={splashDone} />
-        <Suspense fallback={null}>
-          <StorySection />
-          <Marquee />
-          <ServicesSection />
-          <PortfolioSection />
-          <ContactSection />
-          <Footer />
-          <WhatsAppButton />
-        </Suspense>
+      {/* Hero always rendered (behind splash) so video preloads immediately */}
+      <div className="min-h-screen">
+        <div
+          style={{
+            opacity: splashDone ? 1 : 0,
+            transition: "opacity 0.5s ease",
+            pointerEvents: splashDone ? "auto" : "none",
+          }}
+        >
+          <Navbar />
+          <SideAccent />
+        </div>
+        <HeroSection ready />
+        <div
+          style={{
+            opacity: splashDone ? 1 : 0,
+            transition: "opacity 0.5s ease",
+            visibility: splashDone ? "visible" : "hidden",
+          }}
+        >
+          <Suspense fallback={null}>
+            <StorySection />
+            <Marquee />
+            <ServicesSection />
+            <PortfolioSection />
+            <ContactSection />
+            <Footer />
+            <WhatsAppButton />
+          </Suspense>
+        </div>
       </div>
     </div>
   );
