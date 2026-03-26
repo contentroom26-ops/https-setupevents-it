@@ -194,7 +194,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile hamburger + lang */}
-          <div className="sm:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             <LanguageSwitcher />
             <button
               className="p-2 rounded-xl hover:bg-white/[0.05] transition-colors"
