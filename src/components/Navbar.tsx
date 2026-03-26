@@ -89,13 +89,13 @@ const Navbar = () => {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
           >
             <img
               src={logo}
               alt="SetupEvents"
-              className={`w-auto drop-shadow-lg transition-all duration-500 ${
-                isScrolled ? "h-24 md:h-32 -my-5 md:-my-8" : "h-28 md:h-36 -my-7 md:-my-10"
+              className={`w-auto min-w-[80px] drop-shadow-lg transition-all duration-500 ${
+                isScrolled ? "h-20 sm:h-24 md:h-32 -my-4 sm:-my-5 md:-my-8" : "h-24 sm:h-28 md:h-36 -my-6 sm:-my-7 md:-my-10"
               }`}
             />
           </a>
