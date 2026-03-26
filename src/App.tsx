@@ -16,6 +16,7 @@ const BrandActivation = lazy(() => import("./pages/BrandActivation"));
 const EventProductions = lazy(() => import("./pages/EventProductions"));
 const HostessStaff = lazy(() => import("./pages/HostessStaff"));
 const PublicRelations = lazy(() => import("./pages/PublicRelations"));
+const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/event-productions" element={<EventProductions />} />
             <Route path="/hostess-staff" element={<HostessStaff />} />
             <Route path="/public-relations" element={<PublicRelations />} />
+            <Route path="/termini-condizioni" element={<TermsConditions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
