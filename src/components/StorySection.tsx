@@ -30,19 +30,19 @@ const StorySection = () => {
           <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/50 font-medium">{t("story.label")}</span>
         </motion.div>
 
-        <motion.div className="max-w-2xl rounded-2xl bg-black/30 backdrop-blur-md border border-white/[0.06] px-6 md:px-10 py-8 md:py-12 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease }}>
-          <motion.h2 className="text-lg md:text-2xl lg:text-3xl font-display font-extrabold tracking-tight leading-[1.15] text-white mb-6" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease }}>
+        <motion.div className="max-w-4xl rounded-2xl bg-black/30 backdrop-blur-md border border-white/[0.06] px-8 md:px-14 py-10 md:py-16 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease }}>
+          <motion.h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-extrabold tracking-tight leading-[1.15] text-white mb-8" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2, ease }}>
             {t("story.heading")}{" "}
             <span className="text-white/50">{t("story.headingSub")}</span>
           </motion.h2>
-          <motion.p className="text-white/55 text-[13px] md:text-sm leading-relaxed mb-6" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.35, ease }}>
+          <motion.p className="text-white/55 text-base md:text-lg leading-relaxed mb-8" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.35, ease }}>
             {t("story.description")}
           </motion.p>
-          <motion.div className="flex items-center gap-3 pt-2 border-t border-white/[0.06]" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease }}>
-            <div className="w-px h-7 bg-white/15" />
+          <motion.div className="flex items-center gap-4 pt-4 border-t border-white/[0.06]" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease }}>
+            <div className="w-px h-8 bg-white/15" />
             <div>
-              <p className="font-display font-bold text-white text-sm tracking-tight">Gabriel Lleshi</p>
-              <p className="text-white/35 text-[10px] uppercase tracking-[0.15em]">{t("story.founderRole")}</p>
+              <p className="font-display font-bold text-white text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
+              <p className="text-white/35 text-xs uppercase tracking-[0.15em]">{t("story.founderRole")}</p>
             </div>
           </motion.div>
         </motion.div>
