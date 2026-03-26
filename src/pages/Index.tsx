@@ -1,16 +1,17 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import StorySection from "@/components/StorySection";
-import ServicesSection from "@/components/ServicesSection";
-import PortfolioSection from "@/components/PortfolioSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
-import Marquee from "@/components/Marquee";
-import ScrollDissolve from "@/components/ScrollDissolve";
+
+// Lazy load below-the-fold sections
+const StorySection = lazy(() => import("@/components/StorySection"));
+const Marquee = lazy(() => import("@/components/Marquee"));
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const PortfolioSection = lazy(() => import("@/components/PortfolioSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
+const WhatsAppButton = lazy(() => import("@/components/WhatsAppButton"));
 
 const Index = () => {
   const [splashDone, setSplashDone] = useState(false);
@@ -33,13 +34,15 @@ const Index = () => {
         <Navbar />
         <SideAccent />
         <HeroSection ready={splashDone} />
-        <StorySection />
-        <Marquee />
-        <ServicesSection />
-        <PortfolioSection />
-        <ContactSection />
-        <Footer />
-        <WhatsAppButton />
+        <Suspense fallback={null}>
+          <StorySection />
+          <Marquee />
+          <ServicesSection />
+          <PortfolioSection />
+          <ContactSection />
+          <Footer />
+          <WhatsAppButton />
+        </Suspense>
       </div>
     </div>
   );
