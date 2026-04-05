@@ -105,6 +105,7 @@
   /* Contain layout paint for heavy sections */
   section {
     contain: layout style;
+    border-radius: inherit;
   }
 }
 
