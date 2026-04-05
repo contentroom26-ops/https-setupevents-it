@@ -78,7 +78,7 @@ const Index = () => {
 
             <div className="h-10 md:h-16" />
 
-            <FloatingSection id="contact-wrap">
+            <FloatingSection id="contact">
               <ContactSection />
             </FloatingSection>
 
