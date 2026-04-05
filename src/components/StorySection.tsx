@@ -20,9 +20,9 @@ const StorySection = () => {
       <motion.div className="absolute inset-0 -top-[5%] -bottom-[5%] z-0 will-change-transform" style={{ y: bgY, scale: bgScale }}>
         <img src={storyBg} alt="" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
       </motion.div>
-      <motion.div className="absolute inset-0 z-[1] bg-background" style={{ opacity: bgOpacity }} />
-      <div className="absolute inset-x-0 top-0 h-24 md:h-40 z-[2] bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-24 md:h-40 z-[2] bg-gradient-to-t from-background to-transparent" />
+      <motion.div className="absolute inset-0 z-[1] bg-white" style={{ opacity: bgOpacity }} />
+      <div className="absolute inset-x-0 top-0 h-24 md:h-40 z-[2] bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-24 md:h-40 z-[2] bg-gradient-to-t from-white to-transparent" />
       <div className="absolute inset-0 z-[3] grain pointer-events-none" />
 
       <motion.div className="container-custom relative z-[4]" style={{ y: textY }}>
