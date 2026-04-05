@@ -78,8 +78,8 @@ const StorySection = () => {
               <span className="text-primary font-display font-bold text-sm">GL</span>
             </div>
             <div>
-              <p className="font-display font-bold text-white text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
-              <p className="text-white/30 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
+              <p className="font-display font-bold text-foreground text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
+              <p className="text-muted-foreground/60 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
             </div>
           </motion.div>
         </motion.div>
