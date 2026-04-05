@@ -58,7 +58,7 @@ const StorySection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-white/50 text-base md:text-lg leading-[1.8] mb-10"
+            className="text-muted-foreground text-base md:text-lg leading-[1.8] mb-10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
