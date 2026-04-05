@@ -54,7 +54,7 @@ const StorySection = () => {
             transition={{ duration: 0.7, delay: 0.2, ease }}
           >
             {t("story.heading")}{" "}
-            <span className="text-white/40">{t("story.headingSub")}</span>
+            <span className="text-muted-foreground/50">{t("story.headingSub")}</span>
           </motion.h2>
 
           <motion.p
