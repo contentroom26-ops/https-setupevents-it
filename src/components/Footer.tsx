@@ -10,7 +10,7 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="bg-background text-foreground pt-16 pb-10 relative border-t border-border">
+    <footer className="bg-foreground text-background pt-16 pb-10 relative mx-4 sm:mx-6 lg:mx-10 rounded-t-[24px] md:rounded-t-[32px]">
       <div className="container-custom">
         <div className="flex justify-end mb-14">
           <motion.button

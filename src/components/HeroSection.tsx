@@ -84,8 +84,8 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
         </video>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none bg-black/45" />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.6) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none bg-black/35" />
         <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: overlayOpacity, background: "hsl(var(--background))" }} />
       </motion.div>
 
