@@ -81,7 +81,7 @@ const MobileServices = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-[9px] font-mono text-primary/50">{num}</span>
-                      <h3 className="text-[14px] font-display font-bold text-white tracking-tight truncate">{title}</h3>
+                      <h3 className="text-[14px] font-display font-bold text-foreground tracking-tight truncate">{title}</h3>
                     </div>
                     <p className="text-[11px] text-white/40 leading-snug line-clamp-1">{description}</p>
                   </div>
