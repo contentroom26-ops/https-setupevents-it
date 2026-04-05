@@ -72,7 +72,7 @@ const Index = () => {
 
             <div className="h-10 md:h-16" />
 
-            <FloatingSection id="portfolio-wrap">
+            <FloatingSection id="portfolio">
               <PortfolioSection />
             </FloatingSection>
 
