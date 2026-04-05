@@ -29,7 +29,7 @@ const Index = () => {
   }, [splashDone]);
 
   return (
-    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
+    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#fff" }}>
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
       <div className="min-h-screen">
         <div
