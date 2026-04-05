@@ -87,7 +87,7 @@ const MobileServices = () => {
                   </div>
 
                   {/* Arrow */}
-                  <ArrowRight className="w-4 h-4 text-white/20 flex-shrink-0 group-active:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 group-active:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             );
