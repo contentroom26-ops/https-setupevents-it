@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FloatingElements from "./FloatingElements";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Tilt3DCard from "./Tilt3DCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
