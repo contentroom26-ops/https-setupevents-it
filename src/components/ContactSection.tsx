@@ -1,66 +1,86 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState, forwardRef } from "react";
-import { Send, Loader2, User, Building2, Mail, Phone, Calendar, MessageSquare } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import FloatingElements from "./FloatingElements";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-interface FloatingInputProps {
-  icon: React.ElementType;
+interface MinimalInputProps {
   name: string;
   type?: string;
   required?: boolean;
   placeholder: string;
-  colSpan?: boolean;
   value: string;
-  isFocused: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: () => void;
-  onBlur: () => void;
 }
 
-const FloatingInput = forwardRef<HTMLInputElement, FloatingInputProps>(
-  ({ icon: Icon, name, type = "text", required = false, placeholder, colSpan = false, value, isFocused, onChange, onFocus, onBlur }, ref) => {
-    return (
-      <div className={`relative group ${colSpan ? "sm:col-span-2" : ""}`}>
-        <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all duration-300 ${isFocused || value ? "text-primary" : "text-muted-foreground/40"}`}>
-          <Icon className="w-4 h-4" />
-        </div>
-        <input
-          ref={ref}
-          type={type}
-          name={name}
-          value={value}
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          required={required}
-          placeholder={placeholder}
-          className={`w-full pl-11 pr-5 py-4 bg-transparent border rounded-2xl text-sm text-foreground placeholder:text-muted-foreground/40 transition-all duration-500 outline-none
-            ${isFocused
-              ? "border-primary/60 shadow-[0_0_0_3px_hsl(var(--primary)/0.1),0_8px_24px_-8px_hsl(var(--primary)/0.15)] bg-primary/[0.03]"
-              : "border-border/60 hover:border-border group-hover:bg-card/50"
-            }`}
-        />
-        <div
-          className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary to-transparent transition-transform duration-400 origin-center"
-          style={{ transform: `scaleX(${isFocused ? 1 : 0})` }}
-        />
-      </div>
-    );
-  }
-);
-FloatingInput.displayName = "FloatingInput";
+const MinimalInput = ({ name, type = "text", required = false, placeholder, value, onChange }: MinimalInputProps) => {
+  const [focused, setFocused] = useState(false);
+  return (
+    <div className="relative">
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        required={required}
+        placeholder={placeholder}
+        className="w-full bg-transparent border-b border-border/40 py-4 text-base md:text-lg text-foreground placeholder:text-muted-foreground/30 outline-none transition-colors duration-500 focus:border-foreground hover:border-muted-foreground/60"
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 h-px bg-foreground origin-left"
+        initial={false}
+        animate={{ scaleX: focused ? 1 : 0 }}
+        transition={{ duration: 0.4, ease }}
+        style={{ width: "100%" }}
+      />
+    </div>
+  );
+};
+
+interface MinimalTextareaProps {
+  name: string;
+  required?: boolean;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const MinimalTextarea = ({ name, required = false, placeholder, value, onChange }: MinimalTextareaProps) => {
+  const [focused, setFocused] = useState(false);
+  return (
+    <div className="relative">
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        required={required}
+        rows={4}
+        placeholder={placeholder}
+        className="w-full bg-transparent border-b border-border/40 py-4 text-base md:text-lg text-foreground placeholder:text-muted-foreground/30 outline-none transition-colors duration-500 focus:border-foreground hover:border-muted-foreground/60 resize-none"
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 h-px bg-foreground origin-left"
+        initial={false}
+        animate={{ scaleX: focused ? 1 : 0 }}
+        transition={{ duration: 0.4, ease }}
+        style={{ width: "100%" }}
+      />
+    </div>
+  );
+};
 
 const ContactSection = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     nome: "", cognome: "", azienda: "", email: "", telefono: "",
     dataEvento: "", messaggio: "", privacy: false,
@@ -100,14 +120,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-36 overflow-hidden">
+    <section id="contact" className="relative py-32 md:py-44 overflow-hidden">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] pointer-events-none" />
-      <FloatingElements variant="lines" count={3} />
 
       <div className="container-custom relative z-10">
+        {/* Section label */}
         <motion.div
-          className="flex items-center gap-4 mb-20"
+          className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -118,112 +137,87 @@ const ContactSection = () => {
           <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("contact.label")}</span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
+        {/* Big heading */}
+        <motion.h2
+          className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-6"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease }}
+        >
+          {t("contact.heading")}
+          <span className="text-muted-foreground/20">.</span>
+        </motion.h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-16 mt-16 md:mt-24">
+          {/* Left text */}
           <motion.div
-            className="lg:col-span-5 flex flex-col justify-between"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease }}
+            className="lg:col-span-4 flex flex-col justify-start"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease }}
           >
-            <div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[0.95] text-foreground mb-8">
-                {t("contact.heading")}<br />
-                <span className="text-muted-foreground/40">{t("contact.headingSub")}</span>
-              </h2>
-              <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-md">{t("contact.description")}</p>
-            </div>
+            <p className="text-muted-foreground/60 text-lg md:text-xl leading-relaxed max-w-sm">
+              {t("contact.description")}
+            </p>
           </motion.div>
 
+          {/* Right form */}
           <motion.div
-            className="lg:col-span-7"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            className="lg:col-span-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease }}
           >
-            <div className="relative rounded-3xl p-[1px] overflow-hidden">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 via-border/40 to-primary/10" />
-              
-              <div className="relative bg-card/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/[0.06] blur-[80px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/[0.04] blur-[60px] pointer-events-none" />
-
-                <div>
-                  <h3 className="text-xl font-display font-bold text-foreground mb-1.5">{t("contact.formTitle")}</h3>
-                  <p className="text-sm text-muted-foreground/60 mb-10">{t("contact.formSubtitle")}</p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FloatingInput icon={User} name="nome" required placeholder={t("contact.firstName")} value={formData.nome} isFocused={focusedField === "nome"} onChange={handleChange} onFocus={() => setFocusedField("nome")} onBlur={() => setFocusedField(null)} />
-                    <FloatingInput icon={User} name="cognome" required placeholder={t("contact.lastName")} value={formData.cognome} isFocused={focusedField === "cognome"} onChange={handleChange} onFocus={() => setFocusedField("cognome")} onBlur={() => setFocusedField(null)} />
-                  </div>
-                  <FloatingInput icon={Building2} name="azienda" placeholder={t("contact.company")} value={formData.azienda} isFocused={focusedField === "azienda"} onChange={handleChange} onFocus={() => setFocusedField("azienda")} onBlur={() => setFocusedField(null)} />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FloatingInput icon={Mail} name="email" type="email" required placeholder={t("contact.email")} value={formData.email} isFocused={focusedField === "email"} onChange={handleChange} onFocus={() => setFocusedField("email")} onBlur={() => setFocusedField(null)} />
-                    <FloatingInput icon={Phone} name="telefono" type="tel" required placeholder={t("contact.phone")} value={formData.telefono} isFocused={focusedField === "telefono"} onChange={handleChange} onFocus={() => setFocusedField("telefono")} onBlur={() => setFocusedField(null)} />
-                  </div>
-                  <FloatingInput icon={Calendar} name="dataEvento" type="date" placeholder={t("contact.eventDate")} value={formData.dataEvento} isFocused={focusedField === "dataEvento"} onChange={handleChange} onFocus={() => setFocusedField("dataEvento")} onBlur={() => setFocusedField(null)} />
-                  
-                  <div className="relative group">
-                    <div className={`absolute left-4 top-4 transition-all duration-300 ${focusedField === "messaggio" || formData.messaggio ? "text-primary" : "text-muted-foreground/40"}`}>
-                      <MessageSquare className="w-4 h-4" />
-                    </div>
-                    <textarea
-                      name="messaggio"
-                      value={formData.messaggio}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField("messaggio")}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      rows={4}
-                      placeholder={t("contact.message")}
-                      className={`w-full pl-11 pr-5 py-4 bg-transparent border rounded-2xl text-sm text-foreground placeholder:text-muted-foreground/40 transition-all duration-500 outline-none resize-none
-                        ${focusedField === "messaggio"
-                          ? "border-primary/60 shadow-[0_0_0_3px_hsl(var(--primary)/0.1),0_8px_24px_-8px_hsl(var(--primary)/0.15)] bg-primary/[0.03]"
-                          : "border-border/60 hover:border-border group-hover:bg-card/50"
-                        }`}
-                    />
-                  </div>
-                  
-                  <label className="flex items-start gap-3 cursor-pointer pt-2 group/check">
-                    <div className="relative mt-0.5">
-                      <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange} className="peer sr-only" />
-                      <div className="w-5 h-5 border-2 border-border/60 rounded-md transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center group-hover/check:border-muted-foreground/40">
-                        <svg className={`w-3 h-3 text-primary-foreground transition-opacity duration-200 ${formData.privacy ? "opacity-100" : "opacity-0"}`} viewBox="0 0 12 12">
-                          <path d="M2 6l3 3 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
-                    <span className="text-sm text-muted-foreground leading-relaxed">
-                      {t("contact.privacy")} <Link to="/privacy-policy" className="text-primary hover:underline transition-colors">{t("contact.privacyLink")}</Link> *
-                    </span>
-                  </label>
-
-                  <div className="pt-6">
-                    <motion.button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="relative w-full overflow-hidden bg-primary text-primary-foreground px-8 py-5 font-bold text-sm rounded-2xl flex items-center justify-center gap-3 group disabled:opacity-60 transition-all duration-500"
-                      whileHover={{ scale: isSubmitting ? 1 : 1.01 }}
-                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-                      <div className="absolute inset-0 shadow-[0_8px_32px_-6px_hsl(var(--primary)/0.5)] group-hover:shadow-[0_12px_40px_-6px_hsl(var(--primary)/0.6)] transition-shadow duration-500" />
-                      
-                      <span className="relative z-10 flex items-center gap-3">
-                        {isSubmitting ? (
-                          <>{t("contact.submitting")} <Loader2 className="w-4 h-4 animate-spin" /></>
-                        ) : (
-                          <>{t("contact.submit")} <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" /></>
-                        )}
-                      </span>
-                    </motion.button>
-                  </div>
-                </form>
+            <form onSubmit={handleSubmit} className="space-y-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+                <MinimalInput name="nome" required placeholder={t("contact.firstName") + " *"} value={formData.nome} onChange={handleChange} />
+                <MinimalInput name="cognome" required placeholder={t("contact.lastName") + " *"} value={formData.cognome} onChange={handleChange} />
               </div>
-            </div>
+              <MinimalInput name="azienda" placeholder={t("contact.company")} value={formData.azienda} onChange={handleChange} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+                <MinimalInput name="email" type="email" required placeholder={t("contact.email") + " *"} value={formData.email} onChange={handleChange} />
+                <MinimalInput name="telefono" type="tel" required placeholder={t("contact.phone") + " *"} value={formData.telefono} onChange={handleChange} />
+              </div>
+              <MinimalInput name="dataEvento" type="date" placeholder={t("contact.eventDate")} value={formData.dataEvento} onChange={handleChange} />
+              <MinimalTextarea name="messaggio" required placeholder={t("contact.message")} value={formData.messaggio} onChange={handleChange} />
+
+              {/* Privacy */}
+              <div className="pt-8">
+                <label className="flex items-start gap-3 cursor-pointer group/check">
+                  <div className="relative mt-1">
+                    <input type="checkbox" name="privacy" checked={formData.privacy} onChange={handleChange} className="peer sr-only" />
+                    <div className="w-4 h-4 border border-muted-foreground/30 rounded-sm transition-all duration-300 peer-checked:border-foreground peer-checked:bg-foreground flex items-center justify-center group-hover/check:border-muted-foreground/60">
+                      <svg className={`w-2.5 h-2.5 text-background transition-opacity duration-200 ${formData.privacy ? "opacity-100" : "opacity-0"}`} viewBox="0 0 12 12">
+                        <path d="M2 6l3 3 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+                  <span className="text-xs text-muted-foreground/50 leading-relaxed">
+                    {t("contact.privacy")} <Link to="/privacy-policy" className="text-foreground/70 hover:text-foreground underline transition-colors">{t("contact.privacyLink")}</Link>
+                  </span>
+                </label>
+              </div>
+
+              {/* Submit */}
+              <div className="pt-10">
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group inline-flex items-center gap-3 bg-foreground text-background px-8 py-4 rounded-full text-sm font-semibold tracking-wide disabled:opacity-40 transition-all duration-300 hover:gap-5"
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+                >
+                  {isSubmitting ? (
+                    <><span>{t("contact.submitting")}</span><Loader2 className="w-4 h-4 animate-spin" /></>
+                  ) : (
+                    <><span>{t("contact.submit")}</span><ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" /></>
+                  )}
+                </motion.button>
+              </div>
+            </form>
           </motion.div>
         </div>
       </div>
