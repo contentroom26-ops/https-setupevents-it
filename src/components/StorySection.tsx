@@ -83,6 +83,7 @@ const StorySection = () => {
             </div>
           </motion.div>
         </motion.div>
+        </Tilt3DCard>
       </motion.div>
     </section>
   );
