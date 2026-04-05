@@ -27,7 +27,7 @@ const FloatingSection = ({ children, className = "", id, noPadding = false }: Fl
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Subtle inner glow at top */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/[0.04] to-transparent pointer-events-none" />
       {children}
     </motion.div>
   );

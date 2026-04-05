@@ -118,7 +118,7 @@ const DesktopServices = () => {
   const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
 
   return (
-    <section ref={sectionRef} className="relative grain rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ height: `${serviceNumbers.length * 60}vh`, background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
+    <section ref={sectionRef} className="relative grain rounded-[24px] md:rounded-[32px] border border-black/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.08)]" style={{ height: `${serviceNumbers.length * 60}vh`, background: "linear-gradient(180deg, hsl(0 0% 100% / 0.9) 0%, hsl(40 20% 98% / 0.95) 100%)" }}>
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />
