@@ -53,7 +53,7 @@ const LanguageSwitcher = () => {
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-black/5 to-transparent" />
             <div className="p-1.5">
               {languages.map((lang) => (
                 <button
