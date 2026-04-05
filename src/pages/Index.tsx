@@ -66,9 +66,9 @@ const Index = () => {
 
             <div className="h-10 md:h-16" />
 
-            <FloatingSection id="services">
+            <div id="services" className="mx-4 sm:mx-6 lg:mx-10">
               <ServicesSection />
-            </FloatingSection>
+            </div>
 
             <div className="h-10 md:h-16" />
 
