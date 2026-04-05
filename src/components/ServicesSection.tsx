@@ -37,7 +37,7 @@ const MobileServices = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="section-dark py-12 relative grain overflow-hidden">
+    <section className="py-12 relative grain overflow-hidden rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         {/* Header */}
