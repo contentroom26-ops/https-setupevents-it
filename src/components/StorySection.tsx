@@ -68,7 +68,7 @@ const StorySection = () => {
           </motion.p>
 
           <motion.div
-            className="flex items-center gap-5 pt-6 border-t border-white/[0.06]"
+            className="flex items-center gap-5 pt-6 border-t border-border"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
