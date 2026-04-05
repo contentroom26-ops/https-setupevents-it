@@ -61,8 +61,8 @@ const LanguageSwitcher = () => {
                   onClick={() => changeLanguage(lang.code)}
                   className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-all duration-200 ${
                     i18n.language === lang.code
-                      ? "bg-white/[0.1] text-white"
-                      : "text-white/50 hover:text-white hover:bg-white/[0.06]"
+                      ? "bg-foreground/[0.06] text-foreground"
+                      : "text-foreground/50 hover:text-foreground hover:bg-foreground/[0.04]"
                   }`}
                 >
                   <span className="text-base">{lang.flag}</span>
