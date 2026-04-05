@@ -9,7 +9,6 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Use requestAnimationFrame for smoother phase transitions
     const t1 = setTimeout(() => requestAnimationFrame(() => setPhase("hold")), 600);
     const t2 = setTimeout(() => requestAnimationFrame(() => setPhase("exit")), 1600);
     const t3 = setTimeout(() => {
@@ -23,7 +22,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease }}
           style={{ willChange: "opacity" }}
@@ -32,7 +31,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
           <motion.div
             className="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full pointer-events-none"
             style={{
-              background: "radial-gradient(circle, hsl(0 72% 51% / 0.25) 0%, transparent 70%)",
+              background: "radial-gradient(circle, hsl(0 72% 51% / 0.12) 0%, transparent 70%)",
             }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -60,7 +59,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
 
           {/* Horizontal line sweep */}
           <motion.div
-            className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-primary/50 z-20 origin-center"
+            className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-primary/40 z-20 origin-center"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={
               phase === "exit"
