@@ -47,7 +47,7 @@ const LanguageSwitcher = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute top-full right-0 mt-2 bg-[hsl(var(--background))]/95 backdrop-blur-2xl border border-white/[0.12] rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.1)] z-50 min-w-[120px]"
+            className="absolute top-full right-0 mt-2 bg-white/95 backdrop-blur-2xl border border-black/[0.08] rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] z-50 min-w-[120px]"
             initial={{ opacity: 0, y: 4, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
