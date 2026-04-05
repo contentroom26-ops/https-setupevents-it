@@ -70,7 +70,7 @@ const MobileServices = () => {
               >
                 <Link
                   to={serviceLinks[i]}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] active:scale-[0.98] active:bg-white/[0.06] transition-all duration-200 group"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-foreground/[0.02] border border-border active:scale-[0.98] active:bg-foreground/[0.05] transition-all duration-200 group"
                 >
                   {/* Icon */}
                   <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-active:bg-primary/20 transition-colors">
