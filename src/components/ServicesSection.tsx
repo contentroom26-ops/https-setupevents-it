@@ -37,7 +37,7 @@ const MobileServices = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="services" className="section-dark py-12 relative grain overflow-hidden">
+    <section className="section-dark py-12 relative grain overflow-hidden">
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         {/* Header */}
