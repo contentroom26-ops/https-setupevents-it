@@ -23,21 +23,21 @@ const serviceNumbers = ["01", "02", "03", "04", "05", "06"];
 const serviceIcons = [Calendar, Megaphone, Users, Handshake, MapPin, Tv];
 
 const getCardStyle = (_idx: number) => ({
-  card: "bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]",
-  number: "text-white/[0.04]",
-  title: "text-white",
-  desc: "text-white/55",
-  label: "text-white/30",
-  tag: "border-white/[0.1] text-white/50",
-  link: "text-white/70 hover:text-white",
-  underline: "bg-white",
+  card: "bg-card/80 backdrop-blur-md border border-border shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)]",
+  number: "text-foreground/[0.04]",
+  title: "text-foreground",
+  desc: "text-muted-foreground",
+  label: "text-muted-foreground/60",
+  tag: "border-border text-muted-foreground",
+  link: "text-foreground/70 hover:text-foreground",
+  underline: "bg-foreground",
 });
 
 const MobileServices = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-12 relative grain overflow-hidden rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
+    <section className="py-12 relative grain overflow-hidden rounded-[24px] md:rounded-[32px] border border-black/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.08)]" style={{ background: "linear-gradient(180deg, hsl(0 0% 100% / 0.9) 0%, hsl(40 20% 98% / 0.95) 100%)" }}>
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         {/* Header */}
@@ -70,7 +70,7 @@ const MobileServices = () => {
               >
                 <Link
                   to={serviceLinks[i]}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] active:scale-[0.98] active:bg-white/[0.06] transition-all duration-200 group"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-foreground/[0.02] border border-border active:scale-[0.98] active:bg-foreground/[0.05] transition-all duration-200 group"
                 >
                   {/* Icon */}
                   <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-active:bg-primary/20 transition-colors">
@@ -81,13 +81,13 @@ const MobileServices = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-[9px] font-mono text-primary/50">{num}</span>
-                      <h3 className="text-[14px] font-display font-bold text-white tracking-tight truncate">{title}</h3>
+                      <h3 className="text-[14px] font-display font-bold text-foreground tracking-tight truncate">{title}</h3>
                     </div>
-                    <p className="text-[11px] text-white/40 leading-snug line-clamp-1">{description}</p>
+                    <p className="text-[11px] text-muted-foreground leading-snug line-clamp-1">{description}</p>
                   </div>
 
                   {/* Arrow */}
-                  <ArrowRight className="w-4 h-4 text-white/20 flex-shrink-0 group-active:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 group-active:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             );
@@ -118,7 +118,7 @@ const DesktopServices = () => {
   const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
 
   return (
-    <section ref={sectionRef} className="relative grain rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ height: `${serviceNumbers.length * 60}vh`, background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
+    <section ref={sectionRef} className="relative grain rounded-[24px] md:rounded-[32px] border border-black/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.08)]" style={{ height: `${serviceNumbers.length * 60}vh`, background: "linear-gradient(180deg, hsl(0 0% 100% / 0.9) 0%, hsl(40 20% 98% / 0.95) 100%)" }}>
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />

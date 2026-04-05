@@ -33,9 +33,9 @@ const StorySection = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-[10px] md:text-xs font-mono text-white/40">[01]</span>
+          <span className="text-[10px] md:text-xs font-mono text-muted-foreground/60">[01]</span>
           <div className="h-px w-8 bg-primary/40" />
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/40 font-medium">{t("story.label")}</span>
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-muted-foreground/60 font-medium">{t("story.label")}</span>
         </motion.div>
 
         <Tilt3DCard className="max-w-4xl glass-card rounded-3xl" intensity={6} scale={1.01}>
@@ -47,18 +47,18 @@ const StorySection = () => {
           transition={{ duration: 1, ease }}
         >
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[1.1] text-white mb-10"
+            className="text-2xl md:text-3xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[1.1] text-foreground mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2, ease }}
           >
             {t("story.heading")}{" "}
-            <span className="text-white/40">{t("story.headingSub")}</span>
+            <span className="text-muted-foreground/50">{t("story.headingSub")}</span>
           </motion.h2>
 
           <motion.p
-            className="text-white/50 text-base md:text-lg leading-[1.8] mb-10"
+            className="text-muted-foreground text-base md:text-lg leading-[1.8] mb-10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -68,7 +68,7 @@ const StorySection = () => {
           </motion.p>
 
           <motion.div
-            className="flex items-center gap-5 pt-6 border-t border-white/[0.06]"
+            className="flex items-center gap-5 pt-6 border-t border-border"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -78,8 +78,8 @@ const StorySection = () => {
               <span className="text-primary font-display font-bold text-sm">GL</span>
             </div>
             <div>
-              <p className="font-display font-bold text-white text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
-              <p className="text-white/30 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
+              <p className="font-display font-bold text-foreground text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
+              <p className="text-muted-foreground/60 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
             </div>
           </motion.div>
         </motion.div>
