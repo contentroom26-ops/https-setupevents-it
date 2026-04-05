@@ -126,7 +126,7 @@ const PortfolioSection = () => {
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
         <img src={dieselMarbleBg} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-background/40" />
       </div>
 
       <div className="relative z-10 py-20 md:py-40">
