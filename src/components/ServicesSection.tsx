@@ -118,7 +118,7 @@ const DesktopServices = () => {
   const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
 
   return (
-    <section ref={sectionRef} id="services" className="section-dark relative grain" style={{ height: `${serviceNumbers.length * 60}vh` }}>
+    <section ref={sectionRef} className="section-dark relative grain" style={{ height: `${serviceNumbers.length * 60}vh` }}>
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />

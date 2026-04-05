@@ -16,7 +16,7 @@ const StorySection = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   return (
-    <section ref={sectionRef} id="storia" className="relative py-24 md:py-52 overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 md:py-52 overflow-hidden">
       <motion.div className="absolute inset-0 -top-[5%] -bottom-[5%] z-0 will-change-transform" style={{ y: bgY, scale: bgScale }}>
         <img src={storyBg} alt="" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
       </motion.div>
