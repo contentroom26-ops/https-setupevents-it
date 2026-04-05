@@ -60,9 +60,9 @@ const FlipCard = ({ index }: { index: number }) => {
         </div>
         <div className="absolute inset-0 rounded-2xl overflow-hidden bg-card/90 backdrop-blur-md border border-border shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">{category} — {study.year}</span>
-          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">{study.title}</h3>
-          <p className="text-sm text-white/50 font-medium mb-6">{subtitle}</p>
-          <p className="text-[13px] md:text-base text-white/75 leading-relaxed">{description}</p>
+          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-foreground tracking-tight mb-2">{study.title}</h3>
+          <p className="text-sm text-muted-foreground font-medium mb-6">{subtitle}</p>
+          <p className="text-[13px] md:text-base text-foreground/75 leading-relaxed">{description}</p>
         </div>
       </motion.div>
     </motion.div>
