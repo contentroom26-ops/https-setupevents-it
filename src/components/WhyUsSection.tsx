@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { ArrowRight, Clock, Users, ShieldCheck, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import FloatingElements from "./FloatingElements";
+import Tilt3DCard from "./Tilt3DCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -83,22 +84,23 @@ const WhyUsSection = () => {
           {bullets.map((bullet, i) => {
             const Icon = bulletIcons[i];
             return (
-              <motion.div
-                key={i}
-                className="flex gap-5 items-start p-6 md:p-7 rounded-2xl glass-card-light hover-lift group cursor-default"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease }}
-              >
-                <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
-                  <Icon className="w-5 h-5 text-primary transition-transform duration-500 group-hover:scale-110" />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-accent-foreground text-sm md:text-base mb-1.5 tracking-tight">{bullet.title}</h3>
-                  <p className="text-accent-foreground/45 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
-                </div>
-              </motion.div>
+              <Tilt3DCard key={i} className="rounded-2xl" intensity={10} scale={1.03}>
+                <motion.div
+                  className="flex gap-5 items-start p-6 md:p-7 rounded-2xl glass-card-light hover-lift group cursor-default"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                >
+                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
+                    <Icon className="w-5 h-5 text-primary transition-transform duration-500 group-hover:scale-110" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-accent-foreground text-sm md:text-base mb-1.5 tracking-tight">{bullet.title}</h3>
+                    <p className="text-accent-foreground/45 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
+                  </div>
+                </motion.div>
+              </Tilt3DCard>
             );
           })}
         </div>

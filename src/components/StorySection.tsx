@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import storyBg from "@/assets/story-bg-2.jpg";
+import Tilt3DCard from "./Tilt3DCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -37,8 +38,9 @@ const StorySection = () => {
           <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/40 font-medium">{t("story.label")}</span>
         </motion.div>
 
+        <Tilt3DCard className="max-w-4xl glass-card rounded-3xl" intensity={6} scale={1.01}>
         <motion.div
-          className="max-w-4xl glass-card rounded-3xl px-8 md:px-16 py-12 md:py-20"
+          className="px-8 md:px-16 py-12 md:py-20"
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -81,6 +83,7 @@ const StorySection = () => {
             </div>
           </motion.div>
         </motion.div>
+        </Tilt3DCard>
       </motion.div>
     </section>
   );
