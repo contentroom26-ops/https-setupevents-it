@@ -23,14 +23,14 @@ const serviceNumbers = ["01", "02", "03", "04", "05", "06"];
 const serviceIcons = [Calendar, Megaphone, Users, Handshake, MapPin, Tv];
 
 const getCardStyle = (_idx: number) => ({
-  card: "bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]",
-  number: "text-white/[0.04]",
-  title: "text-white",
-  desc: "text-white/55",
-  label: "text-white/30",
-  tag: "border-white/[0.1] text-white/50",
-  link: "text-white/70 hover:text-white",
-  underline: "bg-white",
+  card: "bg-card/80 backdrop-blur-md border border-border shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)]",
+  number: "text-foreground/[0.04]",
+  title: "text-foreground",
+  desc: "text-muted-foreground",
+  label: "text-muted-foreground/60",
+  tag: "border-border text-muted-foreground",
+  link: "text-foreground/70 hover:text-foreground",
+  underline: "bg-foreground",
 });
 
 const MobileServices = () => {
