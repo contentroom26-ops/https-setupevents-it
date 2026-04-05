@@ -37,7 +37,7 @@ const MobileServices = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="services" className="section-dark py-12 relative grain overflow-hidden">
+    <section className="py-12 relative grain overflow-hidden rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
       <FloatingElements variant="lines" count={2} />
       <div className="container-custom">
         {/* Header */}
@@ -118,7 +118,7 @@ const DesktopServices = () => {
   const categories: string[] = t(`services.items.${activeIndex}.categories`, { returnObjects: true }) as string[];
 
   return (
-    <section ref={sectionRef} id="services" className="section-dark relative grain" style={{ height: `${serviceNumbers.length * 60}vh` }}>
+    <section ref={sectionRef} className="relative grain rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]" style={{ height: `${serviceNumbers.length * 60}vh`, background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)" }}>
       <div className="sticky top-0 h-screen flex flex-col" style={{ overflow: 'clip' }}>
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 bg-border/20">
           <motion.div className="h-full bg-primary origin-left" style={{ width: progressWidth }} />

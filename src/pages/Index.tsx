@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
-import SectionReveal from "@/components/SectionReveal";
+import FloatingSection from "@/components/FloatingSection";
 
 // Lazy load below-the-fold sections
 const StorySection = lazy(() => import("@/components/StorySection"));
@@ -51,19 +51,39 @@ const Index = () => {
           }}
         >
           <Suspense fallback={null}>
-            <SectionReveal direction="up">
+            {/* Spacer after hero */}
+            <div className="h-16 md:h-24" />
+
+            <FloatingSection id="storia">
               <StorySection />
-            </SectionReveal>
-            <Marquee />
-            <SectionReveal direction="up">
+            </FloatingSection>
+
+            <div className="h-10 md:h-16" />
+
+            <FloatingSection className="!bg-transparent !border-0 !shadow-none !backdrop-blur-0" noPadding>
+              <Marquee />
+            </FloatingSection>
+
+            <div className="h-10 md:h-16" />
+
+            <div id="services" className="mx-4 sm:mx-6 lg:mx-10">
               <ServicesSection />
-            </SectionReveal>
-            <SectionReveal direction="up">
+            </div>
+
+            <div className="h-10 md:h-16" />
+
+            <FloatingSection id="portfolio">
               <PortfolioSection />
-            </SectionReveal>
-            <SectionReveal direction="up">
+            </FloatingSection>
+
+            <div className="h-10 md:h-16" />
+
+            <FloatingSection id="contact">
               <ContactSection />
-            </SectionReveal>
+            </FloatingSection>
+
+            <div className="h-10 md:h-16" />
+
             <Footer />
             <WhatsAppButton />
           </Suspense>
