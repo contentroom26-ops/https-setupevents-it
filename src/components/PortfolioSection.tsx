@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import Tilt3DCard from "./Tilt3DCard";
 
 // Use string paths for lazy loading — images load on scroll, not on page load
 const dieselMarbleBg = new URL("@/assets/diesel-marble-bg.jpg", import.meta.url).href;
