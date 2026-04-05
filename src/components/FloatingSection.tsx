@@ -16,7 +16,7 @@ const FloatingSection = ({ children, className = "", id, noPadding = false }: Fl
   return (
     <motion.div
       id={id}
-      className={`relative mx-4 sm:mx-6 lg:mx-10 rounded-[24px] md:rounded-[32px] overflow-hidden border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5),0_2px_20px_-4px_rgba(0,0,0,0.3)] ${!noPadding ? "" : ""} ${className}`}
+      className={`relative mx-4 sm:mx-6 lg:mx-10 rounded-[24px] md:rounded-[32px] border border-white/[0.06] shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5),0_2px_20px_-4px_rgba(0,0,0,0.3)] ${className}`}
       style={{
         background: "linear-gradient(180deg, hsl(40 6% 11% / 0.95) 0%, hsl(40 6% 9% / 0.98) 100%)",
         backdropFilter: "blur(20px)",
