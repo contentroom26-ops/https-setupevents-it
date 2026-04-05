@@ -163,7 +163,8 @@ const DesktopServices = () => {
               </div>
               <div className="col-span-7 xl:col-span-8">
                 <AnimatePresence mode="wait">
-                  <motion.div key={activeIndex} className={`relative rounded-2xl p-10 lg:p-12 overflow-hidden ${s.card}`}>
+                  <Tilt3DCard key={activeIndex} className="rounded-2xl" intensity={5} scale={1.01}>
+                    <motion.div className={`relative rounded-2xl p-10 lg:p-12 overflow-hidden ${s.card}`}>
                     <motion.div className="absolute inset-0 bg-[hsl(var(--background))] z-20 origin-left" initial={{ scaleX: 1 }} animate={{ scaleX: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }} style={{ transformOrigin: "right" }} />
                     <motion.span className={`absolute top-6 right-10 text-[9rem] font-display font-extrabold leading-none select-none pointer-events-none ${s.number}`} style={{ y: parallaxY }}>{serviceNumbers[activeIndex]}</motion.span>
                     <motion.div className="relative z-10" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}>
@@ -185,7 +186,8 @@ const DesktopServices = () => {
                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </Link>
                     </motion.div>
-                  </motion.div>
+                    </motion.div>
+                  </Tilt3DCard>
                 </AnimatePresence>
               </div>
             </div>
