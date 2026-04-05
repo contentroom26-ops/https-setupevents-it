@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
+import SectionReveal from "@/components/SectionReveal";
 
 // Lazy load below-the-fold sections
 const StorySection = lazy(() => import("@/components/StorySection"));
@@ -27,10 +28,9 @@ const Index = () => {
     return () => { document.body.style.overflow = ""; };
   }, [splashDone]);
 
-    return (
+  return (
     <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
-      {/* Hero always rendered (behind splash) so video preloads immediately */}
       <div className="min-h-screen">
         <div
           style={{
@@ -51,11 +51,19 @@ const Index = () => {
           }}
         >
           <Suspense fallback={null}>
-            <StorySection />
+            <SectionReveal direction="up">
+              <StorySection />
+            </SectionReveal>
             <Marquee />
-            <ServicesSection />
-            <PortfolioSection />
-            <ContactSection />
+            <SectionReveal direction="up">
+              <ServicesSection />
+            </SectionReveal>
+            <SectionReveal direction="up">
+              <PortfolioSection />
+            </SectionReveal>
+            <SectionReveal direction="up">
+              <ContactSection />
+            </SectionReveal>
             <Footer />
             <WhatsAppButton />
           </Suspense>
