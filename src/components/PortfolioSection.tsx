@@ -104,8 +104,8 @@ const ScrollGallery = () => {
 
   return (
     <div className="relative overflow-hidden" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black/60 to-transparent z-[1] pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background/60 to-transparent z-[1] pointer-events-none" />
       <div ref={trackRef} className="flex gap-4 md:gap-5 will-change-transform">
         {doubledImages.map((img, i) => (
           <motion.div key={i} className="flex-shrink-0 w-[60vw] md:w-[280px] lg:w-[320px] aspect-[3/4] rounded-xl overflow-hidden cursor-pointer relative group/card" whileHover={{ scale: 1.06, zIndex: 10 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
