@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { ArrowRight, Clock, Users, ShieldCheck, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import FloatingElements from "./FloatingElements";
+import Tilt3DCard from "./Tilt3DCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
