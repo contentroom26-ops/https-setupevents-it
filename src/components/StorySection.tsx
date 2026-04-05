@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import storyBg from "@/assets/story-bg-2.jpg";
+import Tilt3DCard from "./Tilt3DCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
