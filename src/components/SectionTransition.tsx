@@ -9,136 +9,159 @@ interface SectionTransitionProps {
   label?: string;
 }
 
-/* ─── Curtain: two panels slide apart ─── */
+/* ─────────────────────────────────────────────
+   Ogni variante è un semplice divider animato
+   che NON usa sticky/fixed positioning.
+   Solo transform + opacity per 60 fps.
+───────────────────────────────────────────── */
+
 const CurtainTransition = ({ scrollYProgress }: { scrollYProgress: any }) => {
-  const leftX = useTransform(scrollYProgress, [0.05, 0.5], ["0%", "-100%"]);
-  const rightX = useTransform(scrollYProgress, [0.05, 0.5], ["0%", "100%"]);
-  const curtainOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0]);
-  const lineScaleY = useTransform(scrollYProgress, [0.0, 0.25, 0.5], [0, 1, 0]);
-  const lineOpacity = useTransform(scrollYProgress, [0.0, 0.15, 0.45, 0.55], [0, 0.5, 0.5, 0]);
-  const crossScale = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
-  const crossOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
+  const leftX = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "-105%"]);
+  const rightX = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "105%"]);
+  const opacity = useTransform(scrollYProgress, [0.4, 0.7], [1, 0]);
+  const lineScale = useTransform(scrollYProgress, [0.05, 0.3, 0.6], [0, 1, 0]);
+  const lineOpacity = useTransform(scrollYProgress, [0.05, 0.2, 0.5, 0.65], [0, 0.4, 0.4, 0]);
 
   return (
     <>
-      <motion.div className="absolute inset-y-0 left-0 w-1/2 bg-background z-10" style={{ x: leftX, opacity: curtainOpacity }} />
-      <motion.div className="absolute inset-y-0 right-0 w-1/2 bg-background z-10" style={{ x: rightX, opacity: curtainOpacity }} />
+      {/* Due pannelli che si aprono */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent z-20"
-        style={{ height: "50vh", scaleY: lineScaleY, opacity: lineOpacity, transformOrigin: "center" }}
+        className="absolute inset-y-0 left-0 w-1/2 bg-background z-10"
+        style={{ x: leftX, opacity }}
       />
-      <motion.div className="absolute z-20 flex items-center justify-center" style={{ scale: crossScale, opacity: crossOpacity }}>
-        <div className="relative w-4 h-4">
-          <div className="absolute top-1/2 left-0 w-full h-px bg-primary -translate-y-1/2" />
-          <div className="absolute left-1/2 top-0 h-full w-px bg-primary -translate-x-1/2" />
-        </div>
-      </motion.div>
+      <motion.div
+        className="absolute inset-y-0 right-0 w-1/2 bg-background z-10"
+        style={{ x: rightX, opacity }}
+      />
+      {/* Linea centrale verticale */}
+      <motion.div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[40%] bg-gradient-to-b from-transparent via-primary/20 to-transparent z-20"
+        style={{ scaleY: lineScale, opacity: lineOpacity }}
+      />
     </>
   );
 };
 
-/* ─── Dissolve: gradient fade with glow ─── */
 const DissolveTransition = ({ scrollYProgress }: { scrollYProgress: any }) => {
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.4, 0.7], [1, 0.3, 0]);
-  const glowOpacity = useTransform(scrollYProgress, [0.1, 0.5, 0.9], [0, 0.2, 0]);
-  const lineScaleX = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0, 1, 0]);
-  const lineOpacity = useTransform(scrollYProgress, [0.15, 0.3, 0.7, 0.85], [0, 0.35, 0.35, 0]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.8, 0.2, 0]);
+  const glowOpacity = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0, 0.15, 0]);
+  const lineScaleX = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0]);
 
   return (
     <>
       <motion.div className="absolute inset-0 bg-background z-10" style={{ opacity: overlayOpacity }} />
       <motion.div
-        className="absolute w-[40vw] h-[25vh] rounded-full blur-[100px] z-[5]"
-        style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.2) 0%, transparent 70%)", opacity: glowOpacity }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[35vw] h-[20vh] rounded-full blur-[80px] z-[5]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
+          opacity: glowOpacity,
+        }}
       />
       <motion.div
-        className="absolute w-[25vw] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent z-20"
-        style={{ scaleX: lineScaleX, opacity: lineOpacity }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[20vw] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent z-20"
+        style={{ scaleX: lineScaleX }}
       />
     </>
   );
 };
 
-/* ─── Wipe: horizontal gradient sweep ─── */
 const WipeTransition = ({ scrollYProgress }: { scrollYProgress: any }) => {
-  const wipeX = useTransform(scrollYProgress, [0, 0.6], ["-100%", "100%"]);
-  const wipeOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.7], [0, 0.8, 0.8, 0]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.8, 0.4, 0.2, 0]);
+  const wipeX = useTransform(scrollYProgress, [0.05, 0.65], ["-100%", "100%"]);
+  const wipeOpacity = useTransform(scrollYProgress, [0.05, 0.2, 0.5, 0.65], [0, 0.6, 0.6, 0]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.6, 0.3, 0.1, 0]);
 
   return (
     <>
       <motion.div className="absolute inset-0 bg-background z-[5]" style={{ opacity: bgOpacity }} />
       <motion.div
-        className="absolute inset-y-0 w-[60%] z-10"
+        className="absolute inset-y-0 w-[50%] z-10"
         style={{
           x: wipeX,
           opacity: wipeOpacity,
-          background: "linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.08) 40%, hsl(var(--primary) / 0.15) 50%, hsl(var(--primary) / 0.08) 60%, transparent 100%)",
+          background:
+            "linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.06) 40%, hsl(var(--primary) / 0.12) 50%, hsl(var(--primary) / 0.06) 60%, transparent 100%)",
         }}
       />
     </>
   );
 };
 
-/* ─── Glow: radial pulse ─── */
 const GlowTransition = ({ scrollYProgress }: { scrollYProgress: any }) => {
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], [0.9, 0.4, 0.15, 0]);
-  const glowScale = useTransform(scrollYProgress, [0.1, 0.5, 0.9], [0.3, 1.2, 0.3]);
-  const glowOpacity = useTransform(scrollYProgress, [0.1, 0.45, 0.9], [0, 0.35, 0]);
-  const dotOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.65], [0, 1, 0]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.35, 0.75, 1], [0.7, 0.3, 0.1, 0]);
+  const glowScale = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0.4, 1, 0.4]);
+  const glowOpacity = useTransform(scrollYProgress, [0.15, 0.5, 0.85], [0, 0.25, 0]);
+  const dotOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
 
   return (
     <>
       <motion.div className="absolute inset-0 bg-background z-[5]" style={{ opacity: bgOpacity }} />
       <motion.div
-        className="absolute w-[50vw] h-[50vw] rounded-full blur-[120px] z-10"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[300px] max-h-[300px] rounded-full blur-[100px] z-10"
         style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.3) 0%, transparent 60%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.2) 0%, transparent 60%)",
           scale: glowScale,
           opacity: glowOpacity,
         }}
       />
       <motion.div
-        className="absolute w-2 h-2 rounded-full bg-primary z-20"
-        style={{ opacity: dotOpacity, boxShadow: "0 0 20px hsl(var(--primary) / 0.5)" }}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary z-20"
+        style={{ opacity: dotOpacity, boxShadow: "0 0 15px hsl(var(--primary) / 0.4)" }}
       />
     </>
   );
 };
 
-const VARIANTS = { curtain: CurtainTransition, dissolve: DissolveTransition, wipe: WipeTransition, glow: GlowTransition };
+const VARIANTS = {
+  curtain: CurtainTransition,
+  dissolve: DissolveTransition,
+  wipe: WipeTransition,
+  glow: GlowTransition,
+};
 
-const SectionTransition = ({ variant = "dissolve", height = "h-[50vh] md:h-[70vh]", label }: SectionTransitionProps) => {
+const SectionTransition = ({
+  variant = "dissolve",
+  height = "h-[20vh] md:h-[30vh]",
+  label,
+}: SectionTransitionProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
   const Variant = VARIANTS[variant];
 
-  // Label animation
-  const labelOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.65, 0.8], [0, 1, 1, 0]);
-  const labelY = useTransform(scrollYProgress, [0.25, 0.45, 0.65, 0.8], [30, 0, 0, -30]);
+  /* Label animation */
+  const labelOpacity = useTransform(scrollYProgress, [0.3, 0.45, 0.6, 0.75], [0, 1, 1, 0]);
+  const labelY = useTransform(scrollYProgress, [0.3, 0.45, 0.6, 0.75], [20, 0, 0, -20]);
 
   return (
-    <div ref={ref} className={`relative ${height} -mt-px`}>
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
+    <div
+      ref={ref}
+      className={`relative ${height} overflow-hidden`}
+      aria-hidden="true"
+    >
+      {/* Gradient edges per fusione morbida con le sezioni adiacenti */}
+      <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent z-30 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent z-30 pointer-events-none" />
+
+      {/* Contenitore centrato per effetti */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <Variant scrollYProgress={scrollYProgress} />
 
-        {/* Optional label */}
+        {/* Label opzionale */}
         {label && (
           <motion.p
-            className="relative z-30 text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/20 font-medium"
+            className="relative z-30 text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/20 font-medium select-none"
             style={{ opacity: labelOpacity, y: labelY }}
           >
             {label}
           </motion.p>
         )}
-
-        {/* Edge fades */}
-        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent z-40" />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent z-40" />
-
-        {/* Grain */}
-        <div className="absolute inset-0 grain pointer-events-none opacity-30 z-50" />
       </div>
+
+      {/* Grain texture */}
+      <div className="absolute inset-0 grain pointer-events-none opacity-20 z-40" />
     </div>
   );
 };
