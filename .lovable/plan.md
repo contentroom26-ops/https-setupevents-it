@@ -1,39 +1,55 @@
 
 
-## Plan: Fix Navbar visibility, remove name fields from contact form, verify email sending
+## Diagnosi completa del sito — Problemi trovati
 
-### Problem Analysis
+### Problema CRITICO: Le sezioni intermedie non sono visibili
 
-1. **Navbar invisible**: The Navbar has CSS `z-50` (z-index 50), but the Hero `StackSection` wraps content with `zIndex: 60` and uses `sticky top-0`. This means the Hero section sits on top of the Navbar, hiding it completely.
+Il problema principale è che il componente `StackSection` usa `sticky top-0` ma il div contenitore esterno non ha altezza aggiuntiva. Per l'effetto "card stack" (dove le sezioni si sovrappongono scorrendo), il contenitore esterno deve essere **più alto del viewport** (es. `200vh`) per creare spazio di scroll. Senza questo, il contenuto sticky non ha spazio per "scorrere via" e tutte le sezioni collassano una sopra l'altra.
 
-2. **Contact form**: Still has `nome` (first name) and `cognome` (last name) fields that need to be removed.
+**Risultato attuale**: il sito salta direttamente dall'Hero al Footer — le sezioni Story, Marquee, Services, Portfolio e Contact sono invisibili o compresse.
 
-3. **Email sending**: The form calls `supabase.functions.invoke("send-contact-email")` which sends to `info@setupevents.it` via Resend — this is already correctly configured in the edge function.
+### Cosa funziona correttamente
+- Navbar visibile con logo, language switcher e hamburger menu
+- Menu mobile si apre/chiude correttamente con tutti i link
+- Footer con "Work with us", servizi, link, contatti e social
+- Pagine secondarie (Corporate Events, Privacy Policy, etc.) funzionano
+- WhatsApp button presente
+- Link nel footer navigano correttamente alle pagine dedicate
 
-### Changes
+### Piano di correzione
 
-#### 1. Fix Navbar z-index (`src/components/Navbar.tsx`)
-- Change `z-50` to `z-[100]` on the `<motion.nav>` element so it always stays above all `StackSection` layers (max z-index is 60 for Hero).
-- Also update the mobile menu overlay from `z-40` to `z-[90]` so it sits just below the navbar but above sections.
+#### 1. Fix `StackSection.tsx` — Aggiungere altezza di scroll
+Il div esterno `ref={ref}` deve avere un'altezza minima che permetta allo sticky di funzionare:
 
-#### 2. Remove name fields from contact form (`src/components/ContactSection.tsx`)
-- Remove `nome` and `cognome` from the form state.
-- Remove the grid row with the two `StageInput` components for nome/cognome.
-- Update `handleSubmit` to send empty strings for `nome`/`cognome` (the edge function expects them but they can be empty) or send a placeholder like "N/A".
-- Also remove the `StageInput` component definition since it's only used for those fields — actually, it's still used for email, so keep it but just remove the name inputs.
+```text
+Attuale:  <div ref={ref} style={{ zIndex }}>
+Corretto: <div ref={ref} style={{ zIndex, minHeight: "200vh" }}>
+```
 
-#### 3. Verify email flow
-- The edge function at `supabase/functions/send-contact-email/index.ts` already sends to `info@setupevents.it` via Resend. The `RESEND_API_KEY` secret is configured. No changes needed here — just confirm it works after the form changes.
+Ogni sezione avrà `min-height: 200vh` così il contenuto sticky (che occupa `100vh`) resta pinnato mentre l'utente scorre la restante altezza, creando l'effetto di profondità desiderato.
 
-### Technical Details
+#### 2. Fix altezza contenuto interno delle sezioni
+Le sezioni figlio (StorySection, ServicesSection, etc.) devono avere `min-h-screen` per occupare tutto il viewport quando sono pinnate:
+- `StorySection`: aggiungere `min-h-screen` alla section
+- `Marquee`: verificare che abbia altezza viewport
+- `ServicesSection`: aggiungere `min-h-screen`
+- `PortfolioSection`: aggiungere `min-h-screen`
+- `ContactSection`: aggiungere `min-h-screen`
 
-- Navbar z-index fix: `z-50` → `z-[100]`, mobile menu `z-40` → `z-[90]`
-- Form state simplified: remove `nome`, `cognome` keys
-- Submit body: pass `nome: "N/A"`, `cognome: "N/A"` since the edge function validates these as required fields — alternatively update the edge function to make them optional
-- Better approach: update the edge function to not require nome/cognome, making them optional
+#### 3. Fix warning React (non critico ma da risolvere)
+Ci sono warning "Function components cannot be given refs" per:
+- `ServiceRow` in ServicesSection — va wrappato con `forwardRef`
+- `ContactSection` — stesso problema
+- `StageInput` — stesso problema
 
-### Files to modify
-- `src/components/Navbar.tsx` — z-index fix
-- `src/components/ContactSection.tsx` — remove name fields
-- `supabase/functions/send-contact-email/index.ts` — make nome/cognome optional
+### File da modificare
+- `src/components/StackSection.tsx` — aggiungere `min-height: 200vh` al wrapper
+- `src/components/StorySection.tsx` — aggiungere `min-h-screen`
+- `src/components/Marquee.tsx` — verificare altezza
+- `src/components/ServicesSection.tsx` — `min-h-screen` + `forwardRef` su ServiceRow
+- `src/components/PortfolioSection.tsx` — `min-h-screen`
+- `src/components/ContactSection.tsx` — `min-h-screen` + `forwardRef`
+
+### Risultato atteso
+Scorrendo il sito, ogni sezione resta pinnata in cima allo schermo. Quando la sezione successiva arriva, quella corrente si riduce leggermente (scala 0.95) e sfuma (opacità 0.4), creando un effetto di profondità "a pila di carte". L'effetto funziona sia scorrendo in basso che in alto.
 
