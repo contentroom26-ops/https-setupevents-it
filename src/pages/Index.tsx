@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
+import SectionTransition from "@/components/SectionTransition";
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -47,11 +48,26 @@ const Index = () => {
           }}
         >
           <Suspense fallback={null}>
+            {/* Hero → Story: curtain wipe */}
+            <SectionTransition variant="curtain" label="[01] Chi siamo" />
             <StorySection />
+
+            {/* Story → Marquee: dissolve */}
+            <SectionTransition variant="dissolve" height="h-[30vh] md:h-[50vh]" />
             <Marquee />
+
+            {/* Marquee → Services: wipe */}
+            <SectionTransition variant="wipe" label="[02] Servizi" height="h-[40vh] md:h-[60vh]" />
             <ServicesSection />
+
+            {/* Services → Portfolio: glow */}
+            <SectionTransition variant="glow" label="[03] Portfolio" />
             <PortfolioSection />
+
+            {/* Portfolio → Contact: curtain */}
+            <SectionTransition variant="curtain" label="[04] Contatti" />
             <ContactSection />
+
             <Footer />
             <WhatsAppButton />
           </Suspense>
