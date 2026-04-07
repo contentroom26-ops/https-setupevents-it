@@ -213,7 +213,21 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
           transition={{ duration: 1, delay: 0.5, ease }}
         >
-          {t("hero.headline")}
+          {t("hero.headlinePre")}{" "}
+          <span className="relative inline-block overflow-hidden align-bottom" style={{ height: "1.15em", verticalAlign: "baseline" }}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={serviceIndex}
+                className="inline-block text-primary"
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {services[serviceIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h1>
 
         <motion.p
