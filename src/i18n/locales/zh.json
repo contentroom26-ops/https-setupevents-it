@@ -31,43 +31,69 @@
   "marquee": "企业活动 • 品牌激活 • 产品发布 • 礼仪人员 • 公共关系 • 场地布置 • 音视频服务 • 佛罗伦萨 • ",
   "services": {
     "label": "服务",
-    "heading": "服务项目",
+    "heading": "我们的服务",
+    "seoHeading": "佛罗伦萨及意大利全境活动制作服务",
     "counter": "项服务 — 滚动查看",
     "scroll": "滚动",
     "swipe": "滑动",
     "tapHint": "点击了解更多",
     "categories": "分类",
     "learnMore": "了解详情 →",
+    "trustLine": "深受意大利各地品牌、代理商和私人客户的信赖",
+    "socialProof": "在意大利成功举办超过100场活动",
+    "ctaQuote": "获取报价 →",
+    "ctaPlan": "策划您的活动 →",
+    "endHeading": "让我们在佛罗伦萨或意大利任何地方创造您的下一场活动",
+    "endSubtext": "告诉我们您的愿景——其余的交给我们",
+    "endCta": "获取免费报价 →",
     "items": [
       {
         "title": "企业活动",
-        "description": "组织会议、大型会展、企业晚宴和团队建设，以加强品牌形象和建立有意义的联系。",
-        "categories": ["会展", "团队建设", "企业晚宴", "会议"]
+        "seoTitle": "佛罗伦萨企业活动策划",
+        "description": "会议、大型会展、企业晚宴和团队建设，加强品牌形象并建立有意义的联系。从概念到完美执行的定制方案。",
+        "seoCopy": "佛罗伦萨及意大利全境企业活动制作",
+        "categories": ["会展", "团队建设", "企业晚宴", "会议"],
+        "imageAlt": "corporate event organization Florence convention"
       },
       {
         "title": "品牌激活",
-        "description": "产品发布和沉浸式体验，旨在最大化品牌曝光率、参与度和市场影响力。",
-        "categories": ["产品发布", "快闪活动", "体验式营销"]
+        "seoTitle": "意大利品牌激活和产品发布",
+        "description": "产品发布和沉浸式体验，最大化品牌曝光率、参与度和市场影响力。从创意概念到完整制作。",
+        "seoCopy": "佛罗伦萨活动品牌激活服务",
+        "categories": ["产品发布", "快闪活动", "体验式营销"],
+        "imageAlt": "brand activation product launch event Italy"
       },
       {
         "title": "礼仪人员",
-        "description": "经过专业培训的人员负责活动接待、推广和品牌形象展示。确保专业素质。",
-        "categories": ["女礼仪", "男礼仪", "推广人员", "技术人员"]
+        "seoTitle": "佛罗伦萨专业礼仪服务",
+        "description": "经过专业选拔和培训的活动人员，为企业和私人活动提供接待、推广和品牌形象服务。保证优雅、有序和完美的宾客体验。",
+        "seoCopy": "佛罗伦萨及意大利全境专业活动人员",
+        "categories": ["女礼仪", "男礼仪", "推广人员", "技术人员"],
+        "imageAlt": "hostess steward service corporate event Florence"
       },
       {
         "title": "公共关系",
-        "description": "精心挑选的联系人和宾客管理。为每场活动进行目标筛选和关系维护。",
-        "categories": ["宾客管理", "VIP接待", "社交网络"]
+        "seoTitle": "活动PR和宾客管理",
+        "description": "战略性联系人和宾客管理。目标筛选、关系维护和社交网络，从企业到VIP活动。",
+        "seoCopy": "意大利独家活动PR和宾客管理",
+        "categories": ["宾客管理", "VIP接待", "社交网络"],
+        "imageAlt": "public relations networking VIP event Florence"
       },
       {
         "title": "场地布置",
-        "description": "寻找最佳场地并提供定制化舞台设计。从概念到实现。",
-        "categories": ["场地搜寻", "舞台设计", "布置", "场景设计"]
+        "seoTitle": "佛罗伦萨场地设计和舞台搭建",
+        "description": "寻找最佳场地并提供定制化舞台设计。从概念到实现的定制装置，打造难忘活动。",
+        "seoCopy": "佛罗伦萨及意大利舞台设计和场景搭建",
+        "categories": ["场地搜寻", "舞台设计", "布置", "场景设计"],
+        "imageAlt": "scenic setup venue design event Florence"
       },
       {
         "title": "音视频制作",
-        "description": "采用尖端技术的专业音视频服务，打造完美而震撼的制作效果。",
-        "categories": ["音响", "视频", "灯光", "直播"]
+        "seoTitle": "活动音视频和灯光服务",
+        "description": "采用尖端技术的专业音视频服务。音响、视频、灯光和直播，打造完美而震撼的制作效果。",
+        "seoCopy": "意大利活动专业音视频制作",
+        "categories": ["音响", "视频", "灯光", "直播"],
+        "imageAlt": "audio video lighting production professional event"
       }
     ]
   },
