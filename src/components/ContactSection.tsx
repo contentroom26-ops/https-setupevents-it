@@ -32,8 +32,7 @@ const ContactSection = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    nome: "", cognome: "", azienda: "", email: "", telefono: "",
-    eventType: "", messaggio: "", privacy: false,
+    email: "", eventType: "", messaggio: "", privacy: false,
   });
 
   /* ── GSAP curtain animation ── */
