@@ -89,7 +89,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="SetupEvents"
-              className="w-auto h-16 sm:h-20 md:h-28 -my-2 sm:-my-4 md:-my-6 drop-shadow-lg transition-all duration-500"
+              className="w-auto h-20 sm:h-24 md:h-32 -my-4 sm:-my-5 md:-my-8 drop-shadow-lg transition-all duration-500"
             />
           </a>
 
