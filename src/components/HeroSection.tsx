@@ -31,10 +31,11 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   }, []);
 
-  // Start video immediately on mount
+  // Start video only after splash is done (ready=true)
   useEffect(() => {
+    if (!ready) return;
     tryPlayVideo();
-  }, [tryPlayVideo]);
+  }, [ready, tryPlayVideo]);
 
   // Show text content only when ready
   useEffect(() => {
