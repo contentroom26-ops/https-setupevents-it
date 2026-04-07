@@ -42,7 +42,7 @@ const Index = () => {
           <Navbar />
           <SideAccent />
         </div>
-        <HeroSection ready />
+        <HeroSection ready={splashDone} />
         <div
           style={{
             opacity: splashDone ? 1 : 0,

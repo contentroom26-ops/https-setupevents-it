@@ -31,10 +31,11 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   }, []);
 
-  // Start video immediately on mount
+  // Start video only after splash is done (ready=true)
   useEffect(() => {
+    if (!ready) return;
     tryPlayVideo();
-  }, [tryPlayVideo]);
+  }, [ready, tryPlayVideo]);
 
   // Show text content only when ready
   useEffect(() => {
@@ -78,7 +79,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         <video
           ref={videoRef} loop muted playsInline
           // @ts-ignore
-          webkit-playsinline="" preload="metadata" poster={heroBg}
+          webkit-playsinline="" preload="auto" poster={heroBg}
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ minWidth: "100%", minHeight: "100%", opacity: videoLoaded ? 1 : 0, transition: "opacity 0.7s ease" }}
         >
