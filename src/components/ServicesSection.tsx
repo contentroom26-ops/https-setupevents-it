@@ -327,9 +327,9 @@ const DesktopServices = () => {
    ═══════════════════════════════════════════ */
 const MobileServices = () => {
   const { t } = useTranslation();
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
 
-  const setCardRef = useCallback((el: HTMLDivElement | null, i: number) => {
+  const setCardRef = useCallback((el: HTMLElement | null, i: number) => {
     cardsRef.current[i] = el;
   }, []);
 
