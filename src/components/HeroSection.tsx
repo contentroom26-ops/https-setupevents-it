@@ -72,7 +72,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     return () => clearInterval(interval);
   }, [showContent, services.length]);
 
-
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const onCanPlay = () => setVideoLoaded(true);
