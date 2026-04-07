@@ -227,12 +227,7 @@ const ContactSection = () => {
                 <StageInput name="cognome" placeholder={t("contact.lastName")} value={formData.cognome} onChange={handleChange} required />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <StageInput name="email" type="email" placeholder={t("contact.email")} value={formData.email} onChange={handleChange} required />
-                <StageInput name="telefono" type="tel" placeholder={t("contact.phone")} value={formData.telefono} onChange={handleChange} required />
-              </div>
-
-              <StageInput name="azienda" placeholder={t("contact.company")} value={formData.azienda} onChange={handleChange} />
+              <StageInput name="email" type="email" placeholder={t("contact.email")} value={formData.email} onChange={handleChange} required />
 
               {/* Event type select */}
               <div className="relative">
@@ -303,7 +298,7 @@ const ContactSection = () => {
                   {isSubmitting ? (
                     <><span>{t("contact.submitting")}</span><Loader2 className="w-4 h-4 animate-spin" /></>
                   ) : (
-                    <><span>{t("contact.submit")}</span><ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" /></>
+                    <><span>{t("contact.sendRequest")}</span><ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" /></>
                   )}
                 </span>
               </button>

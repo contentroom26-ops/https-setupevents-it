@@ -104,21 +104,29 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* ── Lavora con noi — banner visibile ── */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-14 pb-10 border-b border-border"
+          className="rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6 sm:p-8 mb-14 flex flex-col sm:flex-row items-center justify-between gap-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
         >
-          <p className="text-sm text-muted-foreground">{t("footer.workWithUs")}</p>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <Users className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-display font-bold text-base sm:text-lg text-foreground">{t("footer.workWithUs")}</h3>
+              <p className="text-sm text-muted-foreground mt-0.5">{t("footer.workDesc")}</p>
+            </div>
+          </div>
           <motion.a
             href="mailto:hostess@setupevents.it?subject=Candidatura%20Hostess%20-%20Lavora%20con%20noi"
-            className="group inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-7 py-4 rounded-full font-semibold text-sm border border-border hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_20px_hsl(var(--primary)/0.1)]"
+            className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-500 hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Users className="w-4 h-4 text-primary" />
             {t("footer.workCta")}
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </motion.a>
