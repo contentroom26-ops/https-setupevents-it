@@ -10,12 +10,55 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="bg-background text-foreground pt-16 pb-10 relative border-t border-border">
+    <footer className="relative pt-20 pb-10" style={{ background: "#0a0a0a" }}>
+      {/* Subtle top glow line */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
       <div className="container-custom">
+
+        {/* ── Lavora con noi — glassmorphism banner ── */}
+        <motion.div
+          className="rounded-2xl p-6 sm:p-8 mb-16 flex flex-col sm:flex-row items-center justify-between gap-6"
+          style={{
+            background: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <Users className="w-5 h-5 text-white/70" />
+            </div>
+            <div>
+              <h3 className="font-display font-bold text-base sm:text-lg text-white">{t("footer.workWithUs")}</h3>
+              <p className="text-sm text-white/40 mt-0.5">{t("footer.workDesc")}</p>
+            </div>
+          </div>
+          <motion.a
+            href="mailto:hostess@setupevents.it?subject=Candidatura%20Hostess%20-%20Lavora%20con%20noi"
+            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-semibold text-sm text-white transition-all duration-500"
+            style={{
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              backdropFilter: "blur(8px)",
+            }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {t("footer.workCta")}
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </motion.a>
+        </motion.div>
+
+        {/* ── Back to top ── */}
         <div className="flex justify-end mb-14">
           <motion.button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium group"
+            className="inline-flex items-center gap-2 text-white/40 hover:text-white transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium group"
             whileHover={{ y: -3 }}
           >
             {t("footer.backToTop")}
@@ -23,10 +66,11 @@ const Footer = () => {
           </motion.button>
         </div>
 
+        {/* ── Grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-14 mb-14">
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-foreground/70">{t("footer.services")}</h4>
-            <ul className="space-y-3.5 text-muted-foreground">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.services")}</h4>
+            <ul className="space-y-3.5">
               {[
                 { name: "Corporate Events", href: "/corporate-events" },
                 { name: "Brand Activation", href: "/brand-activation" },
@@ -35,15 +79,15 @@ const Footer = () => {
                 { name: "Public Relations", href: "/public-relations" },
               ].map((item) => (
                 <li key={item.name}>
-                  <Link to={item.href} className="hover:text-primary transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                  <Link to={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-foreground/70">{t("footer.links")}</h4>
-            <ul className="space-y-3.5 text-muted-foreground">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.links")}</h4>
+            <ul className="space-y-3.5">
               {[
                 { name: t("footer.portfolio"), href: "#portfolio" },
                 { name: t("footer.contactLink"), href: "#contact" },
@@ -53,9 +97,9 @@ const Footer = () => {
               ].map((item) => (
                 <li key={item.name}>
                   {item.href.startsWith("/") ? (
-                    <Link to={item.href} className="hover:text-primary transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                    <Link to={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
                   ) : (
-                    <a href={item.href} className="hover:text-primary transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</a>
+                    <a href={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</a>
                   )}
                 </li>
               ))}
@@ -63,25 +107,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-foreground/70">{t("footer.contacts")}</h4>
-            <ul className="space-y-4.5 text-muted-foreground text-sm">
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.contacts")}</h4>
+            <ul className="space-y-4.5 text-sm">
               <li className="flex items-center gap-3 group">
-                <Mail className="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                <a href="mailto:info@setupevents.it" className="hover:text-primary transition-colors duration-300">info@setupevents.it</a>
+                <Mail className="w-4 h-4 text-white/40 transition-transform duration-300 group-hover:scale-110" />
+                <a href="mailto:info@setupevents.it" className="text-white/70 hover:text-white transition-colors duration-300">info@setupevents.it</a>
               </li>
               <li className="flex items-center gap-3 group">
-                <Phone className="w-4 h-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                <a href="tel:+393284163053" className="hover:text-primary transition-colors duration-300">+39 328 416 3053</a>
+                <Phone className="w-4 h-4 text-white/40 transition-transform duration-300 group-hover:scale-110" />
+                <a href="tel:+393284163053" className="text-white/70 hover:text-white transition-colors duration-300">+39 328 416 3053</a>
               </li>
               <li className="flex items-start gap-3 group">
-                <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
-                <span>Firenze, Italia</span>
+                <MapPin className="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-white/70">Firenze, Italia</span>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-foreground/70">{t("footer.social")}</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.social")}</h4>
             <div className="flex gap-3">
               {[
                 { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gabrielleshi_events/" },
@@ -92,7 +136,8 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-all duration-300"
+                  style={{ border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)" }}
                   aria-label={social.label}
                   whileHover={{ scale: 1.15, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -104,35 +149,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* ── Lavora con noi — banner visibile ── */}
-        <motion.div
-          className="rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6 sm:p-8 mb-14 flex flex-col sm:flex-row items-center justify-between gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Users className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-display font-bold text-base sm:text-lg text-foreground">{t("footer.workWithUs")}</h3>
-              <p className="text-sm text-muted-foreground mt-0.5">{t("footer.workDesc")}</p>
-            </div>
-          </div>
-          <motion.a
-            href="mailto:hostess@setupevents.it?subject=Candidatura%20Hostess%20-%20Lavora%20con%20noi"
-            className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-500 hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {t("footer.workCta")}
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
-        </motion.div>
-
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted-foreground/60 text-xs pt-8">
+        {/* ── Bottom bar ── */}
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-xs">
           <p>© {new Date().getFullYear()} SetupEvents by Gabriel Lleshi</p>
           <p>P.IVA: 07386270487</p>
         </div>
