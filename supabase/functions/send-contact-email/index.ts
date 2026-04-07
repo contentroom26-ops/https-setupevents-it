@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
     const formData: ContactFormData = await req.json();
 
     // Validate required fields with length limits
-    if (!formData.nome || !formData.cognome || !formData.email || !formData.telefono || !formData.messaggio) {
+    if (!formData.email || !formData.messaggio) {
       return new Response(
         JSON.stringify({ success: false, error: "Campi obbligatori mancanti." }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }

@@ -32,8 +32,7 @@ const ContactSection = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    nome: "", cognome: "", azienda: "", email: "", telefono: "",
-    eventType: "", messaggio: "", privacy: false,
+    email: "", eventType: "", messaggio: "", privacy: false,
   });
 
   /* ── GSAP curtain animation ── */
@@ -113,14 +112,15 @@ const ContactSection = () => {
     try {
       const { error } = await supabase.functions.invoke("send-contact-email", {
         body: {
-          nome: formData.nome, cognome: formData.cognome, azienda: formData.azienda,
-          email: formData.email, telefono: formData.telefono,
+          nome: "", cognome: "",
+          email: formData.email,
+          telefono: "", azienda: "",
           dataEvento: "", messaggio: `[${formData.eventType}] ${formData.messaggio}`,
         },
       });
       if (error) throw error;
       toast({ title: t("contact.successTitle"), description: t("contact.successDesc") });
-      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", eventType: "", messaggio: "", privacy: false });
+      setFormData({ email: "", eventType: "", messaggio: "", privacy: false });
     } catch {
       toast({ title: t("contact.errorTitle"), description: t("contact.errorDesc"), variant: "destructive" });
     } finally {
@@ -222,11 +222,6 @@ const ContactSection = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <StageInput name="nome" placeholder={t("contact.firstName")} value={formData.nome} onChange={handleChange} required />
-                <StageInput name="cognome" placeholder={t("contact.lastName")} value={formData.cognome} onChange={handleChange} required />
-              </div>
-
               <StageInput name="email" type="email" placeholder={t("contact.email")} value={formData.email} onChange={handleChange} required />
 
               {/* Event type select */}
