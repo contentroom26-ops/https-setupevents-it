@@ -102,9 +102,9 @@
     content-visibility: auto;
   }
 
-  /* Contain layout paint for heavy sections */
-  section {
-    contain: layout style;
+  /* Contain paint for heavy sections — exclude services (needs sticky) */
+  section:not(#services) {
+    contain: style;
   }
 }
 
