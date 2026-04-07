@@ -27,7 +27,6 @@ const DesktopServices = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const layersRef = useRef<(HTMLDivElement | null)[]>([]);
   const progressRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const setLayerRef = useCallback((el: HTMLDivElement | null, i: number) => {
@@ -40,95 +39,104 @@ const DesktopServices = () => {
 
     const ctx = gsap.context(() => {
       const layers = layersRef.current.filter(Boolean) as HTMLDivElement[];
+      if (layers.length < TOTAL) return;
 
-      // Set initial states — all layers hidden except first
+      // Initial states
       layers.forEach((layer, i) => {
+        const textEl = layer.querySelector(".svc-text");
+        const imgEl = layer.querySelector(".svc-img");
+        const numEl = layer.querySelector(".svc-num");
         if (i === 0) {
-          gsap.set(layer, { opacity: 1, visibility: "visible" });
-          gsap.set(layer.querySelector(".svc-text"), { y: 0, opacity: 1 });
-          gsap.set(layer.querySelector(".svc-img"), { scale: 1, opacity: 1 });
-          gsap.set(layer.querySelector(".svc-num"), { y: 0, opacity: 1 });
+          gsap.set(layer, { autoAlpha: 1 });
+          gsap.set(textEl, { y: 0, autoAlpha: 1 });
+          gsap.set(imgEl, { scale: 1, autoAlpha: 1 });
+          gsap.set(numEl, { y: 0, autoAlpha: 1 });
         } else {
-          gsap.set(layer, { opacity: 0, visibility: "hidden" });
-          gsap.set(layer.querySelector(".svc-text"), { y: 40, opacity: 0 });
-          gsap.set(layer.querySelector(".svc-img"), { scale: 1.08, opacity: 0 });
-          gsap.set(layer.querySelector(".svc-num"), { y: 20, opacity: 0 });
+          gsap.set(layer, { autoAlpha: 0 });
+          gsap.set(textEl, { y: 40, autoAlpha: 0 });
+          gsap.set(imgEl, { scale: 1.08, autoAlpha: 0 });
+          gsap.set(numEl, { y: 20, autoAlpha: 0 });
         }
       });
 
-      // Main timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.8,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            const idx = Math.min(Math.floor(self.progress * TOTAL), TOTAL - 1);
-            setActiveIndex(idx);
+      // Build ONE master timeline. Each service gets 1 "unit" of time.
+      // Each service: HOLD for 0.6 units, EXIT 0.15 units, ENTER next 0.25 units (sequential, no overlap)
+      const UNIT = 1;
+      const tl = gsap.timeline();
 
-            // Progress bar
-            if (progressRef.current) {
-              progressRef.current.style.transform = `scaleX(${self.progress})`;
-            }
-          },
+      for (let i = 0; i < TOTAL; i++) {
+        const current = layers[i];
+        const next = layers[i + 1];
+        const baseTime = i * UNIT;
+
+        tl.addLabel(`svc${i}`, baseTime);
+
+        if (next) {
+          // EXIT current — fast, complete before next enters
+          const exitStart = baseTime + UNIT * 0.65;
+          const exitDur = UNIT * 0.15;
+
+          tl.to(current.querySelector(".svc-text")!, {
+            y: -25, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
+          tl.to(current.querySelector(".svc-img")!, {
+            scale: 0.97, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
+          tl.to(current.querySelector(".svc-num")!, {
+            y: -10, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
+          tl.to(current, {
+            autoAlpha: 0, duration: exitDur * 0.6, ease: "none",
+          }, exitStart + exitDur * 0.4);
+
+          // ENTER next — starts after exit completes
+          const enterStart = exitStart + exitDur;
+          const enterDur = UNIT * 0.2;
+
+          tl.set(next, { autoAlpha: 1 }, enterStart);
+          tl.fromTo(next.querySelector(".svc-num")!,
+            { y: 15, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: enterDur * 0.7, ease: "power2.out" },
+            enterStart
+          );
+          tl.fromTo(next.querySelector(".svc-text")!,
+            { y: 30, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: enterDur, ease: "power2.out" },
+            enterStart + enterDur * 0.1
+          );
+          tl.fromTo(next.querySelector(".svc-img")!,
+            { scale: 1.05, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: enterDur, ease: "power2.out" },
+            enterStart + enterDur * 0.05
+          );
+        }
+      }
+
+      // Add final hold
+      tl.addLabel("end", TOTAL * UNIT);
+
+      // Attach timeline to scroll
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.6,
+        animation: tl,
+        onUpdate: (self) => {
+          const idx = Math.min(Math.floor(self.progress * TOTAL), TOTAL - 1);
+          setActiveIndex(idx);
+          if (progressRef.current) {
+            progressRef.current.style.transform = `scaleX(${self.progress})`;
+          }
         },
       });
 
-      // Build transitions between services
-      for (let i = 0; i < TOTAL - 1; i++) {
-        const current = layers[i];
-        const next = layers[i + 1];
-        if (!current || !next) continue;
-
-        const segStart = i / TOTAL;
-        const exitStart = segStart + 0.7 / TOTAL; // exit at 70% of segment
-        const exitEnd = segStart + 1 / TOTAL;     // end of segment
-        const enterStart = exitStart;               // overlap: next enters as current exits
-        const enterEnd = exitEnd + 0.2 / TOTAL;
-
-        // EXIT current
-        tl.to(current.querySelector(".svc-text"), {
-          y: -40, opacity: 0, duration: 0.15, ease: "power2.in",
-        }, exitStart);
-        tl.to(current.querySelector(".svc-img"), {
-          scale: 0.95, opacity: 0, duration: 0.15, ease: "power2.in",
-        }, exitStart);
-        tl.to(current.querySelector(".svc-num"), {
-          y: -20, opacity: 0, duration: 0.1, ease: "power2.in",
-        }, exitStart);
-        tl.to(current, {
-          opacity: 0, duration: 0.12, ease: "none",
-          onComplete: () => gsap.set(current, { visibility: "hidden" }),
-        }, exitStart + 0.03);
-
-        // ENTER next
-        tl.set(next, { visibility: "visible", opacity: 0 });
-        tl.to(next, { opacity: 1, duration: 0.12, ease: "none" }, enterStart);
-        tl.fromTo(next.querySelector(".svc-num"),
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.08, ease: "power2.out" },
-          enterStart
-        );
-        tl.fromTo(next.querySelector(".svc-text"),
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.15, ease: "power2.out" },
-          enterStart + 0.02
-        );
-        tl.fromTo(next.querySelector(".svc-img"),
-          { scale: 1.08, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.15, ease: "power2.out" },
-          enterStart + 0.01
-        );
-      }
-
-      // Add subtle parallax to active image
+      // Subtle parallax on all images
       layers.forEach((layer) => {
-        const img = layer?.querySelector(".svc-img-inner");
-        if (!img) return;
-        gsap.to(img, {
-          yPercent: 8,
+        const inner = layer?.querySelector(".svc-img-inner");
+        if (!inner) return;
+        gsap.to(inner, {
+          yPercent: 6,
           ease: "none",
           scrollTrigger: {
             trigger: section,
@@ -148,9 +156,8 @@ const DesktopServices = () => {
       ref={sectionRef}
       id="services"
       className="relative"
-      style={{ height: `${TOTAL * 60}vh`, background: "#0A0A0A" }}
+      style={{ height: `${TOTAL * 55}vh`, background: "#0A0A0A" }}
     >
-      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen" style={{ overflow: "clip" }}>
         {/* Progress bar */}
         <div className="absolute top-0 left-0 right-0 h-[2px] z-30 bg-white/5">
@@ -170,15 +177,15 @@ const DesktopServices = () => {
         </div>
 
         {/* Counter */}
-        <div className="absolute top-7 right-10 z-20 flex items-center gap-2" ref={counterRef}>
+        <div className="absolute top-7 right-10 z-20 flex items-center gap-2">
           <div className="h-7 overflow-hidden relative w-7">
             {Array.from({ length: TOTAL }).map((_, i) => (
               <div
                 key={i}
-                className="absolute inset-0 flex items-center justify-center text-xl font-display font-extrabold text-primary tabular-nums transition-transform duration-500"
+                className="absolute inset-0 flex items-center justify-center text-xl font-display font-extrabold text-primary tabular-nums"
                 style={{
                   transform: `translateY(${(i - activeIndex) * 100}%)`,
-                  willChange: "transform",
+                  transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)",
                 }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -199,10 +206,8 @@ const DesktopServices = () => {
                   width: activeIndex === i ? 10 : 5,
                   height: activeIndex === i ? 10 : 5,
                   backgroundColor: activeIndex === i ? "hsl(0 85% 55%)" : "transparent",
-                  borderWidth: 1,
-                  borderColor: activeIndex === i ? "hsl(0 85% 55%)" : "hsl(0 0% 25%)",
+                  border: `1px solid ${activeIndex === i ? "hsl(0 85% 55%)" : "hsl(0 0% 25%)"}`,
                   boxShadow: activeIndex === i ? "0 0 10px hsl(0 85% 55% / 0.4)" : "none",
-                  willChange: activeIndex === i ? "transform" : "auto",
                 }}
               />
               {i < TOTAL - 1 && (
@@ -229,36 +234,31 @@ const DesktopServices = () => {
               key={i}
               ref={(el) => setLayerRef(el, i)}
               className="absolute inset-0 flex"
-              style={{ willChange: i === activeIndex ? "opacity" : "auto" }}
+              style={{ visibility: "hidden" }}
             >
-              {/* LEFT — Text */}
+              {/* LEFT */}
               <div className="w-[42%] flex flex-col justify-center pl-16 xl:pl-24 pr-8 relative z-10">
                 <span className="svc-num text-[7rem] xl:text-[9rem] font-display font-black leading-none text-white/[0.025] absolute -top-2 -left-2 select-none pointer-events-none">
                   {num}
                 </span>
-
                 <div className="svc-text">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-primary font-mono text-sm font-bold">{num}</span>
                     <div className="w-10 h-px bg-primary/40" />
                   </div>
-
                   <h3 className="text-3xl xl:text-[2.8rem] font-display font-extrabold tracking-tight text-white mb-5 leading-[1.08]">
                     {title}
                   </h3>
-
                   <p className="text-[15px] xl:text-base text-white/45 leading-relaxed mb-7 max-w-sm">
                     {desc}
                   </p>
-
                   <div className="flex flex-wrap gap-1.5 mb-9">
                     {cats.map((cat) => (
-                      <span key={cat} className="text-[11px] px-3.5 py-1 rounded-full border border-white/8 text-white/35 font-medium">
+                      <span key={cat} className="text-[11px] px-3.5 py-1 rounded-full border border-white/[0.08] text-white/35 font-medium">
                         {cat}
                       </span>
                     ))}
                   </div>
-
                   <Link
                     to={SERVICE_LINKS[i]}
                     className="inline-flex items-center gap-2.5 text-sm font-bold text-white/60 hover:text-white transition-colors duration-300 group"
@@ -272,14 +272,9 @@ const DesktopServices = () => {
                 </div>
               </div>
 
-              {/* RIGHT — Image */}
+              {/* RIGHT */}
               <div className="w-[58%] flex items-center justify-center p-5 xl:p-8">
-                <div className="svc-img relative w-full h-[72vh] max-h-[680px] rounded-2xl overflow-hidden" style={{ willChange: i === activeIndex ? "transform, opacity" : "auto" }}>
-                  {/* Gradient glow — lightweight alternative to blur */}
-                  <div
-                    className="absolute -inset-16 rounded-full pointer-events-none opacity-25"
-                    style={{ background: `radial-gradient(ellipse at center, hsl(0 50% 20% / 0.3), transparent 70%)` }}
-                  />
+                <div className="svc-img relative w-full h-[72vh] max-h-[680px] rounded-2xl overflow-hidden">
                   <div className="svc-img-inner w-full h-full">
                     <img
                       src={SERVICE_IMAGES[i]}
@@ -291,7 +286,6 @@ const DesktopServices = () => {
                       height={960}
                     />
                   </div>
-                  {/* Bottom gradient fade */}
                   <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent pointer-events-none rounded-b-2xl" />
                 </div>
               </div>
@@ -312,8 +306,8 @@ const DesktopServices = () => {
           </span>
         </div>
 
-        {/* Grain overlay — static PNG approach */}
-        <div className="absolute inset-0 pointer-events-none z-10 opacity-[0.03]"
+        {/* Grain */}
+        <div className="absolute inset-0 pointer-events-none z-[5] opacity-[0.03]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
@@ -339,9 +333,9 @@ const MobileServices = () => {
       cardsRef.current.forEach((card) => {
         if (!card) return;
         gsap.fromTo(card,
-          { y: 30, opacity: 0 },
+          { y: 30, autoAlpha: 0 },
           {
-            y: 0, opacity: 1,
+            y: 0, autoAlpha: 1,
             duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
@@ -366,26 +360,16 @@ const MobileServices = () => {
         <h2 className="text-3xl font-display font-extrabold tracking-tighter text-white mb-8">
           {t("services.heading")}
         </h2>
-
         <div className="space-y-5">
           {Array.from({ length: TOTAL }).map((_, i) => {
             const title = t(`services.items.${i}.title`);
             const desc = t(`services.items.${i}.description`);
             const num = String(i + 1).padStart(2, "0");
-
             return (
-              <div key={i} ref={(el) => setCardRef(el, i)} style={{ opacity: 0 }}>
+              <div key={i} ref={(el) => setCardRef(el, i)} style={{ visibility: "hidden" }}>
                 <Link to={SERVICE_LINKS[i]} className="block group active:scale-[0.98] transition-transform duration-200">
                   <div className="relative rounded-2xl overflow-hidden mb-3 aspect-[16/10]">
-                    <img
-                      src={SERVICE_IMAGES[i]}
-                      alt={title}
-                      loading={i < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                      className="w-full h-full object-cover"
-                      width={1280}
-                      height={960}
-                    />
+                    <img src={SERVICE_IMAGES[i]} alt={title} loading={i < 2 ? "eager" : "lazy"} decoding="async" className="w-full h-full object-cover" width={1280} height={960} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <span className="absolute bottom-3 left-3 text-[10px] font-mono text-white/40">{num}</span>
                   </div>
@@ -406,7 +390,6 @@ const MobileServices = () => {
   );
 };
 
-/* ═══════════════════════════════════════════ */
 const ServicesSection = () => {
   const isMobile = useIsMobile();
   return isMobile ? <MobileServices /> : <DesktopServices />;
