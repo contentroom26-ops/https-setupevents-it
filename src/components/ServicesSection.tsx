@@ -74,7 +74,7 @@ const DesktopServices = () => {
   const progressRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const setLayerRef = useCallback((el: HTMLDivElement | null, i: number) => {
+  const setLayerRef = useCallback((el: HTMLElement | null, i: number) => {
     layersRef.current[i] = el;
   }, []);
 
