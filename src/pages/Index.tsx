@@ -1,10 +1,8 @@
 import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
 
-// Lazy load below-the-fold sections
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
 const ServicesSection = lazy(() => import("@/components/ServicesSection"));
@@ -14,40 +12,38 @@ const Footer = lazy(() => import("@/components/Footer"));
 const WhatsAppButton = lazy(() => import("@/components/WhatsAppButton"));
 
 const Index = () => {
-  const [splashDone, setSplashDone] = useState(false);
-  const handleSplashComplete = useCallback(() => setSplashDone(true), []);
+  const [introDone, setIntroDone] = useState(false);
+  const handleIntroComplete = useCallback(() => setIntroDone(true), []);
 
   useEffect(() => {
-    if (!splashDone) {
+    if (!introDone) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
       window.scrollTo(0, 0);
     }
     return () => { document.body.style.overflow = ""; };
-  }, [splashDone]);
+  }, [introDone]);
 
-    return (
-    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
-      {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
-      {/* Hero always rendered (behind splash) so video preloads immediately */}
+  return (
+    <div className="min-h-screen" style={{ background: introDone ? "hsl(var(--background))" : "#000" }}>
       <div className="min-h-screen">
         <div
           style={{
-            opacity: splashDone ? 1 : 0,
+            opacity: introDone ? 1 : 0,
             transition: "opacity 0.5s ease",
-            pointerEvents: splashDone ? "auto" : "none",
+            pointerEvents: introDone ? "auto" : "none",
           }}
         >
           <Navbar />
           <SideAccent />
         </div>
-        <HeroSection ready={splashDone} />
+        <HeroSection onIntroComplete={handleIntroComplete} />
         <div
           style={{
-            opacity: splashDone ? 1 : 0,
+            opacity: introDone ? 1 : 0,
             transition: "opacity 0.5s ease",
-            visibility: splashDone ? "visible" : "hidden",
+            visibility: introDone ? "visible" : "hidden",
           }}
         >
           <Suspense fallback={null}>
