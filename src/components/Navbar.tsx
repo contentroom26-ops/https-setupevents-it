@@ -79,7 +79,7 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease }}
       >
-        <div className="container-custom flex items-center justify-between h-20 md:h-24 px-6 md:px-10">
+        <div className="container-custom flex items-center justify-between h-24 md:h-28 px-6 md:px-10">
           {/* Logo */}
           <a
             href="#"
@@ -89,7 +89,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="SetupEvents"
-              className="w-auto h-20 sm:h-24 md:h-32 -my-4 sm:-my-5 md:-my-8 drop-shadow-lg transition-all duration-500"
+              className="w-auto h-24 sm:h-28 md:h-40 -my-6 sm:-my-7 md:-my-12 drop-shadow-lg transition-all duration-500"
             />
           </a>
 
@@ -105,7 +105,7 @@ const Navbar = () => {
                 >
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="px-5 py-2.5 text-[14px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
+                    className="px-5 py-3 text-[15px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
                   >
                     {link.name}
                   </button>
@@ -161,7 +161,7 @@ const Navbar = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="px-5 py-2.5 text-[14px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
+                  className="px-5 py-3 text-[15px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
                 >
                   {link.name}
                 </button>
