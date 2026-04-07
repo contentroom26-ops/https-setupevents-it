@@ -191,7 +191,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col lg:hidden"
+            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-2xl flex flex-col lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -222,11 +222,6 @@ const ContactSection = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <StageInput name="nome" placeholder={t("contact.firstName")} value={formData.nome} onChange={handleChange} required />
-                <StageInput name="cognome" placeholder={t("contact.lastName")} value={formData.cognome} onChange={handleChange} required />
-              </div>
-
               <StageInput name="email" type="email" placeholder={t("contact.email")} value={formData.email} onChange={handleChange} required />
 
               {/* Event type select */}
