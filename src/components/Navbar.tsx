@@ -161,7 +161,7 @@ const Navbar = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="px-5 py-2.5 text-[14px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
+                  className="px-5 py-3 text-[15px] font-medium text-white/60 hover:text-white transition-colors duration-300 tracking-wide"
                 >
                   {link.name}
                 </button>
