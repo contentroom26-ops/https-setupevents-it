@@ -70,7 +70,7 @@ const ConversionBlock = () => {
 const DesktopServices = () => {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
-  const layersRef = useRef<(HTMLDivElement | null)[]>([]);
+  const layersRef = useRef<(HTMLElement | null)[]>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
