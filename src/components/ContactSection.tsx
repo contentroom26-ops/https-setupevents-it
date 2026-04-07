@@ -298,7 +298,7 @@ const ContactSection = () => {
                   {isSubmitting ? (
                     <><span>{t("contact.submitting")}</span><Loader2 className="w-4 h-4 animate-spin" /></>
                   ) : (
-                    <><span>{t("contact.submit")}</span><ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" /></>
+                    <><span>{t("contact.sendRequest")}</span><ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" /></>
                   )}
                 </span>
               </button>
