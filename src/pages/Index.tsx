@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
-import SectionTransition from "@/components/SectionTransition";
+import StackSection from "@/components/StackSection";
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -28,50 +28,56 @@ const Index = () => {
 
   return (
     <div className="min-h-screen" style={{ background: introDone ? "hsl(var(--background))" : "#000" }}>
-      <div className="min-h-screen">
-        <div
-          style={{
-            opacity: introDone ? 1 : 0,
-            transition: "opacity 0.5s ease",
-            pointerEvents: introDone ? "auto" : "none",
-          }}
-        >
-          <Navbar />
-          <SideAccent />
-        </div>
+      <div
+        style={{
+          opacity: introDone ? 1 : 0,
+          transition: "opacity 0.5s ease",
+          pointerEvents: introDone ? "auto" : "none",
+        }}
+      >
+        <Navbar />
+        <SideAccent />
+      </div>
+
+      {/* Hero — highest z, slides away first */}
+      <StackSection zIndex={60}>
         <HeroSection onIntroComplete={handleIntroComplete} />
-        <div
-          style={{
-            opacity: introDone ? 1 : 0,
-            transition: "opacity 0.5s ease",
-            visibility: introDone ? "visible" : "hidden",
-          }}
-        >
-          <Suspense fallback={null}>
-            {/* Hero → Story: curtain wipe */}
-            <SectionTransition variant="curtain" label="[01] Chi siamo" />
+      </StackSection>
+
+      <div
+        style={{
+          opacity: introDone ? 1 : 0,
+          transition: "opacity 0.5s ease",
+          visibility: introDone ? "visible" : "hidden",
+        }}
+      >
+        <Suspense fallback={null}>
+          {/* Ogni sezione ha un z-index decrescente:
+              scrollando giù la sezione corrente "esce" e quella sotto
+              si rivela come se fosse in secondo piano. */}
+          <StackSection zIndex={50}>
             <StorySection />
+          </StackSection>
 
-            {/* Story → Marquee: dissolve */}
-            <SectionTransition variant="dissolve" height="h-[30vh] md:h-[50vh]" />
+          <StackSection zIndex={40}>
             <Marquee />
+          </StackSection>
 
-            {/* Marquee → Services: wipe */}
-            <SectionTransition variant="wipe" label="[02] Servizi" height="h-[40vh] md:h-[60vh]" />
+          <StackSection zIndex={30}>
             <ServicesSection />
+          </StackSection>
 
-            {/* Services → Portfolio: glow */}
-            <SectionTransition variant="glow" label="[03] Portfolio" />
+          <StackSection zIndex={20}>
             <PortfolioSection />
+          </StackSection>
 
-            {/* Portfolio → Contact: curtain */}
-            <SectionTransition variant="curtain" label="[04] Contatti" />
+          <StackSection zIndex={10}>
             <ContactSection />
+          </StackSection>
 
-            <Footer />
-            <WhatsAppButton />
-          </Suspense>
-        </div>
+          <Footer />
+          <WhatsAppButton />
+        </Suspense>
       </div>
     </div>
   );
