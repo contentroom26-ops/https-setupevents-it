@@ -8,51 +8,51 @@
 
 @layer base {
   :root {
-    /* Light-first palette */
-    --background: 40 20% 97%;
-    --foreground: 40 10% 10%;
+    /* Dark-first palette */
+    --background: 40 8% 8%;
+    --foreground: 40 10% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 40 10% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 40 10% 10%;
+    --card: 40 6% 12%;
+    --card-foreground: 40 10% 92%;
+    --popover: 40 6% 12%;
+    --popover-foreground: 40 10% 92%;
 
     /* Vivid Red accent */
     --primary: 0 85% 55%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 0 90% 65%;
 
-    --secondary: 40 10% 93%;
-    --secondary-foreground: 40 10% 20%;
+    --secondary: 40 6% 14%;
+    --secondary-foreground: 40 10% 85%;
 
-    --muted: 40 10% 90%;
-    --muted-foreground: 40 8% 45%;
+    --muted: 40 5% 18%;
+    --muted-foreground: 40 8% 55%;
 
-    /* Accent for inverted sections */
-    --accent: 40 8% 8%;
-    --accent-foreground: 40 10% 95%;
+    /* Lighter sections (inverted) */
+    --accent: 40 10% 95%;
+    --accent-foreground: 40 8% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 10% 88%;
-    --input: 40 10% 88%;
+    --border: 40 6% 18%;
+    --input: 40 6% 18%;
     --ring: 0 85% 55%;
 
     --radius: 0.75rem;
 
     /* Premium shadows & effects */
-    --shadow-premium: 0 20px 60px -15px hsl(0 0% 0% / 0.1);
-    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.08);
-    --shadow-glow: 0 0 40px -10px hsl(var(--primary) / 0.15);
+    --shadow-premium: 0 20px 60px -15px hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 40px -10px hsl(var(--primary) / 0.3);
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 40 10% 20%;
+    --sidebar-background: 40 8% 8%;
+    --sidebar-foreground: 40 10% 85%;
     --sidebar-primary: 0 85% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 10% 95%;
-    --sidebar-accent-foreground: 40 10% 20%;
-    --sidebar-border: 40 10% 88%;
+    --sidebar-accent: 40 6% 14%;
+    --sidebar-accent-foreground: 40 10% 85%;
+    --sidebar-border: 40 6% 18%;
     --sidebar-ring: 0 85% 55%;
   }
 }
@@ -105,7 +105,6 @@
   /* Contain layout paint for heavy sections */
   section {
     contain: layout style;
-    border-radius: inherit;
   }
 }
 
@@ -124,16 +123,16 @@
 
   /* Premium glass card */
   .glass-card {
-    background: hsl(0 0% 100% / 0.7);
+    background: hsl(0 0% 100% / 0.03);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(0 0% 0% / 0.06);
+    border: 1px solid hsl(0 0% 100% / 0.06);
     box-shadow: var(--shadow-card);
   }
 
   .glass-card-light {
-    background: hsl(0 0% 100% / 0.5);
+    background: hsl(0 0% 0% / 0.02);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(0 0% 0% / 0.04);
+    border: 1px solid hsl(0 0% 0% / 0.05);
   }
 
   /* Hover lift effect */

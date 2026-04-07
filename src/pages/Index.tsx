@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SplashScreen from "@/components/SplashScreen";
 import SideAccent from "@/components/SideAccent";
-import FloatingSection from "@/components/FloatingSection";
 
 // Lazy load below-the-fold sections
 const StorySection = lazy(() => import("@/components/StorySection"));
@@ -28,9 +27,10 @@ const Index = () => {
     return () => { document.body.style.overflow = ""; };
   }, [splashDone]);
 
-  return (
-    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#fff" }}>
+    return (
+    <div className="min-h-screen" style={{ background: splashDone ? "hsl(var(--background))" : "#000" }}>
       {!splashDone && <SplashScreen onComplete={handleSplashComplete} />}
+      {/* Hero always rendered (behind splash) so video preloads immediately */}
       <div className="min-h-screen">
         <div
           style={{
@@ -51,39 +51,11 @@ const Index = () => {
           }}
         >
           <Suspense fallback={null}>
-            {/* Spacer after hero */}
-            <div className="h-16 md:h-24" />
-
-            <FloatingSection id="storia">
-              <StorySection />
-            </FloatingSection>
-
-            <div className="h-10 md:h-16" />
-
-            <FloatingSection className="!bg-transparent !border-0 !shadow-none !backdrop-blur-0" noPadding>
-              <Marquee />
-            </FloatingSection>
-
-            <div className="h-10 md:h-16" />
-
-            <div id="services" className="mx-4 sm:mx-6 lg:mx-10">
-              <ServicesSection />
-            </div>
-
-            <div className="h-10 md:h-16" />
-
-            <FloatingSection id="portfolio">
-              <PortfolioSection />
-            </FloatingSection>
-
-            <div className="h-10 md:h-16" />
-
-            <FloatingSection id="contact">
-              <ContactSection />
-            </FloatingSection>
-
-            <div className="h-10 md:h-16" />
-
+            <StorySection />
+            <Marquee />
+            <ServicesSection />
+            <PortfolioSection />
+            <ContactSection />
             <Footer />
             <WhatsAppButton />
           </Suspense>

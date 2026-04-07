@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import Tilt3DCard from "./Tilt3DCard";
 
 // Use string paths for lazy loading — images load on scroll, not on page load
 const dieselMarbleBg = new URL("@/assets/diesel-marble-bg.jpg", import.meta.url).href;
@@ -58,11 +57,11 @@ const FlipCard = ({ index }: { index: number }) => {
             <span className="text-xs text-white/40 font-mono mt-1 block">{study.year}</span>
           </div>
         </div>
-        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-card/90 backdrop-blur-md border border-border shadow-[0_16px_48px_-12px_rgba(0,0,0,0.1)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
           <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">{category} — {study.year}</span>
-          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-foreground tracking-tight mb-2">{study.title}</h3>
-          <p className="text-sm text-muted-foreground font-medium mb-6">{subtitle}</p>
-          <p className="text-[13px] md:text-base text-foreground/75 leading-relaxed">{description}</p>
+          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">{study.title}</h3>
+          <p className="text-sm text-white/50 font-medium mb-6">{subtitle}</p>
+          <p className="text-[13px] md:text-base text-white/75 leading-relaxed">{description}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -104,8 +103,8 @@ const ScrollGallery = () => {
 
   return (
     <div className="relative overflow-hidden" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background/60 to-transparent z-[1] pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black/60 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black/60 to-transparent z-[1] pointer-events-none" />
       <div ref={trackRef} className="flex gap-4 md:gap-5 will-change-transform">
         {doubledImages.map((img, i) => (
           <motion.div key={i} className="flex-shrink-0 w-[60vw] md:w-[280px] lg:w-[320px] aspect-[3/4] rounded-xl overflow-hidden cursor-pointer relative group/card" whileHover={{ scale: 1.06, zIndex: 10 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
@@ -123,10 +122,10 @@ const PortfolioSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="portfolio" className="relative overflow-hidden">
       <div className="absolute inset-0">
         <img src={dieselMarbleBg} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="relative z-10 py-20 md:py-40">
@@ -143,11 +142,11 @@ const PortfolioSection = () => {
             {t("portfolio.heading")}
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" style={{ perspective: '800px' }}>
             {caseStudiesData.map((_, i) => (
-              <Tilt3DCard key={i} className="rounded-2xl" intensity={7} scale={1.02}>
+              <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
                 <FlipCard index={i} />
-              </Tilt3DCard>
+              </div>
             ))}
           </div>
         </div>

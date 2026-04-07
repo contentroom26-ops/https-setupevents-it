@@ -37,7 +37,7 @@ const LanguageSwitcher = () => {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-foreground/50 hover:text-foreground hover:bg-foreground/[0.06] transition-all duration-300 text-[10px] md:text-[11px] uppercase tracking-[0.1em] font-medium"
+        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-all duration-300 text-[10px] md:text-[11px] uppercase tracking-[0.1em] font-medium"
       >
         <Globe className="w-3 h-3 md:w-3.5 md:h-3.5" />
         <span>{current.flag}</span>
@@ -47,13 +47,13 @@ const LanguageSwitcher = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute top-full right-0 mt-2 bg-white/95 backdrop-blur-2xl border border-black/[0.08] rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] z-50 min-w-[120px]"
+            className="absolute top-full right-0 mt-2 bg-[hsl(var(--background))]/95 backdrop-blur-2xl border border-white/[0.12] rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.1)] z-50 min-w-[120px]"
             initial={{ opacity: 0, y: 4, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-black/5 to-transparent" />
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             <div className="p-1.5">
               {languages.map((lang) => (
                 <button
@@ -61,8 +61,8 @@ const LanguageSwitcher = () => {
                   onClick={() => changeLanguage(lang.code)}
                   className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-all duration-200 ${
                     i18n.language === lang.code
-                      ? "bg-foreground/[0.06] text-foreground"
-                      : "text-foreground/50 hover:text-foreground hover:bg-foreground/[0.04]"
+                      ? "bg-white/[0.1] text-white"
+                      : "text-white/50 hover:text-white hover:bg-white/[0.06]"
                   }`}
                 >
                   <span className="text-base">{lang.flag}</span>
