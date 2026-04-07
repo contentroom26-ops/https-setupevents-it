@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoSplash from "@/assets/logo-splash.png";
 
+const ROTATE_INTERVAL = 2800;
+
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
