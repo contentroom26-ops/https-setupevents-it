@@ -35,7 +35,7 @@ const StackSection = ({ children, zIndex, className = "" }: StackSectionProps) =
   );
 
   return (
-    <div ref={ref} className={`relative ${className}`} style={{ zIndex }}>
+    <div ref={ref} className={`relative ${className}`} style={{ zIndex, backgroundColor: "hsl(220 10% 12%)" }}>
       <motion.div
         className="sticky top-0 origin-center will-change-transform"
         style={{ scale, opacity }}
