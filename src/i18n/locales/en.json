@@ -31,43 +31,69 @@
   "marquee": "CORPORATE EVENTS • BRAND ACTIVATION • PRODUCT LAUNCH • HOSTESS & STEWARD • PUBLIC RELATIONS • VENUE & SET-UP • A/V SERVICES • FLORENCE • ",
   "services": {
     "label": "Services",
-    "heading": "Services",
+    "heading": "Our services",
+    "seoHeading": "Event production services in Florence and across Italy",
     "counter": "services — scroll to discover",
     "scroll": "Scroll",
     "swipe": "Swipe",
     "tapHint": "Tap to learn more",
     "categories": "Categories",
     "learnMore": "See how →",
+    "trustLine": "Trusted by brands, agencies, and private clients across Italy",
+    "socialProof": "Over 100 successful events delivered across Italy",
+    "ctaQuote": "Request a quote →",
+    "ctaPlan": "Plan your event →",
+    "endHeading": "Let's create your next event in Florence or anywhere in Italy",
+    "endSubtext": "Tell us your vision — we'll take care of everything",
+    "endCta": "Request a free quote →",
     "items": [
       {
         "title": "Corporate Events",
-        "description": "Organization of meetings, conventions, corporate dinners and team building to strengthen the brand and create meaningful connections.",
-        "categories": ["Conventions", "Team Building", "Corporate Dinners", "Meetings"]
+        "seoTitle": "Corporate event planning in Florence",
+        "description": "Organization of meetings, conventions, corporate dinners and team building to strengthen your brand and create meaningful connections. Tailored solutions from concept to flawless execution.",
+        "seoCopy": "Corporate event production in Florence and across Italy",
+        "categories": ["Conventions", "Team Building", "Corporate Dinners", "Meetings"],
+        "imageAlt": "corporate event organization Florence convention"
       },
       {
         "title": "Brand Activations",
-        "description": "Product launches and immersive experiences designed to maximize visibility, engagement and market impact.",
-        "categories": ["Product Launch", "Pop-up Events", "Experiential Marketing"]
+        "seoTitle": "Brand activation and product launches in Italy",
+        "description": "Product launches and immersive experiences designed to maximize visibility, engagement and market impact. From creative concept to full production.",
+        "seoCopy": "Brand activation services for events in Florence",
+        "categories": ["Product Launch", "Pop-up Events", "Experiential Marketing"],
+        "imageAlt": "brand activation product launch event Italy"
       },
       {
         "title": "Hostess & Staff",
-        "description": "Selected and trained personnel for reception, promotion and brand image during events. Guaranteed professionalism.",
-        "categories": ["Hostess", "Steward", "Promoter", "Technical Staff"]
+        "seoTitle": "Professional hostess and steward services in Florence",
+        "description": "Selected and trained event staff for reception, promotion and brand image during corporate and private events. Experienced hostesses and stewards ensuring elegance and flawless guest experience.",
+        "seoCopy": "Professional event staff in Florence and across Italy",
+        "categories": ["Hostess", "Steward", "Promoter", "Technical Staff"],
+        "imageAlt": "hostess steward service corporate event Florence"
       },
       {
         "title": "Public Relations",
-        "description": "Carefully selected contact and guest management. Target selection and relationship care for every event.",
-        "categories": ["Guest Management", "VIP Relations", "Networking"]
+        "seoTitle": "PR and guest management for events",
+        "description": "Strategic contact and guest management. Target selection, relationship care and networking for every event, from corporate to VIP.",
+        "seoCopy": "PR and guest management for exclusive events in Italy",
+        "categories": ["Guest Management", "VIP Relations", "Networking"],
+        "imageAlt": "public relations networking VIP event Florence"
       },
       {
         "title": "Location & Set-up",
-        "description": "Scouting of the best venues and bespoke scenic setups. From concept to realization.",
-        "categories": ["Scouting", "Set Design", "Installations", "Scenography"]
+        "seoTitle": "Venue design and scenic installations in Florence",
+        "description": "Scouting of the best venues and bespoke scenic setups. Custom installations from concept to realization, for unforgettable events.",
+        "seoCopy": "Set design and scenic installations in Florence and Italy",
+        "categories": ["Scouting", "Set Design", "Installations", "Scenography"],
+        "imageAlt": "scenic setup venue design event Florence"
       },
       {
         "title": "A/V Production",
-        "description": "Professional audio-video services with cutting-edge technologies for flawless and impactful productions.",
-        "categories": ["Audio", "Video", "Lighting", "Live Streaming"]
+        "seoTitle": "Audio video and lighting services for events",
+        "description": "Professional audio-video services with cutting-edge technologies. Sound, video, lighting and live streaming for flawless, high-impact productions.",
+        "seoCopy": "Professional audio video production for events in Italy",
+        "categories": ["Audio", "Video", "Lighting", "Live Streaming"],
+        "imageAlt": "audio video lighting production professional event"
       }
     ]
   },

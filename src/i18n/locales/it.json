@@ -31,43 +31,69 @@
   "marquee": "CORPORATE EVENTS • BRAND ACTIVATION • LAUNCH PRODUCT • HOSTESS & STEWARD • PUBLIC RELATIONS • LOCATION & SET-UP • A/V SERVICES • FIRENZE • ",
   "services": {
     "label": "Servizi",
-    "heading": "Services",
+    "heading": "I nostri servizi",
+    "seoHeading": "Servizi di organizzazione eventi a Firenze e in tutta Italia",
     "counter": "servizi — scorri per scoprire",
     "scroll": "Scorri",
     "swipe": "Scorri",
     "tapHint": "Tocca per scoprire di più",
     "categories": "Categories",
     "learnMore": "Scopri come →",
+    "trustLine": "Scelti da brand, agenzie e clienti privati in tutta Italia",
+    "socialProof": "Oltre 100 eventi realizzati con successo in Italia",
+    "ctaQuote": "Richiedi preventivo →",
+    "ctaPlan": "Pianifica il tuo evento →",
+    "endHeading": "Creiamo il tuo prossimo evento a Firenze o in tutta Italia",
+    "endSubtext": "Raccontaci la tua visione — al resto pensiamo noi",
+    "endCta": "Richiedi un preventivo gratuito →",
     "items": [
       {
         "title": "Corporate Events",
-        "description": "Organizzazione di meeting, convention, cene aziendali e team building per rafforzare il brand e creare connessioni significative.",
-        "categories": ["Convention", "Team Building", "Cene Aziendali", "Meeting"]
+        "seoTitle": "Organizzazione eventi aziendali a Firenze",
+        "description": "Meeting, convention, cene aziendali e team building per rafforzare il brand e creare connessioni significative. Soluzioni su misura per ogni azienda, dalla pianificazione all'esecuzione impeccabile.",
+        "seoCopy": "Produzione eventi corporate a Firenze e in tutta Italia",
+        "categories": ["Convention", "Team Building", "Cene Aziendali", "Meeting"],
+        "imageAlt": "organizzazione evento aziendale Firenze convention"
       },
       {
         "title": "Brand Activations",
-        "description": "Lanci prodotto ed esperienze immersive studiate per massimizzare visibilità, engagement e impatto sul mercato.",
-        "categories": ["Lancio Prodotto", "Pop-up Events", "Experiential Marketing"]
+        "seoTitle": "Brand activation e lanci prodotto in Italia",
+        "description": "Lanci prodotto ed esperienze immersive studiate per massimizzare visibilità, engagement e impatto sul mercato. Dal concept creativo alla produzione completa.",
+        "seoCopy": "Servizi di brand activation per eventi a Firenze",
+        "categories": ["Lancio Prodotto", "Pop-up Events", "Experiential Marketing"],
+        "imageAlt": "brand activation lancio prodotto evento Italia"
       },
       {
         "title": "Hostess & Staff",
-        "description": "Personale selezionato e formato per accoglienza, promozione e immagine durante gli eventi. Professionalità garantita.",
-        "categories": ["Hostess", "Steward", "Promoter", "Staff Tecnico"]
+        "seoTitle": "Servizio hostess e steward professionali a Firenze",
+        "description": "Personale selezionato e formato per accoglienza, promozione e immagine durante eventi corporate e privati. Hostess e steward professionali per garantire eleganza e organizzazione impeccabile.",
+        "seoCopy": "Staff professionale per eventi a Firenze e in tutta Italia",
+        "categories": ["Hostess", "Steward", "Promoter", "Staff Tecnico"],
+        "imageAlt": "servizio hostess steward evento corporate Firenze"
       },
       {
         "title": "Public Relations",
-        "description": "Gestione dei contatti e degli ospiti accuratamente selezionata. Selezione del target e cura delle relazioni per ogni evento.",
-        "categories": ["Guest Management", "VIP Relations", "Networking"]
+        "seoTitle": "Gestione PR e relazioni per eventi",
+        "description": "Gestione strategica dei contatti e degli ospiti. Selezione del target, cura delle relazioni e networking per ogni evento, dal corporate al VIP.",
+        "seoCopy": "PR e guest management per eventi esclusivi in Italia",
+        "categories": ["Guest Management", "VIP Relations", "Networking"],
+        "imageAlt": "public relations networking evento VIP Firenze"
       },
       {
         "title": "Location & Set-up",
-        "description": "Scouting delle migliori location e allestimenti scenografici su misura. Dal concept alla realizzazione.",
-        "categories": ["Scouting", "Set Design", "Allestimenti", "Scenografia"]
+        "seoTitle": "Allestimenti e scenografie per eventi a Firenze",
+        "description": "Scouting delle migliori location e allestimenti scenografici su misura. Installazioni custom, dal concept alla realizzazione, per eventi indimenticabili.",
+        "seoCopy": "Set design e allestimenti scenografici a Firenze e in Italia",
+        "categories": ["Scouting", "Set Design", "Allestimenti", "Scenografia"],
+        "imageAlt": "allestimento scenografico location evento Firenze"
       },
       {
         "title": "A/V Production",
-        "description": "Servizi audio-video professionali con tecnologie all'avanguardia per produzioni impeccabili e d'impatto.",
-        "categories": ["Audio", "Video", "Lighting", "Live Streaming"]
+        "seoTitle": "Servizi audio video e luci per eventi",
+        "description": "Servizi audio-video professionali con tecnologie all'avanguardia. Impianti audio, video, luci e live streaming per produzioni impeccabili e d'impatto.",
+        "seoCopy": "Produzione audio video professionale per eventi in Italia",
+        "categories": ["Audio", "Video", "Lighting", "Live Streaming"],
+        "imageAlt": "produzione audio video luci evento professionale"
       }
     ]
   },
