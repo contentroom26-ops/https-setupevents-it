@@ -17,6 +17,9 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
+  const [serviceIndex, setServiceIndex] = useState(0);
+
+  const services = t("hero.headlineServices", { returnObjects: true }) as string[];
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
