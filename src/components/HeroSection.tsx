@@ -63,7 +63,16 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     };
   }, [tryPlayVideo, onIntroComplete]);
 
+  // Rotate services text
   useEffect(() => {
+    if (!showContent || !services.length) return;
+    const interval = setInterval(() => {
+      setServiceIndex((prev) => (prev + 1) % services.length);
+    }, ROTATE_INTERVAL);
+    return () => clearInterval(interval);
+  }, [showContent, services.length]);
+
+
     const video = videoRef.current;
     if (!video) return;
     const onCanPlay = () => setVideoLoaded(true);
