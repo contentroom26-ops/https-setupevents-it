@@ -60,8 +60,8 @@ const DesktopServices = () => {
       });
 
       // Build ONE master timeline. Each service gets 1 "unit" of time.
-      // Within each unit: 0-0.7 = hold, 0.7-1.0 = transition to next
-      const UNIT = 1; // 1 second per service in timeline-time (scrubbed to scroll)
+      // Each service: HOLD for 0.6 units, EXIT 0.15 units, ENTER next 0.25 units (sequential, no overlap)
+      const UNIT = 1;
       const tl = gsap.timeline();
 
       for (let i = 0; i < TOTAL; i++) {
@@ -69,46 +69,45 @@ const DesktopServices = () => {
         const next = layers[i + 1];
         const baseTime = i * UNIT;
 
-        // HOLD phase: just add a spacer label
         tl.addLabel(`svc${i}`, baseTime);
 
         if (next) {
-          const transStart = baseTime + UNIT * 0.7;
-          const transDur = UNIT * 0.3;
+          // EXIT current — fast, complete before next enters
+          const exitStart = baseTime + UNIT * 0.65;
+          const exitDur = UNIT * 0.15;
 
-          // EXIT current
           tl.to(current.querySelector(".svc-text")!, {
-            y: -30, autoAlpha: 0, duration: transDur, ease: "power2.in",
-          }, transStart);
+            y: -25, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
           tl.to(current.querySelector(".svc-img")!, {
-            scale: 0.96, autoAlpha: 0, duration: transDur, ease: "power2.in",
-          }, transStart);
+            scale: 0.97, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
           tl.to(current.querySelector(".svc-num")!, {
-            y: -15, autoAlpha: 0, duration: transDur * 0.7, ease: "power2.in",
-          }, transStart);
+            y: -10, autoAlpha: 0, duration: exitDur, ease: "power2.in",
+          }, exitStart);
           tl.to(current, {
-            autoAlpha: 0, duration: transDur * 0.5, ease: "none",
-          }, transStart + transDur * 0.5);
+            autoAlpha: 0, duration: exitDur * 0.6, ease: "none",
+          }, exitStart + exitDur * 0.4);
 
-          // ENTER next
-          tl.set(next, { autoAlpha: 0 }, transStart);
-          tl.to(next, {
-            autoAlpha: 1, duration: transDur * 0.5, ease: "none",
-          }, transStart + transDur * 0.3);
+          // ENTER next — starts after exit completes
+          const enterStart = exitStart + exitDur;
+          const enterDur = UNIT * 0.2;
+
+          tl.set(next, { autoAlpha: 1 }, enterStart);
           tl.fromTo(next.querySelector(".svc-num")!,
-            { y: 20, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: transDur, ease: "power2.out" },
-            transStart + transDur * 0.3
+            { y: 15, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: enterDur * 0.7, ease: "power2.out" },
+            enterStart
           );
           tl.fromTo(next.querySelector(".svc-text")!,
-            { y: 40, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: transDur, ease: "power2.out" },
-            transStart + transDur * 0.4
+            { y: 30, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: enterDur, ease: "power2.out" },
+            enterStart + enterDur * 0.1
           );
           tl.fromTo(next.querySelector(".svc-img")!,
-            { scale: 1.08, autoAlpha: 0 },
-            { scale: 1, autoAlpha: 1, duration: transDur, ease: "power2.out" },
-            transStart + transDur * 0.35
+            { scale: 1.05, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: enterDur, ease: "power2.out" },
+            enterStart + enterDur * 0.05
           );
         }
       }
