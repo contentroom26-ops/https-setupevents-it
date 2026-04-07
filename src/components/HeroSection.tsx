@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoSplash from "@/assets/logo-splash.png";
 
+const ROTATE_INTERVAL = 2800;
+
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
@@ -15,6 +17,9 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
+  const [serviceIndex, setServiceIndex] = useState(0);
+
+  const services = t("hero.headlineServices", { returnObjects: true }) as string[];
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
@@ -57,6 +62,15 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       clearTimeout(t3);
     };
   }, [tryPlayVideo, onIntroComplete]);
+
+  // Rotate services text
+  useEffect(() => {
+    if (!showContent || !services.length) return;
+    const interval = setInterval(() => {
+      setServiceIndex((prev) => (prev + 1) % services.length);
+    }, ROTATE_INTERVAL);
+    return () => clearInterval(interval);
+  }, [showContent, services.length]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -199,7 +213,21 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
           transition={{ duration: 1, delay: 0.5, ease }}
         >
-          {t("hero.headline")}
+          {t("hero.headlinePre")}{" "}
+          <span className="relative inline-block overflow-hidden align-bottom" style={{ height: "1.15em", verticalAlign: "baseline" }}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={serviceIndex}
+                className="inline-block text-primary"
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {services[serviceIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h1>
 
         <motion.p
