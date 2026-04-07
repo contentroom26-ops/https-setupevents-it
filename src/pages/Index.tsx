@@ -59,9 +59,7 @@ const Index = () => {
             <StorySection />
           </StackSection>
 
-          <StackSection zIndex={40}>
-            <Marquee />
-          </StackSection>
+          <Marquee />
 
           <StackSection zIndex={30}>
             <ServicesSection />
