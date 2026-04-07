@@ -112,14 +112,15 @@ const ContactSection = () => {
     try {
       const { error } = await supabase.functions.invoke("send-contact-email", {
         body: {
-          nome: formData.nome, cognome: formData.cognome, azienda: formData.azienda,
-          email: formData.email, telefono: formData.telefono,
+          nome: "", cognome: "",
+          email: formData.email,
+          telefono: "", azienda: "",
           dataEvento: "", messaggio: `[${formData.eventType}] ${formData.messaggio}`,
         },
       });
       if (error) throw error;
       toast({ title: t("contact.successTitle"), description: t("contact.successDesc") });
-      setFormData({ nome: "", cognome: "", azienda: "", email: "", telefono: "", eventType: "", messaggio: "", privacy: false });
+      setFormData({ email: "", eventType: "", messaggio: "", privacy: false });
     } catch {
       toast({ title: t("contact.errorTitle"), description: t("contact.errorDesc"), variant: "destructive" });
     } finally {
