@@ -79,7 +79,7 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease }}
       >
-        <div className="container-custom flex items-center justify-between h-16 md:h-20 px-6 md:px-10">
+        <div className="container-custom flex items-center justify-between h-20 md:h-24 px-6 md:px-10">
           {/* Logo */}
           <a
             href="#"
