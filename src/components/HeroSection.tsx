@@ -1,16 +1,20 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Pause, Play, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoSplash from "@/assets/logo-splash.png";
 
-const HeroSection = ({ ready = true }: { ready?: boolean }) => {
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
@@ -31,18 +35,28 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
     }
   }, []);
 
-  // Start video only after splash is done (ready=true)
+  // Logo intro → 2.5s → start video → show text
   useEffect(() => {
-    if (!ready) return;
-    tryPlayVideo();
-  }, [ready, tryPlayVideo]);
+    const t1 = setTimeout(() => {
+      setIntroPhase("transition");
+      tryPlayVideo();
+    }, 2500);
 
-  // Show text content only when ready
-  useEffect(() => {
-    if (!ready) return;
-    const timer = setTimeout(() => setShowContent(true), 500);
-    return () => clearTimeout(timer);
-  }, [ready]);
+    const t2 = setTimeout(() => {
+      setIntroPhase("done");
+      onIntroComplete?.();
+    }, 3000);
+
+    const t3 = setTimeout(() => {
+      setShowContent(true);
+    }, 3200);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [tryPlayVideo, onIntroComplete]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -71,6 +85,71 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
 
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
+      {/* Logo Intro Overlay */}
+      <AnimatePresence>
+        {introPhase !== "done" && (
+          <motion.div
+            className="absolute inset-0 z-50 bg-black flex items-center justify-center"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease }}
+          >
+            {/* Radial glow */}
+            <motion.div
+              className="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full pointer-events-none"
+              style={{
+                background: "radial-gradient(circle, hsl(0 72% 51% / 0.25) 0%, transparent 70%)",
+              }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.5 }}
+              transition={{ duration: 1, ease }}
+            />
+
+            {/* Logo */}
+            <motion.img
+              src={logoSplash}
+              alt="SetupEvents"
+              className="relative z-10 w-[75vw] max-w-[600px] md:w-[45vw] md:max-w-[700px]"
+              initial={{ opacity: 0, scale: 0.7, y: 30 }}
+              animate={
+                introPhase === "transition"
+                  ? { opacity: 0, scale: 1.4, y: -20, filter: "blur(8px)" }
+                  : { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }
+              }
+              transition={
+                introPhase === "transition"
+                  ? { duration: 0.6, ease }
+                  : { duration: 0.8, ease }
+              }
+            />
+
+            {/* Corner accents */}
+            {[
+              "top-6 left-6 origin-top-left",
+              "top-6 right-6 origin-top-right",
+              "bottom-6 left-6 origin-bottom-left",
+              "bottom-6 right-6 origin-bottom-right",
+            ].map((pos, i) => (
+              <motion.div
+                key={i}
+                className={`absolute ${pos} z-20`}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={
+                  introPhase === "transition"
+                    ? { opacity: 0, scale: 0 }
+                    : { opacity: 0.3, scale: 1 }
+                }
+                transition={{ duration: 0.4, delay: introPhase === "transition" ? 0 : 0.6 + i * 0.08, ease }}
+              >
+                <div className="w-6 h-px bg-primary" />
+                <div className="w-px h-6 bg-primary" />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Video background (always mounted for preloading) */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
         style={{ backgroundImage: `url(${heroBg})`, opacity: videoLoaded ? 0 : 1 }}
@@ -108,7 +187,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
         </motion.button>
       </motion.div>
 
-      {/* Content — bottom-left to keep video center logo clear */}
+      {/* Content */}
       <div className="flex-1" />
       <motion.div
         className="relative z-10 container-custom px-6 pb-20 md:pb-24"
@@ -118,7 +197,7 @@ const HeroSection = ({ ready = true }: { ready?: boolean }) => {
           className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[1.05] max-w-2xl"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 0.5, ease }}
         >
           {t("hero.headline")}
         </motion.h1>
