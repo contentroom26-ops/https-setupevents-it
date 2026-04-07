@@ -132,7 +132,7 @@ const ContactSection = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-0 overflow-hidden"
+      className="relative min-h-screen py-0 overflow-hidden"
       style={{ background: "#0a0a0a" }}
     >
       {/* ── Stage background ── */}

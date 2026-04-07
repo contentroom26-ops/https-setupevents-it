@@ -122,7 +122,7 @@ const PortfolioSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="portfolio" className="relative overflow-hidden">
+    <section id="portfolio" className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0">
         <img src={dieselMarbleBg} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
         <div className="absolute inset-0 bg-black/40" />

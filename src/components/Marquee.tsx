@@ -5,7 +5,7 @@ const Marquee = ({ text }: { text?: string }) => {
   const content = text || t("marquee");
 
   return (
-    <div className="py-6 md:py-8 overflow-hidden border-y border-border/30 relative">
+    <div className="min-h-screen flex flex-col justify-center py-6 md:py-8 overflow-hidden border-y border-border/30 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 animate-pulse-glow pointer-events-none" />
       <div className="flex whitespace-nowrap animate-marquee">
         {Array(3).fill(null).map((_, i) => (
