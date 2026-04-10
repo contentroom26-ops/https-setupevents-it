@@ -213,8 +213,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
           transition={{ duration: 1, delay: 0.5, ease }}
         >
-          {t("hero.headlinePre")}{" "}
-          <span className="relative inline-block overflow-hidden align-bottom" style={{ height: "1.15em", verticalAlign: "baseline" }}>
+          <span className="relative inline-block overflow-hidden" style={{ height: "1.15em" }}>
             <AnimatePresence mode="wait">
               <motion.span
                 key={serviceIndex}
