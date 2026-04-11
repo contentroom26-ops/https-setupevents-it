@@ -52,7 +52,7 @@ const Index = () => {
           visibility: introDone ? "visible" : "hidden",
         }}
       >
-        <ParallaxDivider />
+        
 
         <Suspense fallback={null}>
           <StackSection zIndex={50}>
