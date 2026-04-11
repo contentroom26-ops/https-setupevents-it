@@ -8,161 +8,148 @@ const StorySection = () => {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const gridRotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const gridScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.05, 1.15]);
-  const orbY = useTransform(scrollYProgress, [0, 1], ["10%", "-20%"]);
-  const orbScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.9]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+  const ringRotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const ringScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 1.2]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 0.12, 0.12, 0]);
 
   return (
-    <section ref={sectionRef} id="storia" className="relative min-h-screen py-24 md:py-52 overflow-hidden bg-background">
-      {/* Animated grid background */}
-      <motion.div
-        className="absolute inset-0 z-0 opacity-[0.07]"
-        style={{ rotate: gridRotate, scale: gridScale }}
-      >
-        <div
-          className="w-full h-full"
+    <section ref={sectionRef} id="storia" className="relative min-h-screen py-28 md:py-56 overflow-hidden bg-background">
+
+      {/* Concentric rings — architectural feel */}
+      {[1, 2, 3, 4, 5].map((i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full border border-primary/[0.06] pointer-events-none"
           style={{
-            backgroundImage: `
-              linear-gradient(hsl(var(--primary) / 0.4) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--primary) / 0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
+            width: `${200 + i * 180}px`,
+            height: `${200 + i * 180}px`,
+            top: "50%",
+            right: "-5%",
+            x: "20%",
+            y: "-50%",
+            rotate: ringRotate,
+            scale: ringScale,
+            opacity: ringOpacity,
           }}
         />
-      </motion.div>
+      ))}
 
-      {/* Floating orb */}
+      {/* Large glow — warm cinematic */}
       <motion.div
-        className="absolute z-[1] rounded-full blur-[100px]"
+        className="absolute z-0 pointer-events-none"
         style={{
-          width: "500px",
-          height: "500px",
-          right: "-10%",
-          top: "20%",
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.15), transparent 70%)",
-          y: orbY,
-          scale: orbScale,
+          width: "70vw",
+          height: "70vw",
+          maxWidth: "900px",
+          maxHeight: "900px",
+          right: "-15%",
+          top: "15%",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.06) 0%, transparent 65%)",
+          scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.1, 0.9]),
         }}
       />
 
-      {/* Secondary orb */}
+      {/* Subtle horizontal rule accent */}
       <motion.div
-        className="absolute z-[1] rounded-full blur-[120px]"
+        className="absolute left-0 right-0 z-[1] pointer-events-none"
         style={{
-          width: "400px",
-          height: "400px",
-          left: "-5%",
-          bottom: "10%",
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.08), transparent 70%)",
-          y: useTransform(scrollYProgress, [0, 1], ["-5%", "15%"]),
+          top: "50%",
+          height: "1px",
+          background: "linear-gradient(90deg, transparent 5%, hsl(var(--primary) / 0.08) 30%, hsl(var(--primary) / 0.15) 50%, hsl(var(--primary) / 0.08) 70%, transparent 95%)",
+          opacity: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]),
         }}
       />
 
-      {/* Diagonal accent lines */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-        <div
-          className="absolute w-px h-[200%] bg-gradient-to-b from-transparent via-primary/10 to-transparent"
-          style={{ left: "25%", top: "-50%", transform: "rotate(15deg)" }}
-        />
-        <div
-          className="absolute w-px h-[200%] bg-gradient-to-b from-transparent via-primary/5 to-transparent"
-          style={{ left: "75%", top: "-50%", transform: "rotate(-10deg)" }}
-        />
-      </div>
-
-      {/* Top/bottom fades */}
-      <div className="absolute inset-x-0 top-0 h-24 md:h-40 z-[2] bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-24 md:h-40 z-[2] bg-gradient-to-t from-background to-transparent" />
+      {/* Edge fades */}
+      <div className="absolute inset-x-0 top-0 h-32 md:h-48 z-[2] bg-gradient-to-b from-background to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 z-[2] bg-gradient-to-t from-background to-transparent" />
       <div className="absolute inset-0 z-[3] grain pointer-events-none" />
 
       {/* Content */}
       <motion.div className="container-custom relative z-[4]" style={{ y: textY }}>
+        {/* Label */}
         <motion.div
-          className="flex items-center gap-3 mb-12 md:mb-20"
+          className="flex items-center gap-3 mb-16 md:mb-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-[10px] md:text-xs font-mono text-foreground/30">[01]</span>
-          <div className="h-px w-8 bg-primary/40" />
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-foreground/30 font-medium">{t("story.label")}</span>
+          <span className="text-[10px] md:text-xs font-mono text-foreground/25">[01]</span>
+          <div className="h-px w-10 bg-primary/30" />
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-foreground/25 font-medium">{t("story.label")}</span>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-start max-w-6xl">
-          {/* Main card */}
-          <motion.div
-            className="glass-card rounded-3xl px-8 md:px-16 py-12 md:py-20"
-            initial={{ opacity: 0, y: 50, scale: 0.96 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1, ease }}
-          >
+        {/* Two-column editorial layout */}
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-start max-w-6xl">
+
+          {/* Left — Big statement */}
+          <div>
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[1.1] text-foreground mb-10"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="text-3xl md:text-4xl lg:text-[3.5rem] font-display font-extrabold tracking-tighter leading-[1.05] text-foreground mb-8"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2, ease }}
+              transition={{ duration: 0.8, delay: 0.1, ease }}
             >
-              {t("story.heading")}{" "}
-              <span className="text-foreground/40">{t("story.headingSub")}</span>
+              {t("story.heading")}
             </motion.h2>
 
             <motion.p
-              className="text-muted-foreground text-base md:text-lg leading-[1.8] mb-10"
-              initial={{ opacity: 0, y: 15 }}
+              className="text-foreground/30 text-3xl md:text-4xl lg:text-[2.8rem] font-display font-extrabold tracking-tighter leading-[1.1]"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.35, ease }}
+              transition={{ duration: 0.8, delay: 0.25, ease }}
             >
-              {t("story.description")}
+              {t("story.headingSub")}
             </motion.p>
 
+            {/* Inline stats row */}
             <motion.div
-              className="flex items-center gap-5 pt-6 border-t border-border/30"
-              initial={{ opacity: 0, y: 10 }}
+              className="flex gap-8 md:gap-12 mt-14 md:mt-20"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5, ease }}
             >
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              {[
+                { value: "10+", label: "Anni" },
+                { value: "500+", label: "Eventi" },
+                { value: "50+", label: "Clienti" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-3xl md:text-4xl font-display font-extrabold text-primary tracking-tight leading-none">{stat.value}</p>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground mt-2">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right — Description + founder */}
+          <motion.div
+            className="lg:pt-4"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.3, ease }}
+          >
+            <div className="w-12 h-px bg-primary/40 mb-8" />
+
+            <p className="text-muted-foreground text-base md:text-lg leading-[1.9] mb-12">
+              {t("story.description")}
+            </p>
+
+            <div className="flex items-center gap-4 pt-8 border-t border-border/20">
+              <div className="w-11 h-11 rounded-full bg-primary/15 flex items-center justify-center ring-1 ring-primary/10">
                 <span className="text-primary font-display font-bold text-sm">GL</span>
               </div>
               <div>
-                <p className="font-display font-bold text-foreground text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
-                <p className="text-muted-foreground text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
+                <p className="font-display font-bold text-foreground text-base tracking-tight">Gabriel Lleshi</p>
+                <p className="text-muted-foreground text-[11px] uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
               </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Side stats */}
-          <motion.div
-            className="flex md:flex-col gap-6"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease }}
-          >
-            {[
-              { value: "10+", label: t("story.label") === "La nostra storia" ? "Anni" : "Years" },
-              { value: "500+", label: "Eventi" },
-              { value: "50+", label: "Clienti" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                className="glass-card rounded-2xl px-6 py-5 text-center min-w-[100px]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.15, ease }}
-              >
-                <p className="text-2xl md:text-3xl font-display font-extrabold text-primary tracking-tight">{stat.value}</p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">{stat.label}</p>
-              </motion.div>
-            ))}
+            </div>
           </motion.div>
         </div>
       </motion.div>
