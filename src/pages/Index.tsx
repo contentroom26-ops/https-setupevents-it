@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
 import StackSection from "@/components/StackSection";
+import ParallaxDivider from "@/components/ParallaxDivider";
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
