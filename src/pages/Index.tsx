@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
 import StackSection from "@/components/StackSection";
+import ParallaxDivider from "@/components/ParallaxDivider";
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -51,10 +52,9 @@ const Index = () => {
           visibility: introDone ? "visible" : "hidden",
         }}
       >
+        <ParallaxDivider />
+
         <Suspense fallback={null}>
-          {/* Ogni sezione ha un z-index decrescente:
-              scrollando giù la sezione corrente "esce" e quella sotto
-              si rivela come se fosse in secondo piano. */}
           <StackSection zIndex={50}>
             <StorySection />
           </StackSection>
