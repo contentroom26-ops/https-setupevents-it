@@ -8,8 +8,9 @@ interface StackSectionProps {
 }
 
 /**
- * Parallax overlay: the current section stays pinned and gently fades/scales
- * while the next section scrolls up OVER it — clean "reveal" effect.
+ * Card-stack reveal: each section sticks at top.
+ * As the user scrolls past, the section slightly scales down
+ * and dims, giving a sense of depth / receding into background.
  */
 const StackSection = ({ children, zIndex, className = "" }: StackSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,26 +19,34 @@ const StackSection = ({ children, zIndex, className = "" }: StackSectionProps) =
     offset: ["start start", "end start"],
   });
 
-  // Subtle scale-down as it recedes (1 → 0.92)
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
-  // Fade out gently
-  const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.7, 0.15]);
-  // Slight upward parallax drift (pinned section moves slower)
-  const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  // Scale down slightly as section scrolls away (1 → 0.95)
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  // Dim as it exits (1 → 0.4)
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
+  // Drop shadow intensifies as next section overlaps
+  const shadow = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [
+      "0 0 0px rgba(0,0,0,0)",
+      "0 -10px 40px rgba(0,0,0,0.4)",
+      "0 -5px 20px rgba(0,0,0,0.2)",
+    ]
+  );
 
   return (
     <div ref={ref} className={`relative ${className}`} style={{ zIndex, minHeight: "200vh" }}>
       <motion.div
-        className="sticky top-0 min-h-screen will-change-transform overflow-hidden"
-        style={{
-          scale,
-          opacity,
-          y,
-          transformOrigin: "center center",
-        }}
+        className="sticky top-0 min-h-screen origin-center will-change-transform"
+        style={{ scale, opacity }}
       >
         {children}
       </motion.div>
+      {/* Shadow overlay cast by the section above */}
+      <motion.div
+        className="sticky top-0 inset-x-0 h-0 pointer-events-none"
+        style={{ zIndex: zIndex + 1, boxShadow: shadow }}
+      />
     </div>
   );
 };
