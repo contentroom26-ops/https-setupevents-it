@@ -2,8 +2,6 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
-import StackSection from "@/components/StackSection";
-
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -40,10 +38,7 @@ const Index = () => {
         <SideAccent />
       </div>
 
-      {/* Hero — highest z, slides away first */}
-      <StackSection zIndex={60}>
-        <HeroSection onIntroComplete={handleIntroComplete} />
-      </StackSection>
+      <HeroSection onIntroComplete={handleIntroComplete} />
 
       <div
         style={{
@@ -52,27 +47,12 @@ const Index = () => {
           visibility: introDone ? "visible" : "hidden",
         }}
       >
-        
-
         <Suspense fallback={null}>
-          <StackSection zIndex={50}>
-            <StorySection />
-          </StackSection>
-
+          <StorySection />
           <Marquee />
-
-          <StackSection zIndex={30}>
-            <ServicesSection />
-          </StackSection>
-
-          <StackSection zIndex={20}>
-            <PortfolioSection />
-          </StackSection>
-
-          <StackSection zIndex={10}>
-            <ContactSection />
-          </StackSection>
-
+          <ServicesSection />
+          <PortfolioSection />
+          <ContactSection />
           <Footer />
           <WhatsAppButton />
         </Suspense>
