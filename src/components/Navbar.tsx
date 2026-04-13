@@ -81,9 +81,9 @@ const Navbar = () => {
       >
         <div className="container-custom flex items-center justify-between h-24 md:h-28 px-6 md:px-10">
           {/* Logo */}
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); scrollToSection("#"); }}
+          <Link
+            to="/"
+            onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setIsMobileMenuOpen(false); }}
             className="flex items-center flex-shrink-0"
           >
             <img
@@ -91,7 +91,7 @@ const Navbar = () => {
               alt="SetupEvents"
               className="w-auto h-24 sm:h-28 md:h-40 -my-6 sm:-my-7 md:-my-12 drop-shadow-lg transition-all duration-500"
             />
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-1">
