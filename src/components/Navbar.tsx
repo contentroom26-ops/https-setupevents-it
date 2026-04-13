@@ -191,7 +191,8 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-2xl flex flex-col lg:hidden"
+            className="fixed inset-0 z-[90] backdrop-blur-2xl flex flex-col lg:hidden"
+            style={{ background: "hsl(var(--primary) / 0.85)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -202,7 +203,7 @@ const Navbar = () => {
                 <motion.button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-white/60 hover:text-white text-2xl font-display font-bold tracking-tight transition-colors"
+                  className="text-white hover:text-white/80 text-2xl font-display font-bold tracking-tight transition-colors drop-shadow-md"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.07, duration: 0.4, ease }}
@@ -211,14 +212,14 @@ const Navbar = () => {
                 </motion.button>
               ))}
               <motion.div
-                className="w-8 h-px bg-white/[0.08]"
+                className="w-8 h-px bg-white/30"
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ delay: 0.3 }}
               />
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="mt-2 border border-white/[0.15] text-white/50 hover:text-white px-8 py-3 font-medium text-xs rounded-lg uppercase tracking-[0.2em] transition-colors"
+                className="mt-2 border border-white/40 text-white hover:bg-white/10 px-8 py-3 font-medium text-xs rounded-lg uppercase tracking-[0.2em] transition-colors drop-shadow-md"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
