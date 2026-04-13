@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
+import SectionReveal from "@/components/SectionReveal";
+import SectionDivider from "@/components/SectionDivider";
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -48,11 +50,36 @@ const Index = () => {
         }}
       >
         <Suspense fallback={null}>
-          <StorySection />
+          {/* Story — clip reveal */}
+          <SectionReveal variant="clip-up">
+            <StorySection />
+          </SectionReveal>
+
+          <SectionDivider style="line" />
+
           <Marquee />
-          <ServicesSection />
-          <PortfolioSection />
-          <ContactSection />
+
+          <SectionDivider style="dot" />
+
+          {/* Services — zoom in */}
+          <SectionReveal variant="zoom">
+            <ServicesSection />
+          </SectionReveal>
+
+          <SectionDivider style="glow" />
+
+          {/* Portfolio — blur reveal */}
+          <SectionReveal variant="blur">
+            <PortfolioSection />
+          </SectionReveal>
+
+          <SectionDivider style="line" />
+
+          {/* Contact — slide from right */}
+          <SectionReveal variant="slide-left">
+            <ContactSection />
+          </SectionReveal>
+
           <Footer />
           <WhatsAppButton />
         </Suspense>
