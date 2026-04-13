@@ -192,7 +192,7 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <motion.div
             className="fixed inset-0 z-[90] backdrop-blur-2xl flex flex-col lg:hidden"
-            style={{ background: "hsl(var(--primary) / 0.85)" }}
+            style={{ background: "rgba(30, 30, 30, 0.92)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
