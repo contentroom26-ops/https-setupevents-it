@@ -227,10 +227,11 @@ const ContactPageContent = ({
 };
 
 /* helpers */
-const ContactRow = ({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: React.ReactNode; href?: string }) => {
+const ContactRow = ({ icon, label, value, href, external = false }: { icon: React.ReactNode; label: string; value: React.ReactNode; href?: string; external?: boolean }) => {
   const Tag: any = href ? "a" : "div";
+  const extraProps = href && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <Tag {...(href ? { href } : {})} className="flex items-start gap-4 group">
+    <Tag {...(href ? { href, ...extraProps } : {})} className="flex items-start gap-4 group">
       <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-primary transition-colors group-hover:bg-primary/15"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
         {icon}
