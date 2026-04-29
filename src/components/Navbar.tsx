@@ -217,15 +217,27 @@ const Navbar = () => {
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ delay: 0.3 }}
               />
-              <motion.button
-                onClick={() => scrollToSection("#contact")}
-                className="mt-2 border border-white/40 text-white hover:bg-white/10 px-8 py-3 font-medium text-xs rounded-lg uppercase tracking-[0.2em] transition-colors drop-shadow-md"
+              <motion.div
+                className="flex flex-col gap-3 mt-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                {t("nav.requestQuote")}
-              </motion.button>
+                <Link
+                  to="/contatti"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="border border-white/40 text-white hover:bg-white/10 px-8 py-3 font-medium text-xs rounded-lg uppercase tracking-[0.2em] transition-colors drop-shadow-md text-center"
+                >
+                  {t("nav.requestQuote")}
+                </Link>
+                <Link
+                  to="/prenota-call"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="border border-primary/60 bg-primary/15 text-white hover:bg-primary/25 px-8 py-3 font-medium text-xs rounded-lg uppercase tracking-[0.2em] transition-colors drop-shadow-md text-center"
+                >
+                  Prenota una call
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

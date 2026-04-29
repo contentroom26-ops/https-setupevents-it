@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Pause, Play, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoSplash from "@/assets/logo-splash.png";
 
@@ -11,6 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -245,7 +247,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           transition={{ duration: 0.8, delay: 1.2 }}
         >
           <motion.button
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => navigate("/contatti")}
             className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white font-semibold text-sm tracking-wide shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/15 hover:border-white/30 transition-all duration-400"
             style={{ WebkitBackdropFilter: "blur(12px)" }}
             whileHover={{ scale: 1.05, y: -3 }}
