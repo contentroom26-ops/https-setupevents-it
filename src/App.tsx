@@ -19,6 +19,7 @@ const PublicRelations = lazy(() => import("./pages/PublicRelations"));
 const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const Contatti = lazy(() => import("./pages/Contatti"));
 const PrenotaCall = lazy(() => import("./pages/PrenotaCall"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/termini-condizioni" element={<TermsConditions />} />
             <Route path="/contatti" element={<Contatti />} />
             <Route path="/prenota-call" element={<PrenotaCall />} />
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
