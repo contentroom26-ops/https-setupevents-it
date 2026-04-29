@@ -38,17 +38,31 @@ const ContactPageContent = ({
     }
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke("send-contact-email", {
+      const submissionId = crypto.randomUUID();
+      const messageWithSubject = data.oggetto
+        ? `Oggetto: ${data.oggetto}\n\n${data.messaggio}`
+        : data.messaggio;
+
+      // 1) Notifica interna a info@setupevents.it
+      const notify = await supabase.functions.invoke("send-transactional-email", {
         body: {
-          nome: data.nome, cognome: "",
-          email: data.email,
-          telefono: "", azienda: "",
-          tipoEvento: data.oggetto || "Richiesta preventivo",
-          dataEvento: "",
-          messaggio: data.messaggio,
+          templateName: "contact-notification",
+          recipientEmail: "info@setupevents.it",
+          idempotencyKey: `contact-notify-${submissionId}`,
+          templateData: { email: data.email, message: messageWithSubject },
         },
       });
-      if (error) throw error;
+      if (notify.error) throw notify.error;
+
+      // 2) Conferma al cliente
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "contact-confirmation",
+          recipientEmail: data.email,
+          idempotencyKey: `contact-confirm-${submissionId}`,
+        },
+      });
+
       toast({ title: "Messaggio inviato", description: "Ti rispondiamo entro 24 ore lavorative." });
       setData({ nome: "", email: "", oggetto: "", messaggio: "" });
     } catch {
