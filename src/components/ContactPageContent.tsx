@@ -118,6 +118,8 @@ const ContactPageContent = ({
                 icon={<MapPin className="w-4 h-4" />}
                 label="Sede"
                 value={<>Firenze, Italia<br /><span className="text-white/40">Operiamo in tutta Italia & EU</span></>}
+                href="https://www.google.com/maps/search/?api=1&query=Firenze%2C+Italia"
+                external
               />
             </div>
 
@@ -219,16 +221,67 @@ const ContactPageContent = ({
             </form>
           </motion.div>
         </div>
+
+        {/* Map embed */}
+        <motion.div
+          className="mt-8 lg:mt-10 max-w-6xl mx-auto rounded-2xl overflow-hidden relative"
+          style={{
+            border: "1px solid rgba(255,255,255,0.06)",
+            background: "rgba(20,20,20,0.55)",
+            boxShadow: "0 20px 60px -20px rgba(0,0,0,0.6)",
+          }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
+        >
+          <div className="relative aspect-[16/9] sm:aspect-[21/9]">
+            <iframe
+              title="Sede SetupEvents — Firenze, Italia"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=11.2055%2C43.7470%2C11.3155%2C43.8070&amp;layer=mapnik&amp;marker=43.7696%2C11.2558"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 w-full h-full"
+              style={{ border: 0, filter: "grayscale(0.6) contrast(1.05) brightness(0.85)" }}
+            />
+            {/* Overlay for visual integration */}
+            <div className="pointer-events-none absolute inset-0"
+              style={{
+                background: "linear-gradient(180deg, rgba(10,10,10,0.25) 0%, transparent 30%, transparent 70%, rgba(10,10,10,0.45) 100%)",
+              }} />
+
+            {/* Floating address card */}
+            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 max-w-[calc(100%-2rem)] rounded-xl p-4 sm:p-5"
+              style={{
+                background: "rgba(15,15,15,0.85)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-primary mb-2">Sede</p>
+              <p className="text-white font-semibold text-sm sm:text-base">SetupEvents · Firenze, Italia</p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Firenze%2C+Italia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-3 text-primary hover:text-primary/80 text-xs uppercase tracking-[0.2em] font-semibold"
+              >
+                Apri in Google Maps <ArrowRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </>
   );
 };
 
 /* helpers */
-const ContactRow = ({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: React.ReactNode; href?: string }) => {
+const ContactRow = ({ icon, label, value, href, external = false }: { icon: React.ReactNode; label: string; value: React.ReactNode; href?: string; external?: boolean }) => {
   const Tag: any = href ? "a" : "div";
+  const extraProps = href && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <Tag {...(href ? { href } : {})} className="flex items-start gap-4 group">
+    <Tag {...(href ? { href, ...extraProps } : {})} className="flex items-start gap-4 group">
       <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-primary transition-colors group-hover:bg-primary/15"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
         {icon}
