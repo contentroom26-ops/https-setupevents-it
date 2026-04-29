@@ -118,6 +118,8 @@ const ContactPageContent = ({
                 icon={<MapPin className="w-4 h-4" />}
                 label="Sede"
                 value={<>Firenze, Italia<br /><span className="text-white/40">Operiamo in tutta Italia & EU</span></>}
+                href="https://www.google.com/maps/search/?api=1&query=Firenze%2C+Italia"
+                external
               />
             </div>
 
