@@ -111,8 +111,8 @@ const ContactPageContent = ({
               <ContactRow
                 icon={<Phone className="w-4 h-4" />}
                 label="Telefono"
-                value="+39 351 939 4669"
-                href="tel:+393519394669"
+                value="+39 328 416 3053"
+                href="tel:+393284163053"
               />
               <ContactRow
                 icon={<MapPin className="w-4 h-4" />}
