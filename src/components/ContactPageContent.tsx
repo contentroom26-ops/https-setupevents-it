@@ -117,7 +117,7 @@ const ContactPageContent = ({
               <ContactRow
                 icon={<MapPin className="w-4 h-4" />}
                 label="Sede"
-                value={<>Milano, Italia<br /><span className="text-white/40">Operiamo in tutta Italia & EU</span></>}
+                value={<>Firenze, Italia<br /><span className="text-white/40">Operiamo in tutta Italia & EU</span></>}
               />
             </div>
 
