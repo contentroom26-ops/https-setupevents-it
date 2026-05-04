@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 // Use string paths for lazy loading — images load on scroll, not on page load
-const dieselMarbleBg = new URL("@/assets/diesel-marble-bg.jpg", import.meta.url).href;
+
 const dieselCard = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
 const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
 const diesel9 = new URL("@/assets/diesel-9.jpg", import.meta.url).href;
