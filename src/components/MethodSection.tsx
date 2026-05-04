@@ -9,7 +9,7 @@ const MethodSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="section-light py-28 md:py-44 relative grain overflow-hidden">
+    <section className="section-light py-16 md:py-24 relative grain overflow-hidden">
       <FloatingElements variant="circles" count={4} />
       <div className="container-custom">
         <motion.div

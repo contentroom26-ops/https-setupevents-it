@@ -11,7 +11,7 @@ const StorySection = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   return (
-    <section ref={sectionRef} id="storia" className="relative min-h-screen py-24 md:py-52 overflow-hidden">
+    <section ref={sectionRef} id="storia" className="relative py-16 md:py-28 overflow-hidden">
       <motion.div className="container-custom relative z-[4]" style={{ y: textY }}>
         <motion.div
           className="flex items-center gap-3 mb-12 md:mb-20"
@@ -26,7 +26,7 @@ const StorySection = () => {
         </motion.div>
 
         <motion.div
-          className="max-w-4xl glass-card rounded-3xl px-8 md:px-16 py-12 md:py-20"
+          className="max-w-4xl glass-card rounded-3xl px-6 md:px-12 py-8 md:py-12"
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
