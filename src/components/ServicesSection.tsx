@@ -122,7 +122,6 @@ const ServicesSection = () => {
       id="services"
       aria-label={t("services.seoHeading")}
       className="relative min-h-screen py-20 md:py-32 overflow-hidden"
-      style={{ background: "#0A0A0A" }}
     >
       <h2 className="sr-only">{t("services.seoHeading")}</h2>
 
