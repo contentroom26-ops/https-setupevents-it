@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
+import GlobalVideoBackground from "./components/GlobalVideoBackground";
 
 // Lazy load secondary pages
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -34,6 +35,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <GlobalVideoBackground />
       <BrowserRouter>
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
