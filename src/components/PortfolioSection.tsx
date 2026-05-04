@@ -123,11 +123,6 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={dieselMarbleBg} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-
       <div className="relative z-10 py-20 md:py-40">
         <FloatingElements variant="dots" count={8} />
         <div className="container-custom">
