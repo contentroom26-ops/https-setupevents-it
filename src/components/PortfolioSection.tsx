@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 // Use string paths for lazy loading — images load on scroll, not on page load
-const dieselMarbleBg = new URL("@/assets/diesel-marble-bg.jpg", import.meta.url).href;
+
 const dieselCard = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
 const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
 const diesel9 = new URL("@/assets/diesel-9.jpg", import.meta.url).href;
@@ -123,11 +123,6 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={dieselMarbleBg} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-
       <div className="relative z-10 py-20 md:py-40">
         <FloatingElements variant="dots" count={8} />
         <div className="container-custom">
