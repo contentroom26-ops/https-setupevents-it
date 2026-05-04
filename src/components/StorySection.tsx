@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import storyBg from "@/assets/story-bg-2.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -9,9 +8,6 @@ const StorySection = () => {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.03, 1.06]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 0.45, 0.45, 0.3]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   return (
