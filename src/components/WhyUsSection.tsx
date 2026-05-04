@@ -104,7 +104,7 @@ const WhyUsSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 sm:gap-8 lg:gap-16 mb-12 sm:mb-16 md:mb-24">>
+        <div className="grid grid-cols-3 gap-4 sm:gap-8 lg:gap-16 mb-12 sm:mb-16 md:mb-24">
           {statsData.map((stat, i) => (
             <AnimatedStat key={i} stat={stat} index={i} isInView={isInView} label={statLabels[i]} />
           ))}
