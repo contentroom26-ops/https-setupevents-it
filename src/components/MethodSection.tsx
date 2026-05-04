@@ -9,11 +9,11 @@ const MethodSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="section-light py-16 md:py-24 relative grain overflow-hidden">
+    <section className="section-light py-12 sm:py-16 md:py-24 relative grain overflow-hidden">
       <FloatingElements variant="circles" count={4} />
       <div className="container-custom">
         <motion.div
-          className="flex items-center gap-4 mb-16 md:mb-24"
+          className="flex items-center gap-4 mb-10 sm:mb-14 md:mb-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -25,7 +25,7 @@ const MethodSection = () => {
         </motion.div>
 
         <motion.h2
-          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-20 md:mb-28 max-w-4xl"
+          className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-12 sm:mb-16 md:mb-28 max-w-4xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -35,11 +35,11 @@ const MethodSection = () => {
           <span className="text-primary">{t("method.headingSub")}</span>
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-2 md:gap-0">
           {stepNumbers.map((num, i) => (
             <motion.div
               key={num}
-              className="relative border-t border-accent-foreground/8 pt-10 pb-10 pr-8 group"
+              className="relative border-t border-accent-foreground/8 pt-7 sm:pt-8 md:pt-10 pb-7 sm:pb-8 md:pb-10 pr-0 md:pr-8 group"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

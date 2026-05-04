@@ -18,7 +18,7 @@ const Footer = () => {
 
         {/* ── Lavora con noi — glassmorphism banner ── */}
         <motion.div
-          className="rounded-2xl p-6 sm:p-8 mb-16 flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="rounded-2xl p-5 sm:p-8 mb-10 md:mb-16 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6"
           style={{
             background: "rgba(255,255,255,0.04)",
             backdropFilter: "blur(12px)",
@@ -55,7 +55,7 @@ const Footer = () => {
         </motion.div>
 
         {/* ── Back to top ── */}
-        <div className="flex justify-end mb-14">
+        <div className="flex justify-end mb-10 md:mb-14">
           <motion.button
             onClick={scrollToTop}
             className="inline-flex items-center gap-2 text-white/40 hover:text-white transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium group"
@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
 
         {/* ── Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-14 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 md:gap-14 mb-10 md:mb-14">
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.services")}</h4>
             <ul className="space-y-3.5">

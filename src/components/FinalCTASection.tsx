@@ -16,7 +16,7 @@ const FinalCTASection = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden" ref={ref}>
+    <section className="py-14 sm:py-20 md:py-28 bg-background relative overflow-hidden" ref={ref}>
       {/* Subtle glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.04] blur-[120px] pointer-events-none" />
       
@@ -28,7 +28,7 @@ const FinalCTASection = () => {
           transition={{ duration: 1, ease }}
         >
           <motion.span
-            className="text-xs font-mono text-muted-foreground block mb-8"
+            className="text-xs font-mono text-muted-foreground block mb-6 md:mb-8"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -36,18 +36,18 @@ const FinalCTASection = () => {
             {t("finalCta.label")}
           </motion.span>
 
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-6 md:mb-8">
             {t("finalCta.heading")}<br />
             <span className="text-gradient-primary">{t("finalCta.headingSub")}</span>
           </h2>
 
-          <p className="text-foreground/80 text-lg md:text-xl mb-14 max-w-xl mx-auto leading-relaxed">
+          <p className="text-foreground/80 text-base sm:text-lg md:text-xl mb-10 md:mb-14 max-w-xl mx-auto leading-relaxed">
             {t("finalCta.description")}
           </p>
 
           <motion.button
             onClick={scrollToContact}
-            className="bg-foreground text-background px-12 py-5 font-bold tracking-tight uppercase text-sm inline-flex items-center gap-3 group rounded-full shadow-[0_10px_40px_-10px_hsl(var(--foreground)/0.3)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--foreground)/0.4)]"
+            className="bg-foreground text-background px-8 sm:px-10 md:px-12 py-4 md:py-5 font-bold tracking-tight uppercase text-sm inline-flex items-center gap-3 group rounded-full shadow-[0_10px_40px_-10px_hsl(var(--foreground)/0.3)] transition-shadow duration-500 hover:shadow-[0_20px_60px_-15px_hsl(var(--foreground)/0.4)]"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.95 }}
           >

@@ -52,11 +52,11 @@ const WhyUsSection = () => {
   };
 
   return (
-    <section className="section-light py-16 md:py-24 relative grain" ref={ref}>
+    <section className="section-light py-12 sm:py-16 md:py-24 relative grain" ref={ref}>
       <FloatingElements variant="circles" count={3} />
       <div className="container-custom">
         <motion.div
-          className="flex items-center gap-4 mb-16 md:mb-24"
+          className="flex items-center gap-4 mb-10 sm:mb-14 md:mb-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -68,7 +68,7 @@ const WhyUsSection = () => {
         </motion.div>
 
         <motion.h2
-          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-16 md:mb-24 max-w-4xl"
+          className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter leading-[1.05] text-accent-foreground mb-10 sm:mb-14 md:mb-24 max-w-4xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -79,13 +79,13 @@ const WhyUsSection = () => {
         </motion.h2>
 
         {/* Bullet points */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mb-20 md:mb-28 max-w-4xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 mb-12 sm:mb-16 md:mb-28 max-w-4xl">
           {bullets.map((bullet, i) => {
             const Icon = bulletIcons[i];
             return (
               <motion.div
                 key={i}
-                className="flex gap-5 items-start p-6 md:p-7 rounded-2xl glass-card-light hover-lift group cursor-default"
+                className="flex gap-4 sm:gap-5 items-start p-5 sm:p-6 md:p-7 rounded-2xl glass-card-light hover-lift group cursor-default"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -104,7 +104,7 @@ const WhyUsSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 lg:gap-16 mb-16 md:mb-24">
+        <div className="grid grid-cols-3 gap-4 sm:gap-8 lg:gap-16 mb-12 sm:mb-16 md:mb-24">
           {statsData.map((stat, i) => (
             <AnimatedStat key={i} stat={stat} index={i} isInView={isInView} label={statLabels[i]} />
           ))}

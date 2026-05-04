@@ -32,11 +32,11 @@ const ServiceRow = ({
     <article className="svc-row" style={{ visibility: "hidden" }}>
       <Link
         to={link}
-        className="group relative block border-b border-white/[0.06] py-8 md:py-10 transition-colors duration-500 hover:bg-white/[0.02]"
+        className="group relative block border-b border-white/[0.06] py-6 sm:py-8 md:py-10 transition-colors duration-500 hover:bg-white/[0.02]"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="container-custom px-5 md:px-10 flex items-center gap-6 md:gap-10">
+        <div className="container-custom flex items-center gap-4 sm:gap-6 md:gap-10">
           {/* Number */}
           <span className="text-[11px] font-mono text-white/20 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
@@ -121,12 +121,12 @@ const ServicesSection = () => {
       ref={sectionRef}
       id="services"
       aria-label={t("services.seoHeading")}
-      className="relative py-14 md:py-20 overflow-hidden"
+      className="relative py-12 sm:py-14 md:py-20 overflow-hidden"
     >
       <h2 className="sr-only">{t("services.seoHeading")}</h2>
 
       {/* Section header */}
-      <div ref={headingRef} className="container-custom px-5 md:px-10 mb-10 md:mb-16" style={{ visibility: "hidden" }}>
+      <div ref={headingRef} className="container-custom mb-8 sm:mb-10 md:mb-16" style={{ visibility: "hidden" }}>
         <div className="flex items-center gap-3 mb-4">
           <span className="text-[10px] font-mono text-white/25">[02]</span>
           <span className="text-[10px] uppercase tracking-[0.3em] text-white/25 font-medium">{t("services.label")}</span>
@@ -153,7 +153,7 @@ const ServicesSection = () => {
       </div>
 
       {/* CTA */}
-      <div ref={ctaRef} className="container-custom px-5 md:px-10 mt-20 md:mt-28 text-center" style={{ visibility: "hidden" }}>
+      <div ref={ctaRef} className="container-custom mt-14 sm:mt-20 md:mt-28 text-center" style={{ visibility: "hidden" }}>
         <div className="max-w-2xl mx-auto">
           <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
             {t("services.endHeading")}
