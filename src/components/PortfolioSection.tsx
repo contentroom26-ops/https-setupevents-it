@@ -122,8 +122,8 @@ const PortfolioSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="portfolio" className="relative min-h-screen overflow-hidden">
-      <div className="relative z-10 py-20 md:py-40">
+    <section id="portfolio" className="relative overflow-hidden">
+      <div className="relative z-10 py-14 md:py-24">
         <FloatingElements variant="dots" count={8} />
         <div className="container-custom">
           <div className="flex items-center justify-between mb-6">

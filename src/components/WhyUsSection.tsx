@@ -52,7 +52,7 @@ const WhyUsSection = () => {
   };
 
   return (
-    <section className="section-light py-28 md:py-44 relative grain" ref={ref}>
+    <section className="section-light py-16 md:py-24 relative grain" ref={ref}>
       <FloatingElements variant="circles" count={3} />
       <div className="container-custom">
         <motion.div

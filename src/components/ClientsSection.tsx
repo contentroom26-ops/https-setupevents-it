@@ -20,7 +20,7 @@ const ClientsSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-background relative" ref={ref}>
+    <section className="py-14 md:py-20 bg-background relative" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="flex items-center justify-between mb-14"

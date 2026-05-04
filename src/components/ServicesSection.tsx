@@ -121,7 +121,7 @@ const ServicesSection = () => {
       ref={sectionRef}
       id="services"
       aria-label={t("services.seoHeading")}
-      className="relative min-h-screen py-20 md:py-32 overflow-hidden"
+      className="relative py-14 md:py-20 overflow-hidden"
     >
       <h2 className="sr-only">{t("services.seoHeading")}</h2>
 
