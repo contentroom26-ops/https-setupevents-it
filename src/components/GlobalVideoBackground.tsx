@@ -32,7 +32,7 @@ const GlobalVideoBackground = () => {
         style={{
           position: "absolute",
           inset: 0,
-          background: "hsl(var(--background) / 0.6)",
+          background: "hsl(var(--background) / 0.72)",
         }}
       />
     </div>

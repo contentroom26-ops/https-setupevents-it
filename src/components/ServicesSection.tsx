@@ -38,17 +38,17 @@ const ServiceRow = ({
       >
         <div className="container-custom flex items-center gap-4 sm:gap-6 md:gap-10">
           {/* Number */}
-          <span className="text-[11px] font-mono text-white/20 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
+          <span className="text-[11px] font-mono text-white/45 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
           </span>
 
           {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white/90 leading-[1.05] transition-colors duration-300 group-hover:text-white">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white">
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
-            <p className="text-xs md:text-sm text-white/65 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
+            <p className="text-xs md:text-sm text-white/80 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
               {description}
             </p>
           </div>
@@ -128,8 +128,8 @@ const ServicesSection = () => {
       {/* Section header */}
       <div ref={headingRef} className="container-custom mb-8 sm:mb-10 md:mb-16" style={{ visibility: "hidden" }}>
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-mono text-white/25">[02]</span>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/25 font-medium">{t("services.label")}</span>
+          <span className="text-[10px] font-mono text-white/45">[02]</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/60 font-medium">{t("services.label")}</span>
           <div className="flex-1 h-px bg-white/[0.06]" />
         </div>
         <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] max-w-3xl">
@@ -158,7 +158,7 @@ const ServicesSection = () => {
           <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
             {t("services.endHeading")}
           </h3>
-          <p className="text-sm md:text-base text-white/75 mb-8 max-w-lg mx-auto">
+          <p className="text-sm md:text-base text-white/85 mb-8 max-w-lg mx-auto">
             {t("services.endSubtext")}
           </p>
           <motion.a
@@ -170,7 +170,7 @@ const ServicesSection = () => {
             {t("services.endCta")}
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </motion.a>
-          <p className="text-[12px] text-white/20 mt-6 flex items-center justify-center gap-2">
+          <p className="text-[12px] text-white/45 mt-6 flex items-center justify-center gap-2">
             <CheckCircle2 className="w-3.5 h-3.5" />
             {t("services.trustLine")}
           </p>

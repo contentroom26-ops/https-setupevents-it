@@ -50,11 +50,11 @@ const FlipCard = ({ index }: { index: number }) => {
         <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ backfaceVisibility: "hidden" }}>
           <img src={study.image} alt={`${study.title} - ${category}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          <div className="absolute top-5 left-6"><span className="text-xs font-mono text-white/40">[{String(index + 1).padStart(2, "0")}]</span></div>
+          <div className="absolute top-5 left-6"><span className="text-xs font-mono text-white/60">[{String(index + 1).padStart(2, "0")}]</span></div>
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2">{category}</span>
             <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight">{study.title}</h3>
-            <span className="text-xs text-white/40 font-mono mt-1 block">{study.year}</span>
+            <span className="text-xs text-white/60 font-mono mt-1 block">{study.year}</span>
           </div>
         </div>
         <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
@@ -128,8 +128,8 @@ const PortfolioSection = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between mb-6">
             <motion.div className="flex items-center gap-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease }}>
-              <span className="text-xs font-mono text-muted-foreground">[03]</span>
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">{t("portfolio.label")}</span>
+              <span className="text-xs font-mono text-foreground/60">[03]</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-foreground/70 font-medium">{t("portfolio.label")}</span>
             </motion.div>
           </div>
 

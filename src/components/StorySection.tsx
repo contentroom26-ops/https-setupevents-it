@@ -20,9 +20,9 @@ const StorySection = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-[10px] md:text-xs font-mono text-white/40">[01]</span>
+          <span className="text-[10px] md:text-xs font-mono text-white/55">[01]</span>
           <div className="h-px w-8 bg-primary/40" />
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/40 font-medium">{t("story.label")}</span>
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/60 font-medium">{t("story.label")}</span>
         </motion.div>
 
         <motion.div
@@ -44,7 +44,7 @@ const StorySection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-white/80 text-sm sm:text-base md:text-lg leading-[1.7] md:leading-[1.8] mb-7 md:mb-10"
+            className="text-white/90 text-sm sm:text-base md:text-lg leading-[1.7] md:leading-[1.8] mb-7 md:mb-10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -65,7 +65,7 @@ const StorySection = () => {
             </div>
             <div>
               <p className="font-display font-bold text-white text-base md:text-lg tracking-tight">Gabriel Lleshi</p>
-              <p className="text-white/30 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
+              <p className="text-white/55 text-xs uppercase tracking-[0.2em]">{t("story.founderRole")}</p>
             </div>
           </motion.div>
         </motion.div>

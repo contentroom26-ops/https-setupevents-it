@@ -88,7 +88,7 @@ const ContactPageContent = ({
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
             {title}
           </h1>
-          <p className="mt-5 text-sm sm:text-base text-white/50 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-5 text-sm sm:text-base text-white/75 max-w-xl mx-auto leading-relaxed">
             {subtitle}
           </p>
         </motion.div>
@@ -131,14 +131,14 @@ const ContactPageContent = ({
               <ContactRow
                 icon={<MapPin className="w-4 h-4" />}
                 label="Sede"
-                value={<>Firenze, Italia<br /><span className="text-white/40">Operiamo in tutta Italia & EU</span></>}
+                value={<>Firenze, Italia<br /><span className="text-white/60">Operiamo in tutta Italia & EU</span></>}
                 href="https://www.google.com/maps/search/?api=1&query=Firenze%2C+Italia"
                 external
               />
             </div>
 
             <div className="mt-9 pt-7 border-t border-white/[0.06]">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-4">Seguici</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-4">Seguici</p>
               <div className="flex gap-3">
                 <SocialBtn href="https://instagram.com" label="Instagram"><Instagram className="w-4 h-4" /></SocialBtn>
                 <SocialBtn href="https://linkedin.com" label="LinkedIn"><Linkedin className="w-4 h-4" /></SocialBtn>
@@ -146,9 +146,9 @@ const ContactPageContent = ({
             </div>
 
             <div className="mt-7 pt-7 border-t border-white/[0.06]">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-3">Orari</p>
-              <p className="text-white/70 text-sm">Lun – Ven · 9:30 – 18:30</p>
-              <p className="text-white/40 text-xs mt-1">Risposta entro 24 ore lavorative</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-3">Orari</p>
+              <p className="text-white/85 text-sm">Lun – Ven · 9:30 – 18:30</p>
+              <p className="text-white/60 text-xs mt-1">Risposta entro 24 ore lavorative</p>
             </div>
 
             {/* Prenota call CTA */}
@@ -181,7 +181,7 @@ const ContactPageContent = ({
             <h2 className="text-primary text-xl md:text-2xl font-display font-bold mb-2">
               Scrivici
             </h2>
-            <p className="text-white/50 text-sm mb-7">
+            <p className="text-white/75 text-sm mb-7">
               Compila il form e ti ricontattiamo con il prossimo passo.
             </p>
 
@@ -201,7 +201,7 @@ const ContactPageContent = ({
                 rows={6}
                 placeholder="Raccontaci il tuo progetto *"
                 maxLength={2000}
-                className="w-full rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/30 outline-none resize-none transition-all duration-300 focus:border-primary/40"
+                className="w-full rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/55 outline-none resize-none transition-all duration-300 focus:border-primary/40"
                 style={{
                   background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.08)",
@@ -226,9 +226,9 @@ const ContactPageContent = ({
                 </span>
               </button>
 
-              <p className="text-[11px] text-white/30 text-center">
+              <p className="text-[11px] text-white/55 text-center">
                 Inviando il form accetti la nostra{" "}
-                <Link to="/privacy-policy" className="text-white/50 hover:text-white underline underline-offset-2">
+                <Link to="/privacy-policy" className="text-white/80 hover:text-white underline underline-offset-2">
                   Privacy Policy
                 </Link>.
               </p>
@@ -301,8 +301,8 @@ const ContactRow = ({ icon, label, value, href, external = false }: { icon: Reac
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-1">{label}</p>
-        <p className="text-white/85 text-sm group-hover:text-white transition-colors">{value}</p>
+        <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-1">{label}</p>
+        <p className="text-white text-sm group-hover:text-white transition-colors">{value}</p>
       </div>
     </Tag>
   );
@@ -326,7 +326,7 @@ const Field = ({ name, type = "text", required = false, placeholder, value, onCh
     required={required}
     placeholder={placeholder}
     maxLength={255}
-    className="w-full rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/30 outline-none transition-all duration-300 focus:border-primary/40"
+    className="w-full rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/55 outline-none transition-all duration-300 focus:border-primary/40"
     style={{
       background: "rgba(255,255,255,0.04)",
       border: "1px solid rgba(255,255,255,0.08)",
