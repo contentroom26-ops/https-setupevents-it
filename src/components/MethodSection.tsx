@@ -32,7 +32,7 @@ const MethodSection = () => {
           transition={{ duration: 0.8, ease }}
         >
           {t("method.heading")}{" "}
-          <span className="text-accent-foreground/25">{t("method.headingSub")}</span>
+          <span className="text-primary">{t("method.headingSub")}</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
@@ -54,7 +54,7 @@ const MethodSection = () => {
               <h3 className="text-lg md:text-xl font-display font-bold text-accent-foreground mb-3 tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {t(`method.steps.${i}.title`)}
               </h3>
-              <p className="text-accent-foreground/40 leading-relaxed text-sm transition-colors duration-300 group-hover:text-accent-foreground/60">
+              <p className="text-accent-foreground/70 leading-relaxed text-sm transition-colors duration-300 group-hover:text-accent-foreground/90">
                 {t(`method.steps.${i}.description`)}
               </p>
             </motion.div>

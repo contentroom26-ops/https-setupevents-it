@@ -40,11 +40,11 @@ const StorySection = () => {
             transition={{ duration: 0.7, delay: 0.2, ease }}
           >
             {t("story.heading")}{" "}
-            <span className="text-white/40">{t("story.headingSub")}</span>
+            <span className="text-primary">{t("story.headingSub")}</span>
           </motion.h2>
 
           <motion.p
-            className="text-white/50 text-base md:text-lg leading-[1.8] mb-10"
+            className="text-white/80 text-base md:text-lg leading-[1.8] mb-10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -48,7 +48,7 @@ const ServiceRow = ({
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
-            <p className="text-xs md:text-sm text-white/30 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
+            <p className="text-xs md:text-sm text-white/65 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
               {description}
             </p>
           </div>
@@ -158,7 +158,7 @@ const ServicesSection = () => {
           <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
             {t("services.endHeading")}
           </h3>
-          <p className="text-sm md:text-base text-white/40 mb-8 max-w-lg mx-auto">
+          <p className="text-sm md:text-base text-white/75 mb-8 max-w-lg mx-auto">
             {t("services.endSubtext")}
           </p>
           <motion.a
