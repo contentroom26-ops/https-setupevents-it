@@ -28,7 +28,7 @@ const Index = () => {
   }, [introDone]);
 
   return (
-    <div className="min-h-screen" style={{ background: introDone ? "hsl(var(--background))" : "#000" }}>
+    <div className="min-h-screen" style={{ background: introDone ? "transparent" : "#000" }}>
       <div
         style={{
           opacity: introDone ? 1 : 0,
