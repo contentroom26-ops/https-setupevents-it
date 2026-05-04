@@ -11,10 +11,10 @@ const StorySection = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   return (
-    <section ref={sectionRef} id="storia" className="relative py-16 md:py-28 overflow-hidden">
+    <section ref={sectionRef} id="storia" className="relative py-12 sm:py-16 md:py-24 overflow-hidden">
       <motion.div className="container-custom relative z-[4]" style={{ y: textY }}>
         <motion.div
-          className="flex items-center gap-3 mb-12 md:mb-20"
+          className="flex items-center gap-3 mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -26,14 +26,14 @@ const StorySection = () => {
         </motion.div>
 
         <motion.div
-          className="max-w-4xl glass-card rounded-3xl px-6 md:px-12 py-8 md:py-12"
+          className="max-w-4xl glass-card rounded-2xl md:rounded-3xl px-5 sm:px-6 md:px-12 py-7 md:py-12"
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, ease }}
         >
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[1.1] text-white mb-10"
+            className="text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-display font-extrabold tracking-tighter leading-[1.1] text-white mb-6 md:mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -44,7 +44,7 @@ const StorySection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-white/80 text-base md:text-lg leading-[1.8] mb-10"
+            className="text-white/80 text-sm sm:text-base md:text-lg leading-[1.7] md:leading-[1.8] mb-7 md:mb-10"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
