@@ -99,7 +99,7 @@ ${data.note || "—"}`;
   };
 
   return (
-    <div className="min-h-screen relative bg-background overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       {/* Atmospheric bg */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-60"
