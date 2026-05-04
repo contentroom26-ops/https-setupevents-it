@@ -70,7 +70,8 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
+    background: transparent;
     font-family: 'DM Sans', sans-serif;
     overflow-x: clip;
     -webkit-tap-highlight-color: transparent;
