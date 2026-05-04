@@ -123,7 +123,7 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="relative overflow-hidden">
-      <div className="relative z-10 py-14 md:py-24">
+      <div className="relative z-10 py-12 sm:py-14 md:py-24">
         <FloatingElements variant="dots" count={8} />
         <div className="container-custom">
           <div className="flex items-center justify-between mb-6">
@@ -133,11 +133,11 @@ const PortfolioSection = () => {
             </motion.div>
           </div>
 
-          <motion.h2 className="text-3xl md:text-5xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-12 md:mb-20" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease }}>
+          <motion.h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[0.9] text-foreground mb-8 sm:mb-12 md:mb-20" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease }}>
             {t("portfolio.heading")}
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" style={{ perspective: '800px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8" style={{ perspective: '800px' }}>
             {caseStudiesData.map((_, i) => (
               <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
                 <FlipCard index={i} />
@@ -146,7 +146,7 @@ const PortfolioSection = () => {
           </div>
         </div>
 
-        <motion.div className="mt-16 md:mt-28" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease }}>
+        <motion.div className="mt-12 sm:mt-16 md:mt-28" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease }}>
           <div className="container-custom mb-6 md:mb-10">
             <h3 className="text-xl md:text-2xl font-display font-bold text-foreground tracking-tight">{t("portfolio.gallery")}</h3>
           </div>
