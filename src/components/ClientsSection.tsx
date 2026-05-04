@@ -20,10 +20,10 @@ const ClientsSection = () => {
   };
 
   return (
-    <section className="py-14 md:py-20 bg-background relative" ref={ref}>
+    <section className="py-10 sm:py-14 md:py-20 bg-background relative" ref={ref}>
       <div className="container-custom">
         <motion.div
-          className="flex items-center justify-between mb-14"
+          className="flex items-center justify-between mb-8 sm:mb-10 md:mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -36,7 +36,7 @@ const ClientsSection = () => {
         </motion.div>
 
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-20"
+          className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-20"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -53,7 +53,7 @@ const ClientsSection = () => {
         </motion.div>
 
         <motion.div
-          className="mt-20 section-divider"
+          className="mt-12 sm:mt-16 md:mt-20 section-divider"
           initial={{ scaleX: 0, originX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 1.2, delay: 0.6, ease: "easeInOut" }}
