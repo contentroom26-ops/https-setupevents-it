@@ -19,9 +19,9 @@ const MethodSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-xs font-mono text-accent-foreground/25">[02]</span>
+          <span className="text-xs font-mono text-accent-foreground/45">[02]</span>
           <div className="h-px w-8 bg-primary/30" />
-          <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/40 font-medium">{t("method.label")}</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/60 font-medium">{t("method.label")}</span>
         </motion.div>
 
         <motion.h2
@@ -54,7 +54,7 @@ const MethodSection = () => {
               <h3 className="text-lg md:text-xl font-display font-bold text-accent-foreground mb-3 tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {t(`method.steps.${i}.title`)}
               </h3>
-              <p className="text-accent-foreground/70 leading-relaxed text-sm transition-colors duration-300 group-hover:text-accent-foreground/90">
+              <p className="text-accent-foreground/80 leading-relaxed text-sm transition-colors duration-300 group-hover:text-accent-foreground">
                 {t(`method.steps.${i}.description`)}
               </p>
             </motion.div>

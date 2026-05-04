@@ -35,7 +35,7 @@ const AnimatedStat = ({ stat, index, isInView, label }: { stat: typeof statsData
         <motion.span>{rounded}</motion.span>
         <span className="text-gradient-primary">{stat.suffix}</span>
       </div>
-      <p className="text-accent-foreground/35 text-[10px] md:text-xs uppercase tracking-[0.25em] mt-4 font-medium">{label}</p>
+      <p className="text-accent-foreground/55 text-[10px] md:text-xs uppercase tracking-[0.25em] mt-4 font-medium">{label}</p>
     </motion.div>
   );
 };
@@ -62,9 +62,9 @@ const WhyUsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-xs font-mono text-accent-foreground/25">[05]</span>
+          <span className="text-xs font-mono text-accent-foreground/45">[05]</span>
           <div className="h-px w-8 bg-primary/30" />
-          <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/40 font-medium">{t("whyUs.label")}</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-accent-foreground/60 font-medium">{t("whyUs.label")}</span>
         </motion.div>
 
         <motion.h2
@@ -96,7 +96,7 @@ const WhyUsSection = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-accent-foreground text-sm md:text-base mb-1.5 tracking-tight">{bullet.title}</h3>
-                  <p className="text-accent-foreground/70 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
+                  <p className="text-accent-foreground/80 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
                 </div>
               </motion.div>
             );
