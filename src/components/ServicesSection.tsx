@@ -38,17 +38,17 @@ const ServiceRow = ({
       >
         <div className="container-custom px-5 md:px-10 flex items-center gap-6 md:gap-10">
           {/* Number */}
-          <span className="text-[11px] font-mono text-white/20 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
+          <span className="text-[11px] font-mono text-primary/70 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
           </span>
 
           {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white/90 leading-[1.05] transition-colors duration-300 group-hover:text-white">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-primary">
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
-            <p className="text-xs md:text-sm text-white/30 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
+            <p className="text-xs md:text-sm text-white/70 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
               {description}
             </p>
           </div>
@@ -123,57 +123,71 @@ const ServicesSection = () => {
       aria-label={t("services.seoHeading")}
       className="relative py-14 md:py-20 overflow-hidden"
     >
-      <h2 className="sr-only">{t("services.seoHeading")}</h2>
+      {/* Stronger overlay for legibility (matches Case Studies cards) */}
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-sm pointer-events-none" />
 
-      {/* Section header */}
-      <div ref={headingRef} className="container-custom px-5 md:px-10 mb-10 md:mb-16" style={{ visibility: "hidden" }}>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-mono text-white/25">[02]</span>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/25 font-medium">{t("services.label")}</span>
-          <div className="flex-1 h-px bg-white/[0.06]" />
-        </div>
-        <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] max-w-3xl">
-          {t("services.heading")}
-        </h3>
-      </div>
+      <div className="relative z-[2]">
+        <h2 className="sr-only">{t("services.seoHeading")}</h2>
 
-      {/* Service list */}
-      <div className="border-t border-white/[0.06]">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <ServiceRow
-            key={i}
-            index={i}
-            image={SERVICE_IMAGES[i]}
-            title={t(`services.items.${i}.title`)}
-            seoTitle={t(`services.items.${i}.seoTitle`)}
-            description={t(`services.items.${i}.description`)}
-            link={SERVICE_LINKS[i]}
-          />
-        ))}
-      </div>
-
-      {/* CTA */}
-      <div ref={ctaRef} className="container-custom px-5 md:px-10 mt-20 md:mt-28 text-center" style={{ visibility: "hidden" }}>
-        <div className="max-w-2xl mx-auto">
-          <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
-            {t("services.endHeading")}
+        {/* Section header */}
+        <div ref={headingRef} className="container-custom px-5 md:px-10 mb-10 md:mb-16" style={{ visibility: "hidden" }}>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-[10px] font-mono text-primary/80">[02]</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-primary font-semibold">{t("services.label")}</span>
+            <div className="flex-1 h-px bg-primary/20" />
+          </div>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] max-w-3xl">
+            {(() => {
+              const words = t("services.heading").split(" ");
+              const last = words.pop();
+              return (
+                <>
+                  {words.join(" ")}{words.length ? " " : ""}
+                  <span className="text-primary">{last}</span>
+                </>
+              );
+            })()}
           </h3>
-          <p className="text-sm md:text-base text-white/40 mb-8 max-w-lg mx-auto">
-            {t("services.endSubtext")}
-          </p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white font-bold text-sm hover:bg-white/15 hover:border-white/30 transition-all duration-400 group"
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            {t("services.endCta")}
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
-          <p className="text-[12px] text-white/20 mt-6 flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            {t("services.trustLine")}
-          </p>
+        </div>
+
+        {/* Service list */}
+        <div className="border-t border-white/[0.1]">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <ServiceRow
+              key={i}
+              index={i}
+              image={SERVICE_IMAGES[i]}
+              title={t(`services.items.${i}.title`)}
+              seoTitle={t(`services.items.${i}.seoTitle`)}
+              description={t(`services.items.${i}.description`)}
+              link={SERVICE_LINKS[i]}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div ref={ctaRef} className="container-custom px-5 md:px-10 mt-20 md:mt-28 text-center" style={{ visibility: "hidden" }}>
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
+              {t("services.endHeading")}
+            </h3>
+            <p className="text-sm md:text-base text-white/75 mb-8 max-w-lg mx-auto">
+              {t("services.endSubtext")}
+            </p>
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-primary/40 bg-primary/15 backdrop-blur-md text-white font-bold text-sm hover:bg-primary/25 hover:border-primary/60 transition-all duration-400 group"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {t("services.endCta")}
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </motion.a>
+            <p className="text-[12px] text-white/60 mt-6 flex items-center justify-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+              {t("services.trustLine")}
+            </p>
+          </div>
         </div>
       </div>
     </section>
