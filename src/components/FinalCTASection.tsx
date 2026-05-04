@@ -28,7 +28,7 @@ const FinalCTASection = () => {
           transition={{ duration: 1, ease }}
         >
           <motion.span
-            className="text-xs font-mono text-muted-foreground block mb-6 md:mb-8"
+            className="text-xs font-mono text-foreground/60 block mb-6 md:mb-8"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
