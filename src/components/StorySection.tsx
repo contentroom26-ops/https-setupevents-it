@@ -16,14 +16,6 @@ const StorySection = () => {
 
   return (
     <section ref={sectionRef} id="storia" className="relative min-h-screen py-24 md:py-52 overflow-hidden">
-      <motion.div className="absolute inset-0 -top-[5%] -bottom-[5%] z-0 will-change-transform" style={{ y: bgY, scale: bgScale }}>
-        <img src={storyBg} alt="" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
-      </motion.div>
-      <motion.div className="absolute inset-0 z-[1] bg-background" style={{ opacity: bgOpacity }} />
-      <div className="absolute inset-x-0 top-0 h-24 md:h-40 z-[2] bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-24 md:h-40 z-[2] bg-gradient-to-t from-background to-transparent" />
-      <div className="absolute inset-0 z-[3] grain pointer-events-none" />
-
       <motion.div className="container-custom relative z-[4]" style={{ y: textY }}>
         <motion.div
           className="flex items-center gap-3 mb-12 md:mb-20"
