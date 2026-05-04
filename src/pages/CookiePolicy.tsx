@@ -16,7 +16,7 @@ const CookiePolicy = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <div className="container-custom py-20 md:py-32">
         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-12 text-sm uppercase tracking-widest">
           <ArrowLeft className="w-4 h-4" /> Torna alla home
