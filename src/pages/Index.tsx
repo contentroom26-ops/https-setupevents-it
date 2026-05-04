@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SideAccent from "@/components/SideAccent";
 import SectionReveal from "@/components/SectionReveal";
-import SectionDivider from "@/components/SectionDivider";
+
 
 const StorySection = lazy(() => import("@/components/StorySection"));
 const Marquee = lazy(() => import("@/components/Marquee"));
@@ -55,25 +55,17 @@ const Index = () => {
             <StorySection />
           </SectionReveal>
 
-          <SectionDivider style="line" />
-
           <Marquee />
-
-          <SectionDivider style="dot" />
 
           {/* Services — zoom in */}
           <SectionReveal variant="zoom">
             <ServicesSection />
           </SectionReveal>
 
-          <SectionDivider style="glow" />
-
           {/* Portfolio — blur reveal */}
           <SectionReveal variant="blur">
             <PortfolioSection />
           </SectionReveal>
-
-          <SectionDivider style="line" />
 
           {/* Contact — slide from right */}
           <SectionReveal variant="slide-left">
