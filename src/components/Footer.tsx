@@ -35,7 +35,7 @@ const Footer = () => {
             </div>
             <div>
               <h3 className="font-display font-bold text-base sm:text-lg text-white">{t("footer.workWithUs")}</h3>
-              <p className="text-sm text-white/40 mt-0.5">{t("footer.workDesc")}</p>
+              <p className="text-sm text-white/65 mt-0.5">{t("footer.workDesc")}</p>
             </div>
           </div>
           <motion.a
@@ -58,7 +58,7 @@ const Footer = () => {
         <div className="flex justify-end mb-10 md:mb-14">
           <motion.button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 text-white/40 hover:text-white transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium group"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium group"
             whileHover={{ y: -3 }}
           >
             {t("footer.backToTop")}
@@ -69,7 +69,7 @@ const Footer = () => {
         {/* ── Grid ── */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 md:gap-14 mb-10 md:mb-14">
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.services")}</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.services")}</h4>
             <ul className="space-y-3.5">
               {[
                 { name: "Corporate Events", href: "/corporate-events" },
@@ -79,14 +79,14 @@ const Footer = () => {
                 { name: "Public Relations", href: "/public-relations" },
               ].map((item) => (
                 <li key={item.name}>
-                  <Link to={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                  <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.links")}</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.links")}</h4>
             <ul className="space-y-3.5">
               {[
                 { name: t("footer.portfolio"), href: "#portfolio" },
@@ -97,9 +97,9 @@ const Footer = () => {
               ].map((item) => (
                 <li key={item.name}>
                   {item.href.startsWith("/") ? (
-                    <Link to={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                    <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
                   ) : (
-                    <a href={item.href} className="text-white/70 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</a>
+                    <a href={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</a>
                   )}
                 </li>
               ))}
@@ -107,25 +107,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.contacts")}</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.contacts")}</h4>
             <ul className="space-y-4.5 text-sm">
               <li className="flex items-center gap-3 group">
-                <Mail className="w-4 h-4 text-white/40 transition-transform duration-300 group-hover:scale-110" />
-                <a href="mailto:info@setupevents.it" className="text-white/70 hover:text-white transition-colors duration-300">info@setupevents.it</a>
+                <Mail className="w-4 h-4 text-white/60 transition-transform duration-300 group-hover:scale-110" />
+                <a href="mailto:info@setupevents.it" className="text-white/85 hover:text-white transition-colors duration-300">info@setupevents.it</a>
               </li>
               <li className="flex items-center gap-3 group">
-                <Phone className="w-4 h-4 text-white/40 transition-transform duration-300 group-hover:scale-110" />
-                <a href="tel:+393284163053" className="text-white/70 hover:text-white transition-colors duration-300">+39 328 416 3053</a>
+                <Phone className="w-4 h-4 text-white/60 transition-transform duration-300 group-hover:scale-110" />
+                <a href="tel:+393284163053" className="text-white/85 hover:text-white transition-colors duration-300">+39 328 416 3053</a>
               </li>
               <li className="flex items-start gap-3 group">
-                <MapPin className="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
-                <span className="text-white/70">Firenze, Italia</span>
+                <MapPin className="w-4 h-4 text-white/60 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-white/85">Firenze, Italia</span>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/50">{t("footer.social")}</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.social")}</h4>
             <div className="flex gap-3">
               {[
                 { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gabrielleshi_events/" },
@@ -136,7 +136,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/50 hover:text-white transition-all duration-300"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all duration-300"
                   style={{ border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)" }}
                   aria-label={social.label}
                   whileHover={{ scale: 1.15, y: -2 }}
@@ -150,7 +150,7 @@ const Footer = () => {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-xs">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/55 text-xs">
           <p>© {new Date().getFullYear()} SetupEvents by Gabriel Lleshi</p>
           <p>P.IVA: 07386270487</p>
         </div>
