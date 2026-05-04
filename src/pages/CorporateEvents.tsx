@@ -26,7 +26,7 @@ const CorporateEvents = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
       <section className="pt-32 pb-20 md:pt-44 md:pb-32 relative grain">
         <div className="container-custom">
