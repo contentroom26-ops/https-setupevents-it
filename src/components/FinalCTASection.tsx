@@ -41,7 +41,7 @@ const FinalCTASection = () => {
             <span className="text-gradient-primary">{t("finalCta.headingSub")}</span>
           </h2>
 
-          <p className="text-muted-foreground text-lg md:text-xl mb-14 max-w-xl mx-auto leading-relaxed">
+          <p className="text-foreground/80 text-lg md:text-xl mb-14 max-w-xl mx-auto leading-relaxed">
             {t("finalCta.description")}
           </p>
 

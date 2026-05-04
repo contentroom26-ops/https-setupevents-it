@@ -75,7 +75,7 @@ const WhyUsSection = () => {
           transition={{ duration: 0.8, ease }}
         >
           {t("whyUs.heading")}{" "}
-          <span className="text-accent-foreground/25">{t("whyUs.headingSub")}</span>
+          <span className="text-primary">{t("whyUs.headingSub")}</span>
         </motion.h2>
 
         {/* Bullet points */}
@@ -96,7 +96,7 @@ const WhyUsSection = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-accent-foreground text-sm md:text-base mb-1.5 tracking-tight">{bullet.title}</h3>
-                  <p className="text-accent-foreground/45 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
+                  <p className="text-accent-foreground/70 text-xs md:text-sm leading-relaxed">{bullet.desc}</p>
                 </div>
               </motion.div>
             );
