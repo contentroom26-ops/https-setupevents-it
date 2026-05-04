@@ -38,17 +38,17 @@ const ServiceRow = ({
       >
         <div className="container-custom px-5 md:px-10 flex items-center gap-6 md:gap-10">
           {/* Number */}
-          <span className="text-[11px] font-mono text-white/20 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
+          <span className="text-[11px] font-mono text-primary/70 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
           </span>
 
           {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white/90 leading-[1.05] transition-colors duration-300 group-hover:text-white">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-primary">
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
-            <p className="text-xs md:text-sm text-white/30 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
+            <p className="text-xs md:text-sm text-white/70 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
               {description}
             </p>
           </div>
