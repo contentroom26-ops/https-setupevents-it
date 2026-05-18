@@ -44,7 +44,7 @@ const ServiceRow = ({
 
           {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white [text-rendering:optimizeLegibility] [-webkit-font-smoothing:antialiased] [transform:translateZ(0)]">
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
