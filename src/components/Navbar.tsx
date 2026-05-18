@@ -51,7 +51,16 @@ const Navbar = () => {
     if (href === "#") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      const el = document.querySelector(href) as HTMLElement | null;
+      if (el) {
+        // Offset = altezza navbar fissa + un piccolo respiro, così l'etichetta
+        // (es. "[02] servizi") resta completamente visibile sotto la navbar.
+        const navEl = document.querySelector("nav") as HTMLElement | null;
+        const navH = navEl?.getBoundingClientRect().height ?? (window.innerWidth >= 768 ? 112 : 96);
+        const breathing = 16;
+        const top = el.getBoundingClientRect().top + window.scrollY - navH - breathing;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
     }
     setIsMobileMenuOpen(false);
     setShowServices(false);
