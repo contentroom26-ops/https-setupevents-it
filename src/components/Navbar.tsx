@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import logo from "@/assets/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -20,6 +20,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const Navbar = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showServices, setShowServices] = useState(false);
@@ -48,6 +50,14 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
+    // Se non siamo sulla home, naviga prima alla home e poi scrolla.
+    if (location.pathname !== "/") {
+      setIsMobileMenuOpen(false);
+      setShowServices(false);
+      navigate("/", { state: { scrollTo: href } });
+      return;
+    }
+
     if (href === "#") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
