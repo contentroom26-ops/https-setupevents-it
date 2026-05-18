@@ -38,22 +38,22 @@ const CorporateEvents = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-8">
               Eventi Aziendali <span className="text-muted-foreground">a Firenze</span>
             </h1>
-            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/70 mb-6">
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Convention, meeting e team building con allestimenti professionali
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Trasformiamo ogni appuntamento aziendale in un'esperienza che rafforza il brand, motiva il team e lascia un'impressione duratura. Dalla convention per 500 persone alla cena esclusiva per il board, ogni evento aziendale a Firenze è curato nei minimi dettagli.
             </p>
-            <p className="text-base text-muted-foreground/80 leading-relaxed mb-12 max-w-2xl">
-              Il nostro servizio di <strong>organizzazione eventi aziendali a Firenze</strong> include la gestione completa: scouting location, allestimenti eventi personalizzati, servizio hostess e steward professionali, catering e produzione audio-video. Che si tratti di feste private aziendali o grandi convention, garantiamo un risultato impeccabile.
+            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+              Il nostro servizio di <strong className="text-foreground/95">organizzazione eventi aziendali a Firenze</strong> include la gestione completa: scouting location, allestimenti eventi personalizzati, servizio hostess e steward professionali, catering e produzione audio-video. Che si tratti di feste private aziendali o grandi convention, garantiamo un risultato impeccabile.
             </p>
 
-            <h3 className="text-lg font-display font-bold text-foreground/60 mb-6 uppercase tracking-wider">I nostri servizi per eventi corporate</h3>
+            <h3 className="text-lg font-display font-bold text-foreground/85 mb-6 uppercase tracking-wider">I nostri servizi per eventi corporate</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
               {features.map((f, i) => (
                 <motion.div key={f} className="flex items-center gap-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.08, ease }}>
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground/80">{f}</span>
+                  <span className="text-foreground/95 leading-relaxed">{f}</span>
                 </motion.div>
               ))}
             </div>

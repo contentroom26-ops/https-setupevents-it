@@ -126,7 +126,7 @@ ${data.note || "—"}`;
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
             30 minuti per <span className="text-primary">conoscerci</span>
           </h1>
-          <p className="mt-5 text-sm sm:text-base text-white/50 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-5 text-sm sm:text-base text-white/80 max-w-xl mx-auto leading-[1.7]">
             Scegli quando preferisci. Confermiamo via email entro qualche ora con il link della videocall o richiamandoti.
           </p>
         </motion.div>
@@ -151,7 +151,7 @@ ${data.note || "—"}`;
                   <CheckCircle2 className="w-8 h-8 text-primary" />
                 </div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">Richiesta ricevuta</h2>
-                <p className="text-white/60 max-w-md mx-auto">
+                <p className="text-white/80 max-w-md mx-auto leading-[1.7]">
                   Abbiamo ricevuto la tua richiesta di call. Ti confermiamo orario e dettagli via email entro qualche ora.
                 </p>
                 <Link to="/" className="inline-flex items-center gap-2 mt-8 text-primary hover:text-primary/80 text-sm uppercase tracking-[0.2em] font-semibold">
