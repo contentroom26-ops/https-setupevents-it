@@ -44,7 +44,7 @@ const ServiceRow = ({
 
           {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white [text-rendering:optimizeLegibility] [-webkit-font-smoothing:antialiased] [transform:translateZ(0)]">
               {title}
             </h3>
             {/* Description — appears on hover (desktop) / always visible (mobile) */}
@@ -88,27 +88,29 @@ const ServicesSection = () => {
     const section = sectionRef.current;
     if (!section) return;
 
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const ctx = gsap.context(() => {
       if (headingRef.current) {
-        gsap.fromTo(headingRef.current, { y: 30, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out",
-          scrollTrigger: { trigger: headingRef.current, start: "top 85%" },
+        gsap.fromTo(headingRef.current, { y: prefersReduced ? 0 : 16, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out", force3D: true,
+          scrollTrigger: { trigger: headingRef.current, start: "top 88%" },
         });
       }
 
       const rows = section.querySelectorAll(".svc-row");
       rows.forEach((row, i) => {
-        gsap.fromTo(row, { y: 30, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out",
-          delay: i * 0.06,
-          scrollTrigger: { trigger: row, start: "top 90%" },
+        gsap.fromTo(row, { y: prefersReduced ? 0 : 18, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out", force3D: true,
+          delay: Math.min(i, 4) * 0.04,
+          scrollTrigger: { trigger: row, start: "top 92%" },
         });
       });
 
       if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current, { y: 30, autoAlpha: 0 }, {
-          y: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out",
-          scrollTrigger: { trigger: ctaRef.current, start: "top 85%" },
+        gsap.fromTo(ctaRef.current, { y: prefersReduced ? 0 : 16, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out", force3D: true,
+          scrollTrigger: { trigger: ctaRef.current, start: "top 88%" },
         });
       }
     }, section);
