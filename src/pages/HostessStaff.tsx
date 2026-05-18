@@ -38,22 +38,22 @@ const HostessStaff = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-8">
               Servizio Hostess, <span className="text-muted-foreground">Steward e Promoter</span>
             </h1>
-            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/70 mb-6">
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Personale qualificato per eventi aziendali, fiere e feste private a Firenze
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Il volto del tuo evento. Selezioniamo, formiamo e coordiniamo hostess, steward e promoter che rappresentano il tuo brand con professionalità, eleganza e competenza in ogni occasione a Firenze.
             </p>
-            <p className="text-base text-muted-foreground/80 leading-relaxed mb-12 max-w-2xl">
-              Il nostro <strong>servizio hostess e steward a Firenze</strong> è pensato per chi cerca personale altamente qualificato per eventi aziendali, feste private, fiere e brand activation. Ogni membro dello staff è selezionato con cura e formato per garantire un'accoglienza impeccabile. Offriamo anche un <strong>servizio promoter per eventi e VIP</strong> dedicato, con professionisti multilingue pronti a valorizzare il tuo marchio.
+            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+              Il nostro <strong className="text-foreground/95">servizio hostess e steward a Firenze</strong> è pensato per chi cerca personale altamente qualificato per eventi aziendali, feste private, fiere e brand activation. Ogni membro dello staff è selezionato con cura e formato per garantire un'accoglienza impeccabile. Offriamo anche un <strong className="text-foreground/95">servizio promoter per eventi e VIP</strong> dedicato, con professionisti multilingue pronti a valorizzare il tuo marchio.
             </p>
 
-            <h3 className="text-lg font-display font-bold text-foreground/60 mb-6 uppercase tracking-wider">Il nostro servizio di staffing per eventi</h3>
+            <h3 className="text-lg font-display font-bold text-foreground/85 mb-6 uppercase tracking-wider">Il nostro servizio di staffing per eventi</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
               {features.map((f, i) => (
                 <motion.div key={f} className="flex items-center gap-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.08, ease }}>
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground/80">{f}</span>
+                  <span className="text-foreground/95 leading-relaxed">{f}</span>
                 </motion.div>
               ))}
             </div>

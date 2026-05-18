@@ -11,7 +11,7 @@ const TermsConditions = () => (
       </Link>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="text-4xl md:text-5xl font-display font-extrabold tracking-tighter mb-8">Termini e Condizioni</h1>
-        <div className="prose prose-invert max-w-3xl space-y-6 text-muted-foreground leading-relaxed">
+        <div className="prose prose-invert max-w-3xl space-y-6 text-foreground/85 leading-[1.75] text-[15px] md:text-base">
 
           <p className="text-foreground font-medium">Condizioni generali di utilizzo del sito web setupevents.it</p>
 

@@ -38,22 +38,22 @@ const BrandActivation = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-8">
               Brand Activation <span className="text-muted-foreground">a Firenze</span>
             </h1>
-            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/70 mb-6">
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Lancio prodotti, promoter e esperienze immersive per il tuo brand
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Creiamo esperienze immersive che connettono il tuo brand al pubblico. Dall'ideazione alla realizzazione, ogni attivazione è progettata per generare impatto, engagement e ricordi indimenticabili a Firenze e in tutta la Toscana.
             </p>
-            <p className="text-base text-muted-foreground/80 leading-relaxed mb-12 max-w-2xl">
-              Il nostro <strong>servizio promoter per eventi e VIP</strong> garantisce personale selezionato e formato per rappresentare al meglio il tuo marchio. Dalle feste private ai lanci prodotto, dagli allestimenti creativi alle campagne street marketing, SetupEvents trasforma ogni brand activation in un successo misurabile.
+            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+              Il nostro <strong className="text-foreground/95">servizio promoter per eventi e VIP</strong> garantisce personale selezionato e formato per rappresentare al meglio il tuo marchio. Dalle feste private ai lanci prodotto, dagli allestimenti creativi alle campagne street marketing, SetupEvents trasforma ogni brand activation in un successo misurabile.
             </p>
 
-            <h3 className="text-lg font-display font-bold text-foreground/60 mb-6 uppercase tracking-wider">Cosa include il nostro servizio</h3>
+            <h3 className="text-lg font-display font-bold text-foreground/85 mb-6 uppercase tracking-wider">Cosa include il nostro servizio</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
               {features.map((f, i) => (
                 <motion.div key={f} className="flex items-center gap-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.08, ease }}>
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground/80">{f}</span>
+                  <span className="text-foreground/95 leading-relaxed">{f}</span>
                 </motion.div>
               ))}
             </div>
