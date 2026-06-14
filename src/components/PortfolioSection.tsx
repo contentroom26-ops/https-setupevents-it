@@ -28,6 +28,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const caseStudiesData = [
   { image: dieselCard, title: "Diesel", year: "2024" },
   { image: diesel1, title: "Mediolanum", year: "2025" },
+  { image: distretto12Card, title: "Distretto 12", year: "2025" },
 ];
 
 const galleryImages = [
