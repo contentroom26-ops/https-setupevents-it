@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const dieselCard = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
 const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
+const distretto12Card = new URL("@/assets/distretto12-card.jpg", import.meta.url).href;
 const diesel9 = new URL("@/assets/diesel-9.jpg", import.meta.url).href;
 const dieselEvent1 = new URL("@/assets/diesel-event-1.jpg", import.meta.url).href;
 const dieselEvent4 = new URL("@/assets/diesel-event-4.jpg", import.meta.url).href;
