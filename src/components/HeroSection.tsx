@@ -178,7 +178,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ minWidth: "100%", minHeight: "100%", opacity: videoLoaded ? 1 : 0, transition: "opacity 0.7s ease" }}
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
+          <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.4D4028" />
         </video>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none bg-black/45" />
