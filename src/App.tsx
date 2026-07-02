@@ -3,12 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalVideoBackground from "./components/GlobalVideoBackground";
 
-// Lazy load secondary pages
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
@@ -32,7 +31,18 @@ const PageLoader = () => (
 
 const ConditionalGlobalVideoBackground = () => {
   const { pathname } = useLocation();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    // Sulla home aspetta che la hero intro sia finita (3.2s) prima di
+    // montare il video globale, evitando competizione per bandwidth
+    const delay = pathname === "/" ? 3500 : 0;
+    const t = setTimeout(() => setReady(true), delay);
+    return () => clearTimeout(t);
+  }, [pathname]);
+
   if (pathname.startsWith("/contatti")) return null;
+  if (!ready) return null;
   return <GlobalVideoBackground />;
 };
 
