@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useEffect } from "react";
+import serviceImage from "@/assets/service-pr.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
