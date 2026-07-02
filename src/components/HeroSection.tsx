@@ -1,8 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Pause, Play, ArrowRight } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import logoSplash from "@/assets/logo-splash.png";
 
 // Immagine hero in public/ per abilitare il preload in index.html
@@ -13,7 +12,6 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -224,23 +222,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       >
 
 
-        <motion.div
-          className="mt-6 md:mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          <motion.button
-            onClick={() => navigate("/contatti")}
-            className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white font-semibold text-sm tracking-wide shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/15 hover:border-white/30 transition-all duration-400"
-            style={{ WebkitBackdropFilter: "blur(12px)" }}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {t("hero.cta")}
-            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
-          </motion.button>
-        </motion.div>
       </motion.div>
 
       {/* Bottom scroll indicator */}
