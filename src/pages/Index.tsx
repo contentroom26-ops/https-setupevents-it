@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import SideAccent from "@/components/SideAccent";
 import SectionReveal from "@/components/SectionReveal";
 
 
