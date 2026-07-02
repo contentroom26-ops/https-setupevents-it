@@ -6,6 +6,9 @@ import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useEffect } from "react";
+import serviceImage from "@/assets/service-corporate.jpg";
+
+
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -33,6 +36,7 @@ const CorporateEvents = () => {
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-12 text-sm uppercase tracking-widest">
             <ArrowLeft className="w-4 h-4" /> Home
           </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 lg:gap-16 items-start">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="max-w-4xl">
             <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 block">Servizio</span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-8">
