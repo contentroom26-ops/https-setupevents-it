@@ -70,7 +70,6 @@ const Index = () => {
         }}
       >
         <Navbar />
-        <SideAccent />
       </div>
 
       <HeroSection onIntroComplete={handleIntroComplete} />
