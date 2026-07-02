@@ -95,7 +95,7 @@ const ContactPageContent = ({
       )}
 
       {/* Two columns */}
-      <div className="relative z-10 container-custom px-6 pb-24 md:pb-32">
+      <div className="relative z-10 container-custom px-6 pb-10 md:pb-14">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8 max-w-6xl mx-auto">
           {/* LEFT — info card */}
           <motion.div
