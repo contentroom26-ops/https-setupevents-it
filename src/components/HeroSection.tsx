@@ -222,27 +222,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         className="relative z-10 container-custom px-6 pb-20 md:pb-24 flex flex-col items-center text-center"
         style={{ y: contentY }}
       >
-        <motion.h1
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[1.05] max-w-3xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 40 }}
-          transition={{ duration: 1, delay: 0.5, ease }}
-        >
-          <span className="relative inline-block overflow-hidden" style={{ height: "1.15em" }}>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={serviceIndex}
-                className="inline-block text-primary"
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                exit={{ y: "-100%", opacity: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {services[serviceIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-        </motion.h1>
 
         <motion.p
           className="mt-3 md:mt-5 text-xs sm:text-sm md:text-base text-white/50 font-medium tracking-wide max-w-lg"
