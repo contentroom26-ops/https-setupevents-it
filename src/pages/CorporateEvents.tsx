@@ -45,10 +45,10 @@ const CorporateEvents = () => {
             <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Convention, meeting e team building con allestimenti professionali
             </h2>
-            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Trasformiamo ogni appuntamento aziendale in un'esperienza che rafforza il brand, motiva il team e lascia un'impressione duratura. Dalla convention per 500 persone alla cena esclusiva per il board, ogni evento aziendale a Firenze è curato nei minimi dettagli.
             </p>
-            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
               Il nostro servizio di <strong className="text-foreground/95">organizzazione eventi aziendali a Firenze</strong> include la gestione completa: scouting location, allestimenti eventi personalizzati, servizio hostess e steward professionali, catering e produzione audio-video. Che si tratti di feste private aziendali o grandi convention, garantiamo un risultato impeccabile.
             </p>
 

@@ -43,10 +43,10 @@ const EventProductions = () => {
             <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Scenografia, set design e produzione audio-video a Firenze
             </h2>
-            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Dalla visione al palcoscenico. Gestiamo ogni aspetto della produzione e degli allestimenti del tuo evento a Firenze: scenografia, tecnologia, logistica e coordinamento per un risultato impeccabile.
             </p>
-            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
               I nostri <strong className="text-foreground/95">allestimenti eventi a Firenze</strong> sono progettati su misura per eventi aziendali, feste private, brand activation e produzioni VIP. Ogni dettaglio — dal set design all'illuminazione, dall'audio professionale al video mapping — è curato dal nostro team con il supporto di hostess e steward dedicati alla gestione on-site.
             </p>
 

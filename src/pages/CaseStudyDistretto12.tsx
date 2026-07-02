@@ -41,10 +41,10 @@ const CaseStudyDistretto12 = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-6">
                 Distretto 12 <span className="text-muted-foreground">Private Club</span>
               </h1>
-              <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6">
+              <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6">
                 Format esclusivo a Firenze: direzione artistica, PR strategiche, selezione ospiti VIP e regia tecnica per serate con un'identità riconoscibile e un'atmosfera unica.
               </p>
-              <p className="text-base text-foreground/75 leading-[1.75] mb-8">
+              <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-8">
                 Un progetto continuativo di nightlife & hospitality dove ogni serata è concepita come un'esperienza immersiva, curata dal concept alla produzione on-site.
               </p>
 
