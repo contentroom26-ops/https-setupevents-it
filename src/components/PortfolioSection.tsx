@@ -144,7 +144,7 @@ const PortfolioSection = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8" style={{ perspective: '800px' }}>
             {caseStudiesData.map((_, i) => (
-              <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
+              <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] w-2/3 mx-auto" style={{ transform: 'rotateX(2deg)' }}>
                 <FlipCard index={i} />
               </div>
             ))}
