@@ -77,7 +77,7 @@ const ContactPageContent = ({
       {/* Header */}
       {showHeader && (
         <motion.div
-          className="relative z-10 text-center max-w-3xl mx-auto px-6 pt-32 md:pt-40 pb-12 md:pb-16"
+          className="relative z-10 text-center max-w-3xl mx-auto px-6 pt-32 md:pt-40 pb-6 md:pb-10"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
@@ -95,7 +95,7 @@ const ContactPageContent = ({
       )}
 
       {/* Two columns */}
-      <div className="relative z-10 container-custom px-6 pb-10 md:pb-14">
+      <div className="relative z-10 container-custom px-6 pb-4 md:pb-6">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8 max-w-6xl mx-auto">
           {/* LEFT — info card */}
           <motion.div
