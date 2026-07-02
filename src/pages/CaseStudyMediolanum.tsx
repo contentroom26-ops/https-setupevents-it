@@ -41,10 +41,10 @@ const CaseStudyMediolanum = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-6">
                 Banca Mediolanum <span className="text-muted-foreground">Convention</span>
               </h1>
-              <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6">
+              <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6">
                 Convention aziendale per 120 invitati con gestione end-to-end: dalla scelta della location all'allestimento scenografico, fino alla produzione audio-video e al live streaming.
               </p>
-              <p className="text-base text-foreground/75 leading-[1.75] mb-8">
+              <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-8">
                 Un evento corporate curato per trasmettere i valori del brand attraverso un'esperienza professionale, fluida e memorabile per gli invitati.
               </p>
 

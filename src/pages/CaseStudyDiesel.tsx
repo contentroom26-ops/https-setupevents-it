@@ -45,10 +45,10 @@ const CaseStudyDiesel = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-6">
                 Diesel <span className="text-muted-foreground">Fashion Night</span>
               </h1>
-              <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6">
+              <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6">
                 Evento esclusivo nello store Diesel di Firenze: una serata di brand activation curata in ogni dettaglio, con selezione ospiti, hostess professionali e service audio-video dedicato.
               </p>
-              <p className="text-base text-foreground/75 leading-[1.75] mb-8">
+              <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-8">
                 Ci siamo occupati dell'intera regia dell'evento — dalla comunicazione con la stampa alla gestione degli invitati — trasformando lo store in un palcoscenico immersivo per il brand.
               </p>
 
