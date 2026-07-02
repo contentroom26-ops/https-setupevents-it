@@ -223,14 +223,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         style={{ y: contentY }}
       >
 
-        <motion.p
-          className="mt-3 md:mt-5 text-xs sm:text-sm md:text-base text-white/50 font-medium tracking-wide max-w-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-        >
-          {t("hero.subheadline")}
-        </motion.p>
 
         <motion.div
           className="mt-6 md:mt-8"
