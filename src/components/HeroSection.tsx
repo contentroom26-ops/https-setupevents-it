@@ -3,11 +3,12 @@ import { Pause, Play, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
 import logoSplash from "@/assets/logo-splash.png";
 
-const ROTATE_INTERVAL = 2800;
+// Immagine hero in public/ per abilitare il preload in index.html
+const heroBg = "/images/hero-bg.jpg";
 
+const ROTATE_INTERVAL = 2800;
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
@@ -165,30 +166,50 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         )}
       </AnimatePresence>
 
-      {/* Video background (always mounted for preloading) */}
+      {/* Immagine di sfondo — sempre visibile come base, il video si sovrappone */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-        style={{ backgroundImage: `url(${heroBg})`, opacity: videoLoaded ? 0 : 1 }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBg})` }}
       />
+
+      {/* Video background */}
       <motion.div className="absolute inset-0" style={{ scale: videoScale, willChange: "transform" }}>
         <video
-          ref={videoRef} loop muted playsInline
+          ref={videoRef}
+          loop
+          muted
+          playsInline
           // @ts-ignore
-          webkit-playsinline="" preload="auto" poster={heroBg}
+          webkit-playsinline=""
+          preload="metadata"
+          poster={heroBg}
           className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ minWidth: "100%", minHeight: "100%", opacity: videoLoaded ? 1 : 0, transition: "opacity 0.7s ease" }}
+          style={{
+            minWidth: "100%",
+            minHeight: "100%",
+            opacity: videoLoaded ? 1 : 0,
+            transition: "opacity 0.7s ease",
+          }}
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4; codecs=avc1.4D4028" />
+          {/* Senza codec hint: più compatibile con Safari */}
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }} />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }}
+        />
         <div className="absolute inset-0 pointer-events-none bg-black/45" />
-        <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: overlayOpacity, background: "hsl(var(--background))" }} />
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: overlayOpacity, background: "hsl(var(--background))" }}
+        />
       </motion.div>
 
       {/* Top bar */}
       <motion.div
         className="relative z-10 flex justify-between items-center container-custom pt-20 md:pt-28"
-        initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 1, delay: 0.3 }}
       >
         <span className="text-[8px] md:text-[10px] text-white/25 font-mono tracking-wider hidden sm:inline">
@@ -264,7 +285,8 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         <div className="flex justify-center">
           <motion.div
             className="flex items-center gap-3 cursor-pointer group"
-            initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showContent ? 1 : 0 }}
             transition={{ delay: 1.6 }}
             onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
           >
@@ -279,7 +301,8 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       {/* Side dots */}
       <motion.div
         className="absolute right-6 md:right-10 lg:right-14 top-1/2 -translate-y-1/2 z-10 flex-col items-center gap-3.5 hidden md:flex"
-        initial={{ opacity: 0 }} animate={{ opacity: showContent ? 1 : 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ delay: 1.3 }}
       >
         <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary)/0.4)]" />
