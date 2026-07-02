@@ -43,10 +43,10 @@ const HostessStaff = () => {
             <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Personale qualificato per eventi aziendali, fiere e feste private a Firenze
             </h2>
-            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Il volto del tuo evento. Selezioniamo, formiamo e coordiniamo hostess, steward e promoter che rappresentano il tuo brand con professionalità, eleganza e competenza in ogni occasione a Firenze.
             </p>
-            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
               Il nostro <strong className="text-foreground/95">servizio hostess e steward a Firenze</strong> è pensato per chi cerca personale altamente qualificato per eventi aziendali, feste private, fiere e brand activation. Ogni membro dello staff è selezionato con cura e formato per garantire un'accoglienza impeccabile. Offriamo anche un <strong className="text-foreground/95">servizio promoter per eventi e VIP</strong> dedicato, con professionisti multilingue pronti a valorizzare il tuo marchio.
             </p>
 

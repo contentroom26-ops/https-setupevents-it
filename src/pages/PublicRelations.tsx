@@ -43,10 +43,10 @@ const PublicRelations = () => {
             <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">
               Networking, guest management VIP e comunicazione strategica a Firenze
             </h2>
-            <p className="text-lg md:text-xl text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6 max-w-2xl">
               Costruiamo relazioni che contano. Dalla gestione dei contatti stampa al networking strategico, posizioniamo il tuo brand davanti alle persone giuste, al momento giusto, nei migliori eventi a Firenze.
             </p>
-            <p className="text-base md:text-[17px] text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
+            <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-12 max-w-2xl">
               Le nostre <strong className="text-foreground/95">PR per eventi a Firenze</strong> coprono ogni aspetto della comunicazione: dall'organizzazione di eventi aziendali con guest list selezionate, alla gestione delle relazioni con media e influencer per brand activation e feste private esclusive. Il nostro team garantisce un servizio di hospitality VIP con hostess e steward professionali.
             </p>
 
