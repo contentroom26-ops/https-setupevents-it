@@ -8,7 +8,7 @@ import logoSplash from "@/assets/logo-splash.png";
 // Immagine hero in public/ per abilitare il preload in index.html
 const heroBg = "/images/hero-bg.jpg";
 
-const ROTATE_INTERVAL = 2800;
+
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
@@ -20,9 +20,9 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
-  const [serviceIndex, setServiceIndex] = useState(0);
+  
 
-  const services = t("hero.headlineServices", { returnObjects: true }) as string[];
+  
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
@@ -66,14 +66,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     };
   }, [tryPlayVideo, onIntroComplete]);
 
-  // Rotate services text
-  useEffect(() => {
-    if (!showContent || !services.length) return;
-    const interval = setInterval(() => {
-      setServiceIndex((prev) => (prev + 1) % services.length);
-    }, ROTATE_INTERVAL);
-    return () => clearInterval(interval);
-  }, [showContent, services.length]);
 
   useEffect(() => {
     const video = videoRef.current;
