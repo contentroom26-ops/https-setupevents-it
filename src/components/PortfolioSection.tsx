@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import FloatingElements from "./FloatingElements";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,9 +27,9 @@ const dieselEvent15 = new URL("@/assets/diesel-event-15.jpg", import.meta.url).h
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const caseStudiesData = [
-  { image: dieselCard, title: "Diesel", year: "2024" },
-  { image: diesel1, title: "Mediolanum", year: "2025" },
-  { image: distretto12Card, title: "Distretto 12", year: "2025" },
+  { image: dieselCard, title: "Diesel", year: "2024", href: "/case-study/diesel" },
+  { image: diesel1, title: "Mediolanum", year: "2025", href: "/case-study/mediolanum" },
+  { image: distretto12Card, title: "Distretto 12", year: "2025", href: "/case-study/distretto-12" },
 ];
 
 const galleryImages = [
@@ -48,6 +49,7 @@ const FlipCard = ({ index }: { index: number }) => {
 
   return (
     <motion.div className="relative w-full cursor-pointer" style={{ perspective: 1200 }} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15, ease }} onMouseEnter={() => setFlipped(true)} onMouseLeave={() => setFlipped(false)}>
+      <Link to={study.href} aria-label={`${study.title} — ${category}`} className="block">
       <motion.div className="relative w-full aspect-[4/5] md:aspect-[3/4]" animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }} style={{ transformStyle: "preserve-3d" }}>
         <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ backfaceVisibility: "hidden" }}>
           <img src={study.image} alt={`${study.title} - ${category}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
@@ -66,6 +68,7 @@ const FlipCard = ({ index }: { index: number }) => {
           <p className="text-[13px] md:text-base text-white/85 leading-relaxed">{description}</p>
         </div>
       </motion.div>
+      </Link>
     </motion.div>
   );
 };
