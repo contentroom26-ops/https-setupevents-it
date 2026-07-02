@@ -6,7 +6,6 @@ import SectionReveal from "@/components/SectionReveal";
 
 
 const StorySection = lazy(() => import("@/components/StorySection"));
-const Marquee = lazy(() => import("@/components/Marquee"));
 const ServicesSection = lazy(() => import("@/components/ServicesSection"));
 const PortfolioSection = lazy(() => import("@/components/PortfolioSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
