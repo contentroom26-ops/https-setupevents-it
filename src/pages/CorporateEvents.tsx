@@ -66,6 +66,13 @@ const CorporateEvents = () => {
               Richiedi un preventivo gratuito
             </a>
           </motion.div>
+            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease }} className="lg:sticky lg:top-32">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] border border-white/[0.06]">
+                <img src={serviceImage} alt="Eventi aziendali a Firenze" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
       <div id="contact-form">
