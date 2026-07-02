@@ -86,8 +86,6 @@ const Index = () => {
             <StorySection />
           </SectionReveal>
 
-          <Marquee />
-
           {/* Services — zoom in */}
           <SectionReveal variant="zoom">
             <ServicesSection />
