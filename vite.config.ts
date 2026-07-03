@@ -42,6 +42,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "script-defer", // ← ritarda registrazione SW
       devOptions: { enabled: false },
       workbox: {
         navigateFallbackDenylist: [/^\/~oauth/],
