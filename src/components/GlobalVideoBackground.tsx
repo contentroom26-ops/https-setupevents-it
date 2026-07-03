@@ -5,53 +5,46 @@ const GlobalVideoBackground = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
     let cancelled = false;
 
+    // Attributi Safari — impostati subito prima del play
+    video.muted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
     const tryPlay = () => {
-      const video = videoRef.current;
-      if (!video || cancelled) return;
-
-      // Forza attributi Safari
-      video.muted = true;
-      video.setAttribute("playsinline", "");
-      video.setAttribute("webkit-playsinline", "");
-
-      // Su Safari il load() esplicito è necessario dopo preload="none"
-      video.load();
-
-      const attempt = () => {
-        if (cancelled) return;
-        video
-          .play()
-          .then(() => {
-            if (!cancelled) setVisible(true);
-          })
-          .catch(() => {
-            // Safari può rifiutare il primo tentativo — riprova dopo 300ms
-            setTimeout(() => {
-              if (!cancelled) {
-                video.play().then(() => {
-                  if (!cancelled) setVisible(true);
-                }).catch(() => {});
-              }
-            }, 300);
-          });
-      };
-
-      if (video.readyState >= 2) {
-        attempt();
-      } else {
-        video.addEventListener("canplay", attempt, { once: true });
-      }
+      if (cancelled) return;
+      video
+        .play()
+        .then(() => {
+          if (!cancelled) setVisible(true);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            if (!cancelled) {
+              video.play()
+                .then(() => { if (!cancelled) setVisible(true); })
+                .catch(() => {});
+            }
+          }, 500);
+        });
     };
 
-    // Aspetta che la hero sia finita (3.5s) poi avvia il video
-    // Usa setTimeout puro — requestIdleCallback non è supportato su Safari
-    const t = setTimeout(tryPlay, 3500);
+    // Inizia a caricare subito — durante l'intro logo
+    video.load();
+
+    if (video.readyState >= 2) {
+      tryPlay();
+    } else {
+      video.addEventListener("canplay", tryPlay, { once: true });
+    }
 
     return () => {
       cancelled = true;
-      clearTimeout(t);
+      video.removeEventListener("canplay", tryPlay);
     };
   }, []);
 
@@ -69,7 +62,6 @@ const GlobalVideoBackground = () => {
         pointerEvents: "none",
       }}
     >
-      {/* Il video è sempre nel DOM — Safari lo inizializza prima */}
       <video
         ref={videoRef}
         loop
@@ -77,7 +69,7 @@ const GlobalVideoBackground = () => {
         playsInline
         // @ts-ignore
         webkit-playsinline=""
-        preload="metadata"
+        preload="auto"
         style={{
           width: "100%",
           height: "100%",
@@ -89,7 +81,6 @@ const GlobalVideoBackground = () => {
         <source src="/videos/global-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay scuro sempre visibile — copre il grigio durante il caricamento */}
       <div
         style={{
           position: "absolute",
