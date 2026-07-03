@@ -4,36 +4,55 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    hmr: {
-      overlay: false,
+    hmr: { overlay: false },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-i18n": ["i18next", "react-i18next"],
+          "vendor-ui": ["lucide-react", "@radix-ui/react-tooltip"],
+        },
+      },
     },
+    chunkSizeWarningLimit: 600,
   },
   plugins: [
     react(),
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
-      devOptions: {
-        enabled: false,
-      },
+      devOptions: { enabled: false },
       workbox: {
         navigateFallbackDenylist: [/^\/~oauth/],
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff,woff2}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,woff2}"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         runtimeCaching: [
           {
-            urlPattern: /\.(?:jpg|jpeg)$/,
+            urlPattern: /\.(?:jpg|jpeg|webp|png)$/,
             handler: "CacheFirst",
             options: {
               cacheName: "images",
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+            },
+          },
+          {
+            urlPattern: /\.(?:mp4)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "videos",
+              expiration: {
+                maxEntries: 5,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
               },
             },
           },
@@ -49,29 +68,14 @@ export default defineConfig(({ mode }) => ({
         scope: "/",
         start_url: "/?source=pwa",
         icons: [
-          {
-            src: "/favicon.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/apple-touch-icon.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-          {
-            src: "/apple-touch-icon.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "maskable",
-          },
+          { src: "/favicon.png", sizes: "192x192", type: "image/png" },
+          { src: "/apple-touch-icon.png", sizes: "512x512", type: "image/png" },
+          { src: "/apple-touch-icon.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
     }),
   ].filter(Boolean),
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: { "@": path.resolve(__dirname, "./src") },
   },
 }));
