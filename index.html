@@ -25,6 +25,9 @@
     <link rel="preload" as="image" href="/images/hero-bg.jpg" fetchpriority="high" />
     <link rel="preload" as="video" href="/videos/hero-bg.mp4" media="(min-width: 768px)" fetchpriority="high" />
 
+    <!-- Preload logo splash: è l'elemento LCP, deve arrivare il prima possibile -->
+    <link rel="preload" as="image" href="/images/logo-splash.png" fetchpriority="high" />
+
     <title>Organizzazione Eventi Aziendali a Firenze | SetupEvents</title>
     <meta name="description" content="Organizziamo eventi aziendali a Firenze e in Toscana: convention, lanci di prodotto, eventi corporate e allestimenti su misura. Preventivo gratuito.">
     <meta name="author" content="SetupEvents" />
@@ -103,8 +106,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Iubenda caricato dinamicamente dopo che la pagina è interattiva -->
-    <!-- NON mettere lo script Iubenda direttamente qui -->
   </body>
 </html>
