@@ -7,6 +7,7 @@ import { lazy, Suspense, useState, useEffect } from "react";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalVideoBackground from "./components/GlobalVideoBackground";
+import IubendaLoader from "./components/IubendaLoader";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -20,9 +21,6 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const Contatti = lazy(() => import("./pages/Contatti"));
 const PrenotaCall = lazy(() => import("./pages/PrenotaCall"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
-const CaseStudyDiesel = lazy(() => import("./pages/CaseStudyDiesel"));
-const CaseStudyMediolanum = lazy(() => import("./pages/CaseStudyMediolanum"));
-const CaseStudyDistretto12 = lazy(() => import("./pages/CaseStudyDistretto12"));
 
 const queryClient = new QueryClient();
 
@@ -37,8 +35,6 @@ const ConditionalGlobalVideoBackground = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Sulla home aspetta che la hero intro sia finita (3.2s) prima di
-    // montare il video globale, evitando competizione per bandwidth
     const delay = pathname === "/" ? 3500 : 0;
     const t = setTimeout(() => setReady(true), delay);
     return () => clearTimeout(t);
@@ -55,6 +51,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <IubendaLoader />
         <ConditionalGlobalVideoBackground />
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
@@ -71,9 +68,6 @@ const App = () => (
             <Route path="/contatti" element={<Contatti />} />
             <Route path="/prenota-call" element={<PrenotaCall />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
-            <Route path="/case-study/diesel" element={<CaseStudyDiesel />} />
-            <Route path="/case-study/mediolanum" element={<CaseStudyMediolanum />} />
-            <Route path="/case-study/distretto-12" element={<CaseStudyDistretto12 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
