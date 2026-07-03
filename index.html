@@ -9,7 +9,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <!-- Font: preconnect + caricamento asincrono non bloccante -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -37,34 +36,26 @@
     <link rel="alternate" hreflang="zh" href="https://www.setupevents.it/?lang=zh" />
     <link rel="alternate" hreflang="x-default" href="https://www.setupevents.it/" />
 
-    <!-- Open Graph / Social Preview -->
     <meta property="og:url" content="https://www.setupevents.it/" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/6WpsBwRi59XDieWDYrWV5zqQkhq2/social-images/social-1775225375579-SETUP_EVENTS.webp">
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content="SetupEvents" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/6WpsBwRi59XDieWDYrWV5zqQkhq2/social-images/social-1775225375579-SETUP_EVENTS.webp">
 
-    <!-- Local SEO GEO Tags -->
     <meta name="geo.region" content="IT-FI" />
     <meta name="geo.placename" content="Firenze" />
     <meta name="geo.position" content="43.7696;11.2558" />
     <meta name="ICBM" content="43.7696, 11.2558" />
 
-    <!-- Structured Data: LocalBusiness + EventPlanning -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "additionalType": "https://schema.org/EventPlanning",
       "name": "SetupEvents",
-      "founder": {
-        "@type": "Person",
-        "name": "Gabriel Lleshi"
-      },
+      "founder": { "@type": "Person", "name": "Gabriel Lleshi" },
       "url": "https://www.setupevents.it",
       "description": "Agenzia specializzata in organizzazione eventi a Firenze: eventi aziendali, feste private, allestimenti scenografici, servizio hostess e steward, promoter per eventi e VIP.",
       "address": {
@@ -74,11 +65,7 @@
         "postalCode": "50100",
         "addressCountry": "IT"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 43.7696,
-        "longitude": 11.2558
-      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 43.7696, "longitude": 11.2558 },
       "areaServed": [
         { "@type": "City", "name": "Firenze" },
         { "@type": "State", "name": "Toscana" }
@@ -116,6 +103,8 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript" src="https://embeds.iubenda.com/widgets/6aa1c7bc-8de3-4188-9ea6-70b12bfa000a.js" async></script>
+
+    <!-- Iubenda caricato dinamicamente dopo che la pagina è interattiva -->
+    <!-- NON mettere lo script Iubenda direttamente qui -->
   </body>
 </html>
