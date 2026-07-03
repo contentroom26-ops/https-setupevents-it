@@ -11,13 +11,33 @@ export default defineConfig(({ mode }) => ({
     hmr: { overlay: false },
   },
   build: {
+    cssCodeSplit: false, // Un solo file CSS — evita waterfall di più file CSS
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom", "react-router-dom"],
-          "vendor-motion": ["framer-motion"],
-          "vendor-i18n": ["i18next", "react-i18next"],
-          "vendor-ui": ["lucide-react", "@radix-ui/react-tooltip"],
+        manualChunks(id) {
+          // Three.js e GSAP — isolati così possiamo lazy-loadarli
+          if (id.includes("three") || id.includes("@react-three")) {
+            return "vendor-three";
+          }
+          if (id.includes("gsap")) {
+            return "vendor-gsap";
+          }
+          // Framer motion
+          if (id.includes("framer-motion")) {
+            return "vendor-motion";
+          }
+          // i18n
+          if (id.includes("i18next") || id.includes("react-i18next")) {
+            return "vendor-i18n";
+          }
+          // Radix UI — solo componenti usati
+          if (id.includes("@radix-ui")) {
+            return "vendor-ui";
+          }
+          // React core
+          if (id.includes("react-dom") || id.includes("react-router")) {
+            return "vendor-react";
+          }
         },
       },
     },
