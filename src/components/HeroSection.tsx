@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Pause, Play } from "lucide-react";
+
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import logoSplash from "@/assets/logo-splash.png";
@@ -14,7 +14,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
@@ -31,13 +31,13 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     video.setAttribute("webkit-playsinline", "");
     const p = video.play();
     if (p) {
-      p.then(() => setIsPlaying(true)).catch(() => {
+      p.catch(() => {
         setTimeout(() => {
-          video.play().then(() => setIsPlaying(true)).catch(() => {});
+          video.play().catch(() => {});
         }, 300);
       });
     } else {
-      setIsPlaying(true);
+      
     }
   }, []);
 
@@ -77,13 +77,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     }
   }, []);
 
-  const toggleVideo = () => {
-    if (videoRef.current) {
-      if (isPlaying) videoRef.current.pause();
-      else videoRef.current.play();
-      setIsPlaying(!isPlaying);
-    }
-  };
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
@@ -205,13 +198,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         <span className="text-[8px] md:text-[10px] text-white/25 font-mono tracking-wider hidden sm:inline">
           {t("hero.agency")}
         </span>
-        <motion.button
-          onClick={toggleVideo}
-          className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/40 hover:text-white hover:border-white/25 hover:bg-white/10 transition-all duration-300"
-          whileTap={{ scale: 0.9 }}
-        >
-          {isPlaying ? <Pause size={11} /> : <Play size={11} />}
-        </motion.button>
       </motion.div>
 
       {/* Content — centered */}
