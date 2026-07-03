@@ -6,14 +6,15 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import serviceCorporate from "@/assets/service-corporate.jpg";
-import serviceBrand from "@/assets/service-brand.jpg";
-import serviceHostess from "@/assets/service-hostess.jpg";
-import servicePR from "@/assets/service-pr.jpg";
-import serviceProduction from "@/assets/service-production.jpg";
-import serviceAV from "@/assets/service-av.jpg";
-
 gsap.registerPlugin(ScrollTrigger);
+
+// Lazy URL references — non finiscono nel bundle JS critico
+const serviceCorporate = new URL("@/assets/service-corporate.webp", import.meta.url).href;
+const serviceBrand = new URL("@/assets/service-brand.webp", import.meta.url).href;
+const serviceHostess = new URL("@/assets/service-hostess.webp", import.meta.url).href;
+const servicePR = new URL("@/assets/service-pr.webp", import.meta.url).href;
+const serviceProduction = new URL("@/assets/service-production.webp", import.meta.url).href;
+const serviceAV = new URL("@/assets/service-av.webp", import.meta.url).href;
 
 const SERVICE_IMAGES = [serviceCorporate, serviceBrand, serviceHostess, servicePR, serviceProduction, serviceAV];
 const SERVICE_LINKS = ["/corporate-events", "/brand-activation", "/hostess-staff", "/public-relations", "/event-productions", "/event-productions"];
@@ -37,23 +38,19 @@ const ServiceRow = ({
         onMouseLeave={() => setHovered(false)}
       >
         <div className="container-custom flex items-center gap-4 sm:gap-6 md:gap-10">
-          {/* Number */}
           <span className="text-[11px] font-mono text-white/45 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
           </span>
 
-          {/* Title — big & bold */}
           <div className="flex-1 min-w-0">
             <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] transition-colors duration-300 group-hover:text-white [text-rendering:optimizeLegibility] [-webkit-font-smoothing:antialiased] [transform:translateZ(0)]">
               {title}
             </h3>
-            {/* Description — appears on hover (desktop) / always visible (mobile) */}
             <p className="text-xs md:text-sm text-white/80 mt-2 max-w-md md:max-h-0 md:opacity-0 md:group-hover:max-h-20 md:group-hover:opacity-100 transition-all duration-500 overflow-hidden leading-relaxed">
               {description}
             </p>
           </div>
 
-          {/* Image peek on hover — desktop only */}
           <div className="hidden md:block relative w-32 lg:w-44 h-20 lg:h-28 flex-shrink-0 overflow-hidden rounded-lg">
             <img
               src={image}
@@ -67,7 +64,6 @@ const ServiceRow = ({
             <div className="absolute inset-0 bg-white/[0.03] border border-white/[0.06] rounded-lg group-hover:opacity-0 transition-opacity duration-500" />
           </div>
 
-          {/* Arrow */}
           <div className="flex-shrink-0">
             <ArrowRight className="w-5 h-5 text-white/15 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />
           </div>
@@ -127,7 +123,6 @@ const ServicesSection = () => {
     >
       <h2 className="sr-only">{t("services.seoHeading")}</h2>
 
-      {/* Section header */}
       <div ref={headingRef} className="container-custom mb-8 sm:mb-10 md:mb-16" style={{ visibility: "hidden" }}>
         <div className="flex items-center gap-3 mb-4">
           <span className="text-[10px] font-mono text-white/45">[02]</span>
@@ -139,7 +134,6 @@ const ServicesSection = () => {
         </h3>
       </div>
 
-      {/* Service list */}
       <div className="border-t border-white/[0.06]">
         {Array.from({ length: 6 }).map((_, i) => (
           <ServiceRow
@@ -154,7 +148,6 @@ const ServicesSection = () => {
         ))}
       </div>
 
-      {/* CTA */}
       <div ref={ctaRef} className="container-custom mt-14 sm:mt-20 md:mt-28 text-center" style={{ visibility: "hidden" }}>
         <div className="max-w-2xl mx-auto">
           <h3 className="text-2xl md:text-4xl font-display font-extrabold tracking-tight text-white mb-4 leading-tight">
