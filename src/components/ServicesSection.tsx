@@ -9,12 +9,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Lazy URL references — non finiscono nel bundle JS critico
-const serviceCorporate = new URL("@/assets/service-corporate.webp", import.meta.url).href;
-const serviceBrand = new URL("@/assets/service-brand.webp", import.meta.url).href;
-const serviceHostess = new URL("@/assets/service-hostess.webp", import.meta.url).href;
-const servicePR = new URL("@/assets/service-pr.webp", import.meta.url).href;
-const serviceProduction = new URL("@/assets/service-production.webp", import.meta.url).href;
-const serviceAV = new URL("@/assets/service-av.webp", import.meta.url).href;
+// Temporaneo — tieni .jpg finché non converti in WebP
+const serviceCorporate = new URL("@/assets/service-corporate.jpg", import.meta.url).href;
+const serviceBrand = new URL("@/assets/service-brand.jpg", import.meta.url).href;
+const serviceHostess = new URL("@/assets/service-hostess.jpg", import.meta.url).href;
+const servicePR = new URL("@/assets/service-pr.jpg", import.meta.url).href;
+const serviceProduction = new URL("@/assets/service-production.jpg", import.meta.url).href;
+const serviceAV = new URL("@/assets/service-av.jpg", import.meta.url).href;
 
 const SERVICE_IMAGES = [serviceCorporate, serviceBrand, serviceHostess, servicePR, serviceProduction, serviceAV];
 const SERVICE_LINKS = ["/corporate-events", "/brand-activation", "/hostess-staff", "/public-relations", "/event-productions", "/event-productions"];
