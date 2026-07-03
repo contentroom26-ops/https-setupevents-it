@@ -11,31 +11,24 @@ export default defineConfig(({ mode }) => ({
     hmr: { overlay: false },
   },
   build: {
-    // cssCodeSplit rimosso — lascia Vite gestire il CSS automaticamente
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Three.js — isolato, non serve sulla home
           if (id.includes("three") || id.includes("@react-three")) {
             return "vendor-three";
           }
-          // GSAP — lazy, serve solo quando l'utente scrolla
           if (id.includes("gsap")) {
             return "vendor-gsap";
           }
-          // Framer motion
           if (id.includes("framer-motion")) {
             return "vendor-motion";
           }
-          // i18n — separato dal bundle principale
           if (id.includes("i18next") || id.includes("react-i18next")) {
             return "vendor-i18n";
           }
-          // Radix UI
           if (id.includes("@radix-ui")) {
             return "vendor-ui";
           }
-          // React core — primo chunk caricato
           if (id.includes("react-dom") || id.includes("react-router")) {
             return "vendor-react";
           }
@@ -60,7 +53,10 @@ export default defineConfig(({ mode }) => ({
             handler: "CacheFirst",
             options: {
               cacheName: "images",
-              expiration: { maxEntries: 50, maxAgeSeconds: 30 * 24 * 60 * 60 },
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
             },
           },
           {
@@ -68,7 +64,10 @@ export default defineConfig(({ mode }) => ({
             handler: "CacheFirst",
             options: {
               cacheName: "videos",
-              expiration: { maxEntries: 5, maxAgeSeconds: 7 * 24 * 60 * 60 },
+              expiration: {
+                maxEntries: 5,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
+              },
             },
           },
         ],
