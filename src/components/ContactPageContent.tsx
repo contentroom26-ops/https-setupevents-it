@@ -114,8 +114,8 @@ const ContactPageContent = ({
             style={{
               background: "rgba(20,20,20,0.55)",
               border: "1px solid rgba(255,255,255,0.06)",
-              backdropFilter: "blur(14px)",
-              WebkitBackdropFilter: "blur(14px)",
+              backdropFilter: "blur(28px)",
+              WebkitBackdropFilter: "blur(28px)",
             }}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
