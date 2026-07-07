@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Instagram, Linkedin, ArrowRight, Loader2, Calendar
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import contactSide from "@/assets/contact-side.png.asset.json";
 
 
 const ease = [0.22, 1, 0.36, 1] as const;
