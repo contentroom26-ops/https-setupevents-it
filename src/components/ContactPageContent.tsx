@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Instagram, Linkedin, ArrowRight, Loader2, Calendar
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import contactBg from "@/assets/contact-bg.jpg";
+
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -75,16 +75,6 @@ const ContactPageContent = ({
 
   return (
     <>
-      {/* Background image */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
-        <img
-          src={contactBg}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover opacity-30"
-        />
-      </div>
       {/* Header */}
       {showHeader && (
         <motion.div
