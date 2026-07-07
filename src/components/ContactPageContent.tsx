@@ -84,13 +84,6 @@ const ContactPageContent = ({
           decoding="async"
           className="w-full h-full object-cover opacity-30"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.75) 30%, hsl(var(--background) / 0.75) 70%, hsl(var(--background)) 100%)",
-          }}
-        />
       </div>
       {/* Header */}
       {showHeader && (
