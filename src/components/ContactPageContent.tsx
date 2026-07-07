@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Instagram, Linkedin, ArrowRight, Loader2, Calendar
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import contactSide from "@/assets/contact-side.png.asset.json";
 
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -97,8 +98,26 @@ const ContactPageContent = ({
 
       {/* Two columns */}
       <div className="relative z-10 container-custom px-6 pb-4 md:pb-6">
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {/* LEFT — info card */}
+        <div className="grid lg:grid-cols-[0.9fr_1fr_1.2fr] gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {/* LEFT — image */}
+          <motion.div
+            className="hidden lg:block rounded-2xl overflow-hidden"
+            style={{ border: "1px solid rgba(255,255,255,0.06)" }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <img
+              src={contactSide.url}
+              alt="Setup Events"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          {/* MIDDLE — info card */}
           <motion.div
             className="rounded-2xl p-7 md:p-9"
             style={{
