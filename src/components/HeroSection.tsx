@@ -111,7 +111,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       <AnimatePresence>
         {introPhase !== "done" && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+            className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden"
             exit={{ opacity: 0 }}
             transition={{ duration: INTRO_TRANSITION / 1000, ease }}
           >
@@ -124,11 +124,11 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
               webkit-playsinline=""
               preload="auto"
               poster={heroOpeningPoster.url}
-              className="w-full h-full object-cover object-center"
-              initial={{ opacity: 0, scale: 1.05 }}
+              className="w-64 h-auto max-w-[250px] object-contain"
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={
                 introPhase === "transition"
-                  ? { opacity: 0, scale: 1.15, filter: "blur(6px)" }
+                  ? { opacity: 0, scale: 1.05, filter: "blur(4px)" }
                   : { opacity: 1, scale: 1, filter: "blur(0px)" }
               }
               transition={{ duration: introPhase === "transition" ? 0.5 : 0.8, ease }}
