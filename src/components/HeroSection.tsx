@@ -43,6 +43,22 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     }
   }, []);
 
+  const transitionStartedRef = useRef(false);
+
+  const startTransition = useCallback(() => {
+    if (transitionStartedRef.current) return;
+    transitionStartedRef.current = true;
+    setIntroPhase("transition");
+    tryPlayVideo();
+    setTimeout(() => {
+      setIntroPhase("done");
+      onIntroComplete?.();
+    }, INTRO_TRANSITION);
+    setTimeout(() => {
+      setShowContent(true);
+    }, INTRO_TRANSITION + 200);
+  }, [tryPlayVideo, onIntroComplete]);
+
   // Avvia subito il video intro
   useEffect(() => {
     const v = introVideoRef.current;
@@ -55,28 +71,20 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     });
   }, []);
 
-  // Intro video → transizione → hero
+  // Transizione quando il video intro finisce
   useEffect(() => {
-    const t1 = setTimeout(() => {
-      setIntroPhase("transition");
-      tryPlayVideo();
-    }, INTRO_DURATION);
+    const v = introVideoRef.current;
+    if (!v) return;
+    const handleEnded = () => startTransition();
+    v.addEventListener("ended", handleEnded);
+    return () => v.removeEventListener("ended", handleEnded);
+  }, [startTransition]);
 
-    const t2 = setTimeout(() => {
-      setIntroPhase("done");
-      onIntroComplete?.();
-    }, INTRO_DURATION + INTRO_TRANSITION);
-
-    const t3 = setTimeout(() => {
-      setShowContent(true);
-    }, INTRO_DURATION + INTRO_TRANSITION + 200);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
-  }, [tryPlayVideo, onIntroComplete]);
+  // Fallback di sicurezza se il video non dovesse terminare
+  useEffect(() => {
+    const id = setTimeout(() => startTransition(), 6000);
+    return () => clearTimeout(id);
+  }, [startTransition]);
 
 
   useEffect(() => {
