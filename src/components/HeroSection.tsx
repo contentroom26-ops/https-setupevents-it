@@ -122,7 +122,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
               webkit-playsinline=""
               preload="auto"
               poster={heroOpeningPoster.url}
-              className="w-64 h-auto max-w-[250px] object-contain"
+              className="w-80 h-auto max-w-[380px] object-contain"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={
                 introPhase === "transition"
