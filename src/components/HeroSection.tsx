@@ -11,8 +11,6 @@ const heroBg = "/images/hero-bg.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Durata del video di apertura (in ms) — 5s + piccolo buffer
-const INTRO_DURATION = 5000;
 const INTRO_TRANSITION = 500;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
