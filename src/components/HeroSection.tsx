@@ -11,8 +11,6 @@ const heroBg = "/images/hero-bg.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Durata del video di apertura (in ms) — 5s + piccolo buffer
-const INTRO_DURATION = 5000;
 const INTRO_TRANSITION = 500;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
@@ -43,6 +41,22 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     }
   }, []);
 
+  const transitionStartedRef = useRef(false);
+
+  const startTransition = useCallback(() => {
+    if (transitionStartedRef.current) return;
+    transitionStartedRef.current = true;
+    setIntroPhase("transition");
+    tryPlayVideo();
+    setTimeout(() => {
+      setIntroPhase("done");
+      onIntroComplete?.();
+    }, INTRO_TRANSITION);
+    setTimeout(() => {
+      setShowContent(true);
+    }, INTRO_TRANSITION + 200);
+  }, [tryPlayVideo, onIntroComplete]);
+
   // Avvia subito il video intro
   useEffect(() => {
     const v = introVideoRef.current;
@@ -55,28 +69,20 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     });
   }, []);
 
-  // Intro video → transizione → hero
+  // Transizione quando il video intro finisce
   useEffect(() => {
-    const t1 = setTimeout(() => {
-      setIntroPhase("transition");
-      tryPlayVideo();
-    }, INTRO_DURATION);
+    const v = introVideoRef.current;
+    if (!v) return;
+    const handleEnded = () => startTransition();
+    v.addEventListener("ended", handleEnded);
+    return () => v.removeEventListener("ended", handleEnded);
+  }, [startTransition]);
 
-    const t2 = setTimeout(() => {
-      setIntroPhase("done");
-      onIntroComplete?.();
-    }, INTRO_DURATION + INTRO_TRANSITION);
-
-    const t3 = setTimeout(() => {
-      setShowContent(true);
-    }, INTRO_DURATION + INTRO_TRANSITION + 200);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
-  }, [tryPlayVideo, onIntroComplete]);
+  // Fallback di sicurezza se il video non dovesse terminare
+  useEffect(() => {
+    const id = setTimeout(() => startTransition(), 6000);
+    return () => clearTimeout(id);
+  }, [startTransition]);
 
 
   useEffect(() => {
@@ -103,7 +109,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       <AnimatePresence>
         {introPhase !== "done" && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+            className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden"
             exit={{ opacity: 0 }}
             transition={{ duration: INTRO_TRANSITION / 1000, ease }}
           >
@@ -116,11 +122,11 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
               webkit-playsinline=""
               preload="auto"
               poster={heroOpeningPoster.url}
-              className="w-full h-full object-cover object-center"
-              initial={{ opacity: 0, scale: 1.05 }}
+              className="w-64 h-auto max-w-[250px] object-contain"
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={
                 introPhase === "transition"
-                  ? { opacity: 0, scale: 1.15, filter: "blur(6px)" }
+                  ? { opacity: 0, scale: 1.05, filter: "blur(4px)" }
                   : { opacity: 1, scale: 1, filter: "blur(0px)" }
               }
               transition={{ duration: introPhase === "transition" ? 0.5 : 0.8, ease }}
