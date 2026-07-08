@@ -109,7 +109,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       <AnimatePresence>
         {introPhase !== "done" && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden"
+            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
             exit={{ opacity: 0 }}
             transition={{ duration: INTRO_TRANSITION / 1000, ease }}
           >
