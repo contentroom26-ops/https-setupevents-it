@@ -2,8 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import heroOpening from "@/assets/hero-opening.mp4.asset.json";
-import heroOpeningPoster from "@/assets/hero-opening-poster.jpg.asset.json";
+const logoSplash = "/images/logo-splash.png";
 
 // Immagine hero in public/ per abilitare il preload in index.html
 const heroBg = "/images/hero-bg.jpg";
@@ -11,18 +10,17 @@ const heroBg = "/images/hero-bg.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const INTRO_TRANSITION = 500;
-
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const introVideoRef = useRef<HTMLVideoElement>(null);
-
+  
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [introPhase, setIntroPhase] = useState<"intro" | "transition" | "done">("intro");
+  const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
+  
 
+  
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
@@ -38,51 +36,33 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           video.play().catch(() => {});
         }, 300);
       });
+    } else {
+      
     }
   }, []);
 
-  const transitionStartedRef = useRef(false);
+  // Logo intro → 2.5s → start video → show text
+  useEffect(() => {
+    const t1 = setTimeout(() => {
+      setIntroPhase("transition");
+      tryPlayVideo();
+    }, 2500);
 
-  const startTransition = useCallback(() => {
-    if (transitionStartedRef.current) return;
-    transitionStartedRef.current = true;
-    setIntroPhase("transition");
-    tryPlayVideo();
-    setTimeout(() => {
+    const t2 = setTimeout(() => {
       setIntroPhase("done");
       onIntroComplete?.();
-    }, INTRO_TRANSITION);
-    setTimeout(() => {
+    }, 3000);
+
+    const t3 = setTimeout(() => {
       setShowContent(true);
-    }, INTRO_TRANSITION + 200);
+    }, 3200);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
   }, [tryPlayVideo, onIntroComplete]);
-
-  // Avvia subito il video intro
-  useEffect(() => {
-    const v = introVideoRef.current;
-    if (!v) return;
-    v.muted = true;
-    v.setAttribute("playsinline", "");
-    v.setAttribute("webkit-playsinline", "");
-    v.play().catch(() => {
-      setTimeout(() => v.play().catch(() => {}), 300);
-    });
-  }, []);
-
-  // Transizione quando il video intro finisce
-  useEffect(() => {
-    const v = introVideoRef.current;
-    if (!v) return;
-    const handleEnded = () => startTransition();
-    v.addEventListener("ended", handleEnded);
-    return () => v.removeEventListener("ended", handleEnded);
-  }, [startTransition]);
-
-  // Fallback di sicurezza se il video non dovesse terminare
-  useEffect(() => {
-    const id = setTimeout(() => startTransition(), 6000);
-    return () => clearTimeout(id);
-  }, [startTransition]);
 
 
   useEffect(() => {
@@ -105,34 +85,66 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
 
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
-      {/* Intro Video Overlay — precede l'apertura della Hero */}
+      {/* Logo Intro Overlay */}
       <AnimatePresence>
         {introPhase !== "done" && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+            className="absolute inset-0 z-50 bg-black flex items-center justify-center"
             exit={{ opacity: 0 }}
-            transition={{ duration: INTRO_TRANSITION / 1000, ease }}
+            transition={{ duration: 0.5, ease }}
           >
-            <motion.video
-              ref={introVideoRef}
-              autoPlay
-              muted
-              playsInline
-              // @ts-ignore
-              webkit-playsinline=""
-              preload="auto"
-              poster={heroOpeningPoster.url}
-              className="w-80 h-auto max-w-[380px] object-contain"
-              initial={{ opacity: 0, scale: 0.98 }}
+            {/* Radial glow */}
+            <motion.div
+              className="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full pointer-events-none"
+              style={{
+                background: "radial-gradient(circle, hsl(0 72% 51% / 0.25) 0%, transparent 70%)",
+              }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.5 }}
+              transition={{ duration: 1, ease }}
+            />
+
+            {/* Logo */}
+            <motion.img
+              src={logoSplash}
+              alt="SetupEvents"
+              className="relative z-10 w-[75vw] max-w-[600px] md:w-[45vw] md:max-w-[700px]"
+              initial={{ opacity: 0, scale: 0.7, y: 30 }}
               animate={
                 introPhase === "transition"
-                  ? { opacity: 0, scale: 1.05, filter: "blur(4px)" }
-                  : { opacity: 1, scale: 1, filter: "blur(0px)" }
+                  ? { opacity: 0, scale: 1.4, y: -20, filter: "blur(8px)" }
+                  : { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }
               }
-              transition={{ duration: introPhase === "transition" ? 0.5 : 0.8, ease }}
-            >
-              <source src={heroOpening.url} type="video/mp4" />
-            </motion.video>
+              transition={
+                introPhase === "transition"
+                  ? { duration: 0.6, ease }
+                  : { duration: 0.8, ease }
+              }
+            />
+
+            {/* Corner accents */}
+            {[
+              "top-6 left-6 origin-top-left",
+              "top-6 right-6 origin-top-right",
+              "bottom-6 left-6 origin-bottom-left",
+              "bottom-6 right-6 origin-bottom-right",
+            ].map((pos, i) => (
+              <motion.div
+                key={i}
+                className={`absolute ${pos} z-20`}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={
+                  introPhase === "transition"
+                    ? { opacity: 0, scale: 0 }
+                    : { opacity: 0.3, scale: 1 }
+                }
+                transition={{ duration: 0.4, delay: introPhase === "transition" ? 0 : 0.6 + i * 0.08, ease }}
+              >
+                <div className="w-6 h-px bg-primary" />
+                <div className="w-px h-6 bg-primary" />
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
@@ -162,6 +174,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
             transition: "opacity 0.7s ease",
           }}
         >
+          {/* Senza codec hint: più compatibile con Safari */}
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <div
@@ -193,6 +206,8 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         className="relative z-10 container-custom px-6 pb-20 md:pb-24 flex flex-col items-center text-center"
         style={{ y: contentY }}
       >
+
+
       </motion.div>
 
       {/* Bottom scroll indicator */}
