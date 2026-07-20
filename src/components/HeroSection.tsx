@@ -226,18 +226,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           {t("hero.subheadline")}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.7, ease }}
-        >
-          <Link
-            to="/contatti"
-            className="inline-flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-7 py-3.5 md:px-9 md:py-4 rounded-full font-bold text-sm md:text-base tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--primary)/0.35)]"
-          >
-            {t("hero.cta")}
-          </Link>
-        </motion.div>
       </motion.div>
 
       {/* Bottom scroll indicator */}
