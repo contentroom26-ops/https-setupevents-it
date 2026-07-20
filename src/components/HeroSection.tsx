@@ -226,10 +226,14 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           {t("hero.subheadline")}
         </motion.p>
 
+      </motion.div>
+
+      {/* Bottom CTA + scroll indicator */}
+      <motion.div className="relative z-10 container-custom pb-10 md:pb-16 flex flex-col items-center gap-6" style={{ y: contentY }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.7, ease }}
+          transition={{ duration: 0.8, delay: 0.9, ease }}
         >
           <Link
             to="/contatti"
@@ -238,10 +242,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
             {t("hero.cta")}
           </Link>
         </motion.div>
-      </motion.div>
 
-      {/* Bottom scroll indicator */}
-      <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ y: contentY }}>
         <div className="flex justify-center">
           <motion.div
             className="flex items-center gap-3 cursor-pointer group"
