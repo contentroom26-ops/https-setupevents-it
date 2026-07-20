@@ -23,6 +23,12 @@ const dieselEvent12 = new URL("@/assets/diesel-event-12.jpg", import.meta.url).h
 const dieselEvent13 = new URL("@/assets/diesel-event-13.jpg", import.meta.url).href;
 const dieselEvent14 = new URL("@/assets/diesel-event-14.jpg", import.meta.url).href;
 const dieselEvent15 = new URL("@/assets/diesel-event-15.jpg", import.meta.url).href;
+const mediolanum1 = new URL("@/assets/mediolanum-1.jpg", import.meta.url).href;
+const mediolanum2 = new URL("@/assets/mediolanum-2.jpg", import.meta.url).href;
+const mediolanum3 = new URL("@/assets/mediolanum-3.jpg", import.meta.url).href;
+const mediolanum4 = new URL("@/assets/mediolanum-4.jpg", import.meta.url).href;
+const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
+const dieselEvent13img = new URL("@/assets/diesel-event-13.jpg", import.meta.url).href;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -33,10 +39,12 @@ const caseStudiesData = [
 ];
 
 const galleryImages = [
-  dieselEvent1, dieselEvent4, dieselEvent5, dieselEvent6,
-  dieselEvent7, dieselEvent8, diesel9, dieselEvent9,
-  dieselEvent10, dieselEvent11, dieselEvent12, dieselEvent13,
-  dieselEvent14, dieselEvent15,
+  // Diesel
+  diesel9, diesel1, dieselEvent13img, dieselEvent9,
+  // Mediolanum
+  mediolanum1, mediolanum2, mediolanum3, mediolanum4,
+  // Distretto 12
+  
 ];
 
 const FlipCard = ({ index }: { index: number }) => {
