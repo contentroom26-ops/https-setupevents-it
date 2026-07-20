@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 const logoSplash = "/images/logo-splash.png";
 
 // Immagine hero in public/ per abilitare il preload in index.html
@@ -206,8 +207,37 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         className="relative z-10 container-custom px-6 pb-20 md:pb-24 flex flex-col items-center text-center"
         style={{ y: contentY }}
       >
+        <motion.h1
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 md:mb-6 max-w-4xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.4, ease }}
+        >
+          {t("hero.headlinePre")}{" "}
+          <span className="text-primary">{t("hero.headlineServices.0")}</span>
+        </motion.h1>
 
+        <motion.p
+          className="text-sm md:text-base text-white/60 font-medium tracking-wide mb-8 md:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.55, ease }}
+        >
+          {t("hero.subheadline")}
+        </motion.p>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.7, ease }}
+        >
+          <Link
+            to="/contatti"
+            className="inline-flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-7 py-3.5 md:px-9 md:py-4 rounded-full font-bold text-sm md:text-base tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--primary)/0.35)]"
+          >
+            {t("hero.cta")}
+          </Link>
+        </motion.div>
       </motion.div>
 
       {/* Bottom scroll indicator */}
