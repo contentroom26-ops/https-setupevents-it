@@ -228,8 +228,21 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
 
       </motion.div>
 
-      {/* Bottom scroll indicator */}
-      <motion.div className="relative z-10 container-custom pb-10 md:pb-16" style={{ y: contentY }}>
+      {/* Bottom CTA + scroll indicator */}
+      <motion.div className="relative z-10 container-custom pb-10 md:pb-16 flex flex-col items-center gap-6" style={{ y: contentY }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.9, ease }}
+        >
+          <Link
+            to="/contatti"
+            className="inline-flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-7 py-3.5 md:px-9 md:py-4 rounded-full font-bold text-sm md:text-base tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--primary)/0.35)]"
+          >
+            {t("hero.cta")}
+          </Link>
+        </motion.div>
+
         <div className="flex justify-center">
           <motion.div
             className="flex items-center gap-3 cursor-pointer group"
