@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 // Use string paths for lazy loading — images load on scroll, not on page load
 
 const dieselCard = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
-const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
+const mediolanumCard = new URL("@/assets/mediolanum-card.jpg", import.meta.url).href;
 const distretto12Card = new URL("@/assets/distretto12-card.jpg", import.meta.url).href;
 const diesel9 = new URL("@/assets/diesel-9.jpg", import.meta.url).href;
 const dieselEvent1 = new URL("@/assets/diesel-event-1.jpg", import.meta.url).href;
@@ -27,8 +27,8 @@ const dieselEvent15 = new URL("@/assets/diesel-event-15.jpg", import.meta.url).h
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const caseStudiesData = [
-  { image: dieselCard, title: "Diesel", year: "2024", href: "/case-study/diesel" },
-  { image: diesel1, title: "Mediolanum", year: "2025", href: "/case-study/mediolanum" },
+  { image: dieselCard,      title: "Diesel",      year: "2024", href: "/case-study/diesel" },
+  { image: mediolanumCard,  title: "Mediolanum",  year: "2025", href: "/case-study/mediolanum" },
   { image: distretto12Card, title: "Distretto 12", year: "2025", href: "/case-study/distretto-12" },
 ];
 
@@ -50,24 +50,24 @@ const FlipCard = ({ index }: { index: number }) => {
   return (
     <motion.div className="relative w-full cursor-pointer" style={{ perspective: 1200 }} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15, ease }} onMouseEnter={() => setFlipped(true)} onMouseLeave={() => setFlipped(false)}>
       <Link to={study.href} aria-label={`${study.title} — ${category}`} className="block">
-      <motion.div className="relative w-full aspect-[4/5] md:aspect-[3/4]" animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }} style={{ transformStyle: "preserve-3d" }}>
-        <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ backfaceVisibility: "hidden" }}>
-          <img src={study.image} alt={`${study.title} - ${category}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          <div className="absolute top-5 left-6"><span className="text-xs font-mono text-white/60">[{String(index + 1).padStart(2, "0")}]</span></div>
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2">{category}</span>
-            <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight">{study.title}</h3>
-            <span className="text-xs text-white/60 font-mono mt-1 block">{study.year}</span>
+        <motion.div className="relative w-full aspect-[4/5] md:aspect-[3/4]" animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }} style={{ transformStyle: "preserve-3d" }}>
+          <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ backfaceVisibility: "hidden" }}>
+            <img src={study.image} alt={`${study.title} - ${category}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute top-5 left-6"><span className="text-xs font-mono text-white/60">[{String(index + 1).padStart(2, "0")}]</span></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-2">{category}</span>
+              <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight">{study.title}</h3>
+              <span className="text-xs text-white/60 font-mono mt-1 block">{study.year}</span>
+            </div>
           </div>
-        </div>
-        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
-          <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">{category} — {study.year}</span>
-          <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">{study.title}</h3>
-          <p className="text-sm text-primary font-medium mb-6">{subtitle}</p>
-          <p className="text-[13px] md:text-base text-white/85 leading-relaxed">{description}</p>
-        </div>
-      </motion.div>
+          <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">{category} — {study.year}</span>
+            <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">{study.title}</h3>
+            <p className="text-sm text-primary font-medium mb-6">{subtitle}</p>
+            <p className="text-[13px] md:text-base text-white/85 leading-relaxed">{description}</p>
+          </div>
+        </motion.div>
       </Link>
     </motion.div>
   );
@@ -142,9 +142,9 @@ const PortfolioSection = () => {
             {t("portfolio.heading")}
           </motion.h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8" style={{ perspective: '800px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 md:gap-8" style={{ perspective: '800px' }}>
             {caseStudiesData.map((_, i) => (
-              <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] w-2/3 mx-auto" style={{ transform: 'rotateX(2deg)' }}>
+              <div key={i} className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" style={{ transform: 'rotateX(2deg)' }}>
                 <FlipCard index={i} />
               </div>
             ))}
