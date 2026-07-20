@@ -208,7 +208,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         style={{ y: contentY }}
       >
         <motion.h1
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 md:mb-6 max-w-4xl"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 md:mb-6 max-w-4xl whitespace-pre-line"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
           transition={{ duration: 0.8, delay: 0.4, ease }}
