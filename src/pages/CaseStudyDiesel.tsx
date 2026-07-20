@@ -1,89 +1,198 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { useEffect } from "react";
-import cover from "@/assets/diesel-card.jpg";
-import shot1 from "@/assets/diesel-event-1.jpg";
-import shot2 from "@/assets/diesel-event-4.jpg";
-import shot3 from "@/assets/diesel-event-7.jpg";
-import shot4 from "@/assets/diesel-event-11.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const highlights = [
-  "Direzione artistica e concept della serata",
-  "PR strategiche e selezione ospiti VIP",
-  "Hostess e steward professionali multilingue",
-  "Service audio-video completo",
-  "Coordinamento fornitori e regia on-site",
-  "Reportage fotografico e video",
+const coverImage = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
+const gallery = [
+  new URL("@/assets/diesel-9.jpg", import.meta.url).href,
+  new URL("@/assets/diesel-1.jpg", import.meta.url).href,
+  new URL("@/assets/diesel-event-13.jpg", import.meta.url).href,
+  new URL("@/assets/diesel-event-9.jpg", import.meta.url).href,
+];
+
+const tags = ["Brand Event", "PR Strategiche", "Hostess & Steward", "Audio-Video"];
+
+const stats = [
+  { label: "Anno", value: "2024" },
+  { label: "Location", value: "Store Diesel, Firenze" },
+  { label: "Formato", value: "Serata esclusiva" },
+  { label: "Servizi", value: "PR · Hostess · AV" },
 ];
 
 const CaseStudyDiesel = () => {
   useEffect(() => {
-    document.title = "Case Study Diesel — Fashion Night Firenze | SetupEvents";
+    document.title = "Case Study Diesel Firenze 2024 | SetupEvents";
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", "Fashion Night Diesel a Firenze: PR, hostess, allestimenti e produzione audio-video per un evento di brand activation ad alto impatto.");
+    if (meta) meta.setAttribute("content", "Evento esclusivo nello store Diesel di Firenze: PR strategiche, selezione ospiti, hostess professionali e service audio-video completo. Case study SetupEvents 2024.");
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <section className="pt-32 pb-16 md:pt-44 md:pb-24 relative grain">
-        <div className="container-custom">
-          <Link to="/#portfolio" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-10 text-sm uppercase tracking-widest">
-            <ArrowLeft className="w-4 h-4" /> Case Studies
+
+      {/* Hero cover */}
+      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <motion.img
+          src={coverImage}
+          alt="Diesel Brand Event Firenze 2024"
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.4, ease }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Back link */}
+        <motion.div
+          className="absolute top-32 left-0 right-0 container-custom"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease }}
+        >
+          <Link
+            to="/#portfolio"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm uppercase tracking-widest"
+          >
+            <ArrowLeft className="w-4 h-4" /> Portfolio
           </Link>
+        </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 lg:gap-16 items-start mb-16">
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
-              <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 block">Case Study — 2024</span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tighter leading-[1.05] mb-6">
-                Diesel <span className="text-muted-foreground">Fashion Night</span>
-              </h1>
-              <p className="text-base md:text-lg text-foreground/85 leading-[1.75] mb-6">
-                Evento esclusivo nello store Diesel di Firenze: una serata di brand activation curata in ogni dettaglio, con selezione ospiti, hostess professionali e service audio-video dedicato.
-              </p>
-              <p className="text-base md:text-lg text-foreground/75 leading-[1.75] mb-8">
-                Ci siamo occupati dell'intera regia dell'evento — dalla comunicazione con la stampa alla gestione degli invitati — trasformando lo store in un palcoscenico immersivo per il brand.
-              </p>
+        {/* Title block */}
+        <div className="absolute bottom-0 left-0 right-0 container-custom pb-12 md:pb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease }}
+          >
+            <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-3 block">
+              Case Study · 2024
+            </span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter text-white leading-[1] mb-4">
+              Diesel
+            </h1>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/15 text-white/60 bg-white/[0.04]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-              <h3 className="text-lg font-display font-bold text-foreground/85 mb-6 uppercase tracking-wider">Cosa abbiamo fatto</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-                {highlights.map((f) => (
-                  <div key={f} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/95 leading-relaxed">{f}</span>
-                  </div>
-                ))}
-              </div>
-
-              <a href="#contact-form" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-sm hover:opacity-90 transition-opacity">
-                Realizza un evento come questo
-              </a>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease }} className="lg:sticky lg:top-32">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] border border-white/[0.06]">
-                <img src={cover} alt="Diesel Fashion Night Firenze" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {[shot1, shot2, shot3, shot4].map((src, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08, ease }} className="aspect-square rounded-xl overflow-hidden">
-                <img src={src} alt={`Diesel event photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+      {/* Stats bar */}
+      <section className="border-y border-white/[0.06] bg-white/[0.02]">
+        <div className="container-custom py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((s, i) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{s.label}</p>
+                <p className="text-sm font-semibold text-white/90">{s.value}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Body */}
+      <section className="container-custom py-16 md:py-24 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
+          className="space-y-6"
+        >
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-tight">
+            Un'esperienza di brand dal forte impatto
+          </h2>
+          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
+            Diesel ci ha affidato la gestione completa di una serata esclusiva all'interno del proprio store fiorentino.
+            L'obiettivo era chiaro: creare un momento di connessione autentica tra il brand e un pubblico selezionato,
+            in un'atmosfera che rispecchiasse l'identità bold e anticonformista di Diesel.
+          </p>
+          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
+            Il nostro team ha curato le <strong className="text-white/95">PR strategiche</strong> e la selezione degli
+            ospiti, garantendo una guest list in linea con il posizionamento del brand. Le hostess professionali hanno
+            accolto e accompagnato ogni invitato, mentre il <strong className="text-white/95">service audio-video
+            completo</strong> ha esaltato l'atmosfera dello spazio, trasformando lo store in un palcoscenico.
+          </p>
+          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
+            Il risultato: una serata memorabile che ha rafforzato la brand perception di Diesel a Firenze,
+            generando contenuti organici e conversazioni che hanno continuato a circolare nei giorni successivi all'evento.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Gallery */}
+      <section className="container-custom pb-16 md:pb-24">
+        <motion.h3
+          className="text-xs uppercase tracking-[0.3em] text-white/40 mb-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease }}
+        >
+          Galleria
+        </motion.h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {gallery.map((src, i) => (
+            <motion.div
+              key={i}
+              className="aspect-[3/4] rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease }}
+            >
+              <img
+                src={src}
+                alt={`Diesel event Firenze 2024 — foto ${i + 1}`}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Next case study */}
+      <section className="border-t border-white/[0.06]">
+        <div className="container-custom py-12">
+          <Link
+            to="/case-study/mediolanum"
+            className="group flex items-center justify-between"
+          >
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-2">Prossimo case study</p>
+              <p className="text-2xl md:text-3xl font-display font-extrabold text-white group-hover:text-primary transition-colors tracking-tight">
+                Mediolanum
+              </p>
+            </div>
+            <ArrowRight className="w-6 h-6 text-white/30 group-hover:text-primary group-hover:translate-x-2 transition-all duration-300" />
+          </Link>
+        </div>
+      </section>
+
       <div id="contact-form">
         <ContactSection />
       </div>
