@@ -21,6 +21,9 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const Contatti = lazy(() => import("./pages/Contatti"));
 const PrenotaCall = lazy(() => import("./pages/PrenotaCall"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
+const CaseStudyDiesel = lazy(() => import("./pages/CaseStudyDiesel"));
+const CaseStudyMediolanum = lazy(() => import("./pages/CaseStudyMediolanum"));
+const CaseStudyDistretto12 = lazy(() => import("./pages/CaseStudyDistretto12"));
 
 const queryClient = new QueryClient();
 
@@ -32,11 +35,7 @@ const PageLoader = () => (
 
 const ConditionalGlobalVideoBackground = () => {
   const { pathname } = useLocation();
-
-  // Non mostrare sulla pagina contatti
   if (pathname.startsWith("/contatti")) return null;
-
-  // Monta subito — il video inizia a caricarsi durante l'intro logo
   return <GlobalVideoBackground />;
 };
 
@@ -63,6 +62,9 @@ const App = () => (
             <Route path="/contatti" element={<Contatti />} />
             <Route path="/prenota-call" element={<PrenotaCall />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="/case-study/diesel" element={<CaseStudyDiesel />} />
+            <Route path="/case-study/mediolanum" element={<CaseStudyMediolanum />} />
+            <Route path="/case-study/distretto-12" element={<CaseStudyDistretto12 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
