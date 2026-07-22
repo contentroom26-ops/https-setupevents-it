@@ -29,6 +29,10 @@ const mediolanum3 = new URL("@/assets/mediolanum-3.jpg", import.meta.url).href;
 const mediolanum4 = new URL("@/assets/mediolanum-4.jpg", import.meta.url).href;
 const diesel1 = new URL("@/assets/diesel-1.jpg", import.meta.url).href;
 const dieselEvent13img = new URL("@/assets/diesel-event-13.jpg", import.meta.url).href;
+const distretto12_1 = new URL("@/assets/distretto12-1.jpg", import.meta.url).href;
+const distretto12_2 = new URL("@/assets/distretto12-2.jpg", import.meta.url).href;
+const distretto12_3 = new URL("@/assets/distretto12-3.jpg", import.meta.url).href;
+const distretto12_4 = new URL("@/assets/distretto12-4.jpg", import.meta.url).href;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -44,7 +48,7 @@ const galleryImages = [
   // Mediolanum
   mediolanum1, mediolanum2, mediolanum3, mediolanum4,
   // Distretto 12
-  
+  distretto12_1, distretto12_2, distretto12_3, distretto12_4,
 ];
 
 const FlipCard = ({ index }: { index: number }) => {
