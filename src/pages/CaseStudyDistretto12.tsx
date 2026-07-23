@@ -70,7 +70,7 @@ const CaseStudyDistretto12 = () => {
               </Link>
             </motion.div>
 
-            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
+            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-6 md:py-8 items-center">
               {/* Colonna sinistra */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -103,7 +103,7 @@ const CaseStudyDistretto12 = () => {
                 transition={{ duration: 0.8, delay: 0.6, ease }}
               >
                 <div
-                  className="rounded-2xl p-7 md:p-9 space-y-5"
+                  className="rounded-2xl p-5 md:p-7 space-y-3"
                   style={{
                     background: "rgba(10, 10, 10, 0.72)",
                     backdropFilter: "blur(16px)",
@@ -115,10 +115,9 @@ const CaseStudyDistretto12 = () => {
                     Un format esclusivo per Pitti Uomo, con un'identità inconfondibile
                   </h2>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
-                    In occasione di Pitti Uomo, abbiamo creato per Distretto 12 un format di serate dall'identità
-                    forte e riconoscibile. Non semplici eventi, ma esperienze costruite attorno a un concept
-                    artistico preciso, capace di parlare al pubblico della moda internazionale presente a Firenze
-                    durante uno dei momenti più attesi del calendario fashion.
+                    In occasione di Pitti Uomo, abbiamo creato per Distretto 12 un evento dall'identità
+                    forte e riconoscibile. Un' esperienza costruita per parlare al pubblico della moda 
+                    internazionale presente a Firenze durante uno dei momenti più attesi del calendario fashion.
                   </p>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
                     Abbiamo seguito ogni fase: dalla <strong className="text-white/95">scelta della location</strong> alla{" "}
@@ -129,9 +128,8 @@ const CaseStudyDistretto12 = () => {
                     trasformando ogni serata in un momento unico e memorabile.
                   </p>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
-                    Il format ha raggiunto l'obiettivo principale: costruire un'identità di evento riconoscibile,
-                    capace di generare attesa e diventare un appuntamento fisso nel calendario degli ospiti più
-                    ricercati durante la settimana di Pitti.
+                    L'evento ha raggiunto l'obiettivo principale: mostrare l'identità del brand al pubblico,
+                    consolidando la brand reputation di Distretto 12 nel settore del fashion.
                   </p>
                 </div>
               </motion.div>
