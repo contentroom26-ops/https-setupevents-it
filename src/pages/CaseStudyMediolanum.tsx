@@ -37,58 +37,110 @@ const CaseStudyMediolanum = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero cover */}
-      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+      {/* Hero — immagine a tutta altezza con due colonne sovrapposte */}
+      <section className="relative min-h-[100svh] overflow-hidden">
+
+        {/* Immagine di copertina a tutta pagina */}
         <motion.img
           src={coverImage}
           alt="Convention Banca Mediolanum Firenze 2025"
           className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1.08 }}
+          initial={{ scale: 1.06 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.4, ease }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-black/30" />
 
-        {/* Back link */}
-        <motion.div
-          className="absolute top-32 left-0 right-0 container-custom"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease }}
-        >
-          <Link
-            to="/#portfolio"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm uppercase tracking-widest"
-          >
-            <ArrowLeft className="w-4 h-4" /> Portfolio
-          </Link>
-        </motion.div>
+        {/* Overlay scuro globale */}
+        <div className="absolute inset-0 bg-black/50" />
 
-        {/* Title block */}
-        <div className="absolute bottom-0 left-0 right-0 container-custom pb-12 md:pb-16">
+        {/* Gradient laterale e verticale per leggibilità */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-black/40" />
+
+        {/* Contenuto a due colonne */}
+        <div className="relative z-10 min-h-[100svh] flex flex-col">
+
+          {/* Back link */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            className="container-custom pt-28 md:pt-32"
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-3 block">
-              Case Study · 2025
-            </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter text-white leading-[1] mb-4">
-              Mediolanum
-            </h1>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/15 text-white/60 bg-white/[0.04]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <Link
+              to="/#portfolio"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm uppercase tracking-widest"
+            >
+              <ArrowLeft className="w-4 h-4" /> Portfolio
+            </Link>
           </motion.div>
+
+          {/* Due colonne */}
+          <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
+
+            {/* Colonna sinistra — label, titolo, tag */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease }}
+              className="flex flex-col justify-center"
+            >
+              <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 block">
+                Case Study · 2025
+              </span>
+              <h1 className="text-5xl md:text-6xl lg:text-8xl font-display font-extrabold tracking-tighter text-white leading-[1] mb-6">
+                Mediolanum
+              </h1>
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/20 text-white/70 bg-white/[0.06]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Colonna destra — testo su pannello con overlay */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease }}
+            >
+              <div
+                className="rounded-2xl p-7 md:p-9 space-y-5"
+                style={{
+                  background: "rgba(10, 10, 10, 0.72)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <h2 className="text-lg md:text-xl font-display font-bold text-white tracking-tight">
+                  Una convention aziendale da 120 invitati, gestita in ogni dettaglio
+                </h2>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  Banca Mediolanum ci ha scelti per organizzare una convention aziendale di alto profilo destinata a
+                  120 invitati tra consulenti finanziari, partner e ospiti istituzionali. Un evento che richiedeva
+                  precisione operativa, cura dell'immagine e una regia invisibile ma impeccabile.
+                </p>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  Abbiamo gestito l'intero processo: dallo <strong className="text-white/95">scouting della location</strong> alla
+                  definizione del layout scenografico, dal <strong className="text-white/95">coordinamento dei relatori</strong> alla
+                  gestione dell'accoglienza con hostess e steward professionali. La produzione
+                  <strong className="text-white/95"> audio-video completa</strong> con live streaming ha permesso di raggiungere
+                  anche chi non era presente in sala, amplificando la portata dell'evento.
+                </p>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  Il risultato è stato un evento fluido, professionale e memorabile — all'altezza del posizionamento
+                  premium di Banca Mediolanum e delle aspettative di un pubblico esigente.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -112,39 +164,8 @@ const CaseStudyMediolanum = () => {
         </div>
       </section>
 
-      {/* Body */}
-      <section className="container-custom py-16 md:py-24 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease }}
-          className="space-y-6"
-        >
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-tight">
-            Una convention aziendale da 120 invitati, gestita in ogni dettaglio
-          </h2>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            Banca Mediolanum ci ha scelti per organizzare una convention aziendale di alto profilo destinata a
-            120 invitati tra consulenti finanziari, partner e ospiti istituzionali. Un evento che richiedeva
-            precisione operativa, cura dell'immagine e una regia invisibile ma impeccabile.
-          </p>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            Abbiamo gestito l'intero processo: dallo <strong className="text-white/95">scouting della location</strong> alla
-            definizione del layout scenografico, dal <strong className="text-white/95">coordinamento dei relatori</strong> alla
-            gestione dell'accoglienza con hostess e steward professionali. La produzione
-            <strong className="text-white/95"> audio-video completa</strong> con live streaming ha permesso di raggiungere
-            anche chi non era presente in sala, amplificando la portata dell'evento.
-          </p>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            Il risultato è stato un evento fluido, professionale e memorabile — all'altezza del posizionamento
-            premium di Banca Mediolanum e delle aspettative di un pubblico esigente.
-          </p>
-        </motion.div>
-      </section>
-
       {/* Gallery */}
-      <section className="container-custom pb-16 md:pb-24">
+      <section className="container-custom py-16 md:py-24">
         <motion.h3
           className="text-xs uppercase tracking-[0.3em] text-white/40 mb-8"
           initial={{ opacity: 0 }}
