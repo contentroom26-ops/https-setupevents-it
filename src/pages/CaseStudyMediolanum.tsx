@@ -70,7 +70,7 @@ const CaseStudyMediolanum = () => {
               </Link>
             </motion.div>
 
-            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
+            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-6 md:py-8 items-center">
               {/* Colonna sinistra */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -103,7 +103,7 @@ const CaseStudyMediolanum = () => {
                 transition={{ duration: 0.8, delay: 0.6, ease }}
               >
                 <div
-                  className="rounded-2xl p-7 md:p-9 space-y-5"
+                  className="rounded-2xl p-5 md:p-7 space-y-3"
                   style={{
                     background: "rgba(10, 10, 10, 0.72)",
                     backdropFilter: "blur(16px)",
@@ -116,15 +116,14 @@ const CaseStudyMediolanum = () => {
                   </h2>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
                     Banca Mediolanum ci ha scelti per organizzare una convention aziendale di alto profilo destinata a
-                    120 invitati tra consulenti finanziari, partner e ospiti istituzionali. Un evento che richiedeva
-                    precisione operativa, cura dell'immagine e una regia invisibile ma impeccabile.
+                    120 invitati tra consulenti finanziari, partner e ospiti istituzionali.
                   </p>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
                     Abbiamo gestito l'intero processo: dallo <strong className="text-white/95">scouting della location</strong> alla
                     definizione del layout scenografico, dal <strong className="text-white/95">coordinamento dei relatori</strong> alla
                     gestione dell'accoglienza con hostess e steward professionali. La produzione
-                    <strong className="text-white/95"> audio-video completa</strong> con live streaming ha permesso di raggiungere
-                    anche chi non era presente in sala, amplificando la portata dell'evento.
+                    <strong className="text-white/95"> audio-video completa</strong> ha permesso di
+                    amplificare la portata dell'evento.
                   </p>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
                     Il risultato è stato un evento fluido, professionale e memorabile — all'altezza del posizionamento
