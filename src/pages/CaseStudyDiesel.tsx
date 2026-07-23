@@ -70,7 +70,7 @@ const CaseStudyDiesel = () => {
               </Link>
             </motion.div>
 
-            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
+            <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-6 md:py-8 items-center">
               {/* Colonna sinistra */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -103,7 +103,7 @@ const CaseStudyDiesel = () => {
                 transition={{ duration: 0.8, delay: 0.6, ease }}
               >
                 <div
-                  className="rounded-2xl p-7 md:p-9 space-y-5"
+                  className="rounded-2xl p-5 md:p-7 space-y-3"
                   style={{
                     background: "rgba(10, 10, 10, 0.72)",
                     backdropFilter: "blur(16px)",
@@ -115,14 +115,13 @@ const CaseStudyDiesel = () => {
                     Un'esperienza di brand dal forte impatto
                   </h2>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
-                    Diesel ci ha affidato la gestione completa di una serata esclusiva all'interno del proprio store
+                    Diesel ci ha affidato la gestione completa di una serata esclusiva nel proprio store
                     fiorentino. L'obiettivo era chiaro: creare un momento di connessione autentica tra il brand e un
-                    pubblico selezionato, in un'atmosfera che rispecchiasse l'identità bold e anticonformista di Diesel.
+                    pubblico selezionato, in un'atmosfera che rispecchiasse l'identità anticonformista di Diesel.
                   </p>
                   <p className="text-sm md:text-base text-white/75 leading-[1.8]">
                     Il nostro team ha curato le <strong className="text-white/95">PR strategiche</strong> e la selezione
-                    degli ospiti, garantendo una guest list in linea con il posizionamento del brand. Le hostess
-                    professionali hanno accolto e accompagnato ogni invitato, mentre il{" "}
+                    degli ospiti, garantendo una guest list in linea con il posizionamento del brand. Il{" "}
                     <strong className="text-white/95">service audio-video completo</strong> ha esaltato l'atmosfera
                     dello spazio, trasformando lo store in un palcoscenico.
                   </p>
