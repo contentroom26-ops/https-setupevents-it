@@ -8,20 +8,16 @@ const logoSplash = "/images/logo-splash.png";
 // Immagine hero in public/ per abilitare il preload in index.html
 const heroBg = "/images/hero-bg.jpg";
 
-
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
-  
-
-  
 
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
@@ -37,12 +33,10 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           video.play().catch(() => {});
         }, 300);
       });
-    } else {
-      
     }
   }, []);
 
-  // Logo intro → 2.5s → start video → show text
+  // Logo intro → 2.5s → start video → show content
   useEffect(() => {
     const t1 = setTimeout(() => {
       setIntroPhase("transition");
@@ -65,7 +59,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     };
   }, [tryPlayVideo, onIntroComplete]);
 
-
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -77,7 +70,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
       return () => video.removeEventListener("canplay", onCanPlay);
     }
   }, []);
-
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
@@ -150,7 +142,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         )}
       </AnimatePresence>
 
-      {/* Immagine di sfondo — sempre visibile come base, il video si sovrappone */}
+      {/* Immagine di sfondo — sempre visibile come base */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroBg})` }}
@@ -175,7 +167,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
             transition: "opacity 0.7s ease",
           }}
         >
-          {/* Senza codec hint: più compatibile con Safari */}
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
         <div
@@ -201,36 +192,11 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         </span>
       </motion.div>
 
-      {/* Content — centered */}
-      <div className="flex-1" />
-      <motion.div
-        className="relative z-10 container-custom px-6 pb-20 md:pb-24 flex flex-col items-center text-center"
-        style={{ y: contentY }}
-      >
-        <motion.h1
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 md:mb-6 max-w-4xl whitespace-pre-line"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.4, ease }}
-        >
-          {t("hero.headlinePre")}{" "}
-          <span className="text-primary">{t("hero.headlineServices.0")}</span>
-        </motion.h1>
-
-        <motion.p
-          className="text-sm md:text-base text-white/60 font-medium tracking-wide mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.55, ease }}
-        >
-          {t("hero.subheadline")}
-        </motion.p>
-
-      </motion.div>
-
-      {/* Bottom CTA + scroll indicator */}
-      <motion.div className="relative z-10 container-custom pb-10 md:pb-16 flex flex-col items-center gap-6" style={{ y: contentY }}>
+      {/* CTA centrato verticalmente */}
+      <div className="flex-1 flex items-center justify-center">
         <motion.div
+          style={{ y: contentY }}
+          className="relative z-10 flex flex-col items-center gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
           transition={{ duration: 0.8, delay: 0.9, ease }}
@@ -242,21 +208,25 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
             {t("hero.cta")}
           </Link>
         </motion.div>
+      </div>
 
-        <div className="flex justify-center">
-          <motion.div
-            className="flex items-center gap-3 cursor-pointer group"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showContent ? 1 : 0 }}
-            transition={{ delay: 1.6 }}
-            onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            <div className="w-px h-7 bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
-            <span className="text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/40 transition-colors duration-300">
-              {t("hero.scroll")}
-            </span>
-          </motion.div>
-        </div>
+      {/* Scroll indicator */}
+      <motion.div
+        className="relative z-10 container-custom pb-10 md:pb-16 flex justify-center"
+        style={{ y: contentY }}
+      >
+        <motion.div
+          className="flex items-center gap-3 cursor-pointer group"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showContent ? 1 : 0 }}
+          transition={{ delay: 1.6 }}
+          onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
+        >
+          <div className="w-px h-7 bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
+          <span className="text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/40 transition-colors duration-300">
+            {t("hero.scroll")}
+          </span>
+        </motion.div>
       </motion.div>
 
       {/* Side dots */}
