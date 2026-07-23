@@ -38,8 +38,9 @@ const CaseStudyDiesel = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero — immagine a tutta altezza con due colonne sovrapposte */}
-      <section className="relative min-h-[100svh] overflow-hidden">
+      {/* Hero + Stats — insieme occupano esattamente 100svh */}
+      <div className="h-[100svh] flex flex-col">
+      <section className="relative flex-1 overflow-hidden">
         <motion.img
           src={coverImage}
           alt="Diesel Brand Event Firenze 2024"
@@ -52,7 +53,7 @@ const CaseStudyDiesel = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/80" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-black/40" />
 
-        <div className="relative z-10 min-h-[100svh] flex flex-col">
+        <div className="relative z-10 h-full flex flex-col">
           <motion.div
             className="container-custom pt-28 md:pt-32"
             initial={{ opacity: 0, y: -10 }}
