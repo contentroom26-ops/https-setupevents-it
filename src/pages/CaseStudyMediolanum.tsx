@@ -10,6 +10,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const coverImage = new URL("@/assets/mediolanum-card.jpg", import.meta.url).href;
+const nextCoverImage = new URL("@/assets/distretto12-card.jpg", import.meta.url).href;
 const gallery = [
   new URL("@/assets/mediolanum-1.jpg", import.meta.url).href,
   new URL("@/assets/mediolanum-2.jpg", import.meta.url).href,
@@ -39,8 +40,6 @@ const CaseStudyMediolanum = () => {
 
       {/* Hero — immagine a tutta altezza con due colonne sovrapposte */}
       <section className="relative min-h-[100svh] overflow-hidden">
-
-        {/* Immagine di copertina a tutta pagina */}
         <motion.img
           src={coverImage}
           alt="Convention Banca Mediolanum Firenze 2025"
@@ -49,18 +48,11 @@ const CaseStudyMediolanum = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 1.4, ease }}
         />
-
-        {/* Overlay scuro globale */}
         <div className="absolute inset-0 bg-black/50" />
-
-        {/* Gradient laterale e verticale per leggibilità */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/80" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-black/40" />
 
-        {/* Contenuto a due colonne */}
         <div className="relative z-10 min-h-[100svh] flex flex-col">
-
-          {/* Back link */}
           <motion.div
             className="container-custom pt-28 md:pt-32"
             initial={{ opacity: 0, y: -10 }}
@@ -75,10 +67,7 @@ const CaseStudyMediolanum = () => {
             </Link>
           </motion.div>
 
-          {/* Due colonne */}
           <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
-
-            {/* Colonna sinistra — label, titolo, tag */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -103,7 +92,6 @@ const CaseStudyMediolanum = () => {
               </div>
             </motion.div>
 
-            {/* Colonna destra — testo su pannello con overlay */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -139,7 +127,6 @@ const CaseStudyMediolanum = () => {
                 </p>
               </div>
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -197,23 +184,41 @@ const CaseStudyMediolanum = () => {
         </div>
       </section>
 
-      {/* Next case study */}
-      <section className="border-t border-white/[0.06]">
-        <div className="container-custom py-12">
-          <Link
-            to="/case-study/distretto-12"
-            className="group flex items-center justify-between"
+      {/* Next case study — banner con immagine copertina */}
+      <Link to="/case-study/distretto-12" className="block group">
+        <section className="relative h-64 md:h-80 overflow-hidden">
+          {/* Immagine copertina prossimo case study */}
+          <img
+            src={nextCoverImage}
+            alt="Distretto 12 — prossimo case study"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+          {/* Overlay scuro */}
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500" />
+
+          {/* Testo centrato */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
           >
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-2">Prossimo case study</p>
-              <p className="text-2xl md:text-3xl font-display font-extrabold text-white group-hover:text-primary transition-colors tracking-tight">
-                Distretto 12
-              </p>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/50 mb-3">
+              Prossimo case study
+            </p>
+            <p className="text-3xl md:text-5xl font-display font-extrabold text-white tracking-tighter group-hover:text-primary transition-colors duration-300">
+              Distretto 12
+            </p>
+            <div className="mt-5 flex items-center gap-2 text-white/50 group-hover:text-primary transition-colors duration-300">
+              <span className="text-xs uppercase tracking-[0.3em]">Scopri</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </div>
-            <ArrowRight className="w-6 h-6 text-white/30 group-hover:text-primary group-hover:translate-x-2 transition-all duration-300" />
-          </Link>
-        </div>
-      </section>
+          </motion.div>
+        </section>
+      </Link>
 
       <div id="contact-form">
         <ContactSection />
