@@ -9,8 +9,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Sostituisci questi path con le immagini reali una volta disponibili
 const coverImage = new URL("@/assets/distretto12-card.jpg", import.meta.url).href;
+const nextCoverImage = new URL("@/assets/diesel-card.jpg", import.meta.url).href;
 const gallery = [
   new URL("@/assets/distretto12-1.jpg", import.meta.url).href,
   new URL("@/assets/distretto12-2.jpg", import.meta.url).href,
@@ -38,58 +38,101 @@ const CaseStudyDistretto12 = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero cover */}
-      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+      {/* Hero — immagine a tutta altezza con due colonne sovrapposte */}
+      <section className="relative min-h-[100svh] overflow-hidden">
         <motion.img
           src={coverImage}
           alt="Distretto 12 Pitti Uomo Firenze 2025"
           className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1.08 }}
+          initial={{ scale: 1.06 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.4, ease }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-black/40" />
 
-        {/* Back link */}
-        <motion.div
-          className="absolute top-32 left-0 right-0 container-custom"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease }}
-        >
-          <Link
-            to="/#portfolio"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm uppercase tracking-widest"
-          >
-            <ArrowLeft className="w-4 h-4" /> Portfolio
-          </Link>
-        </motion.div>
-
-        {/* Title block */}
-        <div className="absolute bottom-0 left-0 right-0 container-custom pb-12 md:pb-16">
+        <div className="relative z-10 min-h-[100svh] flex flex-col">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            className="container-custom pt-28 md:pt-32"
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-3 block">
-              Case Study · 2025
-            </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tighter text-white leading-[1] mb-4">
-              Distretto 12
-            </h1>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/15 text-white/60 bg-white/[0.04]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <Link
+              to="/#portfolio"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm uppercase tracking-widest"
+            >
+              <ArrowLeft className="w-4 h-4" /> Portfolio
+            </Link>
           </motion.div>
+
+          <div className="flex-1 container-custom grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 py-12 md:py-16 items-center">
+            {/* Colonna sinistra — label, titolo, tag */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease }}
+              className="flex flex-col justify-center"
+            >
+              <span className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 block">
+                Case Study · 2025
+              </span>
+              <h1 className="text-5xl md:text-6xl lg:text-8xl font-display font-extrabold tracking-tighter text-white leading-[1] mb-6">
+                Distretto 12
+              </h1>
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/20 text-white/70 bg-white/[0.06]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Colonna destra — testo su pannello con overlay */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease }}
+            >
+              <div
+                className="rounded-2xl p-7 md:p-9 space-y-5"
+                style={{
+                  background: "rgba(10, 10, 10, 0.72)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <h2 className="text-lg md:text-xl font-display font-bold text-white tracking-tight">
+                  Un format esclusivo per Pitti Uomo, con un'identità inconfondibile
+                </h2>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  In occasione di Pitti Uomo, abbiamo creato per Distretto 12 un format di serate dall'identità
+                  forte e riconoscibile. Non semplici eventi, ma esperienze costruite attorno a un concept
+                  artistico preciso, capace di parlare al pubblico della moda internazionale presente a Firenze
+                  durante uno dei momenti più attesi del calendario fashion.
+                </p>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  Abbiamo seguito ogni fase: dalla <strong className="text-white/95">scelta della location</strong> alla{" "}
+                  <strong className="text-white/95">direzione artistica</strong> degli spazi, dalle{" "}
+                  <strong className="text-white/95">PR strategiche</strong> per la selezione degli ospiti VIP alla
+                  gestione dell'accoglienza con hostess dedicate. La{" "}
+                  <strong className="text-white/95">regia luci e audio</strong> ha completato l'atmosfera,
+                  trasformando ogni serata in un momento unico e memorabile.
+                </p>
+                <p className="text-sm md:text-base text-white/75 leading-[1.8]">
+                  Il format ha raggiunto l'obiettivo principale: costruire un'identità di evento riconoscibile,
+                  capace di generare attesa e diventare un appuntamento fisso nel calendario degli ospiti più
+                  ricercati durante la settimana di Pitti.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -113,41 +156,8 @@ const CaseStudyDistretto12 = () => {
         </div>
       </section>
 
-      {/* Body */}
-      <section className="container-custom py-16 md:py-24 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease }}
-          className="space-y-6"
-        >
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-tight">
-            Un format esclusivo per Pitti Uomo, con un'identità inconfondibile
-          </h2>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            In occasione di Pitti Uomo, abbiamo creato per Distretto 12 un format di serate dall'identità
-            forte e riconoscibile. Non semplici eventi, ma esperienze costruite attorno a un concept
-            artistico preciso, capace di parlare al pubblico della moda internazionale presente a Firenze
-            durante uno dei momenti più attesi del calendario fashion.
-          </p>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            Abbiamo seguito ogni fase: dalla <strong className="text-white/95">scelta della location</strong> alla
-            <strong className="text-white/95"> direzione artistica</strong> degli spazi, dalle
-            <strong className="text-white/95"> PR strategiche</strong> per la selezione degli ospiti VIP alla
-            gestione dell'accoglienza con hostess dedicate. La <strong className="text-white/95">regia luci e audio</strong> ha
-            completato l'atmosfera, trasformando ogni serata in un momento unico e memorabile.
-          </p>
-          <p className="text-base md:text-lg text-white/75 leading-[1.8]">
-            Il format ha raggiunto l'obiettivo principale: costruire un'identità di evento riconoscibile,
-            capace di generare attesa e diventare un appuntamento fisso nel calendario degli ospiti più
-            ricercati durante la settimana di Pitti.
-          </p>
-        </motion.div>
-      </section>
-
       {/* Gallery */}
-      <section className="container-custom pb-16 md:pb-24">
+      <section className="container-custom py-16 md:py-24">
         <motion.h3
           className="text-xs uppercase tracking-[0.3em] text-white/40 mb-8"
           initial={{ opacity: 0 }}
@@ -179,23 +189,37 @@ const CaseStudyDistretto12 = () => {
         </div>
       </section>
 
-      {/* Back to portfolio */}
-      <section className="border-t border-white/[0.06]">
-        <div className="container-custom py-12">
-          <Link
-            to="/#portfolio"
-            className="group flex items-center justify-between"
+      {/* Banner — torna al primo case study (Diesel) */}
+      <Link to="/case-study/diesel" className="block group">
+        <section className="relative h-64 md:h-80 overflow-hidden">
+          <img
+            src={nextCoverImage}
+            alt="Diesel — torna al primo case study"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500" />
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
           >
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-2">Torna a</p>
-              <p className="text-2xl md:text-3xl font-display font-extrabold text-white group-hover:text-primary transition-colors tracking-tight">
-                Portfolio
-              </p>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/50 mb-3">
+              Torna all'inizio
+            </p>
+            <p className="text-3xl md:text-5xl font-display font-extrabold text-white tracking-tighter group-hover:text-primary transition-colors duration-300">
+              Diesel
+            </p>
+            <div className="mt-5 flex items-center gap-2 text-white/50 group-hover:text-primary transition-colors duration-300">
+              <span className="text-xs uppercase tracking-[0.3em]">Scopri</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </div>
-            <ArrowRight className="w-6 h-6 text-white/30 group-hover:text-primary group-hover:translate-x-2 transition-all duration-300" />
-          </Link>
-        </div>
-      </section>
+          </motion.div>
+        </section>
+      </Link>
 
       <div id="contact-form">
         <ContactSection />
