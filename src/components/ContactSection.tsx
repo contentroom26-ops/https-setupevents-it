@@ -37,12 +37,15 @@ const ContactSection = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative overflow-hidden bg-background"
+      className="relative overflow-hidden"
+      // Fondo neutro (niente dominante calda) che finisce esattamente sul colore del footer (#0a0a0a)
+      style={{ background: "linear-gradient(to bottom, #0d0d0d 0%, #0d0d0d 65%, #0a0a0a 100%)" }}
     >
       {/* Atmospheric background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-50"
-          style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.16) 0%, transparent 55%)" }} />
+        {/* Bagliore rosso più contenuto, su fondo neutro: resta rosso, non vira al marrone */}
+        <div className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 70% 45% at 50% 0%, hsl(var(--primary) / 0.12) 0%, transparent 100%)" }} />
         <div className="absolute inset-0 grain opacity-25" aria-hidden />
       </div>
 
