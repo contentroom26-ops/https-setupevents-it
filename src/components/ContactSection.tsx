@@ -20,6 +20,13 @@ const ContactSection = () => {
     const wrap = contentWrapRef.current;
     if (!section || !cL || !cR || !cLine || !wrap) return;
 
+    // Con "riduci animazioni" niente tende: il contenuto è subito visibile
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(wrap, { opacity: 1, y: 0 });
+      gsap.set([cL, cR, cLine], { display: "none" });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: { trigger: section, start: "top 75%", once: true },
@@ -58,7 +65,7 @@ const ContactSection = () => {
         style={{ background: "linear-gradient(to bottom, transparent 5%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 70%, transparent 95%)", boxShadow: "0 0 20px 6px rgba(0,0,0,0.5)" }} />
 
       <div ref={contentWrapRef} className="relative z-20 opacity-0">
-        <ContactPageContent />
+        <ContactPageContent headingLevel="h2" />
       </div>
     </section>
   );

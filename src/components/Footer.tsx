@@ -70,7 +70,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 md:gap-14 mb-10 md:mb-14">
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.services")}</h4>
-            <ul className="space-y-3.5">
+            <ul className="space-y-0 md:space-y-3.5">
               {[
                 { name: "Corporate Events", href: "/corporate-events" },
                 { name: "Brand Activation", href: "/brand-activation" },
@@ -79,7 +79,7 @@ const Footer = () => {
                 { name: "Public Relations", href: "/public-relations" },
               ].map((item) => (
                 <li key={item.name}>
-                  <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                  <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block py-3 md:py-0 hover:translate-x-1 transform transition-transform">{item.name}</Link>
                 </li>
               ))}
             </ul>
@@ -87,7 +87,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-[0.15em] mb-7 text-white/70">{t("footer.links")}</h4>
-            <ul className="space-y-3.5">
+            <ul className="space-y-0 md:space-y-3.5">
               {[
                 { name: t("footer.portfolio"), href: "#portfolio" },
                 { name: t("footer.contactLink"), href: "#contact" },
@@ -97,9 +97,9 @@ const Footer = () => {
               ].map((item) => (
                 <li key={item.name}>
                   {item.href.startsWith("/") ? (
-                    <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</Link>
+                    <Link to={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block py-3 md:py-0 hover:translate-x-1 transform transition-transform">{item.name}</Link>
                   ) : (
-                    <a href={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block hover:translate-x-1 transform transition-transform">{item.name}</a>
+                    <a href={item.href} className="text-white/85 hover:text-white transition-colors duration-300 text-sm inline-block py-3 md:py-0 hover:translate-x-1 transform transition-transform">{item.name}</a>
                   )}
                 </li>
               ))}
@@ -111,11 +111,11 @@ const Footer = () => {
             <ul className="space-y-4.5 text-sm">
               <li className="flex items-center gap-3 group">
                 <Mail className="w-4 h-4 text-white/60 transition-transform duration-300 group-hover:scale-110" />
-                <a href="mailto:info@setupevents.it" className="text-white/85 hover:text-white transition-colors duration-300">info@setupevents.it</a>
+                <a href="mailto:info@setupevents.it" className="inline-block py-3 md:py-0 text-white/85 hover:text-white transition-colors duration-300">info@setupevents.it</a>
               </li>
               <li className="flex items-center gap-3 group">
                 <Phone className="w-4 h-4 text-white/60 transition-transform duration-300 group-hover:scale-110" />
-                <a href="tel:+393284163053" className="text-white/85 hover:text-white transition-colors duration-300">+39 328 416 3053</a>
+                <a href="tel:+393284163053" className="inline-block py-3 md:py-0 text-white/85 hover:text-white transition-colors duration-300">+39 328 416 3053</a>
               </li>
               <li className="flex items-start gap-3 group">
                 <MapPin className="w-4 h-4 text-white/60 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />

@@ -20,9 +20,9 @@ const StorySection = () => {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease }}
         >
-          <span className="text-[10px] md:text-xs font-mono text-white/55">[01]</span>
+          <span className="text-xs font-mono text-white/55">[01]</span>
           <div className="h-px w-8 bg-primary/40" />
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/60 font-medium">{t("story.label")}</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-white/60 font-medium">{t("story.label")}</span>
         </motion.div>
 
         <motion.div

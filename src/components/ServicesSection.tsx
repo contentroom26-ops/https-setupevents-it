@@ -39,7 +39,7 @@ const ServiceRow = ({
         onMouseLeave={() => setHovered(false)}
       >
         <div className="container-custom flex items-center gap-4 sm:gap-6 md:gap-10">
-          <span className="text-[11px] font-mono text-white/45 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
+          <span className="text-xs font-mono text-white/45 transition-colors duration-300 group-hover:text-primary w-6 flex-shrink-0">
             {num}
           </span>
 
@@ -126,8 +126,8 @@ const ServicesSection = () => {
 
       <div ref={headingRef} className="container-custom mb-8 sm:mb-10 md:mb-16" style={{ visibility: "hidden" }}>
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-mono text-white/45">[02]</span>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/60 font-medium">{t("services.label")}</span>
+          <span className="text-xs font-mono text-white/45">[02]</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-white/60 font-medium">{t("services.label")}</span>
           <div className="flex-1 h-px bg-white/[0.06]" />
         </div>
         <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tighter text-white leading-[1.05] max-w-3xl">

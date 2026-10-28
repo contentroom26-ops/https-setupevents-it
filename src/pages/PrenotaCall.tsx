@@ -117,10 +117,10 @@ ${data.note || "—"}`;
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
         >
-          <Link to="/contatti" className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs uppercase tracking-[0.3em] mb-8 transition-colors">
+          <Link to="/contatti" className="inline-flex items-center gap-2 text-white/55 hover:text-white text-xs uppercase tracking-[0.3em] mb-8 transition-colors">
             <ArrowLeft className="w-3 h-3" /> Torna ai contatti
           </Link>
-          <p className="text-[10px] uppercase tracking-[0.4em] text-primary/80 font-semibold mb-5">
+          <p className="text-xs uppercase tracking-[0.4em] text-primary/80 font-semibold mb-5">
             Prenota una call
           </p>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
@@ -162,7 +162,7 @@ ${data.note || "—"}`;
               <form onSubmit={submit} className="space-y-7">
                 {/* Step: data + ora */}
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">1 · Quando ti va bene?</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-4">1 · Quando ti va bene?</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <Popover>
                       <PopoverTrigger asChild>
@@ -170,7 +170,7 @@ ${data.note || "—"}`;
                           type="button"
                           className={cn(
                             "flex items-center justify-between w-full rounded-xl px-5 py-4 text-sm text-left outline-none transition-all hover:border-primary/40",
-                            !date && "text-white/40"
+                            !date && "text-white/55"
                           )}
                           style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
                         >
@@ -216,7 +216,7 @@ ${data.note || "—"}`;
 
                 {/* Step canale */}
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">2 · Come ti chiamiamo?</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-4">2 · Come ti chiamiamo?</p>
                   <div className="grid grid-cols-2 gap-3">
                     {CHANNELS.map(c => (
                       <button
@@ -243,7 +243,7 @@ ${data.note || "—"}`;
 
                 {/* Step dati */}
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">3 · I tuoi dati</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-4">3 · I tuoi dati</p>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <Field name="nome" required placeholder="Nome e cognome *" value={data.nome} onChange={handle} />
                     <Field name="email" type="email" required placeholder="Email *" value={data.email} onChange={handle} />
@@ -300,7 +300,7 @@ ${data.note || "—"}`;
                   </span>
                 </button>
 
-                <p className="text-[11px] text-white/30 text-center">
+                <p className="text-xs text-white/55 text-center">
                   Inviando il form accetti la nostra{" "}
                   <Link to="/privacy-policy" className="text-white/50 hover:text-white underline underline-offset-2">Privacy Policy</Link>.
                 </p>

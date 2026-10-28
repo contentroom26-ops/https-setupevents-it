@@ -1,12 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 
+// Video di sfondo leggero (480p, senza audio). Parte solo dopo l'intro dell'hero
+// e non viene caricato con risparmio dati, 2G o animazioni ridotte.
+const pickGlobalVideo = (): string | null => {
+  if (typeof window === "undefined") return null;
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return null;
+  if (conn?.saveData || /2g$/.test(conn?.effectiveType ?? "")) return null;
+  return "/videos/global-bg-480.mp4";
+};
+
+const START_DELAY_MS = 3500;
+
 const GlobalVideoBackground = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [src, setSrc] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
+
+  // Non compete con il caricamento iniziale: si attiva dopo l'intro del logo
+  useEffect(() => {
+    const id = window.setTimeout(() => setSrc(pickGlobalVideo()), START_DELAY_MS);
+    return () => window.clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !src) return;
 
     let cancelled = false;
 
@@ -25,16 +44,16 @@ const GlobalVideoBackground = () => {
         .catch(() => {
           setTimeout(() => {
             if (!cancelled) {
-              video.play()
-                .then(() => { if (!cancelled) setVisible(true); })
+              video
+                .play()
+                .then(() => {
+                  if (!cancelled) setVisible(true);
+                })
                 .catch(() => {});
             }
           }, 500);
         });
     };
-
-    // Inizia a caricare subito — durante l'intro logo
-    video.load();
 
     if (video.readyState >= 2) {
       tryPlay();
@@ -46,7 +65,7 @@ const GlobalVideoBackground = () => {
       cancelled = true;
       video.removeEventListener("canplay", tryPlay);
     };
-  }, []);
+  }, [src]);
 
   return (
     <div
@@ -64,6 +83,7 @@ const GlobalVideoBackground = () => {
     >
       <video
         ref={videoRef}
+        src={src ?? undefined}
         loop
         muted
         playsInline
@@ -77,9 +97,7 @@ const GlobalVideoBackground = () => {
           opacity: visible ? 1 : 0,
           transition: "opacity 1s ease",
         }}
-      >
-        <source src="/videos/global-bg.mp4" type="video/mp4" />
-      </video>
+      />
 
       <div
         style={{

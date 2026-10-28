@@ -141,7 +141,7 @@ const Navbar = () => {
                       >
                         <div className="w-[360px] bg-black/90 backdrop-blur-2xl border border-white/[0.1] rounded-xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.8)]">
                           <div className="px-4 pt-4 pb-1">
-                            <p className="text-[9px] uppercase tracking-[0.4em] text-white/25 font-semibold">
+                            <p className="text-xs uppercase tracking-[0.4em] text-white/55 font-semibold">
                               {t("nav.ourServices")}
                             </p>
                           </div>
@@ -158,7 +158,7 @@ const Navbar = () => {
                                   className="group/item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/[0.06] transition-all duration-300"
                                   onClick={() => setShowServices(false)}
                                 >
-                                  <span className="text-white/20 text-[10px] font-mono w-5 group-hover/item:text-white/40 transition-colors">
+                                  <span className="text-white/55 text-xs font-mono w-5 group-hover/item:text-white/80 transition-colors">
                                     {String(i + 1).padStart(2, "0")}
                                   </span>
                                   <div className="flex-1 min-w-0">
@@ -193,7 +193,8 @@ const Navbar = () => {
           <div className="lg:hidden flex items-center gap-2">
             <LanguageSwitcher />
             <button
-              className="p-2 rounded-lg hover:bg-white/[0.05] transition-colors"
+              className="p-3 rounded-lg hover:bg-white/[0.05] transition-colors"
+              aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (

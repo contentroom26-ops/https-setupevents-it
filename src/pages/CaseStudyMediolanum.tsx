@@ -9,13 +9,13 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const coverImage = new URL("@/assets/mediolanum-card.jpg", import.meta.url).href;
-const nextCoverImage = new URL("@/assets/distretto12-card.jpg", import.meta.url).href;
+const coverImage = new URL("@/assets/mediolanum-card.webp", import.meta.url).href;
+const nextCoverImage = new URL("@/assets/distretto12-card.webp", import.meta.url).href;
 const gallery = [
-  new URL("@/assets/mediolanum-1.jpg", import.meta.url).href,
-  new URL("@/assets/mediolanum-2.jpg", import.meta.url).href,
-  new URL("@/assets/mediolanum-3.jpg", import.meta.url).href,
-  new URL("@/assets/mediolanum-4.jpg", import.meta.url).href,
+  new URL("@/assets/mediolanum-1.webp", import.meta.url).href,
+  new URL("@/assets/mediolanum-2.webp", import.meta.url).href,
+  new URL("@/assets/mediolanum-3.webp", import.meta.url).href,
+  new URL("@/assets/mediolanum-4.webp", import.meta.url).href,
 ];
 
 const tags = ["Convention Aziendale", "Allestimento Scenografico", "Audio-Video & Streaming", "Hostess & Steward"];
@@ -88,7 +88,7 @@ const CaseStudyMediolanum = () => {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/20 text-white/70 bg-white/[0.06]"
+                      className="text-xs uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/20 text-white/70 bg-white/[0.06]"
                     >
                       {tag}
                     </span>
@@ -147,7 +147,7 @@ const CaseStudyMediolanum = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08, ease }}
                 >
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-1">{s.label}</p>
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-1">{s.label}</p>
                   <p className="text-sm font-semibold text-white/90">{s.value}</p>
                 </motion.div>
               ))}
@@ -160,7 +160,7 @@ const CaseStudyMediolanum = () => {
       {/* Gallery */}
       <section className="container-custom py-16 md:py-24">
         <motion.h3
-          className="text-xs uppercase tracking-[0.3em] text-white/40 mb-8"
+          className="text-xs uppercase tracking-[0.3em] text-white/55 mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -208,7 +208,7 @@ const CaseStudyMediolanum = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
-            <p className="text-[10px] uppercase tracking-[0.4em] text-white/50 mb-3">Prossimo case study</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-white/50 mb-3">Prossimo case study</p>
             <p className="text-3xl md:text-5xl font-display font-extrabold text-white tracking-tighter group-hover:text-primary transition-colors duration-300">
               Distretto 12
             </p>

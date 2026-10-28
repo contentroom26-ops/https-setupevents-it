@@ -25,7 +25,8 @@
 
     <!-- Preload risorse critiche hero -->
     <link rel="preload" as="image" href="/images/hero-bg.jpg" fetchpriority="high" />
-    <link rel="preload" as="video" href="/videos/hero-bg.mp4" media="(min-width: 768px)" fetchpriority="high" />
+    <!-- Nessun preload del video: i browser lo scaricano due volte (preload + <video>).
+         Il video viene scelto per dispositivo da HeroSection. -->
 
     <!-- Preload logo splash: è l'elemento LCP, deve arrivare il prima possibile -->
     <link rel="preload" as="image" href="/images/logo-splash.png" fetchpriority="high" />
