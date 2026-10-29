@@ -60,17 +60,9 @@ export default defineConfig(({ mode }) => ({
               },
             },
           },
-          {
-            urlPattern: /\.(?:mp4)$/,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "videos",
-              expiration: {
-                maxEntries: 5,
-                maxAgeSeconds: 7 * 24 * 60 * 60,
-              },
-            },
-          },
+          // Niente cache del service worker per gli .mp4: CacheFirst senza supporto
+          // alle richieste Range impedisce la riproduzione su Safari/iOS.
+          // I video usano la cache HTTP del browser.
         ],
       },
       manifest: {

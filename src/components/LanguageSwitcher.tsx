@@ -37,7 +37,8 @@ const LanguageSwitcher = () => {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-all duration-300 text-[10px] md:text-[11px] uppercase tracking-[0.1em] font-medium"
+        aria-label="Lingua"
+        className="flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-all duration-300 text-xs uppercase tracking-[0.1em] font-medium"
       >
         <Globe className="w-3 h-3 md:w-3.5 md:h-3.5" />
         <span>{current.flag}</span>
@@ -66,7 +67,7 @@ const LanguageSwitcher = () => {
                   }`}
                 >
                   <span className="text-base">{lang.flag}</span>
-                  <span className="text-[11px] font-medium tracking-wide">{lang.label}</span>
+                  <span className="text-xs font-medium tracking-wide">{lang.label}</span>
                   {i18n.language === lang.code && (
                     <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />
                   )}

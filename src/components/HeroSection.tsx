@@ -10,11 +10,25 @@ const heroBg = "/images/hero-bg.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+// Sceglie il video in base al dispositivo. Restituisce null (resta l'immagine) se
+// l'utente ha ridotto le animazioni, ha il risparmio dati o una connessione 2G.
+const pickHeroVideo = (): string | null => {
+  if (typeof window === "undefined") return null;
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return null;
+  if (conn?.saveData || /2g$/.test(conn?.effectiveType ?? "")) return null;
+  return window.matchMedia?.("(min-width: 768px)").matches
+    ? "/videos/hero-bg-720.mp4"
+    : "/videos/hero-bg-480.mp4";
+};
+
 const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const { t } = useTranslation();
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const startedRef = useRef(false);
 
+  const [videoSrc] = useState<string | null>(pickHeroVideo);
   const [showContent, setShowContent] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [introPhase, setIntroPhase] = useState<"logo" | "transition" | "done">("logo");
@@ -22,6 +36,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
+    startedRef.current = true;
     video.currentTime = 0;
     video.muted = true;
     video.setAttribute("playsinline", "");
@@ -71,6 +86,22 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
     }
   }, []);
 
+  // Ferma il video quando l'hero esce dallo schermo: meno decodifica, meno blocchi
+  useEffect(() => {
+    const section = ref.current;
+    const video = videoRef.current;
+    if (!section || !video || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) video.pause();
+        else if (startedRef.current) video.play().catch(() => {});
+      },
+      { threshold: 0.05 }
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, [videoSrc]);
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.6]);
@@ -78,6 +109,9 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
 
   return (
     <section ref={ref} className="relative h-[100svh] flex flex-col overflow-hidden">
+      {/* H1 della home: il testo visibile dell'hero è dentro il video, quindi serve per SEO e screen reader */}
+      <h1 className="sr-only">{t("hero.seoHeading")}</h1>
+
       {/* Logo Intro Overlay */}
       <AnimatePresence>
         {introPhase !== "done" && (
@@ -150,25 +184,26 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
 
       {/* Video background */}
       <motion.div className="absolute inset-0" style={{ scale: videoScale, willChange: "transform" }}>
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          // @ts-ignore
-          webkit-playsinline=""
-          preload="metadata"
-          poster={heroBg}
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{
-            minWidth: "100%",
-            minHeight: "100%",
-            opacity: videoLoaded ? 1 : 0,
-            transition: "opacity 0.7s ease",
-          }}
-        >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
+        {videoSrc && (
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            loop
+            muted
+            playsInline
+            // @ts-ignore
+            webkit-playsinline=""
+            preload="auto"
+            poster={heroBg}
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{
+              minWidth: "100%",
+              minHeight: "100%",
+              opacity: videoLoaded ? 1 : 0,
+              transition: "opacity 0.7s ease",
+            }}
+          />
+        )}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.8) 100%)" }}
@@ -187,7 +222,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
         animate={{ opacity: showContent ? 1 : 0 }}
         transition={{ duration: 1, delay: 0.3 }}
       >
-        <span className="text-[8px] md:text-[10px] text-white/25 font-mono tracking-wider hidden sm:inline">
+        <span className="text-xs text-white/55 font-mono tracking-wider hidden sm:inline">
           {t("hero.agency")}
         </span>
       </motion.div>
@@ -223,7 +258,7 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
           onClick={() => document.getElementById("storia")?.scrollIntoView({ behavior: "smooth" })}
         >
           <div className="w-px h-7 bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
-          <span className="text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium group-hover:text-white/40 transition-colors duration-300">
+          <span className="text-white/55 text-xs uppercase tracking-[0.3em] font-medium group-hover:text-white/80 transition-colors duration-300">
             {t("hero.scroll")}
           </span>
         </motion.div>

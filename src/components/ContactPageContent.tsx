@@ -16,13 +16,17 @@ interface Props {
   title?: string;
   /** override subtitle */
   subtitle?: string;
+  /** "h2" quando incorporato nella home (l'H1 della home sta nell'hero) */
+  headingLevel?: "h1" | "h2";
 }
 
 const ContactPageContent = ({
   showHeader = true,
   title = "Parliamo del tuo progetto",
   subtitle = "Scrivici, chiamaci o compila il form: ti rispondiamo entro 24 ore con il prossimo step giusto per te.",
+  headingLevel = "h1",
 }: Props) => {
+  const Heading = headingLevel;
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [data, setData] = useState({ nome: "", email: "", oggetto: "", messaggio: "" });
@@ -84,12 +88,12 @@ const ContactPageContent = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
         >
-          <p className="text-[10px] uppercase tracking-[0.4em] text-primary/80 font-semibold mb-5">
+          <p className="text-xs uppercase tracking-[0.4em] text-primary/80 font-semibold mb-5">
             Contatti
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
+          <Heading className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
             {title}
-          </h1>
+          </Heading>
           <p className="mt-5 text-sm sm:text-base text-white/75 max-w-xl mx-auto leading-relaxed">
             {subtitle}
           </p>
@@ -141,15 +145,15 @@ const ContactPageContent = ({
             </div>
 
             <div className="mt-9 pt-7 border-t border-white/[0.06]">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-4">Seguici</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-4">Seguici</p>
               <div className="flex gap-3">
-                <SocialBtn href="https://instagram.com" label="Instagram"><Instagram className="w-4 h-4" /></SocialBtn>
+                <SocialBtn href="https://www.instagram.com/gabrielleshi_events/" label="Instagram"><Instagram className="w-4 h-4" /></SocialBtn>
                 <SocialBtn href="https://linkedin.com" label="LinkedIn"><Linkedin className="w-4 h-4" /></SocialBtn>
               </div>
             </div>
 
             <div className="mt-7 pt-7 border-t border-white/[0.06]">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-3">Orari</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-3">Orari</p>
               <p className="text-white/85 text-sm">Lun – Ven · 9:30 – 18:30</p>
               <p className="text-white/60 text-xs mt-1">Risposta entro 24 ore lavorative</p>
             </div>
@@ -229,7 +233,7 @@ const ContactPageContent = ({
                 </span>
               </button>
 
-              <p className="text-[11px] text-white/55 text-center">
+              <p className="text-xs text-white/55 text-center">
                 Inviando il form accetti la nostra{" "}
                 <Link to="/privacy-policy" className="text-white/80 hover:text-white underline underline-offset-2">
                   Privacy Policy
@@ -249,13 +253,13 @@ const ContactRow = ({ icon, label, value, href, external = false }: { icon: Reac
   const Tag: any = href ? "a" : "div";
   const extraProps = href && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <Tag {...(href ? { href, ...extraProps } : {})} className="flex items-start gap-4 group">
+    <Tag {...(href ? { href, ...extraProps } : {})} className="flex items-start gap-4 group min-h-[44px]">
       <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-primary transition-colors group-hover:bg-primary/15"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-[0.3em] text-white/55 mb-1">{label}</p>
+        <p className="text-xs uppercase tracking-[0.3em] text-white/55 mb-1">{label}</p>
         <p className="text-white text-sm group-hover:text-white transition-colors">{value}</p>
       </div>
     </Tag>
@@ -264,7 +268,7 @@ const ContactRow = ({ icon, label, value, href, external = false }: { icon: Reac
 
 const SocialBtn = ({ href, label, children }: { href: string; label: string; children: React.ReactNode }) => (
   <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-    className="w-9 h-9 rounded-lg flex items-center justify-center text-white/60 hover:text-primary hover:border-primary/30 transition-all"
+    className="w-11 h-11 rounded-lg flex items-center justify-center text-white/60 hover:text-primary hover:border-primary/30 transition-all"
     style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
     {children}
   </a>
