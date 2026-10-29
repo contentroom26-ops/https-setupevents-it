@@ -39,7 +39,7 @@ const CaseStudyMediolanum = () => {
       <Navbar />
 
       {/* Hero + Stats insieme in 100svh */}
-      <div className="h-[100svh] flex flex-col">
+      <div className="min-h-[100svh] flex flex-col">
 
         {/* Hero */}
         <section className="relative flex-1 overflow-hidden">

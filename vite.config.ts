@@ -42,6 +42,8 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "autoUpdate",
+      // Il service worker lasciava i visitatori bloccati su versioni vecchie: si auto-disinstalla
+      selfDestroying: true,
       injectRegister: "script-defer", // ← ritarda registrazione SW
       devOptions: { enabled: false },
       workbox: {

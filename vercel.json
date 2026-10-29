@@ -1,0 +1,22 @@
+{
+  "rewrites": [
+    { "source": "/videos/hero-bg.mp4", "destination": "/videos/hero-bg-720.mp4" },
+    { "source": "/videos/global-bg.mp4", "destination": "/videos/global-bg-480.mp4" },
+    { "source": "/images/hero-bg.jpg", "destination": "/images/hero-poster.jpg" },
+    { "source": "/((?!assets/|videos/|images/|.*\\.[A-Za-z0-9]+$).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(images|videos)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
+    },
+    {
+      "source": "/videos/(hero-bg|global-bg).mp4",
+      "headers": [{ "key": "Clear-Site-Data", "value": "\"storage\"" }]
+    }
+  ]
+}

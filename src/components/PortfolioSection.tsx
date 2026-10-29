@@ -73,7 +73,7 @@ const FlipCard = ({ index }: { index: number }) => {
               <span className="text-xs text-white/60 font-mono mt-1 block">{study.year}</span>
             </div>
           </div>
-          <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+          <div className="absolute inset-0 rounded-2xl overflow-hidden bg-black/75 md:bg-black/30 backdrop-blur-md border border-white/[0.06] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)] flex flex-col justify-center p-8 md:p-12" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
             <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] block mb-3">{category} — {study.year}</span>
             <h3 className="text-2xl md:text-4xl font-display font-extrabold text-white tracking-tight mb-2">{study.title}</h3>
             <p className="text-sm text-primary font-medium mb-6">{subtitle}</p>
@@ -87,25 +87,59 @@ const FlipCard = ({ index }: { index: number }) => {
 
 const ScrollGallery = () => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const positionRef = useRef(0);
   const speedRef = useRef(1);
-  const animRef = useRef<number>(0);
   const doubledImages = [...galleryImages, ...galleryImages];
 
+  // Scorrimento automatico: gira solo mentre la galleria è visibile, misura la larghezza
+  // una volta sola (non a ogni frame) e ha velocità indipendente dal refresh dello schermo.
   useEffect(() => {
     const el = trackRef.current;
-    if (!el) return;
-    const baseSpeed = 0.8;
-    const animate = () => {
-      positionRef.current += baseSpeed * speedRef.current;
-      const halfWidth = el.scrollWidth / 2;
-      if (positionRef.current >= halfWidth) positionRef.current = 0;
-      if (positionRef.current < 0) positionRef.current = halfWidth;
-      el.style.transform = `translateX(-${positionRef.current}px)`;
-      animRef.current = requestAnimationFrame(animate);
+    const wrap = el?.parentElement;
+    if (!el || !wrap) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const pxPerSecond = 48;
+    let position = 0;
+    let half = el.scrollWidth / 2;
+    let raf = 0;
+    let running = false;
+    let last = 0;
+
+    const step = (now: number) => {
+      const dt = Math.min(now - last, 64);
+      last = now;
+      position += (pxPerSecond * speedRef.current * dt) / 1000;
+      if (position >= half) position -= half;
+      if (position < 0) position += half;
+      el.style.transform = `translate3d(-${position}px, 0, 0)`;
+      raf = requestAnimationFrame(step);
     };
-    animRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animRef.current);
+    const start = () => {
+      if (running || document.hidden) return;
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(step);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()));
+    io.observe(wrap);
+    const ro = new ResizeObserver(() => {
+      half = el.scrollWidth / 2;
+    });
+    ro.observe(el);
+    const onVisibility = () => (document.hidden ? stop() : undefined);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      stop();
+      io.disconnect();
+      ro.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {

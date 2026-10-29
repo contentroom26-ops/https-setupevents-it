@@ -1,27 +1,56 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-// Video di sfondo leggero (480p, senza audio). Parte solo dopo l'intro dell'hero
-// e non viene caricato con risparmio dati, 2G o animazioni ridotte.
-const pickGlobalVideo = (): string | null => {
-  if (typeof window === "undefined") return null;
-  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return null;
-  if (conn?.saveData || /2g$/.test(conn?.effectiveType ?? "")) return null;
-  return "/videos/global-bg-480.mp4";
+// Sfondo animato globale (480p, senza audio).
+// - Sempre scuro: se il video non parte resta la sua immagine fissa (mai grigio/bianco).
+// - Sulla home parte solo quando l'hero esce dallo schermo (l'hero lo copre del tutto).
+// - Non viene caricato con risparmio dati, 2G o animazioni ridotte.
+const VIDEO_SRC = "/videos/global-bg-480.mp4";
+const POSTER_SRC = "/images/global-poster.jpg";
+const OTHER_PAGES_DELAY_MS = 1200;
+
+type NetInfo = { saveData?: boolean; effectiveType?: string };
+
+const canPlayVideo = (): boolean => {
+  if (typeof window === "undefined") return false;
+  const conn = (navigator as Navigator & { connection?: NetInfo }).connection;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return false;
+  if (conn?.saveData || /2g$/.test(conn?.effectiveType ?? "")) return false;
+  return true;
 };
 
-const START_DELAY_MS = 3500;
-
 const GlobalVideoBackground = () => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [wanted, setWanted] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
-  // Non compete con il caricamento iniziale: si attiva dopo l'intro del logo
+  // Quando serve davvero il video?
   useEffect(() => {
-    const id = window.setTimeout(() => setSrc(pickGlobalVideo()), START_DELAY_MS);
-    return () => window.clearTimeout(id);
-  }, []);
+    if (!isHome) {
+      const id = window.setTimeout(() => setWanted(true), OTHER_PAGES_DELAY_MS);
+      return () => window.clearTimeout(id);
+    }
+    const check = () => window.scrollY > window.innerHeight * 0.6;
+    if (check()) {
+      setWanted(true);
+      return;
+    }
+    const onScroll = () => {
+      if (check()) {
+        setWanted(true);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  useEffect(() => {
+    if (wanted && canPlayVideo()) setSrc(VIDEO_SRC);
+  }, [wanted]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -74,11 +103,15 @@ const GlobalVideoBackground = () => {
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100lvh",
         zIndex: -1,
         overflow: "hidden",
         pointerEvents: "none",
+        backgroundColor: "hsl(var(--background))",
+        backgroundImage: `url(${POSTER_SRC})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <video
@@ -87,7 +120,6 @@ const GlobalVideoBackground = () => {
         loop
         muted
         playsInline
-        // @ts-ignore
         webkit-playsinline=""
         preload="auto"
         style={{

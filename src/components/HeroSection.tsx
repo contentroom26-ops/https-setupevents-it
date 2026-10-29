@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const logoSplash = "/images/logo-splash.png";
 
 // Immagine hero in public/ per abilitare il preload in index.html
-const heroBg = "/images/hero-bg.jpg";
+const heroBg = "/images/hero-poster.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -191,7 +191,6 @@ const HeroSection = ({ onIntroComplete }: { onIntroComplete?: () => void }) => {
             loop
             muted
             playsInline
-            // @ts-ignore
             webkit-playsinline=""
             preload="auto"
             poster={heroBg}

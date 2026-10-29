@@ -92,7 +92,7 @@ const Index = () => {
           </SectionReveal>
 
           {/* Portfolio — blur reveal */}
-          <SectionReveal variant="blur">
+          <SectionReveal variant="fade-up">
             <PortfolioSection />
           </SectionReveal>
 
